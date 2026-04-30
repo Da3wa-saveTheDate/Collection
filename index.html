@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Wedding Invitation Templates — Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Josefin Sans',sans-serif;background:#0a0a0a;color:#e0e0e0;min-height:100vh}
+.hero{text-align:center;padding:6rem 2rem 4rem}
+.hero .eyebrow{font-size:.65rem;letter-spacing:.5em;text-transform:uppercase;color:#888;margin-bottom:1rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-bottom:1rem}
+.hero p{font-size:.9rem;color:#777;max-width:600px;margin:0 auto;line-height:1.8}
+.hero .count{display:inline-block;margin-top:1.5rem;padding:.4rem 1.2rem;border:1px solid #333;border-radius:50px;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#999}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;max-width:1400px;margin:0 auto;padding:2rem}
+.card{position:relative;border-radius:12px;overflow:hidden;background:#111;border:1px solid #222;transition:all .4s cubic-bezier(.16,1,.3,1);cursor:pointer;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-8px);border-color:#444;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.card .preview{height:250px;background-size:cover;background-position:center;position:relative}
+.card .preview::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,#111)}
+.card .preview .badge{position:absolute;top:1rem;right:1rem;padding:.4rem 1rem;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-radius:50px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase}
+.card .body{padding:1.5rem 2rem 2rem}
+.card .body h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;font-style:italic;margin-bottom:.5rem}
+.card .body p{font-size:.75rem;color:#777;line-height:1.7;margin-bottom:1rem}
+.card .body .tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.card .body .tags span{font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid #333;border-radius:50px;color:#999}
+.card.featured{border-color:#7A2D3A55}
+.card.featured .badge{background:rgba(122,45,58,.6)}
+/* Color accents per card */
+.card[data-theme="omar"] .badge,.card[data-theme="omar"] h2{color:#7A2D3A}
+.card[data-theme="midnight"] .badge,.card[data-theme="midnight"] h2{color:#C9A84C}
+.card[data-theme="olive"] .badge,.card[data-theme="olive"] h2{color:#87A878}
+.card[data-theme="celestial"] .badge,.card[data-theme="celestial"] h2{color:#B76E79}
+.card[data-theme="coral"] .badge,.card[data-theme="coral"] h2{color:#E8725C}
+.card[data-theme="emerald"] .badge,.card[data-theme="emerald"] h2{color:#14A76C}
+.card[data-theme="cherry"] .badge,.card[data-theme="cherry"] h2{color:#E8A0BF}
+.card[data-theme="desert"] .badge,.card[data-theme="desert"] h2{color:#C4887B}
+.card[data-theme="royal"] .badge,.card[data-theme="royal"] h2{color:#5A8AC0}
+.card[data-theme="velvet"] .badge,.card[data-theme="velvet"] h2{color:#B52A3E}
+.card .body .style-tag{display:inline-block;margin-bottom:.8rem;padding:.2rem .6rem;background:rgba(255,255,255,.05);border:1px solid #333;border-radius:4px;font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#666}
+footer{text-align:center;padding:4rem 2rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#444;border-top:1px solid #1a1a1a;margin-top:4rem}
+.section-label{max-width:1400px;margin:3rem auto 0;padding:0 2rem}
+.section-label h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#555;font-style:italic}
+.section-label p{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#444;margin-top:.3rem}
+</style>
+</head>
+<body>
+<div class="hero">
+<p class="eyebrow">Collection</p>
+<h1>Wedding Invitation Templates</h1>
+<p>Ten stunning, animated wedding invitations — two distinct styles, unique themes, scroll animations, and interactive features.</p>
+<span class="count">10 Designs</span>
+</div>
+<div class="grid">
+<a class="card featured" href="omarlayla/index.html" data-theme="omar">
+<div class="preview" style="background-image:url('omarlayla/assets/hero-bg.jpg')"><span class="badge">Original · Warm Romantic</span></div>
+<div class="body">
+<h2>Layla &amp; Omar</h2>
+<p>The original inspiration — warm cream and burgundy with floating rose petals, silk textures, and dreamy storytelling.</p>
+<div class="tags"><span>Rose Petals</span><span>Burgundy</span><span>Light Mode</span><span>Cream &amp; Wine</span></div>
+</div>
+</a>
+<a class="card" href="midnight-garden/index.html" data-theme="midnight">
+<div class="preview" style="background-image:url('midnight-garden/images/hero.png')"><span class="badge">Dark Romantic</span></div>
+<div class="body">
+<h2>Midnight Garden</h2>
+<p>Nour &amp; Youssef — A luxurious nighttime garden with golden fireflies, deep navy tones, and warm gold accents.</p>
+<div class="tags"><span>Fireflies</span><span>Gold Foil</span><span>Dark Mode</span><span>Navy &amp; Gold</span></div>
+</div>
+</a>
+<a class="card" href="olive-sage/index.html" data-theme="olive">
+<div class="preview" style="background-image:url('olive-sage/images/hero.png')"><span class="badge">Mediterranean</span></div>
+<div class="body">
+<h2>Olive &amp; Sage</h2>
+<p>Farida &amp; Karim — Sun-drenched Tuscan elegance with falling olive leaves, earthy terracotta warmth, and botanical charm.</p>
+<div class="tags"><span>Falling Leaves</span><span>Botanical</span><span>Light Mode</span><span>Sage &amp; Terra</span></div>
+</div>
+</a>
+<a class="card" href="celestial-love/index.html" data-theme="celestial">
+<div class="preview" style="background-image:url('celestial-love/images/hero.png')"><span class="badge">Celestial</span></div>
+<div class="body">
+<h2>Celestial Love</h2>
+<p>Yasmin &amp; Tarek — A starry night fantasy with twinkling constellations, shooting stars, and rose gold accents.</p>
+<div class="tags"><span>Stars</span><span>Shooting Stars</span><span>Dark Mode</span><span>Purple &amp; Rose</span></div>
+</div>
+</a>
+<a class="card" href="coral-sunset/index.html" data-theme="coral">
+<div class="preview" style="background-image:url('coral-sunset/images/hero.png')"><span class="badge">Tropical Sunset</span></div>
+<div class="body">
+<h2>Coral Sunset</h2>
+<p>Amira &amp; Rami — Tropical beach paradise with floating bubbles, warm coral and peach tones, and ocean-inspired elegance.</p>
+<div class="tags"><span>Bubbles</span><span>Tropical</span><span>Light Mode</span><span>Coral &amp; Peach</span></div>
+</div>
+</a>
+<a class="card" href="emerald-noir/index.html" data-theme="emerald">
+<div class="preview" style="background-image:url('emerald-noir/images/hero.png')"><span class="badge">Art Deco</span></div>
+<div class="body">
+<h2>Emerald Noir</h2>
+<p>Salma &amp; Hassan — Great Gatsby glamour with diamond sparkles, deep emerald and gold, and art deco geometry.</p>
+<div class="tags"><span>Sparkles</span><span>Art Deco</span><span>Dark Mode</span><span>Emerald &amp; Gold</span></div>
+</div>
+</a>
+<a class="card" href="cherry-blossom/index.html" data-theme="cherry">
+<div class="preview" style="background-image:url('cherry-blossom/images/hero.png')"><span class="badge">Japanese Garden</span></div>
+<div class="body">
+<h2>Cherry Blossom</h2>
+<p>Mariam &amp; Ahmed — Enchanting sakura petals falling over a soft pink and blush palette, inspired by Kyoto spring.</p>
+<div class="tags"><span>Sakura Petals</span><span>Japanese</span><span>Light Mode</span><span>Pink &amp; Blush</span></div>
+</div>
+</a>
+</div>
+<div class="section-label"><p>Wedvite Style</p><h3>Card-Based · Envelope Opening</h3></div>
+<div class="grid">
+<a class="card" href="desert-rose/index.html" data-theme="desert">
+<div class="preview" style="background-image:url('desert-rose/images/hero.png')"><span class="badge">Desert Oasis</span></div>
+<div class="body">
+<span class="style-tag">📩 Envelope Style</span>
+<h2>Desert Rose</h2>
+<p>Dalia &amp; Mostafa — Golden desert oasis with warm rose and sand tones, wax-seal envelope opening, and card-based layout.</p>
+<div class="tags"><span>Envelope Intro</span><span>Card Layout</span><span>Light Mode</span><span>Rose &amp; Gold</span></div>
+</div>
+</a>
+<a class="card" href="royal-blue/index.html" data-theme="royal">
+<div class="preview" style="background-image:url('royal-blue/images/hero.png')"><span class="badge">Palace Regal</span></div>
+<div class="body">
+<span class="style-tag">📩 Envelope Style</span>
+<h2>Royal Blue</h2>
+<p>Hana &amp; Ziad — Royal palace elegance with deep blue and silver, crystalline sparkle particles, and regal atmosphere.</p>
+<div class="tags"><span>Envelope Intro</span><span>Card Layout</span><span>Light Mode</span><span>Blue &amp; Silver</span></div>
+</div>
+</a>
+<a class="card" href="velvet-theatre/index.html" data-theme="velvet">
+<div class="preview" style="background-image:url('velvet-theatre/images/hero.png')"><span class="badge">Theatre Drama</span></div>
+<div class="body">
+<span class="style-tag">📩 Envelope Style</span>
+<h2>Velvet Theatre</h2>
+<p>Laila &amp; Sherif — Dramatic crimson velvet and gold Valentine's Day wedding with theatrical opera house storytelling.</p>
+<div class="tags"><span>Envelope Intro</span><span>Card Layout</span><span>Dark Mode</span><span>Crimson &amp; Gold</span></div>
+</div>
+</a>
+</div>
+<footer>Handcrafted with love · 2026</footer>
+</body>
+</html>
