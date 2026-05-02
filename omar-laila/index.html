@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Omar &amp; Laila — Wedding Invitation</title>
+    <meta name="description" content="Join Omar El Shazly & Laila Farouk in celebrating their wedding on May 7, 2026 at the Four Seasons Hotel, Cairo." />
+    <meta name="author" content="Omar & Laila" />
+    <meta property="og:title" content="Omar & Laila — Wedding Invitation" />
+    <meta property="og:description" content="Join us on May 7, 2026 at the Four Seasons Hotel, Cairo." />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Pinyon+Script&family=Inter:wght@300;400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+      <div class="preloader-inner">
+        <svg class="infinity icon-w16-h6 mb-6 ink-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <path d="M12 12c-2-3-4-5-6.5-5S1 9 1 12s2 5 4.5 5 4.5-2 6.5-5 4-5 6.5-5S23 9 23 12s-2 5-4.5 5-4.5-2-6.5-5z" />
+        </svg>
+        <p class="caps muted mb-4">You have received an invitation from</p>
+        <h2 class="font-script script-xl ink">Omar &amp; Laila</h2>
+      </div>
+    </div>
+
+    <main class="page">
+      <h1 class="sr-only">Omar &amp; Laila — Wedding Invitation</h1>
+      <div class="page-inner">
+
+        <!-- Hero -->
+        <section class="reveal">
+          <div class="card">
+            <p class="font-script script-md text-center ink-80 mb-1">These two souls</p>
+            <p class="text-center text-sm muted italic mb-6">had no idea…</p>
+            <img
+              src="assets/hero-couple.png"
+              alt="Omar and Laila — childhood photos in vintage frames over hand-drawn sketches"
+              width="1024" height="1024"
+              class="hero-img"
+            />
+            <div class="text-center mt-6">
+              <p class="font-script script-lg ink">
+                Omar <span class="amp">&amp;</span> Laila
+              </p>
+              <p class="caps muted mt-3">Omar El Shazly &amp; Laila Farouk</p>
+              <p class="text-sm italic muted mt-6">…that one day they would exchange rings.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Invitation -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="font-script script-title ink mb-6 text-center">Dear Friends</h2>
+            <p class="text-center leading-relaxed ink-80">
+              Time flies, and we are now ready to say
+              <span class="font-script script-sm"> “yes” </span>
+              to one another.
+            </p>
+            <p class="text-center leading-relaxed ink-80 mt-4">
+              We invite you to be part of this long-awaited day.
+            </p>
+
+            <!-- Calendar -->
+            <div class="mt-8">
+              <p class="font-script script-md text-center ink mb-4">May <span>2026</span></p>
+              <div class="calendar-head">
+                <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
+              </div>
+              <div class="calendar-grid" id="calendar-grid"></div>
+              <p class="caps muted text-center mt-6">The day we say yes</p>
+            </div>
+
+            <div class="mt-8 text-center">
+              <h2 class="caps ink mb-6">We are waiting for you</h2>
+              <p class="text-sm ink-80">Four Seasons Hotel</p>
+              <p class="text-sm ink-80">Nile Plaza, Cairo</p>
+              <p class="text-sm ink-80 mt-1">Beginning at 16:00</p>
+            </div>
+
+            <img src="assets/sketch-bouquet.png" alt="" loading="lazy" width="512" height="512" class="img-bouquet" />
+          </div>
+        </section>
+
+        <!-- Location -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="caps ink mb-6 text-center">Location</h2>
+            <h2 class="font-script script-title ink mb-6 text-center">Where we'll meet</h2>
+            <div class="venue-frame">
+              <div class="venue-frame-border" aria-hidden="true"></div>
+              <img
+                src="assets/location-venue.jpg"
+                alt="Sketch of the Four Seasons Hotel Cairo at Nile Plaza"
+                loading="lazy" width="1024" height="768"
+                class="venue-img"
+              />
+            </div>
+            <div class="text-center mt-8">
+              <p class="font-script script-md ink">Four Seasons Hotel</p>
+              <p class="caps-xs muted mt-2">Nile Plaza · Cairo</p>
+              <p class="text-sm muted mt-3">1089 Corniche El Nil, Garden City</p>
+              <a
+                href="https://maps.google.com/?q=Four+Seasons+Hotel+Cairo+at+Nile+Plaza"
+                target="_blank" rel="noreferrer"
+                class="btn-outline mt-6"
+              >Open Map</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="caps ink mb-6 text-center">Wedding Day</h2>
+            <h2 class="font-script script-title ink mb-6 text-center">Plan of the day</h2>
+            <div class="timeline">
+              <div class="timeline-line" aria-hidden="true"></div>
+              <ul class="timeline-list" id="timeline-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dress Code -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="font-script script-title ink mb-6 text-center">Dress code</h2>
+            <p class="text-center text-sm ink-80 leading-relaxed">
+              Please wear elegant attire that fits the festive mood.
+            </p>
+            <p class="text-center text-sm ink-80 leading-relaxed mt-3">
+              We would be delighted if you joined our color palette.
+            </p>
+            <div class="palette mt-8">
+              <span style="background: oklch(0.88 0.015 70)"></span>
+              <span style="background: oklch(0.82 0.04 30)"></span>
+              <span style="background: oklch(0.7 0.04 25)"></span>
+              <span style="background: oklch(0.55 0.03 40)"></span>
+              <span style="background: oklch(0.42 0.04 50)"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Details -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="font-script script-title ink mb-6 text-center">Details</h2>
+            <p class="text-center text-sm ink-80 leading-relaxed">
+              Please note that the format of the celebration does not include a
+              children's area or animators. We kindly ask you to spend this evening
+              without children.
+            </p>
+            <svg class="infinity infinity-divider" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+              <path d="M12 12c-2-3-4-5-6.5-5S1 9 1 12s2 5 4.5 5 4.5-2 6.5-5 4-5 6.5-5S23 9 23 12s-2 5-4.5 5-4.5-2-6.5-5z" />
+            </svg>
+            <p class="text-center text-sm ink-80 leading-relaxed">
+              Instead of bouquets, we would be happy to receive your favorite book
+              for our future family library.
+            </p>
+            <svg class="infinity infinity-divider" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+              <path d="M12 12c-2-3-4-5-6.5-5S1 9 1 12s2 5 4.5 5 4.5-2 6.5-5 4-5 6.5-5S23 9 23 12s-2 5-4.5 5-4.5-2-6.5-5z" />
+            </svg>
+            <p class="text-center text-sm ink-80 leading-relaxed">
+              From the bottom of our hearts we ask you to refrain from shouts of
+              “Bitter!” and to preserve the warm atmosphere of an intimate family
+              celebration.
+            </p>
+          </div>
+        </section>
+
+        <!-- Countdown -->
+        <section class="reveal">
+          <div class="countdown">
+            <p class="font-script script-md ink mb-8">Until our wedding</p>
+            <div class="countdown-row" id="countdown-row">
+              <div class="cd-item"><div class="cd-circle"><span data-cd="days">—</span></div><span class="caps-xs muted mt-2">Days</span></div>
+              <div class="cd-item"><div class="cd-circle"><span data-cd="hours">—</span></div><span class="caps-xs muted mt-2">Hours</span></div>
+              <div class="cd-item"><div class="cd-circle"><span data-cd="minutes">—</span></div><span class="caps-xs muted mt-2">Minutes</span></div>
+              <div class="cd-item"><div class="cd-circle"><span data-cd="seconds">—</span></div><span class="caps-xs muted mt-2">Seconds</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RSVP -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="font-script script-title ink mb-6 text-center">RSVP</h2>
+            <p class="text-center text-sm ink-80 mb-6">
+              Please confirm your attendance by April 1, 2026.
+            </p>
+            <form id="rsvp-form" class="rsvp-form">
+              <label class="block">
+                <span class="caps-xs muted">Full Name</span>
+                <input type="text" required maxlength="80" name="name" class="input-line" />
+              </label>
+
+              <fieldset>
+                <legend class="caps-xs muted mb-2">Will you attend?</legend>
+                <label class="radio-row"><input type="radio" name="att" value="yes" required /><span>Yes, with joy</span></label>
+                <label class="radio-row"><input type="radio" name="att" value="no" /><span>Sadly, no</span></label>
+              </fieldset>
+
+              <div class="text-center pt-2">
+                <button type="submit" class="btn-outline btn-pill">Submit</button>
+              </div>
+            </form>
+            <p id="rsvp-thanks" class="font-script script-md ink text-center" style="display:none; padding:2rem 0;">
+              Thank you, see you soon!
+            </p>
+          </div>
+        </section>
+
+        <!-- Voice Message -->
+        <section class="reveal">
+          <div class="card">
+            <h2 class="caps ink mb-6 text-center">A Message From Us</h2>
+            <h2 class="font-script script-title ink mb-6 text-center">With love</h2>
+            <p class="text-center text-sm italic ink-80 leading-relaxed mb-8">
+              Before the big day, we wanted to share a small message with you…
+            </p>
+
+            <div class="voice-player">
+              <div class="voice-row">
+                <button id="voice-toggle" type="button" aria-label="Play message" class="voice-btn">
+                  <svg id="voice-icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z" /></svg>
+                  <svg id="voice-icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none">
+                    <rect x="6" y="5" width="4" height="14" /><rect x="14" y="5" width="4" height="14" />
+                  </svg>
+                </button>
+                <div id="waveform" class="waveform" aria-hidden="true"></div>
+              </div>
+              <div class="voice-meta">
+                <span id="voice-cur" class="tabular">0:00</span>
+                <span class="font-script voice-label">voice note</span>
+                <span id="voice-dur" class="tabular">0:00</span>
+              </div>
+            </div>
+
+            <audio id="voice-audio" src="assets/song.mp3" preload="metadata" class="sr-only">
+              Your browser does not support audio.
+            </audio>
+
+            <p class="font-script script-sm-2 ink text-center mt-6">— Omar &amp; Laila</p>
+          </div>
+        </section>
+
+        <!-- Final -->
+        <section class="reveal">
+          <div class="card">
+            <img src="assets/sketch-hands.png" alt="" loading="lazy" width="512" height="512" class="img-hands" />
+            <p class="text-center leading-relaxed ink-80 mt-6">
+              We are excited to celebrate this special moment with you and create
+              beautiful memories together.
+            </p>
+            <p class="font-script script-md ink text-center mt-8">Until our wedding day</p>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="site-footer">
+        <svg class="infinity icon-w14-h5 mb-4 ink-50 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <path d="M12 12c-2-3-4-5-6.5-5S1 9 1 12s2 5 4.5 5 4.5-2 6.5-5 4-5 6.5-5S23 9 23 12s-2 5-4.5 5-4.5-2-6.5-5z" />
+        </svg>
+        <p class="font-script script-md ink">Omar &amp; Laila</p>
+        <p class="caps-xs muted mt-3">07 . 05 . 2026 — Cairo</p>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
