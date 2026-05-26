@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Wish Invitation</title>
+  <meta name="description" content="An interactive birthday invitation with an envelope reveal, personal letter, memory gallery, song page, and surprises.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <div class="gate" id="gate" aria-label="Sealed birthday invitation">
+    <div class="gate-bg" aria-hidden="true"></div>
+    <div class="envelope-wrap">
+      <div class="envelope" aria-hidden="true">
+        <div class="flap flap-top"></div>
+        <div class="paper">
+          <span>Birthday Wish</span>
+        </div>
+        <div class="flap flap-left"></div>
+        <div class="flap flap-right"></div>
+        <div class="flap flap-bottom"></div>
+      </div>
+      <button class="seal" id="openInvitation" type="button" aria-label="Open birthday invitation">
+        <span class="seal-ring"></span>
+        <span class="seal-text">Open</span>
+      </button>
+      <p class="gate-note">A little birthday message is waiting.</p>
+    </div>
+  </div>
+
+  <div class="site-shell" id="siteShell" aria-hidden="true">
+    <header class="hero" id="top">
+      <img class="hero-img" src="assets/hero.png" alt="Colorful birthday invitation artwork with cake, balloons, and confetti.">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <nav class="hero-nav" aria-label="Birthday invitation sections">
+        <a href="#letter">Letter</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#song">Song</a>
+        <a href="#wish">Wish</a>
+      </nav>
+      <div class="hero-copy">
+        <p class="eyebrow" id="heroEyebrow">A private birthday invitation</p>
+        <h1 id="heroTitle">Happy Birthday Maya</h1>
+        <p class="hero-subtitle" id="heroSubtitle">Hey you know who, this one is all yours.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#letter">
+            <span class="btn-icon" aria-hidden="true"></span>
+            Read the letter
+          </a>
+          <button class="btn ghost" type="button" id="quickConfetti">
+            <span class="spark-icon" aria-hidden="true"></span>
+            Surprise
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro-band" data-reveal>
+        <p class="kicker">Birthday details</p>
+        <div class="detail-strip" aria-label="Birthday details">
+          <div>
+            <span>Date</span>
+            <strong id="birthdayDate">June 18, 2026</strong>
+          </div>
+          <div>
+            <span>From</span>
+            <strong id="senderName">Leen</strong>
+          </div>
+          <div>
+            <span>Theme</span>
+            <strong id="themeName">Soft confetti glow</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="letter-section" id="letter" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">A note for you</p>
+          <h2>Before the candles</h2>
+        </div>
+        <article class="letter">
+          <p id="letterText"></p>
+          <button class="secret-note" id="secretNote" type="button" aria-expanded="false">
+            <span class="secret-title">A tiny secret</span>
+            <span class="secret-body" id="secretBody">You make ordinary days feel like celebrations.</span>
+          </button>
+        </article>
+      </section>
+
+      <section class="gallery-section" id="gallery" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">Memory gallery</p>
+          <h2>Twenty two little moments</h2>
+          <p>Swap these placeholders with real photos to turn the page into a personal memory trail.</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid" aria-label="Birthday memory gallery"></div>
+      </section>
+
+      <section class="song-section" id="song" data-reveal>
+        <div class="song-visual">
+          <img src="assets/song-cover.png" alt="Abstract birthday song cover artwork.">
+          <div class="vinyl" aria-hidden="true"></div>
+        </div>
+        <div class="song-copy">
+          <p class="kicker">Song page</p>
+          <h2 id="songTitle">Golden Hour Wish</h2>
+          <p id="songNote">Press play for a soft demo ambience, or replace it with a real song file in the settings.</p>
+          <div class="player">
+            <button class="play-btn" id="playSong" type="button" aria-label="Play birthday song">
+              <span class="play-symbol" aria-hidden="true"></span>
+            </button>
+            <div class="track">
+              <span id="trackLabel">Birthday song</span>
+              <div class="track-line"><span id="trackProgress"></span></div>
+            </div>
+          </div>
+          <audio id="birthdaySong" preload="metadata"></audio>
+        </div>
+      </section>
+
+      <section class="surprises" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">Mini surprises</p>
+          <h2>Small things to find</h2>
+        </div>
+        <div class="surprise-grid">
+          <button class="surprise-card" type="button" data-surprise="You are the plot twist everyone roots for.">
+            <span>Hidden message</span>
+            <strong>Tap to reveal</strong>
+          </button>
+          <button class="surprise-card" type="button" data-surprise="One more reason to smile: today is officially yours.">
+            <span>Birthday spark</span>
+            <strong>Tap to reveal</strong>
+          </button>
+          <button class="surprise-card" type="button" data-surprise="Save room for cake, laughter, and one dramatic wish.">
+            <span>Final note</span>
+            <strong>Tap to reveal</strong>
+          </button>
+        </div>
+      </section>
+
+      <section class="wish-section" id="wish" data-reveal>
+        <p class="kicker">Make a wish</p>
+        <h2>Close your eyes for one second</h2>
+        <button class="wish-button" id="wishButton" type="button">Light the candles</button>
+        <p class="wish-message" id="wishMessage" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer>
+      <p id="footerText">Made with love for Maya.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <dialog class="lightbox" id="lightbox">
+    <button class="close-lightbox" id="closeLightbox" type="button" aria-label="Close memory preview"></button>
+    <img id="lightboxImage" alt="">
+    <p id="lightboxCaption"></p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

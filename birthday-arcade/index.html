@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Arcade Invitation</title>
+  <meta name="description" content="A neon arcade birthday invitation with a press-start opening, bonus round, prize gallery, and gift-code reveal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <div class="start-screen" id="startScreen">
+    <div class="start-panel">
+      <p class="pixel-label">Insert birthday token</p>
+      <h1>Birthday Arcade</h1>
+      <p>Press start to unlock the party level.</p>
+      <button class="start-button" id="startButton" type="button">Press start</button>
+    </div>
+  </div>
+
+  <div class="page" id="page" aria-hidden="true">
+    <header class="hero" id="top">
+      <img src="assets/hero.png" alt="Neon arcade cabinet birthday artwork.">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <nav class="nav" aria-label="Birthday arcade sections">
+        <a href="#mission">Mission</a>
+        <a href="#bonus">Bonus</a>
+        <a href="#prizes">Prizes</a>
+        <a href="#gift">Gift</a>
+      </nav>
+      <div class="hero-copy">
+        <p class="pixel-label" id="heroLabel">Player one birthday mode</p>
+        <h2 id="heroTitle">Level 25 unlocked</h2>
+        <p id="heroText">Join Sami for a neon birthday quest, collect bonus points, and unlock the final gift code.</p>
+        <a class="arcade-button" href="#mission">Enter level</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hud" data-reveal>
+        <div><span>Player</span><strong id="playerName">Sami</strong></div>
+        <div><span>Date</span><strong id="partyDate">July 12, 2026</strong></div>
+        <div><span>Location</span><strong id="partyPlace">The Neon Room</strong></div>
+        <div><span>Score</span><strong id="scoreDisplay">0000</strong></div>
+      </section>
+
+      <section class="mission" id="mission" data-reveal>
+        <div class="section-head">
+          <p class="pixel-label">Main mission</p>
+          <h2>Clear the birthday level</h2>
+        </div>
+        <div class="mission-grid">
+          <article><span>01</span><h3>Arrive powered up</h3><p>Bring your best party energy and one dramatic cheer.</p></article>
+          <article><span>02</span><h3>Collect memories</h3><p>Take photos, leave notes, and help fill the prize wall.</p></article>
+          <article><span>03</span><h3>Unlock cake mode</h3><p>Stay until the candles, because that is where the bonus points live.</p></article>
+        </div>
+      </section>
+
+      <section class="bonus" id="bonus" data-reveal>
+        <div class="section-head">
+          <p class="pixel-label">Bonus round</p>
+          <h2>Catch ten birthday tokens</h2>
+          <p>Tap the glowing tokens before the timer runs out.</p>
+        </div>
+        <div class="game-panel">
+          <div class="game-stats">
+            <span>Tokens <strong id="tokenCount">0</strong>/10</span>
+            <span>Time <strong id="timerCount">20</strong>s</span>
+          </div>
+          <div class="playfield" id="playfield" aria-label="Birthday token game"></div>
+          <button class="arcade-button" id="gameButton" type="button">Start bonus round</button>
+          <p class="game-message" id="gameMessage" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="prizes" id="prizes" data-reveal>
+        <div class="section-head">
+          <p class="pixel-label">Prize wall</p>
+          <h2>Eight unlockable rewards</h2>
+        </div>
+        <div class="prize-grid" id="prizeGrid"></div>
+      </section>
+
+      <section class="gift" id="gift" data-reveal>
+        <div>
+          <p class="pixel-label">Final unlock</p>
+          <h2>Reveal the birthday code</h2>
+          <p id="giftText">Finish the level with one more tap. Replace this with a real gift clue, party address detail, or secret message.</p>
+          <button class="arcade-button" id="giftButton" type="button">Reveal code</button>
+        </div>
+        <div class="code-box" id="codeBox">LOCKED</div>
+      </section>
+    </main>
+
+    <footer>
+      <p id="footerLine">Thanks for playing birthday mode.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <dialog class="prize-dialog" id="prizeDialog">
+    <button class="close" id="closeDialog" type="button" aria-label="Close prize preview"></button>
+    <img id="dialogImage" alt="">
+    <div>
+      <p class="pixel-label" id="dialogLabel"></p>
+      <h3 id="dialogTitle"></h3>
+      <p id="dialogText"></p>
+    </div>
+  </dialog>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>

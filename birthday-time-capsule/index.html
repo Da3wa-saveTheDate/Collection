@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Time Capsule</title>
+  <meta name="description" content="A playful birthday invitation website built around unlocking memory capsules, wishes, and a future message.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <div class="unlock" id="unlock">
+    <div class="unlock-card">
+      <p class="mini">Birthday archive</p>
+      <h1>Time Capsule</h1>
+      <p>Unlock a small collection of memories, wishes, and future promises.</p>
+      <button class="unlock-button" id="unlockButton" type="button">
+        <span aria-hidden="true"></span>
+        Unlock capsule
+      </button>
+    </div>
+  </div>
+
+  <div class="page" id="page" aria-hidden="true">
+    <header class="hero" id="top">
+      <img src="assets/hero.png" alt="Illustrated birthday time capsule with notes, confetti, and balloons.">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <nav class="nav" aria-label="Birthday time capsule sections">
+        <a href="#capsules">Capsules</a>
+        <a href="#wishes">Wishes</a>
+        <a href="#future">Future</a>
+      </nav>
+      <div class="hero-copy">
+        <p class="mini" id="heroMini">For Nadia's birthday</p>
+        <h2 id="heroTitle">Open today. Keep forever.</h2>
+        <p id="heroText">A digital birthday time capsule full of tiny notes, old memories, and one message for the year ahead.</p>
+        <a class="primary-link" href="#capsules">Start exploring</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="details" data-reveal>
+        <div>
+          <span>Date sealed</span>
+          <strong id="sealedDate">May 25, 2026</strong>
+        </div>
+        <div>
+          <span>Opened for</span>
+          <strong id="birthdayName">Nadia</strong>
+        </div>
+        <div>
+          <span>Made by</span>
+          <strong id="madeBy">Your favorite people</strong>
+        </div>
+      </section>
+
+      <section class="capsules" id="capsules" data-reveal>
+        <div class="section-head">
+          <p class="mini">Memory capsules</p>
+          <h2>Tap each capsule to reveal a note</h2>
+        </div>
+        <div class="capsule-grid" id="capsuleGrid"></div>
+      </section>
+
+      <section class="wishes" id="wishes" data-reveal>
+        <div class="section-head">
+          <p class="mini">Wish wall</p>
+          <h2>Messages from the people who know your sparkle</h2>
+        </div>
+        <div class="wish-list" id="wishList"></div>
+      </section>
+
+      <section class="future" id="future" data-reveal>
+        <div class="future-copy">
+          <p class="mini">Future message</p>
+          <h2>Open this when the year gets loud</h2>
+          <p id="futureMessage">You have already handled things you once thought would be too much. Keep choosing joy loudly.</p>
+          <button class="primary-link as-button" id="shuffleFuture" type="button">Another note</button>
+        </div>
+        <div class="date-orbit" aria-hidden="true">
+          <span>12</span>
+          <span>months</span>
+          <span>of wishes</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p id="footerLine">Capsule sealed with love.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <dialog class="memory-dialog" id="memoryDialog">
+    <button class="close" id="closeDialog" type="button" aria-label="Close capsule preview"></button>
+    <img id="dialogImage" alt="">
+    <div>
+      <p class="mini" id="dialogLabel"></p>
+      <h3 id="dialogTitle"></h3>
+      <p id="dialogText"></p>
+    </div>
+  </dialog>
+
+  <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>

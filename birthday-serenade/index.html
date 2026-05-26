@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Serenade Invitation</title>
+  <meta name="description" content="A romantic birthday celebration invitation with candlelight, love notes, memories, bouquet interaction, and a lantern wish.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <div class="candle-gate" id="candleGate">
+    <div class="gate-card">
+      <p class="kicker">A romantic birthday celebration</p>
+      <h1>Light the first candle</h1>
+      <p>One small flame, one private wish, one evening made for love.</p>
+      <button class="primary-button" id="lightButton" type="button">Light candle</button>
+      <div class="candle" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
+
+  <div class="page" id="page" aria-hidden="true">
+    <header class="hero" id="top">
+      <img src="assets/hero.png" alt="Moonlit candlelit birthday table with cake, candles, roses, and a love note.">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <nav class="nav" aria-label="Birthday Serenade sections">
+        <a href="#letter">Letter</a>
+        <a href="#evening">Evening</a>
+        <a href="#memories">Memories</a>
+        <a href="#wish">Wish</a>
+      </nav>
+      <div class="hero-copy">
+        <p class="kicker" id="heroKicker">Tonight belongs to Lina</p>
+        <h2 id="heroTitle">Happy birthday, my love</h2>
+        <p id="heroText">A candlelit birthday invitation for dinner, memories, music, and one wish under the moon.</p>
+        <a class="primary-button" href="#letter">Begin the serenade</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="details" data-reveal>
+        <div><span>Date</span><strong id="dateText">August 9, 2026</strong></div>
+        <div><span>Place</span><strong id="placeText">Rooftop Garden</strong></div>
+        <div><span>Dress</span><strong id="dressText">Soft romance</strong></div>
+      </section>
+
+      <section class="letter" id="letter" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">Love note</p>
+          <h2>A letter before the cake</h2>
+        </div>
+        <article class="note">
+          <p id="letterText"></p>
+          <button class="note-button" id="revealLine" type="button">Reveal one more line</button>
+          <p class="hidden-line" id="hiddenLine" aria-live="polite"></p>
+        </article>
+      </section>
+
+      <section class="evening" id="evening" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">The evening</p>
+          <h2>Our little birthday itinerary</h2>
+        </div>
+        <div class="timeline">
+          <article><span>7:00</span><h3>Candlelit dinner</h3><p>Something warm, slow, and just for us.</p></article>
+          <article><span>8:30</span><h3>Moonlight photos</h3><p>A few new memories to keep from this year.</p></article>
+          <article><span>9:15</span><h3>Cake and a wish</h3><p>The sweetest part, obviously supervised by love.</p></article>
+        </div>
+      </section>
+
+      <section class="memories" id="memories" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">Memory film</p>
+          <h2>Ten scenes I keep replaying</h2>
+        </div>
+        <div class="film-strip" id="filmStrip"></div>
+      </section>
+
+      <section class="bouquet" data-reveal>
+        <div class="section-copy">
+          <p class="kicker">Bouquet builder</p>
+          <h2>Collect six petals</h2>
+          <p>Tap the petals to finish the bouquet and unlock a small birthday promise.</p>
+        </div>
+        <div class="petal-field" id="petalField" aria-label="Romantic petal interaction"></div>
+        <p class="bouquet-message" id="bouquetMessage" aria-live="polite"></p>
+      </section>
+
+      <section class="wish" id="wish" data-reveal>
+        <div>
+          <p class="kicker">Lantern wish</p>
+          <h2>Release one wish into the night</h2>
+          <p id="wishText">May this year love you back in every language you understand.</p>
+          <button class="primary-button" id="lanternButton" type="button">Release lantern</button>
+        </div>
+        <div class="lantern-scene" id="lanternScene" aria-hidden="true">
+          <span class="lantern"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p id="footerLine">Made for Lina, with all my love.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <dialog class="memory-dialog" id="memoryDialog">
+    <button class="close" id="closeDialog" type="button" aria-label="Close memory preview"></button>
+    <img id="dialogImage" alt="">
+    <div>
+      <p class="kicker" id="dialogKicker"></p>
+      <h3 id="dialogTitle"></h3>
+      <p id="dialogText"></p>
+    </div>
+  </dialog>
+
+  <div class="spark-layer" id="sparkLayer" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>

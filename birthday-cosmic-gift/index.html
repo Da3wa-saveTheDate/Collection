@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmic Birthday Gift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050713;
+  --bg2:#0b1024;
+  --panel:rgba(8,12,31,.68);
+  --panel-strong:rgba(10,14,35,.9);
+  --line:rgba(255,255,255,.14);
+  --line-soft:rgba(255,255,255,.08);
+  --text:#f7f3ff;
+  --muted:#b7bad5;
+  --soft:#7e84aa;
+  --cyan:#61e4ff;
+  --violet:#a88cff;
+  --gold:#ffd67a;
+  --rose:#ff79b8;
+  --shadow:0 24px 70px rgba(0,0,0,.5);
+}
+html,body{height:100%}
+body{
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(97,228,255,.18),transparent 28%),
+    radial-gradient(circle at 82% 18%,rgba(168,140,255,.2),transparent 31%),
+    radial-gradient(circle at 50% 80%,rgba(255,214,122,.12),transparent 34%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Lato",system-ui,sans-serif;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.3;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+  mix-blend-mode:screen;
+}
+button,a{font:inherit}
+#spaceCanvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.app{
+  position:relative;
+  z-index:1;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  padding:1rem;
+}
+.music-toggle{
+  position:fixed;
+  top:1rem;
+  right:1rem;
+  z-index:20;
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  background:rgba(8,12,31,.58);
+  color:var(--text);
+  cursor:pointer;
+  box-shadow:0 12px 34px rgba(0,0,0,.25);
+  backdrop-filter:blur(14px);
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.music-toggle:hover,.music-toggle.active{
+  transform:translateY(-2px);
+  border-color:rgba(97,228,255,.5);
+  background:rgba(97,228,255,.12);
+}
+.music-toggle small{
+  position:absolute;
+  width:8px;
+  height:8px;
+  right:7px;
+  bottom:8px;
+  border-radius:50%;
+  background:var(--soft);
+}
+.music-toggle.active small{background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.stage{
+  position:relative;
+  width:min(480px,100%);
+  height:min(760px,calc(100svh - 2rem));
+  min-height:620px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:26px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),
+    rgba(5,7,19,.66);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  backdrop-filter:blur(18px);
+}
+.stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(97,228,255,.18),transparent 26%),
+    radial-gradient(circle at 50% 100%,rgba(168,140,255,.14),transparent 28%);
+}
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:1.1rem;
+  padding:4.2rem 1.35rem 5.8rem;
+  opacity:0;
+  transform:translateY(28px);
+  pointer-events:none;
+  transition:opacity .8s ease,transform .8s ease;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+.page::-webkit-scrollbar{display:none}
+.page.active{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.page-kicker{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.26em;
+  font-size:.66rem;
+  font-weight:900;
+  text-align:center;
+}
+.display{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(4.4rem,17vw,6.7rem);
+  line-height:.86;
+  text-align:center;
+  letter-spacing:.01em;
+  text-shadow:0 0 24px rgba(97,228,255,.28),0 0 46px rgba(168,140,255,.2);
+}
+.shimmer{
+  position:relative;
+  display:inline-block;
+  color:transparent;
+  background:linear-gradient(90deg,#fff,var(--cyan),var(--gold),#fff);
+  background-size:260% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation:shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.subtitle{
+  max-width:350px;
+  margin:0 auto;
+  color:#d8dcff;
+  text-align:center;
+  font-size:1rem;
+  line-height:1.8;
+}
+.cosmic-ring{
+  position:relative;
+  width:178px;
+  height:178px;
+  margin:0 auto 1rem;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  display:grid;
+  place-items:center;
+}
+.cosmic-ring::before,.cosmic-ring::after{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:50%;
+  border:1px solid rgba(97,228,255,.26);
+  animation:orbit 9s linear infinite;
+}
+.cosmic-ring::after{
+  inset:33px;
+  border-color:rgba(255,214,122,.3);
+  animation-duration:13s;
+  animation-direction:reverse;
+}
+.moon{
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 32%,rgba(255,255,255,.95),rgba(255,255,255,.54) 22%,transparent 23%),
+    radial-gradient(circle at 62% 62%,rgba(255,214,122,.65),transparent 10%),
+    linear-gradient(135deg,#fff4cc,#8fefff 48%,#6553d8);
+  box-shadow:0 0 34px rgba(97,228,255,.45),inset -18px -22px 28px rgba(5,7,19,.32);
+}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.btn{
+  min-height:50px;
+  padding:.9rem 1.25rem;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  color:var(--text);
+  background:rgba(255,255,255,.06);
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.7rem;
+  font-weight:900;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
+}
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(97,228,255,.5);
+  box-shadow:0 14px 36px rgba(97,228,255,.12);
+}
+.btn-primary{
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  color:#070913;
+  box-shadow:0 15px 38px rgba(97,228,255,.22);
+}
+.title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(2.4rem,10vw,3.7rem);
+  line-height:1.02;
+  text-align:center;
+}
+.title em{color:var(--cyan);font-style:italic}
+.intro-copy{
+  color:var(--muted);
+  text-align:center;
+  max-width:360px;
+  margin:0 auto;
+  line-height:1.7;
+  font-size:.94rem;
+}
+.reasons-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+  margin-top:.6rem;
+}
+.reason-card{
+  position:relative;
+  min-height:118px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.055);
+  color:var(--text);
+  cursor:pointer;
+  overflow:hidden;
+  padding:.85rem;
+  text-align:left;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.reason-card:hover{transform:translateY(-3px);border-color:rgba(97,228,255,.42)}
+.reason-card::before{
+  content:"Tap to reveal";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.58rem;
+  font-weight:900;
+  opacity:1;
+  transition:opacity .25s ease;
+}
+.reason-card.revealed::before{opacity:0}
+.reason-card h3{
+  font-family:"Cormorant Garamond",serif;
+  color:var(--cyan);
+  font-size:1.25rem;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .28s ease,transform .28s ease;
+}
+.reason-card p{
+  color:#dce2ff;
+  font-size:.74rem;
+  line-height:1.48;
+  margin-top:.35rem;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .28s ease .08s,transform .28s ease .08s;
+}
+.reason-card.revealed h3,.reason-card.revealed p{opacity:1;transform:translateY(0)}
+.polaroids{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.85rem;
+  margin-top:.4rem;
+}
+.polaroid{
+  min-height:154px;
+  padding:.55rem .55rem .85rem;
+  border-radius:8px;
+  background:#f5f0e8;
+  color:#1b1b22;
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+  transform:rotate(var(--rot));
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.polaroid:hover{
+  transform:rotate(0) scale(1.055);
+  box-shadow:0 18px 46px rgba(0,0,0,.38);
+  z-index:4;
+}
+.polaroid:nth-child(5){
+  grid-column:1/3;
+  width:63%;
+  justify-self:center;
+}
+.photo-slot{
+  height:112px;
+  border-radius:5px;
+  background:
+    radial-gradient(circle at 30% 25%,rgba(255,255,255,.8),transparent 24%),
+    linear-gradient(135deg,var(--g1),var(--g2));
+  border:1px solid rgba(0,0,0,.08);
+  background-size:cover;
+  background-position:center;
+}
+.photo-caption{
+  margin-top:.55rem;
+  text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  font-weight:700;
+  font-size:1rem;
+}
+.surprise-wrap{
+  display:grid;
+  gap:1rem;
+  justify-items:center;
+}
+.cake{
+  position:relative;
+  width:min(330px,100%);
+  height:245px;
+  margin-top:.4rem;
+}
+.cake-base{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  width:250px;
+  height:112px;
+  transform:translateX(-50%);
+  border-radius:26px 26px 18px 18px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.2),transparent 28%),
+    linear-gradient(135deg,#292357,#101733);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:inset 0 0 30px rgba(97,228,255,.1),0 22px 42px rgba(0,0,0,.3);
+}
+.cake-base::before{
+  content:"";
+  position:absolute;
+  left:16px;
+  right:16px;
+  top:22px;
+  height:16px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet),var(--gold));
+  box-shadow:0 0 22px rgba(97,228,255,.24);
+}
+.candle-row{
+  position:absolute;
+  left:50%;
+  bottom:129px;
+  transform:translateX(-50%);
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  width:94%;
+}
+.candle{
+  position:relative;
+  width:22px;
+  height:72px;
+  border:0;
+  border-radius:8px;
+  background:linear-gradient(90deg,#faf6ff,#dfe8ff,#faf6ff);
+  box-shadow:inset -3px 0 0 rgba(0,0,0,.08),0 8px 16px rgba(0,0,0,.16);
+  cursor:pointer;
+}
+.candle::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-26px;
+  width:18px;
+  height:28px;
+  transform:translateX(-50%);
+  border-radius:50% 50% 48% 48%;
+  background:radial-gradient(circle at 45% 68%,#fff 0 16%,#ffd67a 20% 38%,#ff875c 56%,transparent 62%);
+  filter:drop-shadow(0 0 12px rgba(255,214,122,.9));
+  transform-origin:50% 100%;
+  animation:flame 1s ease-in-out infinite alternate;
+}
+.candle::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-2px;
+  width:2px;
+  height:8px;
+  background:#25212d;
+  transform:translateX(-50%);
+}
+.candle.out::before{opacity:0;transform:translateX(-50%) scale(.25);animation:none;transition:opacity .25s ease,transform .25s ease}
+@keyframes flame{from{transform:translateX(-50%) rotate(-4deg) scale(.93)}to{transform:translateX(-50%) rotate(5deg) scale(1.06)}}
+.wish{
+  min-height:58px;
+  color:#e9ebff;
+  font-family:"Cormorant Garamond",serif;
+  font-size:1.35rem;
+  text-align:center;
+  font-style:italic;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.wish.show{opacity:1;transform:translateY(0)}
+.letter-card{
+  position:relative;
+  padding:2rem 1.3rem;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 30%),
+    rgba(5,7,19,.82);
+  box-shadow:0 20px 56px rgba(0,0,0,.34);
+}
+.letter-card::before,.letter-card::after{
+  content:"";
+  position:absolute;
+  left:1.3rem;
+  right:1.3rem;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--gold),transparent);
+}
+.letter-card::before{top:1rem}
+.letter-card::after{bottom:1rem}
+.letter-message{
+  font-family:"Cormorant Garamond",serif;
+  font-size:1.32rem;
+  line-height:1.62;
+  font-style:italic;
+  color:#f6f1ff;
+  text-align:center;
+}
+.signature{
+  margin-top:1.4rem;
+  text-align:right;
+  color:var(--gold);
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.nav-controls{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:8;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.65rem;
+  padding:1rem 1rem 1.1rem;
+  background:linear-gradient(180deg,transparent,rgba(5,7,19,.92) 35%);
+}
+.nav-controls.hide{display:none}
+.nav-controls .btn{
+  min-height:42px;
+  padding:.75rem .95rem;
+  font-size:.62rem;
+}
+.dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.45rem;
+}
+.dot{
+  width:8px;
+  height:8px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.26);
+  cursor:pointer;
+  transition:width .25s ease,background .25s ease;
+}
+.dot.active{
+  width:24px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+}
+.hidden{visibility:hidden;pointer-events:none}
+@media (max-width:520px){
+  .app{padding:0}
+  .stage{
+    width:100%;
+    height:100svh;
+    min-height:100svh;
+    border-radius:0;
+    border:0;
+  }
+  .page{padding:4.4rem 1.05rem 5.6rem}
+  .music-toggle{top:.7rem;right:.7rem}
+  .display{font-size:clamp(4rem,22vw,5.7rem)}
+  .cosmic-ring{width:146px;height:146px}
+  .moon{width:72px;height:72px}
+  .reasons-grid{gap:.55rem}
+  .reason-card{min-height:108px;padding:.75rem}
+  .polaroids{gap:.65rem}
+  .polaroid{min-height:142px}
+  .photo-slot{height:100px}
+  .cake{height:220px}
+  .cake-base{width:226px}
+  .candle-row{gap:8px}
+  .candle{width:19px;height:66px}
+}
+@media (max-height:690px){
+  .stage{height:100svh;min-height:100svh;border-radius:0}
+  .page{padding-top:3.4rem}
+  .cosmic-ring{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+
+<button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle music" title="Toggle music">
+  ♪
+  <small aria-hidden="true"></small>
+</button>
+<audio id="music" loop></audio>
+
+<main class="app" id="app">
+  <section class="stage" id="stage" aria-live="polite">
+    <article class="page active" data-page="0" aria-label="Cover">
+      <div class="cosmic-ring" aria-hidden="true"><div class="moon"></div></div>
+      <p class="page-kicker" id="occasionLabel">Birthday constellation</p>
+      <h1 class="display"><span class="shimmer" id="coverName">Maya</span></h1>
+      <p class="subtitle" id="coverSubtitle">Tonight, the stars arranged themselves just to spell your name.</p>
+      <button class="btn btn-primary" id="openGift" type="button">Open Your Gift</button>
+    </article>
+
+    <article class="page" data-page="1" aria-label="Reasons">
+      <p class="page-kicker">Six little stars</p>
+      <h2 class="title">Things that make you <em id="qualityWord">radiant</em></h2>
+      <p class="intro-copy">Tap each card to reveal a tiny constellation of why you matter so much.</p>
+      <div class="reasons-grid" id="reasonsGrid"></div>
+    </article>
+
+    <article class="page" data-page="2" aria-label="Photo memories">
+      <p class="page-kicker">Memory orbit</p>
+      <h2 class="title">Photos from our little <em>galaxy</em></h2>
+      <p class="intro-copy">Replace the placeholder gradients with real photos, then let every frame become a tiny time machine.</p>
+      <div class="polaroids" id="photoGrid"></div>
+    </article>
+
+    <article class="page" data-page="3" aria-label="Interactive surprise">
+      <p class="page-kicker">Make a wish</p>
+      <h2 class="title">Blow out the <em>star candles</em></h2>
+      <p class="intro-copy">Click every flame. When the last one disappears, the wish unlocks.</p>
+      <div class="surprise-wrap">
+        <div class="cake" aria-label="Birthday cake with candles">
+          <div class="candle-row" id="candleRow"></div>
+          <div class="cake-base"></div>
+        </div>
+        <p class="wish" id="wishText"></p>
+      </div>
+    </article>
+
+    <article class="page" data-page="4" aria-label="Final letter">
+      <p class="page-kicker">Final transmission</p>
+      <h2 class="title">A letter from my <em>orbit</em></h2>
+      <div class="letter-card">
+        <p class="letter-message" id="finalLetter"></p>
+        <p class="signature" id="signature"></p>
+      </div>
+      <button class="btn btn-primary" id="readAgain" type="button">Read Again</button>
+    </article>
+
+    <div class="nav-controls" id="navControls">
+      <button class="btn" id="prevBtn" type="button">Back</button>
+      <div class="dots" id="dots" aria-label="Page selector"></div>
+      <button class="btn btn-primary" id="nextBtn" type="button">Next</button>
+    </div>
+  </section>
+</main>
+
+<script>
+// 🖊️ CHANGE NAME HERE
+const RECIPIENT_NAME = "Maya";
+
+// 🖊️ CHANGE OCCASION HERE
+const OCCASION = "birthday";
+
+// 🖊️ CHANGE TONE HERE
+const TONE = "romantic";
+
+// 🎵 ADD MUSIC URL HERE
+const MUSIC_URL = "";
+
+// 🖊️ CHANGE CANDLE COUNT HERE
+const CANDLE_COUNT = 7;
+
+const content = {
+  // 💬 EDIT MESSAGE HERE
+  subtitle: "Tonight, the stars arranged themselves just to spell your name.",
+  qualityWord: "radiant",
+  sender: "Your favorite person",
+  wish: "Wish unlocked: may this year love you loudly, softly, and in every language your heart understands.",
+  reasons: [
+    { title:"Your light", message:"You make ordinary rooms feel like they have windows to the sky." },
+    { title:"Your laugh", message:"It is the sound I would recognize in any universe, even through static." },
+    { title:"Your kindness", message:"You notice the small things, and somehow that makes everything feel less heavy." },
+    { title:"Your courage", message:"You keep becoming yourself with a grace that feels quietly cosmic." },
+    { title:"Your heart", message:"It is tender, brilliant, stubborn in the best way, and so easy to love." },
+    { title:"Your magic", message:"You turn simple days into stories I want to keep forever." }
+  ],
+  photos: [
+    // 📸 REPLACE WITH PHOTO URL
+    { src:"", caption:"First little universe", colors:["#61e4ff","#4c3bbf"] },
+    // 📸 REPLACE WITH PHOTO URL
+    { src:"", caption:"A laugh in orbit", colors:["#ffd67a","#a88cff"] },
+    // 📸 REPLACE WITH PHOTO URL
+    { src:"", caption:"Favorite starlight", colors:["#ff79b8","#253a7a"] },
+    // 📸 REPLACE WITH PHOTO URL
+    { src:"", caption:"That perfect day", colors:["#7cffd8","#152347"] },
+    // 📸 REPLACE WITH PHOTO URL
+    { src:"", caption:"Always this memory", colors:["#f7f3ff","#7457e8"] }
+  ],
+  // 💬 EDIT MESSAGE HERE
+  finalLetter: "If I could gather every bright thing in the sky, I would still choose this small, impossible miracle: getting to know you, celebrate you, and watch another year find its way to your beautiful heart.",
+};
+
+const pages = [...document.querySelectorAll(".page")];
+const dotsWrap = document.getElementById("dots");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const navControls = document.getElementById("navControls");
+const stage = document.getElementById("stage");
+const music = document.getElementById("music");
+const musicToggle = document.getElementById("musicToggle");
+let currentPage = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+let completedCandles = false;
+
+document.getElementById("coverName").textContent = RECIPIENT_NAME;
+document.getElementById("occasionLabel").textContent = `${OCCASION} constellation`;
+document.getElementById("coverSubtitle").textContent = content.subtitle;
+document.getElementById("qualityWord").textContent = content.qualityWord;
+document.getElementById("wishText").textContent = content.wish;
+document.getElementById("finalLetter").textContent = content.finalLetter;
+document.getElementById("signature").textContent = `- ${content.sender}`;
+
+content.reasons.forEach((reason, index) => {
+  const card = document.createElement("button");
+  card.className = "reason-card";
+  card.type = "button";
+  card.innerHTML = `<h3>${reason.title}</h3><p>${reason.message}</p>`;
+  card.addEventListener("click", () => {
+    if(card.classList.contains("revealed")) return;
+    card.classList.add("revealed");
+    const rect = card.getBoundingClientRect();
+    burst(rect.left + rect.width / 2, rect.top + rect.height / 2, index % 2 ? "#ffd67a" : "#61e4ff");
+  });
+  document.getElementById("reasonsGrid").appendChild(card);
+});
+
+content.photos.forEach((photo, index) => {
+  const frame = document.createElement("figure");
+  frame.className = "polaroid";
+  frame.style.setProperty("--rot", `${[-5,4,-3,5,-2][index]}deg`);
+  frame.innerHTML = `
+    <div class="photo-slot" style="--g1:${photo.colors[0]};--g2:${photo.colors[1]};${photo.src ? `background-image:url('${photo.src}')` : ""}"></div>
+    <figcaption class="photo-caption">${photo.caption}</figcaption>
+  `;
+  document.getElementById("photoGrid").appendChild(frame);
+});
+
+function buildCandles(){
+  const row = document.getElementById("candleRow");
+  row.innerHTML = "";
+  for(let i = 0; i < CANDLE_COUNT; i++){
+    const candle = document.createElement("button");
+    candle.type = "button";
+    candle.className = "candle";
+    candle.setAttribute("aria-label", `Extinguish candle ${i + 1}`);
+    candle.addEventListener("click", () => {
+      if(candle.classList.contains("out")) return;
+      candle.classList.add("out");
+      const rect = candle.getBoundingClientRect();
+      burst(rect.left + rect.width / 2, rect.top, "#ffd67a");
+      checkCandles();
+    });
+    row.appendChild(candle);
+  }
+}
+
+function checkCandles(){
+  const candles = [...document.querySelectorAll(".candle")];
+  if(candles.length && candles.every(c => c.classList.contains("out")) && !completedCandles){
+    completedCandles = true;
+    document.getElementById("wishText").classList.add("show");
+    for(let i = 0; i < 42; i++){
+      setTimeout(() => burst(window.innerWidth / 2 + (Math.random() - .5) * 190, window.innerHeight / 2 + (Math.random() - .5) * 160, i % 2 ? "#61e4ff" : "#a88cff"), i * 24);
+    }
+  }
+}
+
+function resetCandles(){
+  completedCandles = false;
+  document.getElementById("wishText").classList.remove("show");
+  document.querySelectorAll(".candle").forEach(c => c.classList.remove("out"));
+}
+
+function renderDots(){
+  dotsWrap.innerHTML = "";
+  pages.forEach((_, index) => {
+    const dot = document.createElement("button");
+    dot.className = "dot";
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Go to page ${index + 1}`);
+    dot.addEventListener("click", () => goToPage(index));
+    dotsWrap.appendChild(dot);
+  });
+}
+
+function goToPage(index){
+  const next = Math.max(0, Math.min(index, pages.length - 1));
+  if(next === currentPage) return;
+  pages[currentPage].classList.remove("active");
+  currentPage = next;
+  pages[currentPage].classList.add("active");
+  updateControls();
+}
+
+function updateControls(){
+  [...dotsWrap.children].forEach((dot, index) => dot.classList.toggle("active", index === currentPage));
+  prevBtn.classList.toggle("hidden", currentPage === 0);
+  nextBtn.textContent = "Next";
+  nextBtn.classList.toggle("hidden", currentPage === pages.length - 1);
+  navControls.classList.toggle("hide", false);
+}
+
+function nextPage(){
+  if(currentPage === pages.length - 1){
+    return;
+  }else{
+    goToPage(currentPage + 1);
+  }
+}
+
+function previousPage(){
+  goToPage(currentPage - 1);
+}
+
+function restart(){
+  document.querySelectorAll(".reason-card").forEach(card => card.classList.remove("revealed"));
+  resetCandles();
+  goToPage(0);
+}
+
+document.getElementById("openGift").addEventListener("click", () => {
+  burst(window.innerWidth / 2, window.innerHeight / 2, "#61e4ff");
+  goToPage(1);
+});
+document.getElementById("readAgain").addEventListener("click", restart);
+prevBtn.addEventListener("click", previousPage);
+nextBtn.addEventListener("click", nextPage);
+
+window.addEventListener("keydown", event => {
+  if(event.key === "ArrowRight") nextPage();
+  if(event.key === "ArrowLeft") previousPage();
+});
+
+stage.addEventListener("touchstart", event => {
+  const touch = event.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}, { passive:true });
+
+stage.addEventListener("touchend", event => {
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+  if(Math.abs(dx) > 52 && Math.abs(dx) > Math.abs(dy)){
+    dx < 0 ? nextPage() : previousPage();
+  }
+}, { passive:true });
+
+musicToggle.addEventListener("click", async () => {
+  if(!music.src && MUSIC_URL){
+    music.src = MUSIC_URL;
+  }
+  if(!MUSIC_URL){
+    musicToggle.title = "Add a music URL inside the code first";
+    burst(window.innerWidth - 42, 42, "#ffd67a");
+    return;
+  }
+  try{
+    if(music.paused){
+      await music.play();
+      musicToggle.classList.add("active");
+    }else{
+      music.pause();
+      musicToggle.classList.remove("active");
+    }
+  }catch(error){
+    musicToggle.title = "Music could not start. Check the audio URL.";
+  }
+});
+
+renderDots();
+buildCandles();
+updateControls();
+
+const canvas = document.getElementById("spaceCanvas");
+const ctx = canvas.getContext("2d");
+let stars = [];
+let comets = [];
+let bursts = [];
+let dpr = 1;
+
+function resize(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = Math.floor(window.innerWidth * dpr);
+  canvas.height = Math.floor(window.innerHeight * dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  stars = Array.from({ length:Math.min(150, Math.floor(window.innerWidth / 5)) }, () => ({
+    x:Math.random() * window.innerWidth,
+    y:Math.random() * window.innerHeight,
+    r:Math.random() * 1.7 + .25,
+    a:Math.random() * .65 + .18,
+    pulse:Math.random() * Math.PI * 2,
+    speed:Math.random() * .13 + .03
+  }));
+}
+
+function burst(x,y,color){
+  for(let i = 0; i < 22; i++){
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 3.2 + 1.2;
+    bursts.push({
+      x,y,
+      vx:Math.cos(angle) * speed,
+      vy:Math.sin(angle) * speed,
+      life:1,
+      color,
+      size:Math.random() * 3 + 1.2
+    });
+  }
+}
+
+function maybeComet(){
+  if(Math.random() > .012) return;
+  comets.push({
+    x:Math.random() * window.innerWidth,
+    y:-30,
+    vx:Math.random() * 2.6 + 1.6,
+    vy:Math.random() * 2.2 + 1.2,
+    life:1,
+    length:Math.random() * 80 + 70
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+  const gradient = ctx.createRadialGradient(window.innerWidth * .5, window.innerHeight * .45, 20, window.innerWidth * .5, window.innerHeight * .45, Math.max(window.innerWidth, window.innerHeight) * .72);
+  gradient.addColorStop(0,"rgba(97,228,255,.08)");
+  gradient.addColorStop(.45,"rgba(168,140,255,.05)");
+  gradient.addColorStop(1,"rgba(5,7,19,0)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+
+  stars.forEach(star => {
+    star.pulse += star.speed;
+    const alpha = star.a + Math.sin(star.pulse) * .16;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(245,247,255,${alpha})`;
+    ctx.fill();
+  });
+
+  maybeComet();
+  comets = comets.filter(comet => comet.life > 0 && comet.x < window.innerWidth + 120 && comet.y < window.innerHeight + 120);
+  comets.forEach(comet => {
+    comet.x += comet.vx;
+    comet.y += comet.vy;
+    comet.life -= .008;
+    ctx.beginPath();
+    ctx.moveTo(comet.x, comet.y);
+    ctx.lineTo(comet.x - comet.length, comet.y - comet.length * .55);
+    ctx.strokeStyle = `rgba(97,228,255,${Math.max(comet.life,0)})`;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+  });
+
+  bursts = bursts.filter(p => p.life > 0);
+  bursts.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += .035;
+    p.life -= .025;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRgba(p.color, p.life);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+
+function hexToRgba(hex, alpha){
+  const clean = hex.replace("#","");
+  const value = parseInt(clean,16);
+  const r = (value >> 16) & 255;
+  const g = (value >> 8) & 255;
+  const b = value & 255;
+  return `rgba(${r},${g},${b},${Math.max(alpha,0)})`;
+}
+
+window.addEventListener("resize", resize);
+resize();
+animate();
+</script>
+</body>
+</html>
