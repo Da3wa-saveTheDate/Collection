@@ -10,7 +10,7 @@ const invitation = {
   song: {
     title: "Golden Hour Wish",
     label: "Birthday song",
-    note: "Press play for a soft demo ambience, or replace it with a real song file in the settings.",
+    note: "Press play for a soft birthday ambience and let the page feel a little more alive.",
     file: ""
   },
   finalWish: "Candles are lit. Make the wish dramatic.",

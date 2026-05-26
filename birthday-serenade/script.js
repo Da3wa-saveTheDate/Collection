@@ -17,7 +17,7 @@ const serenade = {
   moments: Array.from({ length: 10 }, (_, index) => ({
     src: `assets/moment-${String(index + 1).padStart(2, "0")}.png`,
     title: `Moonlit moment ${String(index + 1).padStart(2, "0")}`,
-    text: "Replace this with a real photo caption, a private memory, or a romantic birthday note."
+    text: "A soft little memory from a night made for love."
   }))
 };
 

@@ -126,7 +126,7 @@ function setupDialog() {
     image.alt = capsuleData.capsules[index];
     label.textContent = `Capsule ${String(index + 1).padStart(2, "0")}`;
     title.textContent = capsuleData.capsules[index];
-    text.textContent = "Replace this placeholder with a real story, private joke, or photo caption for the birthday person.";
+    text.textContent = "A saved little story from the archive, sealed with birthday love.";
     if (typeof dialog.showModal === "function") {
       dialog.showModal();
     }

@@ -5,7 +5,7 @@ const arcade = {
   place: "The Neon Room",
   heroLabel: "Player one birthday mode",
   heroText: "Join Sami for a neon birthday quest, collect bonus points, and unlock the final gift code.",
-  giftText: "Finish the level with one more tap. Replace this with a real gift clue, party address detail, or secret message.",
+  giftText: "Finish the level with one more tap to unlock a secret birthday clue.",
   giftCode: "CAKE-MODE",
   prizes: [
     "Birthday power-up",
@@ -171,7 +171,7 @@ function setupPrizeDialog() {
     dialogImage.alt = arcade.prizes[index];
     dialogLabel.textContent = `Reward ${String(index + 1).padStart(2, "0")}`;
     dialogTitle.textContent = arcade.prizes[index];
-    dialogText.textContent = "Replace this with a real photo, personal reward, birthday coupon, or inside joke.";
+    dialogText.textContent = "A tiny birthday reward unlocked just for this player.";
     if (typeof prizeDialog.showModal === "function") prizeDialog.showModal();
     addScore(50);
   });
