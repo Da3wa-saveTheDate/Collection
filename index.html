@@ -6,7 +6,7 @@
 <title>Ajwaa - Digital Invitations and Birthday Websites</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Josefin+Sans:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -35,6 +35,10 @@ body{
   color:var(--text);
   font-family:"Josefin Sans",system-ui,sans-serif;
   line-height:1.5;
+}
+html[dir="rtl"] body{
+  direction:rtl;
+  font-family:"Noto Kufi Arabic","Josefin Sans",system-ui,sans-serif;
 }
 body::before{
   content:"";
@@ -101,6 +105,25 @@ a{color:inherit}
   transition:color .2s ease;
 }
 .nav-links a:hover{color:#fff}
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.lang-switch{
+  min-height:42px;
+  padding:.65rem .9rem;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  font:600 .62rem/1 "Josefin Sans",system-ui,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.lang-switch:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
 .nav-cta,.btn{
   display:inline-flex;
   align-items:center;
@@ -126,6 +149,27 @@ a{color:inherit}
 .btn-secondary{background:rgba(255,255,255,.04)}
 .btn:hover,.nav-cta:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28)}
 .btn-primary:hover{box-shadow:0 18px 40px rgba(220,111,134,.32)}
+html[dir="rtl"] .brand{font-family:"DM Serif Display",serif}
+html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .section-kicker,
+html[dir="rtl"] .label-top,
+html[dir="rtl"] .nav-links a,
+html[dir="rtl"] .nav-cta,
+html[dir="rtl"] .btn,
+html[dir="rtl"] .lang-switch,
+html[dir="rtl"] .badge,
+html[dir="rtl"] .preview-link,
+html[dir="rtl"] .tags span,
+html[dir="rtl"] .stat span,
+html[dir="rtl"] .package-name,
+html[dir="rtl"] .wa-label{
+  letter-spacing:0;
+  text-transform:none;
+}
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .card-body h2,
+html[dir="rtl"] .package-card h3,
+html[dir="rtl"] .promise-card h3{line-height:1.45}
 .nav-toggle{
   display:none;
   width:42px;
@@ -889,7 +933,10 @@ footer{
     <a href="#contact">Contact</a>
   </div>
   <!-- Instagram link for order buttons. -->
-  <a class="nav-cta" href="https://www.instagram.com/ajwaa.eg_26/" target="_blank" rel="noopener">Claim 50% Offer</a>
+  <div class="nav-actions">
+    <button class="lang-switch" id="langSwitch" type="button" aria-label="Switch to Arabic" aria-pressed="false">العربية</button>
+    <a class="nav-cta" href="https://www.instagram.com/ajwaa.eg_26/" target="_blank" rel="noopener">Claim 50% Offer</a>
+  </div>
 </nav>
 
 <header class="hero" id="top">
@@ -1286,6 +1333,320 @@ footer{
 const nav = document.getElementById("navbar");
 const toggle = document.getElementById("navToggle");
 const links = document.getElementById("navLinks");
+const langSwitch = document.getElementById("langSwitch");
+let currentLanguage = "en";
+
+const arabicTranslations = {
+  "Ajwaa - Digital Invitations and Birthday Websites":"Ajwaa - مواقع دعوات رقمية ومواقع أعياد ميلاد",
+  "How It Works":"طريقة العمل",
+  "Weddings":"حفلات الزفاف",
+  "Birthdays":"أعياد الميلاد",
+  "Packages":"الباقات",
+  "Contact":"تواصل معنا",
+  "Claim 50% Offer":"احصل على خصم ٥٠٪",
+  "New digital invitation studio":"استوديو جديد للدعوات الرقمية",
+  "Personal websites for":"مواقع شخصية",
+  "unforgettable":"لدعوات لا تُنسى",
+  "invitations.":"",
+  "Choose a wedding or birthday design, send your photos and details, and turn it into a polished shareable website made for phones, family chats, and once-in-a-lifetime moments.":"اختر تصميم زفاف أو عيد ميلاد، أرسل الصور والتفاصيل، ونحوّله إلى موقع أنيق قابل للمشاركة ومناسب للهاتف ومحادثات العائلة واللحظات التي لا تتكرر.",
+  "Limited launch offer":"عرض إطلاق محدود",
+  "50% discount":"خصم ٥٠٪",
+  "Available for wedding and birthday website orders booked by June 1, 2026.":"متاح لطلبات مواقع الزفاف وأعياد الميلاد التي يتم حجزها قبل ١ يونيو ٢٠٢٦.",
+  "Claim the Offer":"احصل على العرض",
+  "View Designs":"شاهد التصاميم",
+  "Explore Birthdays":"استكشف أعياد الميلاد",
+  "26":"٢٦",
+  "Demo designs":"تصميمًا تجريبيًا",
+  "2":"٢",
+  "Occasion categories":"فئتا مناسبات",
+  "Live":"جاهزة",
+  "Shareable links":"روابط قابلة للمشاركة",
+  "Scroll for designs":"مرّر لمشاهدة التصاميم",
+  "01":"٠١",
+  "Fresh startup, honest showcase":"شركة ناشئة جديدة ومعرض صادق",
+  "02":"٠٢",
+  "Mobile-first invitation pages":"صفحات دعوة مصممة للهاتف أولًا",
+  "03":"٠٣",
+  "Wedding and birthday websites":"مواقع زفاف وأعياد ميلاد",
+  "04":"٠٤",
+  "50% discount until June 1":"خصم ٥٠٪ حتى ١ يونيو",
+  "How it works":"طريقة العمل",
+  "A simple path from template to":"خطوات بسيطة من القالب إلى",
+  "personal gift":"هدية شخصية",
+  "This is built for a new studio launch, so the page explains the process clearly and keeps the focus on the actual demo collection.":"صُممت هذه الصفحة لإطلاق استوديو جديد، لذلك تشرح الخطوات بوضوح وتُبقي التركيز على مجموعة العروض التجريبية الحقيقية.",
+  "1":"١",
+  "Pick a starting style":"اختر أسلوب البداية",
+  "Browse the real demo collection and choose the look that feels closest to your wedding, birthday, or romantic gift idea.":"تصفح مجموعة التصاميم التجريبية الحقيقية واختر الشكل الأقرب لفكرة زفافك أو عيد ميلادك أو هديتك الرومانسية.",
+  "Send the details":"أرسل التفاصيل",
+  "Names, date, venue, message, photos, music, colors, and any surprise moments can be personalized for the final page.":"يمكن تخصيص الأسماء، التاريخ، المكان، الرسالة، الصور، الموسيقى، الألوان، وأي لحظات مفاجأة في الصفحة النهائية.",
+  "3":"٣",
+  "Share the website":"شارك الموقع",
+  "The finished invitation becomes a responsive website link that is easy to send through Instagram DMs or any chat.":"تتحول الدعوة النهائية إلى رابط موقع متجاوب يسهل إرساله عبر رسائل إنستغرام أو أي محادثة.",
+  "Wedding Invitations":"دعوات الزفاف",
+  "26 curated demo designs available now":"٢٦ تصميمًا تجريبيًا منسقًا متاحًا الآن",
+  "Top-level category":"فئة رئيسية",
+  "Wedding designs are arranged from the most personal story-led websites, to ready-made visual themes, then envelope-style experiences for couples who want a more interactive opening.":"تم ترتيب تصاميم الزفاف من المواقع الشخصية التي تحكي قصة، إلى الثيمات الجاهزة، ثم تجارب الظرف التفاعلية للأزواج الذين يريدون بداية أكثر تشويقًا.",
+  "Custom Designs":"تصاميم مخصصة",
+  "Photo-led and story-led wedding websites":"مواقع زفاف تعتمد على الصور والقصة",
+  "Custom Invitation":"دعوة مخصصة",
+  "Preview ->":"المعاينة ←",
+  "Villa Montalcino Wedding":"زفاف فيلا مونتالشينو",
+  "A refined mobile wedding invitation for Elisa and Jhon with chandelier artwork, villa details, countdown, gift notes, and an RSVP section.":"دعوة زفاف راقية للهاتف لإليسا وجون مع رسومات ثريا، تفاصيل الفيلا، عدّ تنازلي، ملاحظات الهدايا، وقسم لتأكيد الحضور.",
+  "Mobile First":"مصمم للهاتف أولًا",
+  "Countdown":"عدّ تنازلي",
+  "RSVP":"تأكيد الحضور",
+  "Custom":"مخصص",
+  "Illustrated Love Story":"قصة حب مرسومة",
+  "A personal wedding invitation style with portrait moments, illustrated details, and a polished story-driven layout.":"أسلوب دعوة زفاف شخصي مع لحظات بورتريه، تفاصيل مرسومة، وتنسيق أنيق يحكي القصة.",
+  "Portraits":"صور شخصية",
+  "Illustrated":"مرسوم",
+  "Wedding Site":"موقع زفاف",
+  "Classic Photo Invitation":"دعوة صور كلاسيكية",
+  "A photo-led invitation style with romantic moments, venue details, and a clean celebration flow.":"أسلوب دعوة يعتمد على الصور مع لحظات رومانسية، تفاصيل المكان، وتسلسل احتفال واضح.",
+  "Gallery":"معرض صور",
+  "Venue":"المكان",
+  "Rose Gallery Wedding":"زفاف معرض الورود",
+  "A graceful custom invitation built around personal photography and elegant wedding-day presentation.":"دعوة مخصصة ناعمة مبنية حول الصور الشخصية وعرض أنيق ليوم الزفاف.",
+  "Photography":"تصوير",
+  "Elegant":"أنيق",
+  "Golden Gallery Wedding":"زفاف المعرض الذهبي",
+  "A rich photo gallery invitation style with hero imagery, favorite moments, and venue details.":"أسلوب دعوة غني بمعرض صور، صورة رئيسية، لحظات مفضلة، وتفاصيل المكان.",
+  "Hero Image":"صورة رئيسية",
+  "Pyramids Love Story":"قصة حب عند الأهرامات",
+  "A warm custom wedding page style with portrait photography, travel-inspired scenes, and illustrated accents.":"صفحة زفاف مخصصة دافئة مع صور بورتريه، مشاهد مستوحاة من السفر، ولمسات مرسومة.",
+  "Travel":"سفر",
+  "Modern Countdown Wedding":"زفاف العدّ التنازلي الحديث",
+  "A polished static wedding invitation with hero photography, countdown details, and venue information.":"دعوة زفاف ثابتة وأنيقة مع صورة رئيسية، تفاصيل العدّ التنازلي، ومعلومات المكان.",
+  "Static Site":"موقع ثابت",
+  "Floral Letter Wedding":"زفاف رسالة الأزهار",
+  "A romantic invitation with photo moments, floral touches, an envelope asset, and venue details.":"دعوة رومانسية مع لحظات مصورة، لمسات زهرية، ظرف، وتفاصيل المكان.",
+  "Floral":"زهري",
+  "Envelope":"ظرف",
+  "Vintage Garden":"حديقة كلاسيكية",
+  "A vintage-inspired wedding invitation with a garden motif, countdown, gallery, and venue section.":"دعوة زفاف مستوحاة من الطابع الكلاسيكي مع روح الحديقة، عدّ تنازلي، معرض صور، وقسم للمكان.",
+  "Vintage":"كلاسيكي",
+  "Themed Designs":"تصاميم بثيمات",
+  "Ready-made moods and visual directions":"أجواء جاهزة واتجاهات بصرية",
+  "Cinematic Romance":"رومانسية سينمائية",
+  "A warm destination-style wedding website with rose petals, travel memories, and immersive storytelling.":"موقع زفاف دافئ بطابع السفر مع بتلات ورد، ذكريات رحلات، وسرد غامر.",
+  "Destination":"وجهة",
+  "Rose Petals":"بتلات ورد",
+  "Warm Mode":"طابع دافئ",
+  "Dark Romantic":"رومانسي داكن",
+  "Midnight Garden":"حديقة منتصف الليل",
+  "A luxurious nighttime garden with golden fireflies, deep navy tones, and warm gold accents.":"حديقة ليلية فاخرة مع يراعات ذهبية، درجات كحلية عميقة، ولمسات ذهبية دافئة.",
+  "Fireflies":"يراعات",
+  "Gold Foil":"ذهب لامع",
+  "Dark Mode":"طابع داكن",
+  "Mediterranean":"متوسطي",
+  "Olive & Sage":"زيتوني ومريمي",
+  "Sun-drenched Tuscan elegance with falling olive leaves, earthy terracotta warmth, and botanical charm.":"أناقة توسكانية مشمسة مع أوراق زيتون متساقطة، دفء التيراكوتا الترابي، وسحر نباتي.",
+  "Falling Leaves":"أوراق متساقطة",
+  "Botanical":"نباتي",
+  "Light Mode":"طابع فاتح",
+  "Celestial":"سماوي",
+  "Celestial Love":"حب سماوي",
+  "A starry night fantasy with twinkling constellations, shooting stars, and rose gold accents.":"خيال ليلة مرصعة بالنجوم مع كوكبات متلألئة، شهب، ولمسات ذهب وردي.",
+  "Stars":"نجوم",
+  "Shooting Stars":"شهب",
+  "Tropical Sunset":"غروب استوائي",
+  "Coral Sunset":"غروب مرجاني",
+  "Tropical beach paradise with floating bubbles, warm coral and peach tones, and ocean-inspired elegance.":"جنة شاطئية استوائية مع فقاعات عائمة، درجات مرجانية وخوخية دافئة، وأناقة مستوحاة من البحر.",
+  "Bubbles":"فقاعات",
+  "Tropical":"استوائي",
+  "Art Deco":"آرت ديكو",
+  "Emerald Noir":"زمردي داكن",
+  "Great Gatsby glamour with diamond sparkles, deep emerald and gold, and art deco geometry.":"فخامة غاتسبي مع بريق ماسي، زمردي وذهبي عميق، وهندسة آرت ديكو.",
+  "Sparkles":"بريق",
+  "Japanese Garden":"حديقة يابانية",
+  "Cherry Blossom":"زهور الكرز",
+  "Enchanting sakura petals falling over a soft pink and blush palette, inspired by Kyoto spring.":"بتلات ساكورا ساحرة تتساقط فوق لوحة وردية ناعمة مستوحاة من ربيع كيوتو.",
+  "Sakura Petals":"بتلات ساكورا",
+  "Japanese":"ياباني",
+  "Interactive Styles":"أساليب تفاعلية",
+  "Envelope opening and card-style experiences":"تجارب فتح الظرف وبطاقات تفاعلية",
+  "Desert Oasis":"واحة صحراوية",
+  "Envelope Style":"أسلوب الظرف",
+  "Desert Rose":"وردة الصحراء",
+  "Golden desert oasis with warm rose and sand tones, wax-seal envelope opening, and card-based layout.":"واحة صحراوية ذهبية بدرجات وردية ورملية دافئة، فتح ظرف بختم شمعي، وتنسيق على شكل بطاقات.",
+  "Envelope Intro":"افتتاحية الظرف",
+  "Card Layout":"تنسيق بطاقات",
+  "Rose & Gold":"وردي وذهبي",
+  "Palace Regal":"فخامة القصر",
+  "Royal Blue Palace":"قصر أزرق ملكي",
+  "Royal palace elegance with deep blue and silver, crystalline sparkle particles, and regal atmosphere.":"أناقة قصر ملكي بالأزرق العميق والفضي، جزيئات بريق كريستالية، وأجواء فخمة.",
+  "Blue & Silver":"أزرق وفضي",
+  "Theatre Drama":"دراما مسرحية",
+  "Velvet Theatre":"مسرح مخملي",
+  "Dramatic crimson velvet and gold with theatrical opera house storytelling and Valentine's flair.":"مخمل قرمزي وذهبي درامي مع سرد مستوحى من دار الأوبرا ولمسة عيد الحب.",
+  "Crimson & Gold":"قرمزي وذهبي",
+  "Birthday designs are grouped by purpose: party invitations first, romantic gift websites next, and single-file fantasy experiences for highly personal surprises.":"تم تجميع تصاميم أعياد الميلاد حسب الهدف: دعوات الحفلات أولًا، ثم مواقع الهدايا الرومانسية، ثم تجارب خيالية بملف واحد للمفاجآت الشخصية جدًا.",
+  "Birthday Invitations":"دعوات أعياد الميلاد",
+  "Party and memory websites":"مواقع حفلات وذكريات",
+  "Birthday Invitation":"دعوة عيد ميلاد",
+  "Memory Wish Invitation":"دعوة أمنية الذكريات",
+  "A modern birthday invitation with an envelope reveal, personal letter, 22-image memory gallery, music page, and mini surprises.":"دعوة عيد ميلاد حديثة مع كشف ظرف، رسالة شخصية، معرض ذكريات حتى ٢٢ صورة، صفحة موسيقى، ومفاجآت صغيرة.",
+  "Music":"موسيقى",
+  "Birthday":"عيد ميلاد",
+  "Time Capsule Party":"حفلة كبسولة الزمن",
+  "A playful birthday archive with an unlock screen, tappable memory capsules, wish wall, and future-message reveal.":"أرشيف عيد ميلاد مرح مع شاشة فتح، كبسولات ذكريات قابلة للنقر، حائط أمنيات، ورسالة مستقبلية.",
+  "Unlock Intro":"افتتاحية فتح",
+  "Memories":"ذكريات",
+  "Wishes":"أمنيات",
+  "Neon Arcade Party":"حفلة أركيد نيون",
+  "A neon game-style birthday invitation with a press-start intro, mission HUD, token bonus round, prize wall, and gift-code reveal.":"دعوة عيد ميلاد بطابع لعبة نيون مع بداية اضغط للانطلاق، شاشة مهام، جولة مكافآت، حائط جوائز، وكود هدية.",
+  "Game Intro":"افتتاحية لعبة",
+  "Bonus Round":"جولة مكافأة",
+  "Prizes":"جوائز",
+  "Romantic Birthday Gifts":"هدايا عيد ميلاد رومانسية",
+  "Love notes, candles, and emotional reveals":"رسائل حب وشموع وكشف عاطفي",
+  "Romantic Birthday":"عيد ميلاد رومانسي",
+  "Candlelight Serenade":"سيرينادة على ضوء الشموع",
+  "A candlelit romantic birthday celebration with a love-note reveal, date-night itinerary, memory film, bouquet interaction, and lantern wish.":"احتفال عيد ميلاد رومانسي على ضوء الشموع مع كشف رسالة حب، جدول سهرة، فيلم ذكريات، تفاعل باقة، وأمنية فانوس.",
+  "Candle Intro":"افتتاحية شموع",
+  "Romance":"رومانسية",
+  "Love Note":"رسالة حب",
+  "Single File Gift":"هدية بملف واحد",
+  "Love Letter Gift":"هدية رسالة حب",
+  "A single-file animated birthday gift with page transitions, typewriter intro, message cards, polaroid memory slots, music toggle, theme switch, and surprise envelope.":"هدية عيد ميلاد متحركة بملف واحد مع انتقالات صفحات، افتتاحية كتابة، بطاقات رسائل، أماكن صور بولارويد، زر موسيقى، تبديل ثيم، وظرف مفاجأة.",
+  "Single HTML":"ملف HTML واحد",
+  "Pages":"صفحات",
+  "Particles":"جزيئات",
+  "Single-File Fantasy Gifts":"هدايا خيالية بملف واحد",
+  "Compact keepsake pages with big atmosphere":"صفحات تذكارية صغيرة بأجواء كبيرة",
+  "Cosmic Gift":"هدية كونية",
+  "Cosmic Candle Wish":"أمنية شمعة كونية",
+  "A single-file starfield birthday gift with five pages, tap-to-reveal reasons, polaroid memories, candle interaction, swipe navigation, and a final love letter.":"هدية عيد ميلاد بنجوم في ملف واحد مع خمس صفحات، بطاقات أسباب تُكشف بالنقر، ذكريات بولارويد، تفاعل شموع، تنقل بالسحب، ورسالة حب أخيرة.",
+  "Starfield":"سماء نجوم",
+  "Candles":"شموع",
+  "Starfall Gift":"هدية تساقط النجوم",
+  "Starfall Letter Gift":"هدية رسالة تساقط النجوم",
+  "A single-file starfall birthday gift with a cosmic cover, reveal cards, polaroid memories, candle wish, music, and a final letter.":"هدية عيد ميلاد بتساقط النجوم في ملف واحد مع غلاف كوني، بطاقات كشف، ذكريات بولارويد، أمنية شموع، موسيقى، ورسالة أخيرة.",
+  "Starfall":"تساقط النجوم",
+  "Starter packages":"باقات البداية",
+  "Choose the amount of":"اختر مستوى",
+  "custom care":"العناية المخصصة",
+  "Clear starting points for building the first real orders, from simple template edits to fully interactive gift pages.":"نقاط بداية واضحة لبناء أول الطلبات الحقيقية، من تعديلات بسيطة على القوالب إلى صفحات هدايا تفاعلية بالكامل.",
+  "Template Edit":"تعديل قالب",
+  "Personalize a demo":"خصص تصميمًا تجريبيًا",
+  "Best when you already like one of the existing looks and only need your names, date, venue, and colors added.":"الأفضل عندما يعجبك شكل موجود وتحتاج فقط إلى إضافة الأسماء، التاريخ، المكان، والألوان.",
+  "One selected demo design":"تصميم تجريبي واحد مختار",
+  "Names, dates, and event details":"الأسماء والتواريخ وتفاصيل المناسبة",
+  "Mobile-ready shareable link":"رابط قابل للمشاركة ومناسب للهاتف",
+  "Ask on Instagram":"اسأل على إنستغرام",
+  "Custom Story":"قصة مخصصة",
+  "Photos, music, message":"صور وموسيقى ورسالة",
+  "For couples and birthday gifts that need a warmer story, more personal sections, and a design shaped around real photos.":"للأزواج وهدايا أعياد الميلاد التي تحتاج قصة أدفأ، أقسامًا شخصية أكثر، وتصميمًا مبنيًا حول صور حقيقية.",
+  "Personal photo gallery":"معرض صور شخصي",
+  "Letter, story, or gift message":"رسالة أو قصة أو رسالة هدية",
+  "Background song option":"خيار أغنية خلفية",
+  "Custom color and typography direction":"اتجاه مخصص للألوان والخطوط",
+  "Start This One":"ابدأ بهذه الباقة",
+  "Interactive Gift":"هدية تفاعلية",
+  "Surprise experience":"تجربة مفاجأة",
+  "For romantic birthdays and emotional openings with envelope reveals, mini games, hidden notes, or special interactions.":"لأعياد الميلاد الرومانسية والافتتاحيات العاطفية مع كشف ظرف، ألعاب صغيرة، رسائل مخفية، أو تفاعلات خاصة.",
+  "Animated opening sequence":"افتتاحية متحركة",
+  "Interactive surprise moment":"لحظة مفاجأة تفاعلية",
+  "Memory gallery or gift reveal":"معرض ذكريات أو كشف هدية",
+  "Plan a Gift":"خطط هدية",
+  "New startup promise":"وعد الشركة الناشئة",
+  "Built around real":"مبني حول",
+  "demo work":"أعمال تجريبية حقيقية",
+  "Because the studio is just launching, the page focuses on real demo work, a clear ordering flow, and honest expectations.":"لأن الاستوديو في بداية انطلاقه، تركز الصفحة على أعمال تجريبية حقيقية، خطوات طلب واضحة، وتوقعات صادقة.",
+  "A":"أ",
+  "Real portfolio first":"الأعمال الحقيقية أولًا",
+  "The templates shown here are actual local demos you can open, inspect, and use as starting points.":"القوالب المعروضة هنا نماذج محلية حقيقية يمكنك فتحها ومراجعتها واستخدامها كنقطة بداية.",
+  "B":"ب",
+  "Clear customization":"تخصيص واضح",
+  "Each project starts with the details that matter: names, photos, message, date, venue, theme, and music.":"يبدأ كل مشروع بالتفاصيل المهمة: الأسماء، الصور، الرسالة، التاريخ، المكان، الثيم، والموسيقى.",
+  "C":"ج",
+  "Launch-ready pages":"صفحات جاهزة للإطلاق",
+  "Every invitation is designed to feel smooth on mobile and simple to share with guests or someone special.":"كل دعوة مصممة لتكون سلسة على الهاتف وسهلة المشاركة مع الضيوف أو شخص مميز.",
+  "50% launch offer ends":"عرض الإطلاق بخصم ٥٠٪ ينتهي",
+  "June 1.":"١ يونيو.",
+  "Pick a design from the catalog, send the details on Instagram, and book before June 1, 2026 to use the limited launch discount.":"اختر تصميمًا من الكتالوج، أرسل التفاصيل على إنستغرام، واحجز قبل ١ يونيو ٢٠٢٦ للاستفادة من خصم الإطلاق المحدود.",
+  "Browse the Catalog":"تصفح الكتالوج",
+  "Digital invitation websites for weddings, birthdays, and romantic gifts. A new studio built around custom design, honest presentation, and shareable moments.":"مواقع دعوات رقمية للزفاف وأعياد الميلاد والهدايا الرومانسية. استوديو جديد مبني حول التصميم المخصص، العرض الصادق، واللحظات القابلة للمشاركة.",
+  "Designs":"التصاميم",
+  "Birthday Websites":"مواقع أعياد الميلاد",
+  "Romantic Gifts":"هدايا رومانسية",
+  "Process":"الخطوات",
+  "Starter Packages":"باقات البداية",
+  "Instagram":"إنستغرام",
+  "2026 Ajwaa":"٢٠٢٦ Ajwaa",
+  "New startup. Honest showcase.":"شركة ناشئة جديدة. عرض صادق.",
+  "Order on Instagram":"اطلب عبر إنستغرام"
+};
+
+const translatedAttributes = [
+  { selector:"#navbar", attr:"aria-label", en:"Primary navigation", ar:"التنقل الرئيسي" },
+  { selector:".offer-panel", attr:"aria-label", en:"Limited launch offer", ar:"عرض الإطلاق المحدود" },
+  { selector:".hero-stats", attr:"aria-label", en:"Catalog summary", ar:"ملخص الكتالوج" },
+  { selector:".social a", attr:"aria-label", en:"Instagram", ar:"إنستغرام" },
+  { selector:".wa-btn", attr:"aria-label", en:"Contact on Instagram", ar:"تواصل عبر إنستغرام" }
+];
+
+const textNodes = [];
+const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+  acceptNode(node){
+    const parent = node.parentElement;
+    if(!parent || parent.closest("script,style,noscript,#langSwitch")) return NodeFilter.FILTER_REJECT;
+    return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+  }
+});
+while(textWalker.nextNode()){
+  const node = textWalker.currentNode;
+  textNodes.push({ node, english:node.nodeValue });
+}
+
+function storedLanguage(){
+  try{return localStorage.getItem("ajwaa-language")}
+  catch{return null}
+}
+
+function saveLanguage(lang){
+  try{localStorage.setItem("ajwaa-language", lang)}
+  catch{}
+}
+
+function translatedText(value, lang){
+  if(lang !== "ar") return value;
+  const trimmed = value.trim();
+  if(!Object.prototype.hasOwnProperty.call(arabicTranslations, trimmed)) return value;
+  if(arabicTranslations[trimmed] === "") return "";
+  const start = value.match(/^\s*/)[0];
+  const end = value.match(/\s*$/)[0];
+  return start + arabicTranslations[trimmed] + end;
+}
+
+function updateNavToggleLabel(){
+  const open = nav.classList.contains("open");
+  if(currentLanguage === "ar"){
+    toggle.setAttribute("aria-label", open ? "أغلق القائمة" : "افتح القائمة");
+  }else{
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+}
+
+function setLanguage(lang){
+  currentLanguage = lang === "ar" ? "ar" : "en";
+  document.documentElement.lang = currentLanguage === "ar" ? "ar" : "en";
+  document.documentElement.dir = currentLanguage === "ar" ? "rtl" : "ltr";
+  document.title = currentLanguage === "ar" ? arabicTranslations["Ajwaa - Digital Invitations and Birthday Websites"] : "Ajwaa - Digital Invitations and Birthday Websites";
+  textNodes.forEach(item => {
+    item.node.nodeValue = translatedText(item.english, currentLanguage);
+  });
+  translatedAttributes.forEach(item => {
+    document.querySelectorAll(item.selector).forEach(el => {
+      el.setAttribute(item.attr, currentLanguage === "ar" ? item.ar : item.en);
+    });
+  });
+  langSwitch.textContent = currentLanguage === "ar" ? "English" : "العربية";
+  langSwitch.setAttribute("aria-label", currentLanguage === "ar" ? "Switch to English" : "Switch to Arabic");
+  langSwitch.setAttribute("aria-pressed", String(currentLanguage === "ar"));
+  saveLanguage(currentLanguage);
+  updateNavToggleLabel();
+}
 
 function setScrolled(){
   nav.classList.toggle("scrolled", window.scrollY > 24);
@@ -1296,14 +1657,22 @@ window.addEventListener("scroll", setScrolled, { passive:true });
 toggle.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
   toggle.setAttribute("aria-expanded", String(open));
+  updateNavToggleLabel();
 });
 
 links.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     nav.classList.remove("open");
     toggle.setAttribute("aria-expanded", "false");
+    updateNavToggleLabel();
   });
 });
+
+langSwitch.addEventListener("click", () => {
+  setLanguage(currentLanguage === "ar" ? "en" : "ar");
+});
+
+setLanguage(storedLanguage() === "ar" ? "ar" : "en");
 
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
