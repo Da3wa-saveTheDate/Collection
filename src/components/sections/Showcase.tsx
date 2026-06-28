@@ -266,7 +266,7 @@ export default function Showcase() {
               <div className="relative w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden mb-6 bg-white shadow-sm">
                 {template.image ? (
                   <img 
-                    src={template.image} 
+                    src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                     alt={template.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
@@ -277,7 +277,7 @@ export default function Showcase() {
                 )}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                   <a 
-                    href={`/${template.id}/index.html`}
+                    href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white/20 hover:bg-white/40 text-white p-4 rounded-full backdrop-blur-md transition-colors"
@@ -300,7 +300,7 @@ export default function Showcase() {
                 </p>
                 
                 <a 
-                  href={`/${template.id}/index.html`}
+                  href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark group/btn"
