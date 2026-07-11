@@ -117,7 +117,7 @@ const templates = [
     title: 'Mountain Romance',
     category: 'wedding',
     description: 'A nature-inspired mountain wedding invitation with artistic illustrations and birds.',
-    image: null
+    image: '/zeyad-lara-wedd/images/hero.png'
   },
 
   // === Engagement ===
