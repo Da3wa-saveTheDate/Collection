@@ -194,17 +194,23 @@ const categories = [
   { key: 'engagement', label: 'Engagements' },
 ];
 
+const MOBILE_PAGE_SIZE = 6;
+
 export default function Showcase() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [mobileLimit, setMobileLimit] = useState(MOBILE_PAGE_SIZE);
   
   const filtered = activeCategory === 'all' 
     ? templates 
     : templates.filter(t => t.category === activeCategory);
 
+  const mobileFiltered = filtered.slice(0, mobileLimit);
+
   const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
 
   useEffect(() => {
     setActiveTemplate(filtered[0]);
+    setMobileLimit(MOBILE_PAGE_SIZE);
   }, [activeCategory]);
 
   return (
@@ -335,45 +341,59 @@ export default function Showcase() {
         </div>
 
         {/* Mobile Layout: Premium Stacked Cards */}
-        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-          {filtered.map((template, index) => (
-             <div key={template.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-lg border border-brand-dark/5">
-                <div className="relative w-full bg-brand-light overflow-hidden" style={{height: '420px'}}>
-                   {template.image && (
-                     <img 
-                       src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                       alt={template.title} 
-                       loading={index < 4 ? 'eager' : 'lazy'}
-                       decoding="async"
-                       width="400"
-                       height="500"
-                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                     />
-                   )}
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
-                   <div className="absolute bottom-8 left-8 right-8">
-                     <span className="text-[10px] uppercase tracking-widest text-brand-accent font-medium mb-3 block">
-                       {template.category}
-                     </span>
-                     <h3 className="text-4xl font-serif text-white mb-3">{template.title}</h3>
-                   </div>
-                </div>
-                <div className="p-8">
-                   <p className="text-brand-dark/70 text-base mb-8 leading-relaxed font-light">
-                     {template.description}
-                   </p>
-                   <a 
-                     href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="w-full inline-flex items-center justify-center gap-3 text-base font-medium bg-brand-light text-brand-dark px-6 py-4 rounded-full transition-all hover:bg-brand-dark hover:text-white"
-                   >
-                     View Design
-                     <ArrowRight className="w-5 h-5" />
-                   </a>
-                </div>
-             </div>
-          ))}
+        <div className="lg:hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+            {mobileFiltered.map((template, index) => (
+               <div key={template.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-lg border border-brand-dark/5">
+                  <div className="relative w-full bg-brand-light overflow-hidden" style={{height: '420px'}}>
+                     {template.image && (
+                       <img 
+                         src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                         alt={template.title} 
+                         loading={index < 3 ? 'eager' : 'lazy'}
+                         decoding="async"
+                         width="400"
+                         height="420"
+                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                       />
+                     )}
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                     <div className="absolute bottom-8 left-8 right-8">
+                       <span className="text-[10px] uppercase tracking-widest text-brand-accent font-medium mb-3 block">
+                         {template.category}
+                       </span>
+                       <h3 className="text-4xl font-serif text-white mb-3">{template.title}</h3>
+                     </div>
+                  </div>
+                  <div className="p-8">
+                     <p className="text-brand-dark/70 text-base mb-8 leading-relaxed font-light">
+                       {template.description}
+                     </p>
+                     <a 
+                       href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="w-full inline-flex items-center justify-center gap-3 text-base font-medium bg-brand-light text-brand-dark px-6 py-4 rounded-full transition-all hover:bg-brand-dark hover:text-white"
+                     >
+                       View Design
+                       <ArrowRight className="w-5 h-5" />
+                     </a>
+                  </div>
+               </div>
+            ))}
+          </div>
+
+          {/* Load More Button */}
+          {mobileLimit < filtered.length && (
+            <div className="flex justify-center mt-12">
+              <button
+                onClick={() => setMobileLimit(prev => prev + MOBILE_PAGE_SIZE)}
+                className="px-10 py-4 rounded-full bg-brand-dark text-white font-medium text-base hover:bg-black transition-all shadow-lg active:scale-95"
+              >
+                Load More ({filtered.length - mobileLimit} remaining)
+              </button>
+            </div>
+          )}
         </div>
         
       </div>
