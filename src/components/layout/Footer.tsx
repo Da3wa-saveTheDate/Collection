@@ -28,7 +28,6 @@ export default function Footer() {
             <ul className="space-y-4 text-sm font-light text-brand-dark/70">
               <li><a href="#" className="hover:text-brand-accent transition-colors">Weddings</a></li>
               <li><a href="#" className="hover:text-brand-accent transition-colors">Engagements</a></li>
-              <li><a href="#" className="hover:text-brand-accent transition-colors">Birthdays</a></li>
               <li><a href="#" className="hover:text-brand-accent transition-colors">Corporate Events</a></li>
             </ul>
           </div>

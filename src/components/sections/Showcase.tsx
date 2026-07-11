@@ -141,63 +141,13 @@ const templates = [
     image: null
   },
 
-  // === Birthday Templates ===
-  {
-    id: 'birthday-arcade',
-    title: 'Arcade Party',
-    category: 'birthday',
-    description: 'A fun, retro arcade-themed birthday invitation packed with vibrant pixel art energy.',
-    image: '/birthday-arcade/assets/hero.png'
-  },
-  {
-    id: 'birthday-cosmic-gift',
-    title: 'Cosmic Gift',
-    category: 'birthday',
-    description: 'A space-themed birthday celebration with cosmic colors and stellar animations.',
-    image: null
-  },
-  {
-    id: 'birthday-romantic-gift',
-    title: 'Romantic Gift',
-    category: 'birthday',
-    description: 'A sweet, romantic birthday gift invitation with soft pastels and heartfelt touches.',
-    image: null
-  },
-  {
-    id: 'birthday-serenade',
-    title: 'Birthday Serenade',
-    category: 'birthday',
-    description: 'A musical birthday celebration with warm moments and melodic vibes.',
-    image: '/birthday-serenade/assets/hero.png'
-  },
-  {
-    id: 'birthday-starfall',
-    title: 'Starfall',
-    category: 'birthday',
-    description: 'A dazzling starfall-themed birthday with shimmering effects and celestial wonder.',
-    image: null
-  },
-  {
-    id: 'birthday-time-capsule',
-    title: 'Time Capsule',
-    category: 'birthday',
-    description: 'A nostalgic time-capsule birthday experience with curated memories through the years.',
-    image: '/birthday-time-capsule/assets/hero.png'
-  },
-  {
-    id: 'birthday-wish',
-    title: 'Birthday Wish',
-    category: 'birthday',
-    description: 'A heartfelt birthday wish invitation filled with cherished photo memories.',
-    image: '/birthday-wish/assets/hero.png'
-  },
+
 ];
 
 const categories = [
   { key: 'all', label: 'All Designs' },
   { key: 'wedding', label: 'Weddings' },
   { key: 'engagement', label: 'Engagements' },
-  { key: 'birthday', label: 'Birthdays' },
 ];
 
 export default function Showcase() {
