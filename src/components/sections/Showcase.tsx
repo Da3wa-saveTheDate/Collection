@@ -73,21 +73,7 @@ const templates = [
     title: 'Vintage Sketch',
     category: 'wedding',
     description: 'A charming hand-sketched wedding invitation with elegant illustrations and warm touches.',
-    image: null
-  },
-  {
-    id: 'ahmedlaila',
-    title: 'Classic Elegance',
-    category: 'wedding',
-    description: 'A refined portrait-style invitation with elegant typography and romantic imagery.',
-    image: null
-  },
-  {
-    id: 'anas-nada-wedding',
-    title: 'Botanical Beauty',
-    category: 'wedding',
-    description: 'A beautiful floral-themed wedding invitation with delicate botanical elements.',
-    image: null
+    image: '/adamfarah12/images/hero.png'
   },
   {
     id: 'elisa-jhon-wedding',
