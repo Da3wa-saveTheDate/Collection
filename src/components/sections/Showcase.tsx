@@ -207,6 +207,15 @@ export default function Showcase() {
   const mobileFiltered = filtered.slice(0, mobileLimit);
 
   const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    // Only render desktop images if we are actually on a desktop screen
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
 
   useEffect(() => {
     setActiveTemplate(filtered[0]);
@@ -294,34 +303,34 @@ export default function Showcase() {
             })}
           </div>
 
-          {/* Right Column: Sticky Preview */}
-          <div className="col-span-6 relative">
-            <div className="sticky top-32 h-[75vh] flex items-center justify-end pr-4">
-               <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-white shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
-                  {filtered.map(template => (
-                    <div 
-                      key={`img-${template.id}`}
-                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                        activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                      }`}
-                    >
-                      {template.image ? (
-                        <img 
-                          src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                          alt={template.title} 
-                          loading="lazy"
-                          decoding="async"
-                          className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
-                            activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
-                          }`}
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-brand-light">
-                          <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+           {/* Right Column: Sticky Preview */}
+           <div className="col-span-6 relative">
+             <div className="sticky top-32 h-[75vh] flex items-center justify-end pr-4">
+                <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-white shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+                   {isDesktop && filtered.map(template => (
+                     <div 
+                       key={`img-${template.id}`}
+                       className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                         activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                       }`}
+                     >
+                       {template.image ? (
+                         <img 
+                           src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                           alt={template.title} 
+                           loading="lazy"
+                           decoding="async"
+                           className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
+                             activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
+                           }`}
+                         />
+                       ) : (
+                         <div className="w-full h-full flex items-center justify-center bg-brand-light">
+                           <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
+                         </div>
+                       )}
+                     </div>
+                   ))}
                   
                   {/* Overlay Action */}
                   <div className="absolute inset-0 z-20 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
