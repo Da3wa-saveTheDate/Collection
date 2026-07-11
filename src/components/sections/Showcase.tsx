@@ -111,13 +111,7 @@ const templates = [
     image: '/omarlayla/images/hero.png'
   },
 
-  {
-    id: 'yassersalma',
-    title: 'Floral Envelope',
-    category: 'wedding',
-    description: 'An elegant floral-decorated invitation with a classic envelope reveal and warm feel.',
-    image: null
-  },
+
   {
     id: 'zeyad-lara-wedd',
     title: 'Mountain Romance',
