@@ -94,7 +94,7 @@ const templates = [
     title: 'Gallery Memories',
     category: 'wedding',
     description: 'A rich gallery-style invitation showcasing cherished memories and favorite moments.',
-    image: null
+    image: '/mohamed-farah/images/hero.png'
   },
   {
     id: 'omar-laila',
