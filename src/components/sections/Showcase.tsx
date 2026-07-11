@@ -115,7 +115,7 @@ const templates = [
     title: 'Joyful Intimacy',
     category: 'wedding',
     description: 'An intimate, joyful wedding invitation featuring a clean layout.',
-    image: null
+    image: '/selim-menna-wedding/images/hero.png'
   },
   {
     id: 'yassersalma',
