@@ -108,7 +108,7 @@ const templates = [
     title: 'Sunset Journey',
     category: 'wedding',
     description: 'A cinematic travel-inspired wedding invitation with stunning sunset photography.',
-    image: null
+    image: '/omarlayla/images/hero.png'
   },
   {
     id: 'selim-menna-wedding',
