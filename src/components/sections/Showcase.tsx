@@ -80,7 +80,7 @@ const templates = [
     title: 'Vintage Fairytale',
     category: 'wedding',
     description: 'A whimsical fairy-tale wedding with chandeliers, cupids, and enchanting vintage décor.',
-    image: null
+    image: '/elisa-jhon-wedding/images/hero.png'
   },
   {
     id: 'karim-somia',
