@@ -32424,7 +32424,7 @@ function $V() {
             duration: .5,
             delay: 1.2
         },
-        className: "fixed top-4 right-4 z-[9999] flex items-center gap-1 backdrop-blur-sm rounded-full p-1 transition-all duration-300",
+        className: "hidden fixed top-4 right-4 z-[9999] flex items-center gap-1 backdrop-blur-sm rounded-full p-1 transition-all duration-300",
         style: {
             backgroundColor: n ? "rgba(250, 248, 245, 0.6)" : "rgba(250, 248, 245, 0.95)",
             border: "1px solid rgba(92, 32, 24, 0.2)",
