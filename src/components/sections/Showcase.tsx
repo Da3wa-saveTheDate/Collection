@@ -126,7 +126,7 @@ const templates = [
     title: 'Festive Celebration',
     category: 'engagement',
     description: 'A celebratory engagement invitation with festive imagery and elegant styling.',
-    image: null
+    image: '/maya-youssef-engagement/images/hero.png'
   },
 
 
