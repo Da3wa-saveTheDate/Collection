@@ -48,7 +48,7 @@ img { display: block; max-width: 100%; }
   position: fixed; inset: 0; z-index: 100;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  background: var(--gradient-wine);
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/fake-couple-1.png') center/cover no-repeat;
   transition: opacity 0.7s ease;
   padding: 1.5rem;
   text-align: center;

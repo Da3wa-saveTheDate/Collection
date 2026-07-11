@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Eye } from 'lucide-react';
 
 const templates = [
@@ -80,7 +80,7 @@ const templates = [
     title: 'Ahmed & Laila',
     category: 'wedding',
     description: 'A refined couple portrait invitation with elegant typography and romantic imagery.',
-    image: '/ahmedlaila/assets/couple-1.jpg'
+    image: '/ahmedlaila/assets/fake-couple-1.png'
   },
   {
     id: 'anas-nada-wedding',
@@ -208,121 +208,186 @@ const templates = [
 ];
 
 const categories = [
-  { key: 'all', label: 'All' },
+  { key: 'all', label: 'All Designs' },
   { key: 'wedding', label: 'Weddings' },
   { key: 'engagement', label: 'Engagements' },
   { key: 'birthday', label: 'Birthdays' },
 ];
 
-const INITIAL_COUNT = 6;
-
 export default function Showcase() {
-  const [showAll, setShowAll] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
-
+  
   const filtered = activeCategory === 'all' 
     ? templates 
     : templates.filter(t => t.category === activeCategory);
 
-  const visibleTemplates = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
-  const hasMore = filtered.length > INITIAL_COUNT && !showAll;
+  const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
+
+  useEffect(() => {
+    setActiveTemplate(filtered[0]);
+  }, [activeCategory]);
 
   return (
-    <section id="designs" className="py-24 bg-white">
-      <div className="container mx-auto px-6">
+    <section id="designs" className="py-24 bg-brand-light relative">
+      {/* Decorative gradient blur */}
+      <div className="absolute top-0 right-0 w-1/3 h-[500px] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
-        <div className="text-center max-w-2xl mx-auto mb-10 reveal-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">Our Signature Collection</h2>
-          <p className="text-lg text-brand-dark/70 font-light">
-            Discover our meticulously crafted digital invitations. Each template is fully customizable to perfectly match your vision.
-          </p>
+        {/* Header Area */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 reveal-on-scroll">
+          <div className="max-w-2xl">
+            <h2 className="text-5xl md:text-6xl font-serif text-brand-dark mb-6 tracking-tight">Our Curated <br/><span className="text-brand-accent italic">Collection</span></h2>
+            <p className="text-xl text-brand-dark/70 font-light max-w-lg leading-relaxed">
+              Explore our exclusive digital invitations. Hover to preview their unique elegance and style.
+            </p>
+          </div>
+          
+          {/* Category Filter */}
+          <div className="flex gap-2 mt-8 md:mt-0 overflow-x-auto pb-2 w-full md:w-auto">
+            {categories.map((cat) => (
+              <button
+                key={cat.key}
+                onClick={() => setActiveCategory(cat.key)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  activeCategory === cat.key
+                    ? 'bg-brand-dark text-white shadow-md'
+                    : 'bg-white text-brand-dark/70 hover:bg-brand-dark/5 border border-brand-dark/10'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex justify-center gap-3 mb-14 flex-wrap reveal-on-scroll">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => { setActiveCategory(cat.key); setShowAll(false); }}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer ${
-                activeCategory === cat.key
-                  ? 'bg-brand-dark text-white'
-                  : 'bg-brand-light text-brand-dark/70 hover:bg-brand-dark/10'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visibleTemplates.map((template, index) => (
-            <div 
-              key={template.id} 
-              className="group rounded-[2rem] bg-brand-light p-6 transition-all duration-500 hover:shadow-xl reveal-on-scroll"
-              style={{ transitionDelay: `${(index % 3) * 100}ms` }}
-            >
-              {/* Mockup Container */}
-              <div className="relative w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden mb-6 bg-white shadow-sm">
-                {template.image ? (
-                  <img 
-                    src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                    alt={template.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-accent/20 to-brand-dark/10">
-                    <span className="font-serif text-2xl text-brand-dark/30">{template.title}</span>
+        {/* Desktop Split Layout */}
+        <div className="hidden lg:grid grid-cols-12 gap-16 relative items-start">
+          
+          {/* Left Column: List */}
+          <div className="col-span-6 space-y-4 pb-32">
+            {filtered.map((template) => {
+              const isActive = activeTemplate?.id === template.id;
+              return (
+                <div 
+                  key={template.id}
+                  onMouseEnter={() => setActiveTemplate(template)}
+                  className={`group flex flex-col p-6 rounded-[1.5rem] cursor-pointer transition-all duration-500 ease-out ${
+                    isActive ? 'bg-white shadow-xl shadow-brand-dark/5 border border-white scale-[1.02]' : 'hover:bg-white/60 border border-transparent scale-100'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                      <span className={`text-xs font-medium tracking-widest uppercase transition-colors duration-300 ${isActive ? 'text-brand-accent' : 'text-brand-dark/30'}`}>
+                        0{filtered.indexOf(template) + 1}
+                      </span>
+                      <h3 className={`text-3xl lg:text-4xl font-serif transition-colors duration-300 ${isActive ? 'text-brand-dark' : 'text-brand-dark/40 group-hover:text-brand-dark/70'}`}>
+                        {template.title}
+                      </h3>
+                    </div>
+                    <ArrowRight className={`w-6 h-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-x-0 text-brand-accent' : 'opacity-0 -translate-x-4 text-brand-dark/20'}`} />
                   </div>
-                )}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                  
+                  <div className={`grid transition-all duration-500 ease-in-out overflow-hidden ${isActive ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+                    <div className="min-h-0 pl-10 pr-4">
+                      <p className="text-brand-dark/60 text-lg font-light leading-relaxed mb-6">
+                        {template.description}
+                      </p>
+                      <a 
+                        href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
+                      >
+                        View Full Experience <Eye className="w-4 h-4 ml-1" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Sticky Preview */}
+          <div className="col-span-6 sticky top-24 h-[80vh] flex items-center justify-end pr-4">
+             <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-white shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+                {filtered.map(template => (
+                  <div 
+                    key={`img-${template.id}`}
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                      activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`}
+                  >
+                    {template.image ? (
+                      <img 
+                        src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                        alt={template.title} 
+                        className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
+                          activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
+                        }`}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-brand-light">
+                        <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                
+                {/* Overlay Action */}
+                <div className="absolute inset-0 z-20 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
                   <a 
-                    href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                    href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/index.html` : '#'}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-white/20 hover:bg-white/40 text-white p-4 rounded-full backdrop-blur-md transition-colors"
+                    className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
                   >
-                    <Eye className="w-6 h-6" />
+                    <Eye className="w-5 h-5 group-hover:text-brand-accent transition-colors" />
+                    Open Template
                   </a>
                 </div>
-              </div>
+             </div>
+          </div>
+        </div>
 
-              {/* Content */}
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-2xl font-serif text-brand-dark">{template.title}</h3>
-                  <span className="text-[10px] uppercase tracking-widest text-brand-dark/40 font-medium px-2 py-0.5 rounded-full border border-brand-dark/10">
-                    {template.category}
-                  </span>
+        {/* Mobile Layout: Premium Stacked Cards */}
+        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+          {filtered.map((template) => (
+             <div key={template.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-lg border border-brand-dark/5">
+                <div className="relative aspect-[4/5] w-full bg-brand-light overflow-hidden">
+                   {template.image && (
+                     <img 
+                       src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                       alt={template.title} 
+                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                     />
+                   )}
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                   <div className="absolute bottom-8 left-8 right-8">
+                     <span className="text-[10px] uppercase tracking-widest text-brand-accent font-medium mb-3 block">
+                       {template.category}
+                     </span>
+                     <h3 className="text-4xl font-serif text-white mb-3">{template.title}</h3>
+                   </div>
                 </div>
-                <p className="text-brand-dark/60 text-sm mb-6 line-clamp-2 leading-relaxed">
-                  {template.description}
-                </p>
-                
-                <a 
-                  href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark group/btn"
-                >
-                  Try Demo
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
+                <div className="p-8">
+                   <p className="text-brand-dark/70 text-base mb-8 leading-relaxed font-light">
+                     {template.description}
+                   </p>
+                   <a 
+                     href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="w-full inline-flex items-center justify-center gap-3 text-base font-medium bg-brand-light text-brand-dark px-6 py-4 rounded-full transition-all hover:bg-brand-dark hover:text-white"
+                   >
+                     View Design
+                     <ArrowRight className="w-5 h-5" />
+                   </a>
+                </div>
+             </div>
           ))}
         </div>
         
-        {hasMore && (
-          <div className="mt-16 text-center reveal-on-scroll">
-            <button 
-              onClick={() => setShowAll(true)}
-              className="bg-transparent border border-brand-dark text-brand-dark px-8 py-4 rounded-full font-medium hover:bg-brand-dark hover:text-white transition-all cursor-pointer"
-            >
-              View All Designs ({filtered.length - INITIAL_COUNT} more)
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );
