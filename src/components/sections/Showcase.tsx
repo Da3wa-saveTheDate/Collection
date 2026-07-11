@@ -87,7 +87,7 @@ const templates = [
     title: 'Heartfelt Moments',
     category: 'wedding',
     description: 'A heartfelt, personal wedding invitation capturing genuine moments of love.',
-    image: null
+    image: '/karim-somia/images/hero.png'
   },
   {
     id: 'mohamed-farah',
