@@ -8,119 +8,119 @@ const templates = [
     title: 'Celestial Love',
     category: 'wedding',
     description: 'A heavenly design featuring soft starlight and ethereal elegance for romantic unions.',
-    image: '/celestial-love/images/hero.png'
+    image: '/celestial-love/images/hero.webp'
   },
   {
     id: 'desert-rose',
     title: 'Desert Rose',
     category: 'wedding',
     description: 'Warm terracotta tones and organic shapes inspired by breathtaking desert sunsets.',
-    image: '/desert-rose/images/hero.jpg'
+    image: '/desert-rose/images/hero.webp'
   },
   {
     id: 'emerald-noir',
     title: 'Emerald Noir',
     category: 'wedding',
     description: 'Deep, luxurious greens paired with gold accents for a highly sophisticated atmosphere.',
-    image: '/emerald-noir/images/hero.png'
+    image: '/emerald-noir/images/hero.webp'
   },
   {
     id: 'cherry-blossom',
     title: 'Cherry Blossom',
     category: 'wedding',
     description: 'Delicate pinks and floral motifs bringing a sense of spring and new beginnings.',
-    image: '/cherry-blossom/images/hero.png'
+    image: '/cherry-blossom/images/hero.webp'
   },
   {
     id: 'midnight-garden',
     title: 'Midnight Garden',
     category: 'wedding',
     description: 'Dark, romantic floral aesthetics with a mysterious and enchanting vibe.',
-    image: '/midnight-garden/images/hero.png'
+    image: '/midnight-garden/images/hero.webp'
   },
   {
     id: 'royal-blue',
     title: 'Royal Blue',
     category: 'wedding',
     description: 'Classic, regal navy blue with silver foil accents for a timeless celebration.',
-    image: '/royal-blue/images/hero.jpg'
+    image: '/royal-blue/images/hero.webp'
   },
   {
     id: 'coral-sunset',
     title: 'Coral Sunset',
     category: 'wedding',
     description: 'Vibrant coral hues blending into golden sunlight for a warm, joyful celebration.',
-    image: '/coral-sunset/images/hero.png'
+    image: '/coral-sunset/images/hero.webp'
   },
   {
     id: 'olive-sage',
     title: 'Olive & Sage',
     category: 'wedding',
     description: 'Earthy olive greens and soft sage tones for a natural, organic wedding aesthetic.',
-    image: '/olive-sage/images/hero.png'
+    image: '/olive-sage/images/hero.webp'
   },
   {
     id: 'velvet-theatre',
     title: 'Velvet Theatre',
     category: 'wedding',
     description: 'Rich velvet textures and dramatic curtain-inspired layouts for a grand affair.',
-    image: '/velvet-theatre/images/hero.jpg'
+    image: '/velvet-theatre/images/hero.webp'
   },
   {
     id: 'new_prem2',
     title: 'New Premium',
     category: 'wedding',
     description: 'A beautiful and elegant premium wedding design.',
-    image: '/new_prem2/images/hero.png'
+    image: '/new_prem2/images/hero.webp'
   },
   {
     id: 'invitation-complete',
     title: 'Classic Wedding',
     category: 'wedding',
     description: 'A beautifully structured and classic wedding invitation layout.',
-    image: '/invitation-complete/images/hero.png'
+    image: '/invitation-complete/images/hero.webp'
   },
   {
     id: 'new_prem3',
     title: 'Majestic Template',
     category: 'wedding',
     description: 'A majestic and elegant design for an unforgettable celebration.',
-    image: '/new_prem3/images/hero.png'
+    image: '/new_prem3/images/hero.webp'
   },
   {
     id: 'new_prem4',
     title: 'Wedding Andrea & Pedro',
     category: 'wedding',
     description: 'A charming and personal wedding template.',
-    image: '/new_prem4/images/hero.png'
+    image: '/new_prem4/images/hero.webp'
   },
   {
     id: 'new_prem5',
     title: 'Larenz & Nica',
     category: 'wedding',
     description: 'A beautiful save the date template with elegant details.',
-    image: '/new_prem5/images/hero.png'
+    image: '/new_prem5/images/hero.webp'
   },
   {
     id: 'new_prem6',
     title: 'Maldives Demo',
     category: 'wedding',
     description: 'A breathtaking tropical and beach-themed wedding design.',
-    image: '/new_prem6/images/hero.png'
+    image: '/new_prem6/images/hero.webp'
   },
   {
     id: 'new_prem7',
     title: 'Elena & Tomás',
     category: 'wedding',
     description: 'A wonderful bilingual wedding invitation layout.',
-    image: '/new_prem7/images/hero.png'
+    image: '/new_prem7/images/hero.webp'
   },
   {
     id: 'new_prem8',
     title: 'The Ballroom',
     category: 'wedding',
     description: 'A grand and luxurious ballroom wedding invitation.',
-    image: '/new_prem8/images/hero.png'
+    image: '/new_prem8/images/hero.webp'
   },
 
   // === Wedding Templates (custom image paths) ===
@@ -129,42 +129,42 @@ const templates = [
     title: 'Vintage Sketch',
     category: 'wedding',
     description: 'A charming hand-sketched wedding invitation with elegant illustrations and warm touches.',
-    image: '/adamfarah12/images/hero.png'
+    image: '/adamfarah12/images/hero.webp'
   },
   {
     id: 'elisa-jhon-wedding',
     title: 'Vintage Fairytale',
     category: 'wedding',
     description: 'A whimsical fairy-tale wedding with chandeliers, cupids, and enchanting vintage décor.',
-    image: '/elisa-jhon-wedding/images/hero.png'
+    image: '/elisa-jhon-wedding/images/hero.webp'
   },
   {
     id: 'karim-somia',
     title: 'Heartfelt Moments',
     category: 'wedding',
     description: 'A heartfelt, personal wedding invitation capturing genuine moments of love.',
-    image: '/karim-somia/images/hero.png'
+    image: '/karim-somia/images/hero.webp'
   },
   {
     id: 'mohamed-farah',
     title: 'Gallery Memories',
     category: 'wedding',
     description: 'A rich gallery-style invitation showcasing cherished memories and favorite moments.',
-    image: '/mohamed-farah/images/hero.png'
+    image: '/mohamed-farah/images/hero.webp'
   },
   {
     id: 'omar-laila',
     title: 'Golden Horizon',
     category: 'wedding',
     description: 'A romantic Egyptian-themed invitation with hand-drawn sketches and warm golden tones.',
-    image: '/omar-laila/images/hero.png'
+    image: '/omar-laila/images/hero.webp'
   },
   {
     id: 'omarlayla',
     title: 'Sunset Journey',
     category: 'wedding',
     description: 'A cinematic travel-inspired wedding invitation with stunning sunset photography.',
-    image: '/omarlayla/images/hero.png'
+    image: '/omarlayla/images/hero.webp'
   },
 
 
@@ -173,7 +173,7 @@ const templates = [
     title: 'Mountain Romance',
     category: 'wedding',
     description: 'A nature-inspired mountain wedding invitation with artistic illustrations and birds.',
-    image: '/zeyad-lara-wedd/images/hero.png'
+    image: '/zeyad-lara-wedd/images/hero.webp'
   },
 
   // === Engagement ===
@@ -182,7 +182,7 @@ const templates = [
     title: 'Festive Celebration',
     category: 'engagement',
     description: 'A celebratory engagement invitation with festive imagery and elegant styling.',
-    image: '/maya-youssef-engagement/images/hero.png'
+    image: '/maya-youssef-engagement/images/hero.webp'
   },
 
 

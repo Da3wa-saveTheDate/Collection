@@ -44,21 +44,21 @@ export default function Hero() {
             {/* Main Mockup */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[580px] rounded-[2.5rem] bg-white shadow-2xl p-2 z-20 animate-float">
               <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
-                <img src={`${import.meta.env.BASE_URL}celestial-love/images/hero.png`} alt="Celestial Love" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}celestial-love/images/hero.webp`} alt="Celestial Love" className="w-full h-full object-cover" />
               </div>
             </div>
             
             {/* Secondary Mockup (Left/Back) */}
             <div className="absolute top-[40%] left-[10%] -translate-y-1/2 w-[240px] h-[500px] rounded-[2rem] bg-white/80 shadow-xl p-2 z-10 -rotate-6 blur-[1px] animate-float" style={{ animationDelay: '1s' }}>
               <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
-                <img src={`${import.meta.env.BASE_URL}desert-rose/images/hero.jpg`} alt="Desert Rose" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}desert-rose/images/hero.webp`} alt="Desert Rose" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Tertiary Mockup (Right/Back) */}
             <div className="absolute top-[60%] right-[10%] -translate-y-1/2 w-[240px] h-[500px] rounded-[2rem] bg-white/80 shadow-xl p-2 z-10 rotate-6 blur-[1px] animate-float" style={{ animationDelay: '2s' }}>
               <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
-                <img src={`${import.meta.env.BASE_URL}emerald-noir/images/hero.png`} alt="Emerald Noir" className="w-full h-full object-cover" />
+                <img src={`${import.meta.env.BASE_URL}emerald-noir/images/hero.webp`} alt="Emerald Noir" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
