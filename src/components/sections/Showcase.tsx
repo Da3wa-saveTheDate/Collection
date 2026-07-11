@@ -101,7 +101,7 @@ const templates = [
     title: 'Golden Horizon',
     category: 'wedding',
     description: 'A romantic Egyptian-themed invitation with hand-drawn sketches and warm golden tones.',
-    image: null
+    image: '/omar-laila/images/hero.png'
   },
   {
     id: 'omarlayla',
