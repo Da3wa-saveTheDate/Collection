@@ -207,10 +207,25 @@ export default function Showcase() {
   const mobileFiltered = filtered.slice(0, mobileLimit);
 
   const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set([filtered[0]?.id]));
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 1024;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Only render desktop images if we are actually on a desktop screen
+    if (activeTemplate) {
+      setLoadedImages(prev => {
+        const next = new Set(prev);
+        next.add(activeTemplate.id);
+        return next;
+      });
+    }
+  }, [activeTemplate]);
+
+  useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth >= 1024);
     checkScreen();
     window.addEventListener('resize', checkScreen);
@@ -314,16 +329,18 @@ export default function Showcase() {
                          activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
                        }`}
                      >
-                       {template.image ? (
+                       {template.image && loadedImages.has(template.id) ? (
                          <img 
                            src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                            alt={template.title} 
-                           loading="lazy"
+                           loading={template.id === filtered[0]?.id ? "eager" : "lazy"}
                            decoding="async"
                            className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
                              activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
                            }`}
                          />
+                       ) : template.image && !loadedImages.has(template.id) ? (
+                         null
                        ) : (
                          <div className="w-full h-full flex items-center justify-center bg-brand-light">
                            <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
