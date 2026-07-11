@@ -11,7 +11,7 @@ function App() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-brand-dark overflow-hidden">
+    <div className="min-h-screen flex flex-col font-sans text-brand-dark overflow-x-clip">
       <Navbar />
       <main className="flex-grow">
         <Hero />
