@@ -66,6 +66,13 @@ const templates = [
     description: 'Rich velvet textures and dramatic curtain-inspired layouts for a grand affair.',
     image: '/velvet-theatre/images/hero.jpg'
   },
+  {
+    id: 'new_prem2',
+    title: 'Theatre Demo',
+    category: 'wedding',
+    description: 'An immersive theatre-style wedding invitation with dramatic aesthetics.',
+    image: '/new_prem2/images/hero.png'
+  },
 
   // === Wedding Templates (custom image paths) ===
   {
