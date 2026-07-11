@@ -1,0 +1,95 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * eckmannpsych-small:
+ *   - http://typekit.com/eulas/00000000000000007735ce32
+ * lulo-one:
+ *   - http://typekit.com/eulas/0000000000000000774ba0ae
+ * maryam:
+ *   - http://typekit.com/eulas/0000000000000000773597c5
+ * metallophile-sp8:
+ *   - http://typekit.com/eulas/0000000000000000775296d6
+ *   - http://typekit.com/eulas/0000000000000000775296d4
+ *   - http://typekit.com/eulas/0000000000000000775296d5
+ *   - http://typekit.com/eulas/0000000000000000775296d3
+ * oddity-script:
+ *   - http://typekit.com/eulas/0000000000000000774a1c08
+ * ojuju:
+ *   - http://typekit.com/eulas/00000000000000007754c5d6
+ *   - http://typekit.com/eulas/00000000000000007754c5da
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2026-05-23 17:26:55 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=ctm5wkx&ht=tk&f=594.595.596.597.786.42659.50379.52074.56530.56535&a=88056013&app=typekit&e=css");
+
+@font-face {
+font-family:"metallophile-sp8";
+src:url("https://use.typekit.net/af/efbd9e/0000000000000000775296d6/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/efbd9e/0000000000000000775296d6/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/efbd9e/0000000000000000775296d6/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"metallophile-sp8";
+src:url("https://use.typekit.net/af/0da935/0000000000000000775296d4/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),url("https://use.typekit.net/af/0da935/0000000000000000775296d4/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),url("https://use.typekit.net/af/0da935/0000000000000000775296d4/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"metallophile-sp8";
+src:url("https://use.typekit.net/af/a8778b/0000000000000000775296d5/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff2"),url("https://use.typekit.net/af/a8778b/0000000000000000775296d5/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff"),url("https://use.typekit.net/af/a8778b/0000000000000000775296d5/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:500;font-stretch:normal;
+}
+
+@font-face {
+font-family:"metallophile-sp8";
+src:url("https://use.typekit.net/af/766deb/0000000000000000775296d3/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i5&v=3") format("woff2"),url("https://use.typekit.net/af/766deb/0000000000000000775296d3/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i5&v=3") format("woff"),url("https://use.typekit.net/af/766deb/0000000000000000775296d3/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i5&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:500;font-stretch:normal;
+}
+
+@font-face {
+font-family:"maryam";
+src:url("https://use.typekit.net/af/8fd495/0000000000000000773597c5/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/8fd495/0000000000000000773597c5/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/8fd495/0000000000000000773597c5/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"eckmannpsych-small";
+src:url("https://use.typekit.net/af/6178e4/00000000000000007735ce32/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/6178e4/00000000000000007735ce32/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/6178e4/00000000000000007735ce32/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"oddity-script";
+src:url("https://use.typekit.net/af/3851ea/0000000000000000774a1c08/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/3851ea/0000000000000000774a1c08/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/3851ea/0000000000000000774a1c08/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"lulo-one";
+src:url("https://use.typekit.net/af/0a836b/0000000000000000774ba0ae/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/0a836b/0000000000000000774ba0ae/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/0a836b/0000000000000000774ba0ae/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"ojuju";
+src:url("https://use.typekit.net/af/9080e1/00000000000000007754c5d6/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/9080e1/00000000000000007754c5d6/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/9080e1/00000000000000007754c5d6/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"ojuju";
+src:url("https://use.typekit.net/af/96c54c/00000000000000007754c5da/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/96c54c/00000000000000007754c5da/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/96c54c/00000000000000007754c5da/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+.tkmetallophile-sp8 { font-family: "metallophile-sp8",sans-serif; }
+.tk-maryam { font-family: "maryam",sans-serif; }
+.tk-eckmannpsych-small { font-family: "eckmannpsych-small",sans-serif; }
+.tk-oddity-script { font-family: "oddity-script",sans-serif; }
+.tk-lulo-one { font-family: "lulo-one",sans-serif; }
+.tk-ojuju { font-family: "ojuju",sans-serif; }

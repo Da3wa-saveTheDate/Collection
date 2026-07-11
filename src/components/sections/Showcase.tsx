@@ -254,6 +254,8 @@ export default function Showcase() {
                         <img 
                           src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                           alt={template.title} 
+                          loading="lazy"
+                          decoding="async"
                           className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
                             activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
                           }`}
@@ -292,6 +294,8 @@ export default function Showcase() {
                      <img 
                        src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                        alt={template.title} 
+                       loading="lazy"
+                       decoding="async"
                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                      />
                    )}
