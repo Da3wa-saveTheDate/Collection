@@ -70,89 +70,89 @@ const templates = [
   // === Wedding Templates (custom image paths) ===
   {
     id: 'adamfarah12',
-    title: 'Adam & Farah',
+    title: 'Vintage Sketch',
     category: 'wedding',
     description: 'A charming hand-sketched wedding invitation with elegant illustrations and warm touches.',
-    image: '/adamfarah12/assets/venue.jpg'
+    image: null
   },
   {
     id: 'ahmedlaila',
-    title: 'Ahmed & Laila',
+    title: 'Classic Elegance',
     category: 'wedding',
-    description: 'A refined couple portrait invitation with elegant typography and romantic imagery.',
-    image: '/ahmedlaila/assets/fake-couple-1.png'
+    description: 'A refined portrait-style invitation with elegant typography and romantic imagery.',
+    image: null
   },
   {
     id: 'anas-nada-wedding',
-    title: 'Anas & Nada',
+    title: 'Botanical Beauty',
     category: 'wedding',
     description: 'A beautiful floral-themed wedding invitation with delicate botanical elements.',
-    image: '/anas-nada-wedding/assets/floral-left-DUmRTXW6.png'
+    image: null
   },
   {
     id: 'elisa-jhon-wedding',
-    title: 'Elisa & John',
+    title: 'Vintage Fairytale',
     category: 'wedding',
     description: 'A whimsical fairy-tale wedding with chandeliers, cupids, and enchanting vintage décor.',
-    image: '/elisa-jhon-wedding/assets/hero-chandelier-Cix3RZHl.png'
+    image: null
   },
   {
     id: 'karim-somia',
-    title: 'Karim & Somia',
+    title: 'Heartfelt Moments',
     category: 'wedding',
     description: 'A heartfelt, personal wedding invitation capturing genuine moments of love.',
-    image: '/karim-somia/assets/WhatsApp Image 2026-04-29 at 3.03.35 PM.jpeg'
+    image: null
   },
   {
     id: 'mohamed-farah',
-    title: 'Mohamed & Farah',
+    title: 'Gallery Memories',
     category: 'wedding',
-    description: 'A rich gallery-style invitation showcasing cherished couple memories and favorite moments.',
-    image: '/mohamed-farah/assets/couple-hero.png'
+    description: 'A rich gallery-style invitation showcasing cherished memories and favorite moments.',
+    image: null
   },
   {
     id: 'omar-laila',
-    title: 'Omar & Laila',
+    title: 'Golden Horizon',
     category: 'wedding',
     description: 'A romantic Egyptian-themed invitation with hand-drawn sketches and warm golden tones.',
-    image: '/omar-laila/assets/hero-couple.jpg'
+    image: null
   },
   {
     id: 'omarlayla',
-    title: 'Omar & Layla',
+    title: 'Sunset Journey',
     category: 'wedding',
     description: 'A cinematic travel-inspired wedding invitation with stunning sunset photography.',
-    image: '/omarlayla/assets/hero-bg.jpg'
+    image: null
   },
   {
     id: 'selim-menna-wedding',
-    title: 'Selim & Menna',
+    title: 'Joyful Intimacy',
     category: 'wedding',
-    description: 'An intimate, joyful wedding invitation featuring candid couple photography.',
-    image: '/selim-menna-wedding/assets/hero-couple.jpg'
+    description: 'An intimate, joyful wedding invitation featuring a clean layout.',
+    image: null
   },
   {
     id: 'yassersalma',
-    title: 'Yasser & Salma',
+    title: 'Floral Envelope',
     category: 'wedding',
     description: 'An elegant floral-decorated invitation with a classic envelope reveal and warm feel.',
-    image: '/yassersalma/assets/envelope.jpg'
+    image: null
   },
   {
     id: 'zeyad-lara-wedd',
-    title: 'Zeyad & Lara',
+    title: 'Mountain Romance',
     category: 'wedding',
     description: 'A nature-inspired mountain wedding invitation with artistic illustrations and birds.',
-    image: '/zeyad-lara-wedd/assets/couple-hero-BGsiXew5.jpg'
+    image: null
   },
 
   // === Engagement ===
   {
     id: 'maya-youssef-engagement',
-    title: 'Maya & Youssef',
+    title: 'Festive Celebration',
     category: 'engagement',
     description: 'A celebratory engagement invitation with festive imagery and elegant styling.',
-    image: '/maya-youssef-engagement/assets/fake-hero.png'
+    image: null
   },
 
   // === Birthday Templates ===
