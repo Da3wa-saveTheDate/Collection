@@ -336,15 +336,17 @@ export default function Showcase() {
 
         {/* Mobile Layout: Premium Stacked Cards */}
         <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-          {filtered.map((template) => (
+          {filtered.map((template, index) => (
              <div key={template.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-lg border border-brand-dark/5">
-                <div className="relative aspect-[4/5] w-full bg-brand-light overflow-hidden">
+                <div className="relative w-full bg-brand-light overflow-hidden" style={{height: '420px'}}>
                    {template.image && (
                      <img 
                        src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                        alt={template.title} 
-                       loading="lazy"
+                       loading={index < 4 ? 'eager' : 'lazy'}
                        decoding="async"
+                       width="400"
+                       height="500"
                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                      />
                    )}
