@@ -92,3 +92,12 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* On mobile, disable reveal animation to prevent flash-of-invisible-content */
+@media (max-width: 1024px) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
