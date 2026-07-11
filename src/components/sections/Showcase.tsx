@@ -110,13 +110,7 @@ const templates = [
     description: 'A cinematic travel-inspired wedding invitation with stunning sunset photography.',
     image: '/omarlayla/images/hero.png'
   },
-  {
-    id: 'selim-menna-wedding',
-    title: 'Joyful Intimacy',
-    category: 'wedding',
-    description: 'An intimate, joyful wedding invitation featuring a clean layout.',
-    image: '/selim-menna-wedding/images/hero.png'
-  },
+
   {
     id: 'yassersalma',
     title: 'Floral Envelope',
