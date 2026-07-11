@@ -15854,7 +15854,7 @@ function ta(e) {
 
 function jI(e) {
     let {
-        basename: t = "/new_prem2/",
+        basename: t = "/Collection/new_prem2/",
         children: n = null,
         location: r,
         navigationType: s = $r.Pop,
