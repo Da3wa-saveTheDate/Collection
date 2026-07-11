@@ -27,4 +27,5 @@ const templates = [
       console.error(`Error on ${template}:`, e);
     }
   }
-  await browser.clo
+  await browser.close();
+})();

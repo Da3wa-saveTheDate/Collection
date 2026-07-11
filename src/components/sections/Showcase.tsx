@@ -68,10 +68,59 @@ const templates = [
   },
   {
     id: 'new_prem2',
-    title: 'Theatre Demo',
+    title: 'New Premium',
     category: 'wedding',
-    description: 'An immersive theatre-style wedding invitation with dramatic aesthetics.',
+    description: 'A beautiful and elegant premium wedding design.',
     image: '/new_prem2/images/hero.png'
+  },
+  {
+    id: 'invitation-complete',
+    title: 'Classic Wedding',
+    category: 'wedding',
+    description: 'A beautifully structured and classic wedding invitation layout.',
+    image: '/invitation-complete/images/hero.png'
+  },
+  {
+    id: 'new_prem3',
+    title: 'Majestic Template',
+    category: 'wedding',
+    description: 'A majestic and elegant design for an unforgettable celebration.',
+    image: '/new_prem3/images/hero.png'
+  },
+  {
+    id: 'new_prem4',
+    title: 'Wedding Andrea & Pedro',
+    category: 'wedding',
+    description: 'A charming and personal wedding template.',
+    image: '/new_prem4/images/hero.png'
+  },
+  {
+    id: 'new_prem5',
+    title: 'Larenz & Nica',
+    category: 'wedding',
+    description: 'A beautiful save the date template with elegant details.',
+    image: '/new_prem5/images/hero.png'
+  },
+  {
+    id: 'new_prem6',
+    title: 'Maldives Demo',
+    category: 'wedding',
+    description: 'A breathtaking tropical and beach-themed wedding design.',
+    image: '/new_prem6/images/hero.png'
+  },
+  {
+    id: 'new_prem7',
+    title: 'Elena & Tomás',
+    category: 'wedding',
+    description: 'A wonderful bilingual wedding invitation layout.',
+    image: '/new_prem7/images/hero.png'
+  },
+  {
+    id: 'new_prem8',
+    title: 'The Ballroom',
+    category: 'wedding',
+    description: 'A grand and luxurious ballroom wedding invitation.',
+    image: '/new_prem8/images/hero.png'
   },
 
   // === Wedding Templates (custom image paths) ===
