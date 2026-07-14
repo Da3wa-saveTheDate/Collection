@@ -208,6 +208,7 @@ export default function Showcase() {
 
   const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set([filtered[0]?.id]));
+  const [isHoveringList, setIsHoveringList] = useState(false);
   const [isDesktop, setIsDesktop] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.innerWidth >= 1024;
@@ -275,7 +276,11 @@ export default function Showcase() {
         <div className="hidden lg:grid grid-cols-12 gap-16 relative">
           
           {/* Left Column: List */}
-          <div className="col-span-6 space-y-4 pb-32">
+          <div 
+            className="col-span-6 space-y-4 pb-32"
+            onMouseEnter={() => setIsHoveringList(true)}
+            onMouseLeave={() => setIsHoveringList(false)}
+          >
             {filtered.map((template) => {
               const isActive = activeTemplate?.id === template.id;
               return (
@@ -321,45 +326,70 @@ export default function Showcase() {
            {/* Right Column: Sticky Preview */}
            <div className="col-span-6 relative">
              <div className="sticky top-32 h-[75vh] flex items-center justify-end pr-4">
-                <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-white shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
-                   {isDesktop && filtered.map(template => (
-                     <div 
-                       key={`img-${template.id}`}
-                       className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                         activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                       }`}
-                     >
-                       {template.image && loadedImages.has(template.id) ? (
-                         <img 
-                           src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                           alt={template.title} 
-                           loading={template.id === filtered[0]?.id ? "eager" : "lazy"}
-                           decoding="async"
-                           className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
-                             activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
-                           }`}
-                         />
-                       ) : template.image && !loadedImages.has(template.id) ? (
-                         null
-                       ) : (
-                         <div className="w-full h-full flex items-center justify-center bg-brand-light">
-                           <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
+                
+                {/* Phone Frame Mockup */}
+                <div className="relative w-full max-w-[400px] aspect-[9/19.5] rounded-[3rem] overflow-hidden bg-brand-dark shadow-2xl border-[10px] border-brand-dark transition-transform duration-700 hover:scale-[1.02]">
+                   
+                   {/* Top Notch / Dynamic Island */}
+                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-brand-dark rounded-b-3xl z-40"></div>
+                   
+                   <div className="relative w-full h-full bg-brand-light rounded-[2.25rem] overflow-hidden">
+                     {isDesktop && filtered.map(template => (
+                       <div 
+                         key={`preview-${template.id}`}
+                         className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                           activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                         }`}
+                       >
+                         {/* Static Image (Visible when not hovering list) */}
+                         <div className={`absolute inset-0 transition-opacity duration-700 ${isHoveringList && activeTemplate?.id === template.id ? 'opacity-0' : 'opacity-100'}`}>
+                           {template.image && loadedImages.has(template.id) ? (
+                             <img 
+                               src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                               alt={template.title} 
+                               loading={template.id === filtered[0]?.id ? "eager" : "lazy"}
+                               decoding="async"
+                               className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
+                                 activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
+                               }`}
+                             />
+                           ) : template.image && !loadedImages.has(template.id) ? (
+                             null
+                           ) : (
+                             <div className="w-full h-full flex items-center justify-center bg-brand-light">
+                               <span className="font-serif text-3xl text-brand-dark/20">{template.title}</span>
+                             </div>
+                           )}
                          </div>
-                       )}
-                     </div>
-                   ))}
-                  
-                  {/* Overlay Action */}
-                  <div className="absolute inset-0 z-20 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                    <a 
-                      href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/` : '#'}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
-                    >
-                      <Eye className="w-5 h-5 group-hover:text-brand-accent transition-colors" />
-                      Open Template
-                    </a>
+
+                         {/* Live iframe (Fades in when hovering list) */}
+                         {activeTemplate?.id === template.id && (
+                           <div className={`absolute inset-0 transition-opacity duration-700 delay-150 ${isHoveringList ? 'opacity-100' : 'opacity-0'}`}>
+                              {isHoveringList && (
+                                <iframe 
+                                  src={`${import.meta.env.BASE_URL}${template.id}/`}
+                                  className="w-full h-full border-0 pointer-events-none"
+                                  title={`${template.title} live preview`}
+                                  loading="lazy"
+                                />
+                              )}
+                           </div>
+                         )}
+                       </div>
+                     ))}
+                    
+                    {/* Overlay Action */}
+                    <div className="absolute inset-0 z-50 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                      <a 
+                        href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/` : '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
+                      >
+                        <Eye className="w-5 h-5 group-hover:text-brand-accent transition-colors" />
+                        Open Template
+                      </a>
+                    </div>
                   </div>
                </div>
             </div>
