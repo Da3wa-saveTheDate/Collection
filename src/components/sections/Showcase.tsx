@@ -304,7 +304,7 @@ export default function Showcase() {
                         {template.description}
                       </p>
                       <a 
-                        href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                        href={`${import.meta.env.BASE_URL}${template.id}/`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
@@ -352,7 +352,7 @@ export default function Showcase() {
                   {/* Overlay Action */}
                   <div className="absolute inset-0 z-20 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
                     <a 
-                      href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/index.html` : '#'}
+                      href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/` : '#'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
@@ -396,7 +396,7 @@ export default function Showcase() {
                        {template.description}
                      </p>
                      <a 
-                       href={`${import.meta.env.BASE_URL}${template.id}/index.html`}
+                       href={`${import.meta.env.BASE_URL}${template.id}/`}
                        target="_blank"
                        rel="noopener noreferrer"
                        className="w-full inline-flex items-center justify-center gap-3 text-base font-medium bg-brand-light text-brand-dark px-6 py-4 rounded-full transition-all hover:bg-brand-dark hover:text-white"
