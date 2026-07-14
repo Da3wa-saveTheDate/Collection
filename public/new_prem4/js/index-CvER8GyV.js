@@ -15858,7 +15858,7 @@ function ta(e) {
 
 function Q2(e) {
     let {
-        basename: t = "/new_prem4/",
+        basename: t = "/Collection/new_prem4/",
         children: n = null,
         location: r,
         navigationType: s = $r.Pop,
@@ -35453,3 +35453,4 @@ const qB = () => {
         })
     };
 S1(document.getElementById("root")).render(h.jsx(QB, {}));
+

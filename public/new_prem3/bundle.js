@@ -15969,7 +15969,7 @@ function Qo(e) {
 }
 function bD(e) {
   let {
-    basename: t = "/new_prem3/",
+    basename: t = "/Collection/new_prem3/",
     children: n = null,
     location: r,
     navigationType: s = Ir.Pop,
@@ -33500,4 +33500,5 @@ const p5 = () => {
     });
   };
 o1(document.getElementById("root")).render(p.jsx(m5, {}));
+
 

@@ -15958,7 +15958,7 @@ function ua(e) {
 
 function XD(e) {
     let {
-        basename: t = "/new_prem7/",
+        basename: t = "/Collection/new_prem7/",
         children: n = null,
         location: r,
         navigationType: s = Kr.Pop,
@@ -37098,3 +37098,4 @@ const x6 = () => {
         })
     };
 X1(document.getElementById("root")).render(u.jsx(b6, {}));
+

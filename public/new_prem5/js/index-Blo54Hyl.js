@@ -15800,7 +15800,7 @@ function da(e) {
 
 function i2(e) {
     let {
-        basename: t = "/new_prem5/",
+        basename: t = "/Collection/new_prem5/",
         children: n = null,
         location: r,
         navigationType: s = Ur.Pop,
@@ -35685,3 +35685,4 @@ const Q8 = () => {
         })
     };
 GS(document.getElementById("root")).render(m.jsx(X8, {}));
+

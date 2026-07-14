@@ -15812,7 +15812,7 @@ function na(e) {
 
 function tD(e) {
     let {
-        basename: t = "/new_prem6/",
+        basename: t = "/Collection/new_prem6/",
         children: n = null,
         location: r,
         navigationType: s = Fr.Pop,
@@ -35970,4 +35970,5 @@ const q7 = () => {
         })
     };
 T1(document.getElementById("root")).render(h.jsx(X7, {}));
+
 
