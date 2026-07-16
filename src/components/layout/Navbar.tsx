@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Globe, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,17 +34,10 @@ export default function Navbar() {
           <a href="#designs" className="hover:text-brand-accent transition-colors">Designs</a>
           <a href="#process" className="hover:text-brand-accent transition-colors">Process</a>
           <a href="#pricing" className="hover:text-brand-accent transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-brand-accent transition-colors">FAQ</a>
         </nav>
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-label="Toggle language">
-            <Globe className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-label="Toggle theme">
-            <Moon className="w-5 h-5" />
-          </button>
           <button className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors">
             Contact Us
           </button>
@@ -65,12 +58,6 @@ export default function Navbar() {
           <a href="#designs" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Designs</a>
           <a href="#process" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Process</a>
           <a href="#pricing" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
-          <a href="#faq" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-          <hr className="border-black/10 my-2" />
-          <div className="flex justify-between items-center">
-             <span className="font-medium">Language</span>
-             <Globe className="w-5 h-5" />
-          </div>
           <button className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2">
             Contact Us
           </button>

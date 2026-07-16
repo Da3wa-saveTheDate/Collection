@@ -184,8 +184,27 @@ const templates = [
     description: 'A celebratory engagement invitation with festive imagery and elegant styling.',
     image: '/maya-youssef-engagement/images/hero.webp'
   },
-
-
+  {
+    id: 'selim-menna-wedding',
+    title: 'Elegant Romance',
+    category: 'wedding',
+    description: 'A beautifully elegant romance themed wedding invitation.',
+    image: '/selim-menna-wedding/images/hero.webp'
+  },
+  {
+    id: 'yassersalma',
+    title: 'Classic Elegance',
+    category: 'wedding',
+    description: 'A classic and elegant wedding invitation with timeless charm.',
+    image: '/yassersalma/images/hero.webp'
+  },
+  {
+    id: 'zeekraa',
+    title: 'Modern Minimalist',
+    category: 'wedding',
+    description: 'A clean, modern, and minimalist design for contemporary weddings.',
+    image: '/zeekraa/images/hero.webp'
+  }
 ];
 
 const categories = [
@@ -294,7 +313,7 @@ export default function Showcase() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-4">
                       <span className={`text-xs font-medium tracking-widest uppercase transition-colors duration-300 ${isActive ? 'text-brand-accent' : 'text-brand-dark/30'}`}>
-                        0{filtered.indexOf(template) + 1}
+                        {String(filtered.indexOf(template) + 1).padStart(2, '0')}
                       </span>
                       <h3 className={`text-3xl lg:text-4xl font-serif transition-colors duration-300 ${isActive ? 'text-brand-dark' : 'text-brand-dark/40 group-hover:text-brand-dark/70'}`}>
                         {template.title}

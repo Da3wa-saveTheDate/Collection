@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer id="faq" className="bg-brand-light pt-24 pb-8 border-t border-brand-dark/5">
+    <footer className="bg-brand-light pt-24 pb-8 border-t border-brand-dark/5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
