@@ -33,14 +33,13 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
           <a href="#designs" className="hover:text-brand-accent transition-colors">Designs</a>
           <a href="#process" className="hover:text-brand-accent transition-colors">Process</a>
-          <a href="#pricing" className="hover:text-brand-accent transition-colors">Pricing</a>
         </nav>
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors">
+          <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener noreferrer" className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors">
             Contact Us
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -57,10 +56,9 @@ export default function Navbar() {
         <div className="md:hidden absolute top-[calc(100%+1rem)] left-4 right-4 glass rounded-2xl p-6 flex flex-col gap-4 shadow-lg animate-fade-up">
           <a href="#designs" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Designs</a>
           <a href="#process" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Process</a>
-          <a href="#pricing" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
-          <button className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2">
+          <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener noreferrer" className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2 text-center block">
             Contact Us
-          </button>
+          </a>
         </div>
       )}
     </header>

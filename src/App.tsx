@@ -4,7 +4,6 @@ import Hero from './components/sections/Hero';
 import Showcase from './components/sections/Showcase';
 import WhyChooseUs from './components/sections/WhyChooseUs';
 import Process from './components/sections/Process';
-import Pricing from './components/sections/Pricing';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
         <Showcase />
         <WhyChooseUs />
         <Process />
-        <Pricing />
       </main>
       <Footer />
     </div>
