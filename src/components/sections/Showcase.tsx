@@ -54,7 +54,7 @@ const templates = [
   },
   {
     id: 'olive-sage',
-    title: 'Olive & Sage',
+    title: 'Earthy Botanical',
     category: 'wedding',
     description: 'Earthy olive greens and soft sage tones for a natural, organic wedding aesthetic.',
     image: '/olive-sage/images/hero.webp'
@@ -89,14 +89,14 @@ const templates = [
   },
   {
     id: 'new_prem4',
-    title: 'Wedding Andrea & Pedro',
+    title: 'Classic Romance',
     category: 'wedding',
     description: 'A charming and personal wedding template.',
     image: '/new_prem4/images/hero.webp'
   },
   {
     id: 'new_prem5',
-    title: 'Larenz & Nica',
+    title: 'Elegant Moments',
     category: 'wedding',
     description: 'A beautiful save the date template with elegant details.',
     image: '/new_prem5/images/hero.webp'
@@ -110,7 +110,7 @@ const templates = [
   },
   {
     id: 'new_prem7',
-    title: 'Elena & Tomás',
+    title: 'Bilingual Elegance',
     category: 'wedding',
     description: 'A wonderful bilingual wedding invitation layout.',
     image: '/new_prem7/images/hero.webp'

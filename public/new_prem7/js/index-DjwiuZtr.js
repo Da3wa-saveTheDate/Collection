@@ -21907,7 +21907,7 @@ COSTA BRAVA
 
 Y un atardecer de otoño, anclados en una cala tranquila, una pregunta sencilla. La respuesta ya la conocen.`,
             story_letter_signoff: "Con cariño,",
-            story_letter_signature: "Elena & Tomás",
+            story_letter_signature: "Emma & James",
             inv_eyebrow: `12 DE JUNIO DE 2027
 POSITANO, ITALIA
 
@@ -22054,7 +22054,7 @@ POSITANO, ITALIA
 
 And one autumn sunset, anchored in a quiet cove, one simple question. You already know the answer.`,
             story_letter_signoff: "With love,",
-            story_letter_signature: "Elena & Tomás",
+            story_letter_signature: "Emma & James",
             inv_eyebrow: `JUNE 12, 2027
 POSITANO, ITALY
 
@@ -33331,8 +33331,8 @@ const uU = "./assets/videos/intro-video-DHxaiZtX.mp4",
             })
         });
         const c = {
-                couple_name_1: (e == null ? void 0 : e.couple_name_1) || "Elena",
-                couple_name_2: (e == null ? void 0 : e.couple_name_2) || "Tomás",
+                couple_name_1: (e == null ? void 0 : e.couple_name_1) || "Emma",
+                couple_name_2: (e == null ? void 0 : e.couple_name_2) || "James",
                 wedding_date: (e == null ? void 0 : e.wedding_date) || "2027-06-12",
                 hero_subtitle: (e == null ? void 0 : e.hero_subtitle) || "We're getting married by the sea"
             },

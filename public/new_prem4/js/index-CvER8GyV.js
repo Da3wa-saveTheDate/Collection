@@ -16161,10 +16161,10 @@ From Ronda station, taxi is required (~10 minutes).`,
             "transport.fullAddress": "Finca El Olivar, Camino de los Olivos s/n, 29400 Ronda, Málaga – Spain",
             "gifts.title": "Gifts",
             "gifts.text": "Your presence is our greatest gift. If you wish to give us something, please find our bank account information below:",
-            "gifts.account1": "CaixaBank – Andrea Morales",
+            "gifts.account1": "CaixaBank – Emma Morales",
             "gifts.account1details": `IBAN: ES00 0000 0000 0000 0000 0000
 BIC/SWIFT: XXXXXXXXXX`,
-            "gifts.account2": "Banco Santander – Pedro Fernández",
+            "gifts.account2": "Banco Santander – James Fernández",
             "gifts.account2details": `IBAN: ES00 0000 0000 0000 0000 0000
 BIC/SWIFT: XXXXXXXXXX`,
             "rsvp.title": "RSVP",
@@ -16264,10 +16264,10 @@ Desde la estación, se necesita taxi (~10 minutos).`,
             "transport.fullAddress": "Finca El Olivar, Camino de los Olivos s/n, 29400 Ronda, Málaga – España",
             "gifts.title": "Regalos",
             "gifts.text": "Vuestra presencia es nuestro mayor regalo. Si deseáis hacernos un obsequio, aquí tenéis los datos bancarios:",
-            "gifts.account1": "CaixaBank – Andrea Morales",
+            "gifts.account1": "CaixaBank – Emma Morales",
             "gifts.account1details": `IBAN: ES00 0000 0000 0000 0000 0000
 BIC/SWIFT: XXXXXXXXXX`,
-            "gifts.account2": "Banco Santander – Pedro Fernández",
+            "gifts.account2": "Banco Santander – James Fernández",
             "gifts.account2details": `IBAN: ES00 0000 0000 0000 0000 0000
 BIC/SWIFT: XXXXXXXXXX`,
             "rsvp.title": "RSVP",
@@ -31528,8 +31528,8 @@ function S3({
     })
 }
 const ec = {
-    couple_name_1: "Andrea",
-    couple_name_2: "Pedro",
+    couple_name_1: "Emma",
+    couple_name_2: "James",
     wedding_date: "2026-09-12",
     venue_location: "Finca El Olivar, Ronda, Málaga"
 };
@@ -32052,10 +32052,10 @@ const P3 = "./assets/images/floral-vase-6x28LN74.png",
     $w = [L3, $3, F3, V3, U3],
     Fw = ["center 40%", "center 35%", "right 50%", "center 30%", "right 40%"],
     ms = {
-        couple_name_1: "Andrea",
-        couple_name_2: "Pedro",
-        hero_name_1: "Andrea",
-        hero_name_2: "Pedro",
+        couple_name_1: "Emma",
+        couple_name_2: "James",
+        hero_name_1: "Emma",
+        hero_name_2: "James",
         wedding_date: "2026-09-12",
         venue_name: "Finca El Olivar",
         venue_address: "Finca El Olivar, Camino de los Olivos s/n, Ronda, Málaga"
