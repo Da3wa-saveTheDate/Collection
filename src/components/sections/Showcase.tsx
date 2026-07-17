@@ -218,27 +218,7 @@ const templates = [
     category: 'invitation fan',
     description: 'Beautiful invitation fan design.',
     image: '/invitation-fan-3/images/hero.webp'
-  },
-  {
-    id: 'invitation-fan-4',
-    title: 'Invitation Fan 4',
-    category: 'invitation fan',
-    description: 'Beautiful invitation fan design.',
-    image: '/invitation-fan-4/images/hero.webp'
-  },
-  {
-    id: 'invitation-fan-5',
-    title: 'Invitation Fan 5',
-    category: 'invitation fan',
-    description: 'Beautiful invitation fan design.',
-    image: '/invitation-fan-5/images/hero.webp'
-  },
-  {
-    id: 'invitation-fan-6',
-    title: 'Invitation Fan 6',
-    category: 'invitation fan',
-    description: 'Beautiful invitation fan design.',
-    image: '/invitation-fan-6/images/hero.webp'
+
   },
   {
     id: 'invitation-card-1',
