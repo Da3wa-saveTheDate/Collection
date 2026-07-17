@@ -31170,36 +31170,7 @@ function hB({ name1: e, name2: t, date: n }) {
   });
 }
 const fB = "./assets/watermark-DICa3eBu.png",
-  pB = () =>
-    p.jsxs("div", {
-      className: "fixed inset-0 pointer-events-none overflow-hidden",
-      style: { zIndex: 9999 },
-      children: [
-        p.jsx("div", {
-          className: "absolute",
-          style: {
-            width: "180px",
-            opacity: 0.8,
-            top: "50%",
-            left: "50%",
-            animation: "watermark-x 25s ease-in-out infinite, watermark-y 18s ease-in-out infinite",
-          },
-          children: p.jsx("img", { src: fB, alt: "", className: "w-full h-auto", draggable: !1 }),
-        }),
-        p.jsx("style", {
-          children: `
-        @keyframes watermark-x {
-          0%, 100% { transform: translateX(-80%); }
-          50% { transform: translateX(-20%); }
-        }
-        @keyframes watermark-y {
-          0%, 100% { top: 20%; }
-          50% { top: 75%; }
-        }
-      `,
-        }),
-      ],
-    }),
+  pB = () => null,
   YC = "./assets/intro-video-Dhn3t98e.mp4",
   JC = "./assets/intro-poster-BaLFALiu.jpg",
   mB = ({ onEnter: e, onInteraction: t }) => {

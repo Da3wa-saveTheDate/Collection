@@ -32203,27 +32203,7 @@ const P3 = "./assets/images/floral-vase-6x28LN74.png",
             toggleMute: i
         } = KF(), o = () => {
             t(!1)
-        }, a = () => h.jsx("div", {
-            className: "fixed pointer-events-none z-50",
-            style: {
-                top: "50%",
-                left: "75%",
-                transform: "translate(-50%, -50%)"
-            },
-            children: h.jsxs("div", {
-                className: "relative flex items-center justify-center animate-[float_3s_ease-in-out_infinite]",
-                children: [h.jsx("div", {
-                    className: "absolute w-72 h-72 rounded-full bg-white/60 blur-2xl"
-                }), h.jsx("img", {
-                    src: M3,
-                    alt: "",
-                    className: "relative",
-                    style: {
-                        width: "840px"
-                    }
-                })]
-            })
-        });
+        }, a = () => null;
         return e ? h.jsxs(h.Fragment, {
             children: [h.jsx(k3, {
                 onEnter: o,
