@@ -16198,7 +16198,7 @@ BIC/SWIFT: XXXXXXXXXX`,
             "confirm.lookForward": "We look forward to seeing you on:",
             "confirm.addCalendar": "Add to Calendar",
             "confirm.plansChange": "If your plans change and you can no longer attend, please let us know as soon as possible.",
-            "footer.madeBy": "Made with love by"
+            "footer.madeBy": ""
         },
         es: {
             "hero.subtitle": "Nos casamos",
@@ -16301,7 +16301,7 @@ BIC/SWIFT: XXXXXXXXXX`,
             "confirm.lookForward": "Te esperamos el:",
             "confirm.addCalendar": "Añadir al Calendario",
             "confirm.plansChange": "Si tus planes cambian y no puedes asistir, por favor avísanos lo antes posible.",
-            "footer.madeBy": "Hecho con amor por"
+            "footer.madeBy": ""
         }
     },
     yE = g.createContext(void 0);
@@ -31951,11 +31951,11 @@ function _3({
             }), h.jsxs("p", {
                 className: "text-sm text-sage-dark/60 mt-12 font-body font-medium",
                 children: [r("footer.madeBy"), " ", h.jsx("a", {
-                    href: "https://www.thedigitalyes.com",
+                    href: "",
                     target: "_blank",
                     rel: "noopener noreferrer",
                     className: "hover:text-gold transition-colors underline underline-offset-2 font-semibold",
-                    children: "The Digital Yes"
+                    children: ""
                 })]
             })]
         })

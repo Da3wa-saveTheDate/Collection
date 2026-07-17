@@ -410,7 +410,7 @@
     "Made with love for Maya.":"صُنع بحب من أجل مايا.",
     "Made for Lina, with all my love.":"صُنع للينا، بكل حبي.",
     "Made with love":"صُنع بحب",
-    "Made with love by":"صُنع بحب بواسطة",
+    "":"صُنع بحب بواسطة",
     "Made with love · Cairo, Egypt":"صُنع بحب · القاهرة، مصر",
     "Hey you know who, this one is all yours.":"يا من تعرفين نفسك، هذه لك وحدك.",
     "Tonight belongs to Lina":"هذه الليلة للينا",

@@ -16100,7 +16100,7 @@ Weekend
         "faq.a3": "As we'll be celebrating with many close family members and loved ones, we kindly ask that guests refrain from bringing additional attendees unless specifically included in the formal invitation.",
         "faq.q4": "Will additional wedding details be shared later?",
         "faq.a4": "Yes — venue information, itinerary details, transportation guidance, and additional updates will be shared closer to the celebration.",
-        "footer.madeBy": "Made with love by"
+        "footer.madeBy": ""
     },
     w2 = {
         en: S0,
@@ -33318,11 +33318,11 @@ function R6({
                     children: [m.jsx("p", {
                         children: r("footer.madeBy")
                     }), m.jsx("a", {
-                        href: "https://www.thedigitalyes.com",
+                        href: "",
                         target: "_blank",
                         rel: "noopener noreferrer",
                         className: "font-semibold underline underline-offset-2 hover:text-gold transition-colors",
-                        children: "The Digital Yes"
+                        children: ""
                     })]
                 })]
             })]

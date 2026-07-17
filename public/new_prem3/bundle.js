@@ -31140,7 +31140,7 @@ function hB({ name1: e, name2: t, date: n }) {
           children: [
             p.jsxs("p", { className: "font-script text-3xl text-sage-dark mt-2 mb-1", children: [e, " & ", t] }),
             p.jsx("p", { className: "text-sm text-sage-dark/80 font-body tracking-wide", children: r }),
-            p.jsx("img", { src: uB, alt: "Ornament", className: "w-80 md:w-96 mx-auto mt-8" }),
+            p.jsx("img", { src: uB, alt: "Ornament", style: { display: "none" }, className: "w-80 md:w-96 mx-auto mt-8" }),
           ],
         }),
       }),
@@ -31154,14 +31154,14 @@ function hB({ name1: e, name2: t, date: n }) {
           transition: { duration: 0.8 },
           className: "text-xs text-[#797f5c] font-body font-medium",
           children: [
-            "Made with love by",
+            "",
             " ",
             p.jsx("a", {
-              href: "https://thedigitalyes.com",
+              href: "",
               target: "_blank",
               rel: "noopener noreferrer",
               className: "underline hover:text-[#797f5c]/80 transition-colors font-semibold",
-              children: "The Digital Yes",
+              children: "",
             }),
           ],
         }),

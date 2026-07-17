@@ -16190,7 +16190,7 @@ BIC/SWIFT: XXXXXXXXXX`,
             "confirm.lookForward": "We look forward to welcoming you on:",
             "confirm.addCalendar": "Add to Calendar",
             "confirm.plansChange": "Should your circumstances change, we would be most grateful if you could notify us at your earliest convenience.",
-            "footer.madeBy": "Made with love by"
+            "footer.madeBy": ""
         },
         de: {
             "hero.subtitle": "Wir heiraten",
@@ -32328,11 +32328,11 @@ function ZU({
             }), h.jsxs("p", {
                 className: "text-sm text-foreground/40 mt-16 font-body",
                 children: [r("footer.madeBy"), " ", h.jsx("a", {
-                    href: "https://www.thedigitalyes.com",
+                    href: "",
                     target: "_blank",
                     rel: "noopener noreferrer",
                     className: "hover:text-foreground transition-colors underline underline-offset-2",
-                    children: "The Digital Yes"
+                    children: ""
                 })]
             })]
         })

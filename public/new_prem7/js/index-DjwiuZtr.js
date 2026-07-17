@@ -33185,11 +33185,11 @@ function aU({
         }), u.jsxs("p", {
             className: "text-[10px] text-sage-dark/45 py-8 font-body tracking-[0.15em] bg-primary-foreground",
             children: [r("footer_credit"), u.jsx("a", {
-                href: "https://www.thedigitalyes.com",
+                href: "",
                 target: "_blank",
                 rel: "noopener noreferrer",
                 className: "hover:text-sage-dark/80 transition-colors underline underline-offset-2",
-                children: "The Digital Yes"
+                children: ""
             })]
         })]
     })
