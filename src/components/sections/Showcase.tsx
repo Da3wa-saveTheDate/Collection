@@ -204,6 +204,62 @@ const templates = [
     category: 'wedding',
     description: 'A clean, modern, and minimalist design for contemporary weddings.',
     image: '/zeekraa/images/hero.webp'
+  },
+  {
+    id: 'invitation-fan-1',
+    title: 'Invitation Fan 1',
+    category: 'invitation fan',
+    description: 'Beautiful invitation fan design.',
+    image: '/invitation-fan-1/images/hero.webp'
+  },
+  {
+    id: 'invitation-fan-2',
+    title: 'Invitation Fan 2',
+    category: 'invitation fan',
+    description: 'Beautiful invitation fan design.',
+    image: '/invitation-fan-2/images/hero.webp'
+  },
+  {
+    id: 'invitation-fan-3',
+    title: 'Invitation Fan 3',
+    category: 'invitation fan',
+    description: 'Beautiful invitation fan design.',
+    image: '/invitation-fan-3/images/hero.webp'
+  },
+  {
+    id: 'invitation-card-1',
+    title: 'Invitation Card 1',
+    category: 'invitation cards',
+    description: 'Beautiful invitation card design.',
+    image: '/invitation-card-1/images/hero.webp'
+  },
+  {
+    id: 'invitation-card-2',
+    title: 'Invitation Card 2',
+    category: 'invitation cards',
+    description: 'Beautiful invitation card design.',
+    image: '/invitation-card-2/images/hero.webp'
+  },
+  {
+    id: 'invitation-card-3',
+    title: 'Invitation Card 3',
+    category: 'invitation cards',
+    description: 'Beautiful invitation card design.',
+    image: '/invitation-card-3/images/hero.webp'
+  },
+  {
+    id: 'invitation-card-4',
+    title: 'Invitation Card 4',
+    category: 'invitation cards',
+    description: 'Beautiful invitation card design.',
+    image: '/invitation-card-4/images/hero.webp'
+  },
+  {
+    id: 'invitation-card-5',
+    title: 'Invitation Card 5',
+    category: 'invitation cards',
+    description: 'Beautiful invitation card design.',
+    image: '/invitation-card-5/images/hero.webp'
   }
 ];
 
@@ -211,6 +267,8 @@ const categories = [
   { key: 'all', label: 'All Designs' },
   { key: 'wedding', label: 'Weddings' },
   { key: 'engagement', label: 'Engagements' },
+  { key: 'invitation fan', label: 'Invitation Fan' },
+  { key: 'invitation cards', label: 'Invitation Cards' },
 ];
 
 const MOBILE_PAGE_SIZE = 6;
