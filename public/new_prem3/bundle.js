@@ -21723,7 +21723,7 @@ function xF({
         E = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
-          "PRODID:-//TheDigitalYes//Wedding//EN",
+          "PRODID:-////Wedding//EN",
           "BEGIN:VEVENT",
           `DTSTART;TZID=Europe/Rome:${w}`,
           `DTEND;TZID=Europe/Rome:${S}`,
@@ -30540,7 +30540,7 @@ function lB({ attendance: e }) {
     const l = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
-        "PRODID:-//TheDigitalYes//Wedding//EN",
+        "PRODID:-////Wedding//EN",
         "BEGIN:VEVENT",
         "DTSTART;TZID=Europe/Rome:20270918T170000",
         "DTEND;TZID=Europe/Rome:20270919T020000",

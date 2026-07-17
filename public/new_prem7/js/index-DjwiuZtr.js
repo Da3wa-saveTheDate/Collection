@@ -22174,7 +22174,7 @@ POSITANO, ITALY
             conf_yes_p3: "See you soon in Positano!",
             conf_add_calendar: "Add to calendar",
             conf_late_change: "If for any reason you can't attend, please let us know in advance.",
-            footer_credit: "Made with love by "
+            footer_credit: " "
         }
     },
     CC = m.createContext(void 0),
