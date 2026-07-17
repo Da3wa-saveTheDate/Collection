@@ -332,7 +332,7 @@ export default function Showcase() {
           </div>
           
           {/* Category Filter */}
-          <div className="flex gap-2 mt-8 md:mt-0 overflow-x-auto pb-2 w-full md:w-auto">
+          <div className="flex flex-wrap justify-start md:justify-end gap-2 mt-8 md:mt-0 w-full md:w-auto md:max-w-[50%]">
             {categories.map((cat) => (
               <button
                 key={cat.key}
