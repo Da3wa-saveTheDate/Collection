@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Eye } from 'lucide-react';
 
 const templates = [
@@ -276,6 +276,20 @@ const MOBILE_PAGE_SIZE = 6;
 export default function Showcase() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [mobileLimit, setMobileLimit] = useState(MOBILE_PAGE_SIZE);
+  const phoneContainerRef = useRef<HTMLDivElement>(null);
+  const [phoneScale, setPhoneScale] = useState(1);
+
+  useEffect(() => {
+    const el = phoneContainerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setPhoneScale(entry.contentRect.width / 390);
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   
   const filtered = activeCategory === 'all' 
     ? templates 
@@ -410,7 +424,7 @@ export default function Showcase() {
                    {/* Top Notch / Dynamic Island */}
                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] min-w-[80px] max-w-[120px] h-[30px] bg-brand-dark rounded-b-3xl z-40"></div>
                    
-                   <div className="relative w-full h-full bg-brand-light rounded-[2.25rem] overflow-hidden">
+                   <div ref={phoneContainerRef} className="relative w-full h-full bg-brand-light rounded-[2.25rem] overflow-hidden">
                      {isDesktop && filtered.map(template => (
                        <div 
                          key={`preview-${template.id}`}
@@ -443,12 +457,21 @@ export default function Showcase() {
                          {activeTemplate?.id === template.id && (
                            <div className={`absolute inset-0 transition-opacity duration-700 delay-150 ${isHoveringList ? 'opacity-100' : 'opacity-0'}`}>
                               {isHoveringList && (
-                                <iframe 
-                                  src={`${import.meta.env.BASE_URL}${template.id}/`}
-                                  className="w-full h-full border-0 pointer-events-none"
-                                  title={`${template.title} live preview`}
-                                  loading="lazy"
-                                />
+                                <div 
+                                  className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
+                                  style={{ transform: `scale(${phoneScale})` }}
+                                >
+                                  <iframe 
+                                    src={`${import.meta.env.BASE_URL}${template.id}/`}
+                                    className="w-full h-full border-0"
+                                    style={{
+                                      scrollbarWidth: 'none',
+                                      msOverflowStyle: 'none'
+                                    }}
+                                    title={`${template.title} live preview`}
+                                    loading="lazy"
+                                  />
+                                </div>
                               )}
                            </div>
                          )}
