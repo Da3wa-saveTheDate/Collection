@@ -402,13 +402,13 @@ export default function Showcase() {
 
            {/* Right Column: Sticky Preview */}
            <div className="col-span-6 relative">
-             <div className="sticky top-32 h-[75vh] flex items-center justify-end pr-4">
+             <div className="sticky top-32 h-[calc(100vh-12rem)] max-h-[800px] flex items-center justify-end pr-4">
                 
                 {/* Phone Frame Mockup */}
-                <div className="relative w-full max-w-[400px] aspect-[9/19.5] rounded-[3rem] overflow-hidden bg-brand-dark shadow-2xl border-[10px] border-brand-dark transition-transform duration-700 hover:scale-[1.02]">
+                <div className="relative h-full aspect-[9/19.5] w-auto rounded-[3rem] overflow-hidden bg-brand-dark shadow-2xl border-[8px] md:border-[10px] border-brand-dark transition-transform duration-700 hover:scale-[1.02]">
                    
                    {/* Top Notch / Dynamic Island */}
-                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-brand-dark rounded-b-3xl z-40"></div>
+                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] min-w-[80px] max-w-[120px] h-[30px] bg-brand-dark rounded-b-3xl z-40"></div>
                    
                    <div className="relative w-full h-full bg-brand-light rounded-[2.25rem] overflow-hidden">
                      {isDesktop && filtered.map(template => (
