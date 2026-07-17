@@ -199,13 +199,6 @@ const templates = [
     image: '/yassersalma/images/hero.webp'
   },
   {
-    id: 'zeekraa',
-    title: 'Modern Minimalist',
-    category: 'wedding',
-    description: 'A clean, modern, and minimalist design for contemporary weddings.',
-    image: '/zeekraa/images/hero.webp'
-  },
-  {
     id: 'invitation-fan-1',
     title: 'Invitation Fan 1',
     category: 'invitation fan',
