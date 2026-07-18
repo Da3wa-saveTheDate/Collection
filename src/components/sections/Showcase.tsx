@@ -185,6 +185,27 @@ const templates = [
     image: '/maya-youssef-engagement/images/hero.webp'
   },
   {
+    id: 'emerald-gold',
+    title: 'Emerald Gold',
+    category: 'engagement',
+    description: 'An elegant emerald and gold engagement invitation.',
+    image: '/emerald-gold/couple.png'
+  },
+  {
+    id: 'garden-bloom',
+    title: 'Garden Bloom',
+    category: 'engagement',
+    description: 'A beautiful botanical garden bloom engagement invitation.',
+    image: '/garden-bloom/couple.png'
+  },
+  {
+    id: 'midnight-stars',
+    title: 'Midnight Stars',
+    category: 'engagement',
+    description: 'A magical midnight stars engagement invitation.',
+    image: '/midnight-stars/couple.png'
+  },
+  {
     id: 'selim-menna-wedding',
     title: 'Elegant Romance',
     category: 'wedding',
