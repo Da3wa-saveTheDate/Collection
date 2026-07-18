@@ -40,24 +40,24 @@ export default function Hero() {
           </div>
 
           {/* Floating Mockups */}
-          <div className="flex-1 relative w-full h-[600px] hidden md:block">
+          <div className="flex-1 relative w-full h-[400px] md:h-[600px] mt-12 lg:mt-0 block">
             {/* Main Mockup */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[580px] rounded-[2.5rem] bg-white shadow-2xl p-2 z-20 animate-float">
-              <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] md:w-[280px] h-[380px] sm:h-[460px] md:h-[580px] rounded-[2rem] md:rounded-[2.5rem] bg-white shadow-2xl p-1.5 md:p-2 z-20 animate-float">
+              <div className="w-full h-full rounded-[1.75rem] md:rounded-[2rem] overflow-hidden relative">
                 <img src={`${import.meta.env.BASE_URL}celestial-love/images/hero.webp`} alt="Celestial Love" className="w-full h-full object-cover" />
               </div>
             </div>
             
             {/* Secondary Mockup (Left/Back) */}
-            <div className="absolute top-[40%] left-[10%] -translate-y-1/2 w-[240px] h-[500px] rounded-[2rem] bg-white/80 shadow-xl p-2 z-10 -rotate-6 blur-[1px] animate-float" style={{ animationDelay: '1s' }}>
-              <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
+            <div className="absolute top-[40%] left-[5%] sm:left-[10%] md:left-[10%] -translate-y-1/2 w-[140px] sm:w-[180px] md:w-[240px] h-[300px] sm:h-[380px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] bg-white/80 shadow-xl p-1.5 md:p-2 z-10 -rotate-6 blur-[1px] animate-float" style={{ animationDelay: '1s' }}>
+              <div className="w-full h-full rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden relative">
                 <img src={`${import.meta.env.BASE_URL}desert-rose/images/hero.webp`} alt="Desert Rose" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Tertiary Mockup (Right/Back) */}
-            <div className="absolute top-[60%] right-[10%] -translate-y-1/2 w-[240px] h-[500px] rounded-[2rem] bg-white/80 shadow-xl p-2 z-10 rotate-6 blur-[1px] animate-float" style={{ animationDelay: '2s' }}>
-              <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
+            <div className="absolute top-[60%] right-[5%] sm:right-[10%] md:right-[10%] -translate-y-1/2 w-[140px] sm:w-[180px] md:w-[240px] h-[300px] sm:h-[380px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] bg-white/80 shadow-xl p-1.5 md:p-2 z-10 rotate-6 blur-[1px] animate-float" style={{ animationDelay: '2s' }}>
+              <div className="w-full h-full rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden relative">
                 <img src={`${import.meta.env.BASE_URL}emerald-noir/images/hero.webp`} alt="Emerald Noir" className="w-full h-full object-cover" />
               </div>
             </div>

@@ -4,8 +4,8 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div className="md:col-span-1">
-            <a href="#" className="font-serif text-3xl font-semibold tracking-wide text-brand-dark block mb-6">
-              Ajwaa
+            <a href="#" className="block mb-6">
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Ajwaa" className="h-16 w-auto object-contain" />
             </a>
             <p className="text-brand-dark/60 font-light text-sm leading-relaxed mb-6">
               Elevating the art of invitations with modern, luxurious digital experiences tailored for your eternal moments.

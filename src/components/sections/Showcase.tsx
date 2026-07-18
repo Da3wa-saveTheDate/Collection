@@ -511,57 +511,101 @@ export default function Showcase() {
           </div>
         </div>
 
-        {/* Mobile Layout: Premium Stacked Cards */}
-        <div className="lg:hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-            {mobileFiltered.map((template, index) => (
-               <div key={template.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-lg border border-brand-dark/5">
-                  <div className="relative w-full bg-brand-light overflow-hidden" style={{height: '420px'}}>
-                     {template.image && (
+        {/* Mobile Layout: Interactive Preview */}
+        <div className="lg:hidden mt-8">
+          {/* Mobile Phone Frame (Sticky Top) */}
+          <div className="sticky top-20 z-30 flex justify-center mb-10 h-[60vh] min-h-[450px]">
+             <div className="relative h-full aspect-[9/19.5] w-auto rounded-[2.5rem] overflow-hidden bg-brand-dark shadow-2xl border-[6px] border-brand-dark transition-transform duration-500">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] min-w-[60px] max-w-[100px] h-[20px] bg-brand-dark rounded-b-2xl z-40"></div>
+               
+               <div className="relative w-full h-full bg-brand-light rounded-[2rem] overflow-hidden">
+                 {mobileFiltered.map(template => (
+                   <div 
+                     key={`mobile-preview-${template.id}`}
+                     className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                       activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                     }`}
+                   >
+                     {template.image && loadedImages.has(template.id) ? (
                        <img 
                          src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
                          alt={template.title} 
-                         loading={index < 3 ? 'eager' : 'lazy'}
-                         decoding="async"
-                         width="400"
-                         height="420"
-                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                         className="w-full h-full object-cover"
                        />
+                     ) : (
+                       <div className="w-full h-full flex items-center justify-center bg-brand-light">
+                         <span className="font-serif text-2xl text-brand-dark/20">{template.title}</span>
+                       </div>
                      )}
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
-                     <div className="absolute bottom-8 left-8 right-8">
-                       <span className="text-[10px] uppercase tracking-widest text-brand-accent font-medium mb-3 block">
-                         {template.category}
-                       </span>
-                       <h3 className="text-4xl font-serif text-white mb-3">{template.title}</h3>
+                     
+                     {/* Overlay Action */}
+                     <div className="absolute inset-0 z-50 bg-brand-dark/40 opacity-0 active:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                       <a 
+                         href={`${import.meta.env.BASE_URL}${template.id}/`}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="bg-white text-brand-dark px-6 py-3 rounded-full font-medium shadow-xl flex items-center gap-2"
+                       >
+                         <Eye className="w-4 h-4" />
+                         Open
+                       </a>
                      </div>
-                  </div>
-                  <div className="p-8">
-                     <p className="text-brand-dark/70 text-base mb-8 leading-relaxed font-light">
-                       {template.description}
-                     </p>
-                     <a 
-                       href={`${import.meta.env.BASE_URL}${template.id}/`}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="w-full inline-flex items-center justify-center gap-3 text-base font-medium bg-brand-light text-brand-dark px-6 py-4 rounded-full transition-all hover:bg-brand-dark hover:text-white"
-                     >
-                       View Design
-                       <ArrowRight className="w-5 h-5" />
-                     </a>
-                  </div>
+                   </div>
+                 ))}
                </div>
-            ))}
+             </div>
+          </div>
+
+          {/* Horizontal Template Selector */}
+          <div className="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory px-4 -mx-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {mobileFiltered.map((template, index) => {
+              const isActive = activeTemplate?.id === template.id;
+              return (
+                <button 
+                  key={`mobile-list-${template.id}`}
+                  onClick={() => setActiveTemplate(template)}
+                  className={`snap-center shrink-0 w-[260px] sm:w-[300px] text-left group bg-white rounded-[1.5rem] overflow-hidden shadow-lg border transition-all duration-300 ${
+                    isActive ? 'border-brand-accent ring-2 ring-brand-accent/20 scale-100' : 'border-brand-dark/5 scale-95 opacity-70'
+                  }`}
+                >
+                  <div className="relative w-full h-[200px] bg-brand-light overflow-hidden">
+                    {template.image && (
+                      <img 
+                        src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                        alt={template.title} 
+                        loading={index < 3 ? 'eager' : 'lazy'}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <span className="text-[9px] uppercase tracking-widest text-brand-accent font-medium mb-1 block">
+                        {template.category}
+                      </span>
+                      <h3 className="text-xl font-serif text-white">{template.title}</h3>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-brand-dark/70 text-sm mb-4 leading-relaxed font-light line-clamp-2">
+                      {template.description}
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark">
+                      Select <ArrowRight className={`w-4 h-4 transition-transform ${isActive ? 'translate-x-1 text-brand-accent' : ''}`} />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {/* Load More Button */}
           {mobileLimit < filtered.length && (
-            <div className="flex justify-center mt-12">
+            <div className="flex justify-center mt-4">
               <button
                 onClick={() => setMobileLimit(prev => prev + MOBILE_PAGE_SIZE)}
-                className="px-10 py-4 rounded-full bg-brand-dark text-white font-medium text-base hover:bg-black transition-all shadow-lg active:scale-95"
+                className="px-8 py-3.5 rounded-full bg-brand-dark text-white font-medium text-sm hover:bg-black transition-all shadow-lg active:scale-95"
               >
-                Load More ({filtered.length - mobileLimit} remaining)
+                Load More Designs ({filtered.length - mobileLimit})
               </button>
             </div>
           )}
@@ -571,3 +615,4 @@ export default function Showcase() {
     </section>
   );
 }
+
