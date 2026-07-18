@@ -109,13 +109,6 @@ const templates = [
     image: '/new_prem7/images/hero.webp'
   },
   {
-    id: 'new_prem8',
-    title: 'The Ballroom',
-    category: 'premium-wedding',
-    description: 'A grand and luxurious ballroom wedding invitation.',
-    image: '/new_prem8/images/hero.webp'
-  },
-  {
     id: 'new_ss',
     title: 'Seaside Celebration',
     category: 'premium-wedding',

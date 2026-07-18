@@ -22485,8 +22485,8 @@ function Lw(e, t) {
         return t(n)
     })
 }
-const q5 = "/Collection/new_ss/assets/intro-poster-new-B2unBQtC.jpg",
-    _C = "/Collection/new_ss/assets/monogram-Dd4GSvtc.png";
+const q5 = "/new_ss/assets/intro-poster-new-B2unBQtC.jpg",
+    _C = "/new_ss/assets/monogram-Dd4GSvtc.png";
 
 function X5({
     name1: e,
@@ -22642,7 +22642,7 @@ function Q5({
         })
     })
 }
-const Y5 = "/Collection/new_ss/assets/wedding-background-music-yxy0nS2O.mp3";
+const Y5 = "/new_ss/assets/wedding-background-music-yxy0nS2O.mp3";
 let ht = null,
     $w = !1;
 
@@ -22698,8 +22698,8 @@ function eV(e) {
         seconds: 0
     }
 }
-const tV = "/Collection/new_ss/assets/column-left-Deau9Trj.png",
-    nV = "/Collection/new_ss/assets/column-right-Dq5wy1M7.png";
+const tV = "/new_ss/assets/column-left-Deau9Trj.png",
+    nV = "/new_ss/assets/column-right-Dq5wy1M7.png";
 
 function rV({
     targetDate: e
@@ -22818,8 +22818,8 @@ function rV({
         })]
     })
 }
-const sV = "/Collection/new_ss/assets/yacht-illustration-BxPtm2NZ.png",
-    iV = "/Collection/new_ss/assets/peninsula-hotel-DfDFGUc8.png",
+const sV = "/new_ss/assets/yacht-illustration-BxPtm2NZ.png",
+    iV = "/new_ss/assets/peninsula-hotel-DfDFGUc8.png",
     Fw = "https://www.google.com/maps/place/The+Peninsula+Istanbul,+Kemanke%C5%9F+Karamustafa+Pa%C5%9Fa,+Kemanke%C5%9F+Cd.+No:34,+34425+Beyo%C4%9Flu%2F%C4%B0stanbul/@41.0230125,28.9779274,17z";
 
 function oV() {
@@ -22946,11 +22946,11 @@ function oV() {
         })
     })
 }
-const aV = "/Collection/new_ss/assets/curtain-left-new-C9yBPbWK.png",
-    lV = "/Collection/new_ss/assets/curtain-center-new-EwKr26ZU.png",
-    cV = "/Collection/new_ss/assets/curtain-right-new-Dusl3IYi.png",
-    uV = "/Collection/new_ss/assets/candles-BlDM94c8.png",
-    dV = "/Collection/new_ss/assets/flower-vase-B9_turUq.png";
+const aV = "/new_ss/assets/curtain-left-new-C9yBPbWK.png",
+    lV = "/new_ss/assets/curtain-center-new-EwKr26ZU.png",
+    cV = "/new_ss/assets/curtain-right-new-Dusl3IYi.png",
+    uV = "/new_ss/assets/candles-BlDM94c8.png",
+    dV = "/new_ss/assets/flower-vase-B9_turUq.png";
 
 function hV() {
     const {
@@ -23171,9 +23171,9 @@ function hV() {
         })]
     })
 }
-const fV = "/Collection/new_ss/assets/bouquet-BbYUpj3K.png",
-    pV = "/Collection/new_ss/assets/flower-stand-BmJQHDXB.png",
-    mV = "/Collection/new_ss/assets/cypress-trees-Bn8J7j_a.png";
+const fV = "/new_ss/assets/bouquet-BbYUpj3K.png",
+    pV = "/new_ss/assets/flower-stand-BmJQHDXB.png",
+    mV = "/new_ss/assets/cypress-trees-Bn8J7j_a.png";
 
 function gV() {
     const {
@@ -23245,9 +23245,9 @@ function gV() {
         })
     })
 }
-const vV = "/Collection/new_ss/assets/hotel-peninsula-Is4jSbdC.png",
-    yV = "/Collection/new_ss/assets/hotel-marriott-wV0E4Iky.png",
-    wV = "/Collection/new_ss/assets/hotel-novotel-CUyCHsIf.png";
+const vV = "/new_ss/assets/hotel-peninsula-Is4jSbdC.png",
+    yV = "/new_ss/assets/hotel-marriott-wV0E4Iky.png",
+    wV = "/new_ss/assets/hotel-novotel-CUyCHsIf.png";
 
 function xV() {
     const {
@@ -23380,8 +23380,8 @@ function xV() {
         })
     })
 }
-const bV = "/Collection/new_ss/assets/roses-top-left-D0RRxzlV.png",
-    SV = "/Collection/new_ss/assets/roses-bottom-right-C-Wj2fia.png";
+const bV = "/new_ss/assets/roses-top-left-D0RRxzlV.png",
+    SV = "/new_ss/assets/roses-bottom-right-C-Wj2fia.png";
 
 function EV({
     enabled: e
@@ -23449,8 +23449,8 @@ function EV({
         })
     })
 }
-const _V = "/Collection/new_ss/assets/vase-left-DfaX_fU4.png",
-    CV = "/Collection/new_ss/assets/vase-right-BfgTPz8l.png",
+const _V = "/new_ss/assets/vase-left-DfaX_fU4.png",
+    CV = "/new_ss/assets/vase-right-BfgTPz8l.png",
     Hg = Xu("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", {
         variants: {
             variant: {
@@ -31810,7 +31810,7 @@ function M4() {
         }
     })
 }
-const L4 = "/Collection/new_ss/assets/rsvp-confirmation-DYbKwzwP.webm";
+const L4 = "/new_ss/assets/rsvp-confirmation-DYbKwzwP.webm";
 
 function $4({
     attendance: e,
@@ -32514,9 +32514,9 @@ function V4({
         })
     })
 }
-const B4 = "/Collection/new_ss/assets/envelope-video-Dp_L7sB9.mp4",
-    cx = "/Collection/new_ss/assets/envelope-poster-CthGb2ks.jpg",
-    U4 = "/Collection/new_ss/assets/intro-video-new-NNPe0W7X.mp4",
+const B4 = "/new_ss/assets/envelope-video-Dp_L7sB9.mp4",
+    cx = "/new_ss/assets/envelope-poster-CthGb2ks.jpg",
+    U4 = "/new_ss/assets/intro-video-new-NNPe0W7X.mp4",
     z4 = ({
         onEnter: e,
         onStartMusic: t,
@@ -36013,3 +36013,4 @@ const Yz = () => {
         })
     };
 K1(document.getElementById("root")).render(h.jsx(Jz, {}));
+
