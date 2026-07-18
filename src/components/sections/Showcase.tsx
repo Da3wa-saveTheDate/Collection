@@ -513,8 +513,8 @@ export default function Showcase() {
 
         {/* Mobile Layout: Interactive Preview */}
         <div className="lg:hidden mt-8">
-          {/* Mobile Phone Frame (Sticky Top) */}
-          <div className="sticky top-20 z-30 flex justify-center mb-10 h-[60vh] min-h-[450px]">
+          {/* Mobile Phone Frame */}
+          <div className="relative flex justify-center mb-10 h-[60vh] min-h-[450px] z-10">
              <div className="relative h-full aspect-[9/19.5] w-auto rounded-[2.5rem] overflow-hidden bg-brand-dark shadow-2xl border-[6px] border-brand-dark transition-transform duration-500">
                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] min-w-[60px] max-w-[100px] h-[20px] bg-brand-dark rounded-b-2xl z-40"></div>
                

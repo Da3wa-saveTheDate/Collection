@@ -10,7 +10,7 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
           
           {/* Text Content */}
           <div className="flex-1 text-center lg:text-left animate-fade-up">
