@@ -122,6 +122,13 @@ const templates = [
     description: 'A grand and luxurious ballroom wedding invitation.',
     image: '/new_prem8/images/hero.webp'
   },
+  {
+    id: 'new_ss',
+    title: 'Seaside Celebration',
+    category: 'premium-wedding',
+    description: 'An elegant premium wedding invitation featuring beautiful animations.',
+    image: '/new_ss/assets/intro-poster-new-B2unBQtC.jpg'
+  },
 
   // === Wedding Templates (custom image paths) ===
   {
