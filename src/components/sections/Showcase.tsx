@@ -71,7 +71,7 @@ const templates = [
     title: 'New Premium',
     category: 'premium-wedding',
     description: 'A beautiful and elegant premium wedding design.',
-    image: '/new_prem2/images/hero.webp'
+    image: '/new_prem2/images/hero.png'
   },
   {
     id: 'invitation-complete',
