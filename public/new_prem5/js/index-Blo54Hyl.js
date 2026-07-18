@@ -15800,7 +15800,7 @@ function da(e) {
 
 function i2(e) {
     let {
-        basename: t = "/Collection/new_prem5/",
+        basename: t = window.location.pathname.substring(0, window.location.pathname.indexOf('/new_prem5') + 10),
         children: n = null,
         location: r,
         navigationType: s = Ur.Pop,

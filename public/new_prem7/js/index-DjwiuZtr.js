@@ -15958,7 +15958,7 @@ function ua(e) {
 
 function XD(e) {
     let {
-        basename: t = "/Collection/new_prem7/",
+        basename: t = window.location.pathname.substring(0, window.location.pathname.indexOf('/new_prem7') + 10),
         children: n = null,
         location: r,
         navigationType: s = Kr.Pop,

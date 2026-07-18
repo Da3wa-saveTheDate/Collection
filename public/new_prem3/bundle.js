@@ -15969,7 +15969,7 @@ function Qo(e) {
 }
 function bD(e) {
   let {
-    basename: t = "/Collection/new_prem3/",
+    basename: t = window.location.pathname.substring(0, window.location.pathname.indexOf('/new_prem3') + 10),
     children: n = null,
     location: r,
     navigationType: s = Ir.Pop,

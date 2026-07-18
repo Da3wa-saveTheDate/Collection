@@ -74,13 +74,6 @@ const templates = [
     image: '/new_prem2/images/hero.jpg'
   },
   {
-    id: 'invitation-complete',
-    title: 'Classic Wedding',
-    category: 'wedding',
-    description: 'A beautifully structured and classic wedding invitation layout.',
-    image: '/invitation-complete/images/hero.webp'
-  },
-  {
     id: 'new_prem3',
     title: 'Majestic Template',
     category: 'premium-wedding',
