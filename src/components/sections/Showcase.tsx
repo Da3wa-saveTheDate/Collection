@@ -134,7 +134,7 @@ const templates = [
   {
     id: 'elisa-jhon-wedding',
     title: 'Vintage Fairytale',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A whimsical fairy-tale wedding with chandeliers, cupids, and enchanting vintage décor.',
     image: '/elisa-jhon-wedding/images/hero.webp'
   },
