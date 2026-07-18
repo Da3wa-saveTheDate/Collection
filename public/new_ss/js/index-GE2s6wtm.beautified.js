@@ -35994,13 +35994,13 @@ const Yz = () => {
                     children: [h.jsx(Uj, {}), h.jsx(xO, {}), h.jsx(DD, {
                         children: h.jsxs(PD, {
                             children: [h.jsx(ca, {
-                                path: "/Collection/new_ss/",
+                                path: "/",
                                 element: h.jsx(K4, {})
                             }), h.jsx(ca, {
-                                path: "/Collection/new_ss/admin",
+                                path: "/admin",
                                 element: h.jsx(G4, {})
                             }), h.jsx(ca, {
-                                path: "/Collection/new_ss/admin/dashboard",
+                                path: "/admin/dashboard",
                                 element: h.jsx(Qz, {})
                             }), h.jsx(ca, {
                                 path: "*",
