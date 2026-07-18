@@ -69,7 +69,7 @@ const templates = [
   {
     id: 'new_prem2',
     title: 'New Premium',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A beautiful and elegant premium wedding design.',
     image: '/new_prem2/images/hero.webp'
   },
@@ -83,42 +83,42 @@ const templates = [
   {
     id: 'new_prem3',
     title: 'Majestic Template',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A majestic and elegant design for an unforgettable celebration.',
     image: '/new_prem3/images/hero.webp'
   },
   {
     id: 'new_prem4',
     title: 'Classic Romance',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A charming and personal wedding template.',
     image: '/new_prem4/images/hero.webp'
   },
   {
     id: 'new_prem5',
     title: 'Elegant Moments',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A beautiful save the date template with elegant details.',
     image: '/new_prem5/images/hero.webp'
   },
   {
     id: 'new_prem6',
     title: 'Maldives Demo',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A breathtaking tropical and beach-themed wedding design.',
     image: '/new_prem6/images/hero.webp'
   },
   {
     id: 'new_prem7',
     title: 'Bilingual Elegance',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A wonderful bilingual wedding invitation layout.',
     image: '/new_prem7/images/hero.webp'
   },
   {
     id: 'new_prem8',
     title: 'The Ballroom',
-    category: 'wedding',
+    category: 'premium-wedding',
     description: 'A grand and luxurious ballroom wedding invitation.',
     image: '/new_prem8/images/hero.webp'
   },
@@ -280,6 +280,7 @@ const templates = [
 
 const categories = [
   { key: 'all', label: 'All Designs' },
+  { key: 'premium-wedding', label: 'Premium Wedding' },
   { key: 'wedding', label: 'Weddings' },
   { key: 'engagement', label: 'Engagements' },
   { key: 'invitation fan', label: 'Invitation Fan' },
