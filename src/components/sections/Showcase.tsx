@@ -293,16 +293,23 @@ export default function Showcase() {
   const [mobileLimit, setMobileLimit] = useState(MOBILE_PAGE_SIZE);
   const phoneContainerRef = useRef<HTMLDivElement>(null);
   const [phoneScale, setPhoneScale] = useState(1);
+  const mobilePhoneContainerRef = useRef<HTMLDivElement>(null);
+  const [mobilePhoneScale, setMobilePhoneScale] = useState(1);
 
   useEffect(() => {
     const el = phoneContainerRef.current;
-    if (!el) return;
+    const mobileEl = mobilePhoneContainerRef.current;
+    
     const observer = new ResizeObserver((entries) => {
       for (let entry of entries) {
-        setPhoneScale(entry.contentRect.width / 390);
+        if (entry.target === el) setPhoneScale(entry.contentRect.width / 390);
+        if (entry.target === mobileEl) setMobilePhoneScale(entry.contentRect.width / 390);
       }
     });
-    observer.observe(el);
+    
+    if (el) observer.observe(el);
+    if (mobileEl) observer.observe(mobileEl);
+    
     return () => observer.disconnect();
   }, []);
   
@@ -518,7 +525,7 @@ export default function Showcase() {
              <div className="relative h-full aspect-[9/19.5] w-auto rounded-[2.5rem] overflow-hidden bg-brand-dark shadow-2xl border-[6px] border-brand-dark transition-transform duration-500">
                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] min-w-[60px] max-w-[100px] h-[20px] bg-brand-dark rounded-b-2xl z-40"></div>
                
-               <div className="relative w-full h-full bg-brand-light rounded-[2rem] overflow-hidden">
+               <div ref={mobilePhoneContainerRef} className="relative w-full h-full bg-brand-light rounded-[2rem] overflow-hidden">
                  {mobileFiltered.map(template => (
                    <div 
                      key={`mobile-preview-${template.id}`}
@@ -526,20 +533,44 @@ export default function Showcase() {
                        activeTemplate?.id === template.id ? 'opacity-100 z-10' : 'opacity-0 z-0'
                      }`}
                    >
-                     {template.image && loadedImages.has(template.id) ? (
-                       <img 
-                         src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                         alt={template.title} 
-                         className="w-full h-full object-cover"
-                       />
-                     ) : (
-                       <div className="w-full h-full flex items-center justify-center bg-brand-light">
-                         <span className="font-serif text-2xl text-brand-dark/20">{template.title}</span>
+                     {/* Static Image (Fades out when active) */}
+                     <div className={`absolute inset-0 transition-opacity duration-700 ${activeTemplate?.id === template.id ? 'opacity-0' : 'opacity-100'}`}>
+                       {template.image && loadedImages.has(template.id) ? (
+                         <img 
+                           src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                           alt={template.title} 
+                           className="w-full h-full object-cover"
+                         />
+                       ) : (
+                         <div className="w-full h-full flex items-center justify-center bg-brand-light">
+                           <span className="font-serif text-2xl text-brand-dark/20">{template.title}</span>
+                         </div>
+                       )}
+                     </div>
+
+                     {/* Live iframe */}
+                     {activeTemplate?.id === template.id && (
+                       <div className="absolute inset-0 transition-opacity duration-700 delay-150 opacity-100 bg-brand-light">
+                          <div 
+                            className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
+                            style={{ transform: `scale(${mobilePhoneScale})` }}
+                          >
+                            <iframe 
+                              src={`${import.meta.env.BASE_URL}${template.id}/`}
+                              className="w-full h-full border-0"
+                              style={{
+                                scrollbarWidth: 'none',
+                                msOverflowStyle: 'none'
+                              }}
+                              title={`${template.title} live preview`}
+                              loading="lazy"
+                            />
+                          </div>
                        </div>
                      )}
                      
                      {/* Overlay Action */}
-                     <div className="absolute inset-0 z-50 bg-brand-dark/40 opacity-0 active:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                     <div className="absolute inset-0 z-50 bg-brand-dark/20 opacity-0 active:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                        <a 
                          href={`${import.meta.env.BASE_URL}${template.id}/`}
                          target="_blank"
