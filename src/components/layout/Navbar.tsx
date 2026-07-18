@@ -25,8 +25,8 @@ export default function Navbar() {
         }`}
       >
         {/* Logo */}
-        <a href="#" className="flex items-center">
-          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Ajwaa" className="h-12 w-auto object-contain" />
+        <a href="#" className="flex items-center -ml-2">
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Ajwaa" className="h-16 md:h-20 w-auto object-contain mix-blend-multiply contrast-105" />
         </a>
 
         {/* Desktop Nav */}
