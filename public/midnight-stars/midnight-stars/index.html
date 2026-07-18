@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John & Jane · Engagement</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#05070f;font-family:'Cormorant Garamond',serif;color:#e6e9f5;overflow-x:hidden}
+:root{
+  --night:#05070f;--night-2:#0a0e27;--night-3:#131c3f;
+  --star:#dfe6ff;--star-d:rgba(223,230,255,.55);--star-f:rgba(223,230,255,.28);
+  --champ:#e9cf9f;--champ-d:#c9a86a;
+  --peri:#aab8e8;
+  --glass:rgba(170,184,232,.06);--glass-b:rgba(170,184,232,.18);
+}
+/* == ENTRANCE - the constellation == */
+#entrance{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 30%,#101736 0%,#05070f 65%);overflow:hidden;transition:opacity 1.6s ease}
+#entrance.done{opacity:0;pointer-events:none}
+#starCanvas{position:absolute;inset:0;width:100%;height:100%}
+#ent-stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.ent-top{font-family:'Cinzel',serif;font-weight:300;font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(233,207,159,.0);margin-bottom:22px;transition:color 2.5s ease}
+.ent-top.show{color:rgba(233,207,159,.6)}
+#ent-names{text-align:center;opacity:0;transform:scale(.9) translateY(16px);transition:opacity 2.8s ease,transform 2.8s cubic-bezier(.2,.8,.3,1)}
+#ent-names.show{opacity:1;transform:scale(1) translateY(0)}
+.ent-name{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(70px,15vw,120px);color:#f4f6ff;display:block;line-height:1;text-shadow:0 0 44px rgba(190,205,255,.55),0 0 100px rgba(170,184,232,.25)}
+.ent-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,3.2vw,26px);color:var(--champ);display:block;letter-spacing:10px;margin:8px 0;animation:starB 4s ease-in-out infinite}
+@keyframes starB{0%,100%{opacity:.7}50%{opacity:1;text-shadow:0 0 44px rgba(233,207,159,.95)}}
+.ent-orn{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:24px}
+.eo-l{width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(223,230,255,.45),transparent)}
+.eo-g{width:5px;height:5px;background:var(--champ);transform:rotate(45deg);box-shadow:0 0 9px rgba(233,207,159,.8)}
+.eo-s{width:3px;height:3px;background:rgba(223,230,255,.4);transform:rotate(45deg)}
+.ent-sub{margin-top:26px;font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:rgba(223,230,255,.0);transition:color 2.5s ease 1s}
+.ent-sub.show{color:rgba(223,230,255,.4)}
+/* == INVITATION == */
+#invitation{opacity:0;transition:opacity 1.4s ease}
+#invitation.visible{opacity:1}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center;background:radial-gradient(ellipse at 50% 28%,#111a3e 0%,#05070f 62%)}
+#heroStars{position:absolute;inset:0;width:100%;height:100%}
+.moon{position:absolute;top:8%;right:9%;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#fdfbf2,#e8ddc0 62%,#cbbd95);box-shadow:0 0 50px rgba(240,230,200,.35),0 0 120px rgba(240,230,200,.16);opacity:.95}
+.moon::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset -12px -8px 0 rgba(180,168,132,.4)}
+.h-body{position:relative;z-index:3;padding:0 24px;display:flex;flex-direction:column;align-items:center}
+.h-ey{display:flex;align-items:center;gap:16px;margin-bottom:24px;opacity:0;animation:fadeUp .9s ease forwards .3s}
+.h-ey-line{width:48px;height:1px}
+.h-ey-line.l{background:linear-gradient(to right,transparent,rgba(233,207,159,.6))}
+.h-ey-line.r{background:linear-gradient(to left,transparent,rgba(233,207,159,.6))}
+.h-ey-txt{font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:rgba(233,207,159,.75)}
+.h-names{line-height:1;opacity:0;animation:fadeUp 1.2s ease forwards .6s}
+.h-name{font-family:'Great Vibes',cursive;font-size:clamp(76px,16vw,128px);color:#f4f6ff;display:block;text-shadow:0 0 55px rgba(190,205,255,.45),0 4px 28px rgba(0,0,0,.6)}
+.h-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(18px,3.4vw,28px);color:var(--champ);display:block;letter-spacing:9px;margin:6px 0;animation:starB 4s ease-in-out infinite}
+.h-orn{display:flex;align-items:center;gap:10px;margin:22px 0;opacity:0;animation:fadeUp .9s ease forwards 1s}
+.h-orn-l{width:52px;height:1px;background:linear-gradient(to right,transparent,rgba(223,230,255,.45),transparent)}
+.h-orn-g{width:5px;height:5px;background:var(--champ);transform:rotate(45deg);box-shadow:0 0 8px rgba(233,207,159,.8)}
+.h-orn-s{width:3px;height:3px;background:rgba(223,230,255,.4);transform:rotate(45deg)}
+.h-pill{display:inline-flex;align-items:center;gap:12px;padding:12px 26px;background:rgba(10,14,39,.6);border:1px solid rgba(170,184,232,.3);border-radius:60px;backdrop-filter:blur(10px);font-family:'Cinzel',serif;font-weight:300;font-size:10px;letter-spacing:3.5px;color:rgba(223,230,255,.85);box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;animation:fadeUp .9s ease forwards 1.2s}
+.h-dot{color:var(--champ);opacity:.6;font-size:9px}
+.h-tagline{font-style:italic;font-size:17px;color:rgba(223,230,255,.45);margin-top:18px;opacity:0;animation:fadeUp .9s ease forwards 1.5s}
+.h-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;z-index:3;opacity:0;animation:fadeUp .9s ease forwards 2.1s}
+.h-scroll-txt{font-family:'Cinzel',serif;font-weight:300;font-size:8px;letter-spacing:5px;text-transform:uppercase;color:rgba(223,230,255,.35)}
+.h-scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,rgba(233,207,159,.6),transparent);animation:barD 2.3s ease-in-out infinite;transform-origin:top}
+@keyframes barD{0%{transform:scaleY(0);opacity:0}40%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+.band{padding:76px 28px;background:var(--night)}
+.band+.band{border-top:1px solid rgba(170,184,232,.1)}
+.band:nth-child(odd){background:linear-gradient(170deg,#05070f 0%,#0a0e27 65%,#0d1330 100%)}
+.band:nth-child(even){background:linear-gradient(170deg,#0a0e27 0%,#05070f 60%,#080c1e 100%)}
+.inner{max-width:700px;margin:0 auto}
+.eyebrow{font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--champ);text-align:center;display:block;margin-bottom:11px}
+.sec-h{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(27px,5.5vw,40px);color:var(--star);text-align:center;line-height:1.2;margin:0}
+.orn{display:flex;align-items:center;gap:12px;max-width:280px;margin:22px auto}
+.orn-l{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--peri),transparent)}
+.orn-l.r{background:linear-gradient(to left,transparent,var(--peri),transparent)}
+.orn-g{width:6px;height:6px;background:var(--champ);transform:rotate(45deg);box-shadow:0 0 8px rgba(233,207,159,.6)}
+.orn-s{width:3px;height:3px;background:rgba(170,184,232,.5);transform:rotate(45deg)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+/* story - constellation path */
+.story-wrap{max-width:640px;margin:44px auto 0;position:relative}
+.story-wrap::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:0;transform:translateX(-50%);border-left:1px dashed rgba(170,184,232,.4)}
+.story-row{display:flex;flex-direction:column;align-items:center;margin:52px 0;position:relative}
+.story-node{position:relative;z-index:2;margin-bottom:18px}
+.sn-circle{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 38% 30%,#1a2450,#05070f 82%);border:1.5px solid rgba(223,230,255,.5);display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 0 6px rgba(170,184,232,.07),0 0 34px rgba(170,184,232,.3);animation:snPulse 3.4s ease-in-out infinite}
+@keyframes snPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 6px rgba(170,184,232,.07),0 0 24px rgba(170,184,232,.22)}50%{transform:scale(1.07);box-shadow:0 0 0 6px rgba(170,184,232,.1),0 0 40px rgba(170,184,232,.4)}}
+.sn-icon{font-size:19px;line-height:1}
+.sn-num{font-family:'Cinzel',serif;font-weight:300;font-size:7.5px;letter-spacing:2px;color:var(--champ);margin-top:2px}
+.sc-in{background:var(--glass);border:1px solid var(--glass-b);border-radius:16px;padding:28px 34px;width:100%;position:relative;box-shadow:0 16px 46px rgba(0,0,0,.4);backdrop-filter:blur(8px);transition:transform .3s,border-color .3s;text-align:center}
+.sc-in::before{content:"";position:absolute;top:0;left:24px;right:24px;height:2px;background:linear-gradient(to right,transparent,var(--peri),var(--champ),var(--peri),transparent)}
+.sc-in:hover{transform:translateY(-5px);border-color:rgba(223,230,255,.4)}
+.sc-tag{font-family:'Cinzel',serif;font-weight:300;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--champ);display:block;margin-bottom:8px}
+.sc-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:21px;color:var(--star);display:block;margin-bottom:8px}
+.sc-body{font-size:15px;color:var(--star-d);line-height:1.8;font-style:italic;margin:0}
+.mystery-card .sc-in{background:linear-gradient(135deg,rgba(233,207,159,.12),rgba(170,184,232,.06));border-color:rgba(233,207,159,.4);cursor:pointer;overflow:hidden}
+.mystery-pulse{position:absolute;inset:0;border-radius:16px;animation:mystPulse 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes mystPulse{0%,100%{box-shadow:inset 0 0 0 0 rgba(233,207,159,.22)}50%{box-shadow:inset 0 0 0 5px rgba(233,207,159,.12)}}
+.mystery-q{font-family:'Great Vibes',cursive;font-size:34px;color:var(--champ);display:block;line-height:1.15;margin-bottom:6px}
+.mystery-sub{font-family:'Cinzel',serif;font-weight:300;font-size:8px;letter-spacing:5px;text-transform:uppercase;color:var(--star-f);display:block}
+.mystery-hint{display:inline-block;margin-top:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--champ);border:1px solid rgba(233,207,159,.5);border-radius:20px;padding:7px 18px;animation:bounce 1.6s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+/* countdown */
+.cd-box{max-width:560px;margin:38px auto 0;background:rgba(10,14,39,.55);border:1px solid rgba(170,184,232,.3);border-radius:16px;padding:42px 18px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(10px)}
+.cd-box::before{content:"\2726";position:absolute;top:-11px;left:50%;transform:translateX(-50%);color:var(--champ);font-size:16px;text-shadow:0 0 12px rgba(233,207,159,.9)}
+.cd-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 8px;max-width:300px;margin:0 auto}
+@media(min-width:520px){.cd-grid{grid-template-columns:repeat(4,1fr);max-width:100%}}
+.cd-unit{text-align:center}
+.cd-n{font-family:'Cinzel',serif;font-weight:300;font-size:clamp(40px,10vw,58px);line-height:1;color:var(--star);display:block;letter-spacing:2px;text-shadow:0 0 28px rgba(170,184,232,.45)}
+.cd-l{font-family:'Cinzel',serif;font-weight:300;font-size:8px;letter-spacing:5px;color:var(--star-f);display:block;margin-top:7px;text-transform:uppercase}
+/* details */
+.det-grid{max-width:600px;margin:38px auto 0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:480px){.det-grid{grid-template-columns:1fr}}
+.det-card{background:var(--glass);border:1px solid var(--glass-b);border-radius:16px;padding:26px 16px;text-align:center;position:relative;transition:transform .3s,border-color .3s;backdrop-filter:blur(8px)}
+.det-card:hover{transform:translateY(-4px);border-color:rgba(223,230,255,.45)}
+.det-card::before{content:"";position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(to right,transparent,var(--peri),transparent)}
+.det-icon{display:block;margin-bottom:10px;color:var(--champ)}
+.det-tag{font-family:'Cinzel',serif;font-weight:300;font-size:7.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--peri);display:block;margin-bottom:7px}
+.det-main{font-family:'Cinzel',serif;font-size:19px;color:var(--star);display:block;margin-bottom:3px}
+.det-sub{font-size:14px;color:var(--star-f);font-style:italic;display:block}
+/* location */
+.loc-box{max-width:500px;margin:38px auto 0;background:rgba(10,14,39,.55);border:1px solid rgba(233,207,159,.35);border-radius:16px;padding:40px 24px;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(10px)}
+.loc-box::before{content:"";position:absolute;inset:8px;border:1px solid rgba(170,184,232,.14);border-radius:10px;pointer-events:none}
+.loc-icon{font-size:32px;display:block;margin-bottom:12px}
+.loc-name{font-family:'Great Vibes',cursive;font-size:42px;color:var(--champ);display:block;margin-bottom:6px;text-shadow:0 0 28px rgba(233,207,159,.4)}
+.loc-addr{font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--star-f);display:block;line-height:2.2;margin-bottom:20px}
+.loc-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(233,207,159,.5);border-radius:30px;font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--champ);background:rgba(233,207,159,.08);text-decoration:none;transition:all .3s}
+.loc-btn:hover{background:rgba(233,207,159,.16);box-shadow:0 6px 22px rgba(233,207,159,.18)}
+/* wishes */
+.wish-inner{max-width:560px;margin:38px auto 0}
+.wish-form{display:flex;flex-direction:column;gap:13px;margin-bottom:34px}
+.wish-inp{padding:14px 18px;border:1px solid rgba(170,184,232,.28);border-radius:10px;background:rgba(10,14,39,.55);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--star);outline:none;transition:border-color .3s;width:100%}
+.wish-inp::placeholder{color:rgba(223,230,255,.3)}
+.wish-inp:focus{border-color:var(--peri)}
+textarea.wish-inp{resize:vertical;min-height:90px}
+.wish-send{align-self:center;padding:14px 42px;background:linear-gradient(135deg,var(--champ),var(--champ-d));border:none;border-radius:30px;font-family:'Cinzel',serif;font-weight:400;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#0a0e27;cursor:pointer;box-shadow:0 6px 22px rgba(233,207,159,.28);transition:transform .25s,box-shadow .25s}
+.wish-send:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(233,207,159,.4)}
+.wish-empty{text-align:center;padding:46px 24px;border:1.5px dashed rgba(170,184,232,.3);border-radius:14px;background:rgba(170,184,232,.04)}
+.wish-empty-icon{font-size:34px;display:block;margin-bottom:12px;opacity:.6}
+.wish-empty-txt{font-style:italic;font-size:18px;color:var(--star-f);line-height:1.85}
+.wish-feed{display:none;flex-direction:column;gap:14px;max-height:320px;overflow-y:auto;padding-right:4px}
+.wish-card{background:var(--glass);border:1px solid var(--glass-b);border-radius:12px;padding:20px 22px;position:relative;flex-shrink:0}
+.wish-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--peri),var(--champ));border-radius:3px 0 0 3px}
+.wish-txt{display:block;font-size:16px;font-style:italic;color:var(--star);line-height:1.7;margin:0 0 8px;word-break:break-word;overflow-wrap:anywhere}
+.wish-from{display:block;font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:4px;color:var(--champ);text-transform:uppercase}
+/* footer */
+footer{background:#03040a;padding:64px 28px 52px;text-align:center}
+.ft-names{font-family:'Great Vibes',cursive;font-size:clamp(48px,10vw,72px);color:var(--star);display:block;margin-bottom:14px;line-height:1;text-shadow:0 0 34px rgba(170,184,232,.4)}
+.ft-date{font-family:'Cinzel',serif;font-weight:300;font-size:10px;letter-spacing:4px;color:rgba(223,230,255,.3);margin-bottom:26px;display:block;text-transform:uppercase}
+.ft-line{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--peri),transparent);margin:0 auto 22px}
+.ft-love{font-style:italic;font-size:15px;color:rgba(223,230,255,.25)}
+/* yes overlay */
+#yesOverlay{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;flex-direction:column;background:rgba(3,4,10,.86);backdrop-filter:blur(6px)}
+#yesOverlay.active{display:flex}
+#yesCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#yesRing{position:relative;z-index:2;width:120px;height:120px;border-radius:50%;border:1.5px solid rgba(223,230,255,.6);display:flex;align-items:center;justify-content:center;font-size:52px;transform:scale(0) rotate(-12deg);transition:transform .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 70px rgba(170,184,232,.4);background:radial-gradient(circle at 36% 30%,#1a2450,#05070f 85%)}
+#yesRing.show{transform:scale(1) rotate(0)}
+#yesMsg{position:relative;z-index:2;font-family:'Great Vibes',cursive;font-size:clamp(38px,9vw,64px);color:var(--star);margin-top:22px;text-align:center;text-shadow:0 0 40px rgba(190,205,255,.75),0 2px 20px rgba(0,0,0,.8);opacity:0;transform:translateY(14px);transition:opacity .5s ease .35s,transform .5s ease .35s}
+#yesMsg.show{opacity:1;transform:translateY(0)}
+/* wish shooting star overlay */
+#wishStar{position:fixed;inset:0;z-index:90000;pointer-events:none;display:none}
+#musicBtn{position:fixed;bottom:20px;right:20px;z-index:9000;width:46px;height:46px;border-radius:50%;background:rgba(10,14,39,.85);border:1px solid rgba(170,184,232,.5);color:var(--star);font-size:18px;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:transform .25s}
+#musicBtn:hover{transform:scale(1.1)}
+#musicBtn.playing{animation:spinDisc 4s linear infinite}
+@keyframes spinDisc{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<!-- ==== ENTRANCE - constellation ==== -->
+<div id="entrance">
+  <canvas id="starCanvas"></canvas>
+  <div id="ent-stage">
+    <div class="ent-top" id="entEy">Engagement Celebration</div>
+    <div id="ent-names">
+      <span class="ent-name">John</span>
+      <span class="ent-amp">&#10022; &amp; &#10022;</span>
+      <span class="ent-name">Jane</span>
+      <div class="ent-orn">
+        <div class="eo-l"></div><div class="eo-s"></div>
+        <div class="eo-g"></div><div class="eo-s"></div>
+        <div class="eo-l"></div>
+      </div>
+    </div>
+    <div class="ent-sub" id="entSub">Written in the stars</div>
+  </div>
+</div>
+
+<!-- ==== INVITATION ==== -->
+<div id="invitation">
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="heroStars"></canvas>
+    <div class="moon"></div>
+    <div class="h-body">
+      <div class="h-ey"><span class="h-ey-line l"></span><span class="h-ey-txt">Engagement Celebration</span><span class="h-ey-line r"></span></div>
+      <div class="h-names"><span class="h-name">John</span><span class="h-amp">&#10022; &amp; &#10022;</span><span class="h-name">Jane</span></div>
+      <div class="h-orn"><span class="h-orn-l"></span><span class="h-orn-s"></span><span class="h-orn-g"></span><span class="h-orn-s"></span><span class="h-orn-l"></span></div>
+      <div class="h-pill"><span>Saturday</span><span class="h-dot">&#10022;</span><span>15th August</span><span class="h-dot">&#10022;</span><span>Grand Hotel</span></div>
+      <p class="h-tagline">Some love stories are written in the stars</p>
+    </div>
+    <div class="h-scroll"><span class="h-scroll-txt">Scroll</span><span class="h-scroll-bar"></span></div>
+  </section>
+
+  <!-- INTRO -->
+  <div class="band">
+    <div class="inner reveal" style="text-align:center">
+      <span class="eyebrow">With All Our Love</span>
+      <h2 class="sec-h">A moment worth celebrating</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <p style="font-style:italic;font-size:19px;color:var(--star-d);text-align:center;line-height:2.1;max-width:500px;margin:0 auto">We are overjoyed to invite you to share in one of the most precious moments of our lives. Your presence, warmth, and blessings will make this day truly unforgettable.</p>
+      <img src="couple.png" alt="Couple" style="max-width: 100%; border-radius: 12px; margin-top: 36px; box-shadow: 0 16px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); display: block; margin-left: auto; margin-right: auto;">
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="band">
+    <div class="inner">
+      <span class="eyebrow">Our Journey</span>
+      <h2 class="sec-h">How it all began</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <div class="story-wrap">
+
+        <div class="story-row reveal">
+          <div class="story-node"><div class="sn-circle"><span class="sn-icon">&#x2728;</span><span class="sn-num">01</span></div></div>
+          <div class="sc-in">
+            <span class="sc-tag">The Beginning</span>
+            <span class="sc-title">First Meeting</span>
+            <p class="sc-body">The moment two worlds collided and nothing was ever the same again.</p>
+          </div>
+        </div>
+
+        <div class="story-row reveal">
+          <div class="story-node"><div class="sn-circle"><span class="sn-icon">&#x1F31F;</span><span class="sn-num">02</span></div></div>
+          <div class="sc-in">
+            <span class="sc-tag">Growing Together</span>
+            <span class="sc-title">Falling in Love</span>
+            <p class="sc-body">Every shared laugh, every quiet moment brought us closer to forever.</p>
+          </div>
+        </div>
+
+        <div class="story-row reveal">
+          <div class="story-node"><div class="sn-circle"><span class="sn-icon">&#x1F48D;</span><span class="sn-num">03</span></div></div>
+          <div class="sc-in">
+            <span class="sc-tag">The Question</span>
+            <span class="sc-title">He Asked</span>
+            <p class="sc-body">The world faded, the moment stood still, and with a hopeful heart&hellip; he asked her to be his forever.</p>
+          </div>
+        </div>
+
+        <div class="story-row reveal">
+          <div class="story-node"><div class="sn-circle" style="animation-delay:.6s"><span class="sn-icon">&#x1F4AB;</span><span class="sn-num">04</span></div></div>
+          <div class="mystery-card" id="mysteryCard" style="width:100%">
+            <div class="sc-in">
+              <div class="mystery-pulse"></div>
+              <span class="sc-tag">And she said...</span>
+              <span class="mystery-q">What do you think she said?</span>
+              <span class="mystery-sub">Tap the card to reveal the answer</span>
+              <span class="mystery-hint">Tap here</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="band reveal">
+    <div class="inner" style="text-align:center">
+      <span class="eyebrow">The Big Day</span>
+      <h2 class="sec-h">Counting every moment</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <div class="cd-box">
+        <div class="cd-grid">
+          <div class="cd-unit"><span class="cd-n" id="cd-d">--</span><span class="cd-l">Days</span></div>
+          <div class="cd-unit"><span class="cd-n" id="cd-h">--</span><span class="cd-l">Hours</span></div>
+          <div class="cd-unit"><span class="cd-n" id="cd-m">--</span><span class="cd-l">Minutes</span></div>
+          <div class="cd-unit"><span class="cd-n" id="cd-s">--</span><span class="cd-l">Seconds</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="band reveal">
+    <div class="inner" style="text-align:center">
+      <span class="eyebrow">Event Details</span>
+      <h2 class="sec-h">Save the date</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <div class="det-grid">
+        <div class="det-card">
+          <span class="det-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="3"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+          <span class="det-tag">Date</span>
+          <span class="det-main">15 August</span>
+          <span class="det-sub">Saturday</span>
+        </div>
+        <div class="det-card">
+          <span class="det-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><polyline points="12,6 12,12 16,14"></polyline></svg></span>
+          <span class="det-tag">Time</span>
+          <span class="det-main">7:00 PM</span>
+          <span class="det-sub">Under the evening stars</span>
+        </div>
+        <div class="det-card">
+          <span class="det-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="14" r="4"></circle><path d="M12 2 L15 7 L9 7 Z"></path></svg></span>
+          <span class="det-tag">Occasion</span>
+          <span class="det-main">Engagement</span>
+          <span class="det-sub">John &amp; Jane</span>
+        </div>
+        <div class="det-card">
+          <span class="det-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 11 22 11 16 15 18 22 12 17 6 22 8 15 2 11 9 11"></polygon></svg></span>
+          <span class="det-tag">Dress Code</span>
+          <span class="det-main">Evening Chic</span>
+          <span class="det-sub">Shine like the stars</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="band reveal">
+    <div class="inner" style="text-align:center">
+      <span class="eyebrow">Celebration Venue</span>
+      <h2 class="sec-h">Where the magic happens</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <div class="loc-box">
+        <span class="loc-icon">&#x1F4CD;</span>
+        <span class="loc-name">Grand Hotel</span>
+        <span class="loc-addr">Saturday &middot; 15th August 2026</span>
+        <a class="loc-btn" href="https://maps.app.goo.gl/eA9VdLHXh6JJ26aU9" target="_blank">&#x1F5FA; &nbsp;Open in Maps</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHES -->
+  <div class="band reveal">
+    <div class="inner" style="text-align:center">
+      <span class="eyebrow">Blessings &amp; Wishes</span>
+      <h2 class="sec-h">Make a wish upon a star</h2>
+      <div class="orn"><div class="orn-l"></div><div class="orn-s"></div><div class="orn-g"></div><div class="orn-s"></div><div class="orn-l r"></div></div>
+      <div class="wish-inner">
+        <div class="wish-form">
+          <input type="text" class="wish-inp wish-name" placeholder="Your name"/>
+          <textarea class="wish-inp wish-message" placeholder="Write your blessing..."></textarea>
+          <button class="wish-send">SEND &#x1F31F;</button>
+        </div>
+        <div class="wish-empty" id="wishEmpty">
+          <span class="wish-empty-icon">&#x1F4AC;</span>
+          <p class="wish-empty-txt">Be the first to leave something we'll remember &#x1F440;<br>for John &amp; Jane on their special day</p>
+        </div>
+        <div class="wish-feed" id="wishFeed"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /invitation -->
+
+<footer id="inv-footer" style="display:none">
+  <span class="ft-names">John &amp; Jane</span>
+  <span class="ft-date">15th August 2026 &middot; Grand Hotel &middot; Engagement Celebration</span>
+  <div class="ft-line"></div>
+  <p class="ft-love">&#x2728; Celebrate with us!</p>
+</footer>
+
+<!-- YES OVERLAY -->
+<div id="yesOverlay">
+  <canvas id="yesCanvas"></canvas>
+  <div id="yesRing">&#x1F48D;</div>
+  <div id="yesMsg">She Said Yes!</div>
+</div>
+
+<!-- wish shooting star -->
+<canvas id="wishStar"></canvas>
+
+<!-- MUSIC TOGGLE -->
+<button id="musicBtn" aria-label="Toggle music">&#9834;</button>
+
+<script>
+/* == STARFIELD HELPERS == */
+function makeStars(n,W,H){
+  return Array.from({length:n},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    r:.4+Math.random()*1.6,tw:Math.random()*Math.PI*2,
+    ts:.008+Math.random()*.025,a:.3+Math.random()*.7
+  }));
+}
+function drawStars(x,stars,ga){
+  stars.forEach(s=>{
+    s.tw+=s.ts;
+    const a=s.a*(.55+.45*Math.sin(s.tw))*ga;
+    x.save();x.globalAlpha=a;
+    x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);
+    x.fillStyle='#e8edff';x.shadowBlur=s.r*4;x.shadowColor='rgba(200,212,255,.9)';
+    x.fill();x.restore();
+  });
+}
+function makeShooter(W,H){
+  const x0=W*(0.15+Math.random()*0.6), y0=H*(0.05+Math.random()*0.25);
+  return {x:x0,y:y0,vx:7+Math.random()*5,vy:3+Math.random()*2.5,life:1,trail:[]};
+}
+function drawShooter(x,sh){
+  sh.trail.push({x:sh.x,y:sh.y});
+  if(sh.trail.length>22)sh.trail.shift();
+  sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=.014;
+  sh.trail.forEach((t,i)=>{
+    x.save();x.globalAlpha=(i/sh.trail.length)*.8*Math.max(sh.life,0);
+    x.beginPath();x.arc(t.x,t.y,1.4,0,Math.PI*2);
+    x.fillStyle='#fff';x.shadowBlur=8;x.shadowColor='rgba(233,207,159,.9)';x.fill();x.restore();
+  });
+  x.save();x.globalAlpha=Math.max(sh.life,0);
+  x.beginPath();x.arc(sh.x,sh.y,2.4,0,Math.PI*2);
+  x.fillStyle='#fff8e8';x.shadowBlur=16;x.shadowColor='rgba(233,207,159,1)';x.fill();x.restore();
+}
+
+/* == ENTRANCE - constellation == */
+document.body.style.overflowY='hidden';
+(function(){
+  const c=document.getElementById('starCanvas'),x=c.getContext('2d');
+  let W,H;const rs=()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight};rs();
+  window.addEventListener('resize',rs);
+  const stars=makeStars(180,W,H);
+  /* constellation points around the names */
+  const pts=[
+    [-.30,-.16],[-.16,-.05],[-.04,-.14],[.08,-.02],[.22,-.12],[.32,0],[.18,.1],[.02,.04],[-.14,.14],[-.3,.06]
+  ].map(p=>({x:W/2+p[0]*W,y:H/2+p[1]*H}));
+  let startTs=null,shooter=null,done=false;
+  const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+  function loop(ts){
+    if(!startTs)startTs=ts;
+    if(done)return;
+    const el=(ts-startTs)/1000;
+    x.clearRect(0,0,W,H);
+    drawStars(x,stars,cl(el/1.2,0,1));
+    if(el>1.1&&el<2.6){
+      if(!shooter)shooter=makeShooter(W,H);
+      drawShooter(x,shooter);
+    }
+    /* constellation reveals */
+    const cp=cl((el-1.8)/1.8,0,1);
+    if(cp>0){
+      const n=Math.floor(cp*pts.length);
+      x.save();x.strokeStyle='rgba(170,184,232,.5)';x.lineWidth=.8;
+      x.beginPath();
+      for(let i=0;i<n;i++){ i?x.lineTo(pts[i].x,pts[i].y):x.moveTo(pts[i].x,pts[i].y); }
+      x.stroke();x.restore();
+      for(let i=0;i<n;i++){
+        x.save();x.globalAlpha=.95;
+        x.beginPath();x.arc(pts[i].x,pts[i].y,2.2,0,Math.PI*2);
+        x.fillStyle='#f4f6ff';x.shadowBlur=12;x.shadowColor='rgba(200,212,255,1)';x.fill();x.restore();
+      }
+    }
+    if(el>2.4)document.getElementById('entEy').classList.add('show');
+    if(el>2.8)document.getElementById('ent-names').classList.add('show');
+    if(el>4.2)document.getElementById('entSub').classList.add('show');
+    if(el>6.6&&!done){
+      done=true;
+      document.getElementById('entrance').classList.add('done');
+      document.getElementById('invitation').classList.add('visible');
+      document.getElementById('inv-footer').style.display='block';
+      document.body.style.overflowY='auto';
+      startHero();
+      return;
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* == HERO SKY == */
+let heroStarted=false;
+function startHero(){
+  if(heroStarted)return;heroStarted=true;
+  const c=document.getElementById('heroStars'),x=c.getContext('2d');
+  let W,H;const rs=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight};rs();
+  window.addEventListener('resize',rs);
+  const stars=makeStars(140,W,H);
+  let shooter=null,nextSh=3;
+  let last=0;
+  (function loop(ts){
+    const dt=last?(ts-last)/1000:0;last=ts;
+    x.clearRect(0,0,W,H);
+    drawStars(x,stars,1);
+    nextSh-=dt;
+    if(nextSh<=0&&!shooter){shooter=makeShooter(W,H);}
+    if(shooter){drawShooter(x,shooter);if(shooter.life<=0){shooter=null;nextSh=5+Math.random()*6;}}
+    requestAnimationFrame(loop);
+  })(0);
+}
+
+/* == COUNTDOWN == */
+function tick(){
+  const d=new Date('2028-08-15T00:00:00')-new Date();
+  if(d<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  const p=n=>String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent=p(Math.floor(d/86400000));
+  document.getElementById('cd-h').textContent=p(Math.floor(d%86400000/3600000));
+  document.getElementById('cd-m').textContent=p(Math.floor(d%3600000/60000));
+  document.getElementById('cd-s').textContent=p(Math.floor(d%60000/1000));
+}
+tick();setInterval(tick,1000);
+
+/* == SCROLL REVEAL == */
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* == MYSTERY - she said yes == */
+let yesActive=false;
+function triggerYes(){
+  if(yesActive)return;yesActive=true;
+  const ov=document.getElementById('yesOverlay');
+  const yc=document.getElementById('yesCanvas');
+  yc.width=window.innerWidth;yc.height=window.innerHeight;
+  const yx=yc.getContext('2d');
+  ov.classList.add('active');
+  requestAnimationFrame(()=>{document.getElementById('yesRing').classList.add('show');document.getElementById('yesMsg').classList.add('show');});
+  /* starburst */
+  const cx=yc.width/2,cy=yc.height/2;
+  const parts=Array.from({length:120},()=>{
+    const a=Math.random()*Math.PI*2,sp=2+Math.random()*6;
+    return {x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,r:1+Math.random()*2.4,
+      col:['#dfe6ff','#e9cf9f','#aab8e8','#ffffff'][Math.floor(Math.random()*4)]};
+  });
+  let hf;
+  function hLoop(){
+    yx.clearRect(0,0,yc.width,yc.height);
+    parts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy*=.985;p.life-=.008;
+      if(p.life<=0){p.x=cx;p.y=cy;const a=Math.random()*Math.PI*2,sp=2+Math.random()*6;p.vx=Math.cos(a)*sp;p.vy=Math.sin(a)*sp;p.life=1;}
+      yx.save();yx.globalAlpha=p.life;
+      yx.beginPath();yx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      yx.fillStyle=p.col;yx.shadowBlur=8;yx.shadowColor=p.col;yx.fill();yx.restore();
+    });
+    hf=requestAnimationFrame(hLoop);
+  }
+  hLoop();
+  setTimeout(()=>{
+    document.getElementById('yesRing').classList.remove('show');
+    document.getElementById('yesMsg').classList.remove('show');
+    setTimeout(()=>{
+      ov.classList.remove('active');cancelAnimationFrame(hf);yesActive=false;
+      const mc=document.querySelector('.mystery-card');
+      if(mc){
+        mc.onclick=null;
+        mc.querySelector('.sc-in').style.cursor='default';
+        mc.querySelector('.sc-tag').textContent='She Said Yes!';
+        mc.querySelector('.mystery-q').textContent='\u2726 Yes, a thousand times yes!';
+        mc.querySelector('.mystery-sub').textContent='The celebration begins August 15, 2028';
+        mc.querySelector('.mystery-hint').textContent='\u2728';
+        const p=mc.querySelector('.mystery-pulse');if(p)p.style.animation='none';
+      }
+    },600);
+  },3200);
+}
+document.getElementById('mysteryCard').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();triggerYes();});
+
+/* == WISH SHOOTING STAR == */
+function fireWishStar(){
+  const c=document.getElementById('wishStar');
+  c.style.display='block';
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  const x=c.getContext('2d');
+  const sh=makeShooter(c.width,c.height*0.7);
+  sh.vy=Math.abs(sh.vy)*.4;
+  (function loop(){
+    x.clearRect(0,0,c.width,c.height);
+    drawShooter(x,sh);
+    if(sh.life>0){requestAnimationFrame(loop);}
+    else{c.style.display='none';}
+  })();
+}
+</script>
+
+<!-- Firebase wishes -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyACx0OULFSzEoFet_m-oS03pg1JwdYDACY",
+    authDomain: "react-native-course-f8e6b.firebaseapp.com",
+    databaseURL: "https://react-native-course-f8e6b-default-rtdb.firebaseio.com",
+    projectId: "react-native-course-f8e6b",
+    storageBucket: "react-native-course-f8e6b.firebasestorage.app",
+    messagingSenderId: "335306381762",
+    appId: "1:335306381762:web:43db5617328752867d5e5b"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const wishesRef = ref(db, "wishes_stars");
+  const feed = document.querySelector(".wish-feed");
+  const empty = document.querySelector(".wish-empty");
+  function renderWish(data){
+    if (empty) empty.style.display = "none";
+    feed.style.display = "flex";
+    const card = document.createElement("div");
+    card.className = "wish-card";
+    const t = document.createElement("span"); t.className = "wish-txt"; t.textContent = "\u201C" + data.message + "\u201D";
+    const f = document.createElement("span"); f.className = "wish-from"; f.textContent = "\u2B50 " + data.name;
+    card.appendChild(t); card.appendChild(f);
+    feed.appendChild(card);
+    feed.scrollTop = feed.scrollHeight;
+  }
+  document.querySelector(".wish-send").addEventListener("click", () => {
+    const nameInput = document.querySelector(".wish-name");
+    const messageInput = document.querySelector(".wish-message");
+    const name = (nameInput.value || "").trim() || "Guest";
+    const message = (messageInput.value || "").trim();
+    if (!message) { alert("Write a wish first!"); return; }
+    push(wishesRef, { name, message, createdAt: Date.now() });
+    fireWishStar();
+    nameInput.value = ""; messageInput.value = "";
+  });
+  onChildAdded(wishesRef, (snapshot) => renderWish(snapshot.val()));
+</script>
+
+<!-- Background music -->
+<script>
+  /* Paste a direct mp3 link here, or leave empty to use the local music.mp3 file */
+  const MUSIC_URL = "";
+  let music = null, musicOn = false;
+  const musicBtn = document.getElementById("musicBtn");
+  function ensureMusic(){
+    if(!music){ music = new Audio(MUSIC_URL || "music.mp3"); music.loop = true; }
+    return music;
+  }
+  function fadeIn(){
+    let vol = 0;
+    const m = ensureMusic();
+    const fade = setInterval(() => {
+      if (vol < 0.35) { vol += 0.02; m.volume = Math.min(vol, .35); }
+      else clearInterval(fade);
+    }, 150);
+  }
+  function playMusic(){
+    const m = ensureMusic();
+    m.play().then(()=>{ musicOn = true; musicBtn.classList.add("playing"); fadeIn(); })
+      .catch(()=>{ musicOn = false; musicBtn.classList.remove("playing"); });
+  }
+  function pauseMusic(){ if(music){ music.pause(); musicOn = false; musicBtn.classList.remove("playing"); } }
+  musicBtn.addEventListener("click", (e)=>{ e.stopPropagation(); musicOn ? pauseMusic() : playMusic(); });
+  ["mousemove","scroll","touchstart","keydown","click"].forEach(ev =>
+    document.addEventListener(ev, function auto(){ playMusic(); }, { once:true })
+  );
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && musicOn && music && music.paused) music.play().catch(()=>{});
+  });
+</script>
+
+
+<!-- FIREWORKS EFFECT -->
+<canvas id="fireworksCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; display:none;"></canvas>
+<script>
+(function(){
+  const fwc = document.getElementById('fireworksCanvas');
+  const fwx = fwc.getContext('2d');
+  let fwW, fwH;
+  let fireworksActive = false;
+  let fireworks = [];
+  let particles = [];
+  let fwAf = null;
+
+  function resizeFw() {
+    fwW = fwc.width = window.innerWidth;
+    fwH = fwc.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeFw);
+  resizeFw();
+
+  class Firework {
+    constructor() {
+      this.x = fwW * (0.2 + Math.random() * 0.6);
+      this.y = fwH;
+      this.ty = fwH * (0.1 + Math.random() * 0.4);
+      this.vy = - (Math.random() * 4 + 8);
+      this.vx = (Math.random() - 0.5) * 2;
+      this.exploded = false;
+      this.col = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += 0.15; // gravity
+      if (this.vy >= 0 || this.y <= this.ty) {
+        this.exploded = true;
+        for(let i=0; i<50; i++) particles.push(new Particle(this.x, this.y, this.col));
+      }
+    }
+    draw() {
+      fwx.beginPath();
+      fwx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+      fwx.fillStyle = this.col;
+      fwx.fill();
+    }
+  }
+
+  class Particle {
+    constructor(x, y, col) {
+      this.x = x;
+      this.y = y;
+      const a = Math.random() * Math.PI * 2;
+      const s = Math.random() * 5 + 2;
+      this.vx = Math.cos(a) * s;
+      this.vy = Math.sin(a) * s;
+      this.life = 1;
+      this.decay = Math.random() * 0.015 + 0.015;
+      this.col = col;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += 0.1;
+      this.life -= this.decay;
+    }
+    draw() {
+      fwx.save();
+      fwx.globalAlpha = Math.max(this.life, 0);
+      fwx.beginPath();
+      fwx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+      fwx.fillStyle = this.col;
+      fwx.fill();
+      fwx.restore();
+    }
+  }
+
+  function animateFw() {
+    if (!fireworksActive) return;
+    fwAf = requestAnimationFrame(animateFw);
+    // Draw trail
+    fwx.globalCompositeOperation = 'destination-out';
+    fwx.fillStyle = 'rgba(0,0,0,0.2)';
+    fwx.fillRect(0, 0, fwW, fwH);
+    fwx.globalCompositeOperation = 'lighter';
+    
+    if (Math.random() < 0.04) fireworks.push(new Firework());
+    
+    for (let i = fireworks.length - 1; i >= 0; i--) {
+      fireworks[i].update();
+      fireworks[i].draw();
+      if (fireworks[i].exploded) fireworks.splice(i, 1);
+    }
+    
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw();
+      if (particles[i].life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  
+  const invFw = document.getElementById('invitation');
+  if(invFw) {
+    const startFw = () => {
+      if(!fireworksActive) {
+        fireworksActive = true;
+        fwc.style.display = 'block';
+        animateFw();
+        setTimeout(() => {
+          fireworksActive = false;
+          fwc.style.display = 'none';
+          if(fwAf) cancelAnimationFrame(fwAf);
+          fireworks = []; particles = [];
+          fwx.clearRect(0, 0, fwW, fwH);
+        }, 15000);
+      }
+    };
+    
+    const ob = new MutationObserver((mutations) => {
+      mutations.forEach((m) => {
+        if(m.target.classList.contains('visible') && !fireworksActive) {
+          startFw();
+          ob.disconnect();
+        }
+      });
+    });
+    ob.observe(invFw, { attributes: true, attributeFilter: ['class'] });
+    
+    if(invFw.classList.contains('visible')) {
+       startFw();
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
