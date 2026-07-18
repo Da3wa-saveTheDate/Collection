@@ -286,7 +286,6 @@ const templates = [
 ];
 
 const categories = [
-  { key: 'all', label: 'All Designs' },
   { key: 'premium-wedding', label: 'Premium Wedding' },
   { key: 'wedding', label: 'Weddings' },
   { key: 'engagement', label: 'Engagements' },
@@ -294,11 +293,8 @@ const categories = [
   { key: 'invitation cards', label: 'Invitation Cards' },
 ];
 
-const MOBILE_PAGE_SIZE = 6;
-
 export default function Showcase() {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [mobileLimit, setMobileLimit] = useState(MOBILE_PAGE_SIZE);
+  const [activeCategory, setActiveCategory] = useState('premium-wedding');
   const phoneContainerRef = useRef<HTMLDivElement>(null);
   const [phoneScale, setPhoneScale] = useState(1);
   const mobilePhoneContainerRef = useRef<HTMLDivElement>(null);
@@ -325,7 +321,7 @@ export default function Showcase() {
     ? templates 
     : templates.filter(t => t.category === activeCategory);
 
-  const mobileFiltered = filtered.slice(0, mobileLimit);
+  const mobileFiltered = filtered;
 
   const [activeTemplate, setActiveTemplate] = useState(filtered[0]);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set([filtered[0]?.id]));
@@ -356,7 +352,6 @@ export default function Showcase() {
 
   useEffect(() => {
     setActiveTemplate(filtered[0]);
-    setMobileLimit(MOBILE_PAGE_SIZE);
   }, [activeCategory]);
 
   return (
@@ -636,22 +631,9 @@ export default function Showcase() {
               );
             })}
           </div>
-
-          {/* Load More Button */}
-          {mobileLimit < filtered.length && (
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={() => setMobileLimit(prev => prev + MOBILE_PAGE_SIZE)}
-                className="px-8 py-3.5 rounded-full bg-brand-dark text-white font-medium text-sm hover:bg-black transition-all shadow-lg active:scale-95"
-              >
-                Load More Designs ({filtered.length - mobileLimit})
-              </button>
-            </div>
-          )}
         </div>
         
       </div>
     </section>
   );
 }
-
