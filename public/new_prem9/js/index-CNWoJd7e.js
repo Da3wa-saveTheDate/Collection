@@ -22189,7 +22189,7 @@ function u8({
     const [t, n] = g.useState(() => {
         if (typeof window > "u") return "en";
         const s = window.localStorage.getItem("lang");
-        return s === "es" || s === "en" ? s : "en"
+        return "en";
     });
     g.useEffect(() => {
         document.documentElement.lang = t, document.documentElement.dir = "ltr", window.localStorage.setItem("lang", t)
@@ -33799,7 +33799,7 @@ const OB = 1,
         })
     };
 
-function ez() {
+function ez() { return null;
     const {
         lang: e,
         setLang: t
