@@ -2,6 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Eye } from 'lucide-react';
 
 const templates = [
+  {
+    id: 'new_simple1',
+    title: 'New Simple 1',
+    category: 'simple-websites',
+    description: 'A beautiful simple website template.',
+    image: '/new_simple1/assets/images/hero-frame-D95C6j_a.png'
+  },
   // === Wedding Templates (with /images/ folder) ===
   {
     id: 'celestial-love',
@@ -284,6 +291,7 @@ const categories = [
   { key: 'engagement', label: 'Engagements' },
   { key: 'invitation fan', label: 'Invitation Fan' },
   { key: 'invitation cards', label: 'Invitation Cards' },
+  { key: 'simple-websites', label: 'Simple Websites' },
 ];
 
 export default function Showcase() {
@@ -630,3 +638,4 @@ export default function Showcase() {
     </section>
   );
 }
+
