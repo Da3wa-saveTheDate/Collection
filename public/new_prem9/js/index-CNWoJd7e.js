@@ -35921,7 +35921,7 @@ const W7 = () => {
             client: e,
             children: p.jsx(u8, {
                 children: p.jsxs(HN, {
-                    children: [p.jsx(TA, {}), p.jsx(ij, {}), p.jsx(xI, {
+                    children: [p.jsx(TA, {}), p.jsx(ij, {}), p.jsx(xI, { basename: "/new_prem9", 
                         children: p.jsxs(pI, {
                             children: [p.jsx(Go, {
                                 path: "/",
@@ -35943,3 +35943,4 @@ const W7 = () => {
         })
     };
 u1(document.getElementById("root")).render(p.jsx(H7, {}));
+

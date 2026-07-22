@@ -110,7 +110,7 @@ const templates = [
   },
   {
     id: 'new_prem9',
-    title: 'New Premium 9',
+    title: 'New Premium2',
     category: 'premium-wedding',
     description: 'A luxurious new premium wedding template.',
     image: '/new_prem9/assets/l5e-images/hero-poster-DsqR-n3x.jpg'
