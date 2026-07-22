@@ -22377,7 +22377,7 @@ const zL = new Ek,
         client: zL,
         children: A.jsx(JP, {
             children: A.jsxs(xL, {
-                children: [A.jsx(FT, {}), A.jsx(pb, {}), A.jsxs(cM, {
+                children: [A.jsx(FT, {}), A.jsx(pb, {}), A.jsxs(cM, { basename: "/new_simple1",
                     children: [A.jsx(VL, {}), A.jsxs(aM, {
                         children: [A.jsx(Zc, {
                             path: "/",
