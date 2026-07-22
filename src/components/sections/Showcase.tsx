@@ -109,6 +109,13 @@ const templates = [
     image: '/new_prem7/images/hero.webp'
   },
   {
+    id: 'new_prem9',
+    title: 'New Premium 9',
+    category: 'premium-wedding',
+    description: 'A luxurious new premium wedding template.',
+    image: '/new_prem9/assets/l5e-images/hero-poster-DsqR-n3x.jpg'
+  },
+  {
     id: 'new_ss',
     title: 'Seaside Celebration',
     category: 'premium-wedding',
