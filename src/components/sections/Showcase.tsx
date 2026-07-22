@@ -9,6 +9,13 @@ const templates = [
     description: 'A beautiful simple website template.',
     image: '/new_simple1/assets/images/hero-frame-D95C6j_a.png'
   },
+  {
+    id: 'thelaceedit',
+    title: 'The Lace Edit',
+    category: 'simple-websites',
+    description: 'A beautiful simple website template.',
+    image: '/thelaceedit/assets/hero-frame-ChwB8WzS.png'
+  },
   // === Wedding Templates (with /images/ folder) ===
   {
     id: 'celestial-love',
