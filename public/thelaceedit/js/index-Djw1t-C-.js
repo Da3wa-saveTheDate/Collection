@@ -22196,15 +22196,6 @@ function dL({
                     children: t("addToCalendar")
                 })]
             })
-        }), R.jsxs("p", {
-            className: "absolute bottom-[calc(7rem+2vh)] left-0 right-0 mx-auto z-20 w-fit font-body italic text-granate/80 text-xs",
-            children: [t("madeWithLove"), " ", R.jsx("a", {
-                href: "https://thedigitalyes.com",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "underline hover:text-granate transition-colors",
-                children: "The Digital Yes"
-            })]
         })]
     })
 }

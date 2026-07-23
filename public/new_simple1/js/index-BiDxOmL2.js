@@ -22148,15 +22148,6 @@ function EL({
                     children: t("addToCalendar")
                 })]
             })
-        }), A.jsxs("p", {
-            className: "absolute bottom-[calc(4rem+3vh-1cm)] left-0 right-0 mx-auto z-20 w-fit font-body italic text-[#654B31]/80 text-xs",
-            children: [t("madeWithLove"), " ", A.jsx("a", {
-                href: "https://thedigitalyes.com",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "underline hover:text-[#654B31] transition-colors",
-                children: "The Digital Yes"
-            })]
         })]
     })
 }
