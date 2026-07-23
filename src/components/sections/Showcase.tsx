@@ -7,7 +7,7 @@ const templates = [
     title: 'New Simple 1',
     category: 'simple-websites',
     description: 'A beautiful simple website template.',
-    image: '/new_simple1/assets/images/hero-frame-D95C6j_a.png'
+    image: '/new_simple1/assets/hero-frame-D95C6j_a.png'
   },
   {
     id: 'thelaceedit',
