@@ -296,6 +296,22 @@ const templates = [
     category: 'invitation cards',
     description: 'Beautiful invitation card design.',
     image: '/invitation-card-5/images/hero.webp'
+  },
+  {
+    id: 'video-invitation-1',
+    title: 'Initial Scene',
+    category: 'video-invitations',
+    description: 'A beautiful video invitation scene.',
+    image: '/assets/video_invitation.mp4',
+    isVideo: true
+  },
+  {
+    id: 'video-invitation-2',
+    title: 'Second Scene',
+    category: 'video-invitations',
+    description: 'Another stunning video invitation scene.',
+    image: '/assets/video_invitation_2.mp4',
+    isVideo: true
   }
 ];
 
@@ -306,6 +322,7 @@ const categories = [
   { key: 'invitation fan', label: 'Invitation Fan' },
   { key: 'invitation cards', label: 'Invitation Cards' },
   { key: 'simple-websites', label: 'Simple Websites' },
+  { key: 'video-invitations', label: 'Video Invitations' },
 ];
 
 export default function Showcase() {
@@ -475,15 +492,25 @@ export default function Showcase() {
                          {/* Static Image (Visible when not hovering list) */}
                          <div className={`absolute inset-0 transition-opacity duration-700 ${isHoveringList && activeTemplate?.id === template.id ? 'opacity-0' : 'opacity-100'}`}>
                            {template.image && loadedImages.has(template.id) ? (
-                             <img 
-                               src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                               alt={template.title} 
-                               loading={template.id === filtered[0]?.id ? "eager" : "lazy"}
-                               decoding="async"
-                               className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
-                                 activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
-                               }`}
-                             />
+                             template.isVideo ? (
+                               <video 
+                                 src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                                 className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
+                                   activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
+                                 }`}
+                                 autoPlay muted loop playsInline
+                               />
+                             ) : (
+                               <img 
+                                 src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                                 alt={template.title} 
+                                 loading={template.id === filtered[0]?.id ? "eager" : "lazy"}
+                                 decoding="async"
+                                 className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${
+                                   activeTemplate?.id === template.id ? 'scale-100' : 'scale-110'
+                                 }`}
+                               />
+                             )
                            ) : template.image && !loadedImages.has(template.id) ? (
                              null
                            ) : (
@@ -497,21 +524,31 @@ export default function Showcase() {
                          {activeTemplate?.id === template.id && (
                            <div className={`absolute inset-0 transition-opacity duration-700 delay-150 ${isHoveringList ? 'opacity-100' : 'opacity-0'}`}>
                               {isHoveringList && (
-                                <div 
-                                  className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
-                                  style={{ transform: `scale(${phoneScale})` }}
-                                >
-                                  <iframe 
-                                    src={`${import.meta.env.BASE_URL}${template.id}/`}
-                                    className="w-full h-full border-0"
-                                    style={{
-                                      scrollbarWidth: 'none',
-                                      msOverflowStyle: 'none'
-                                    }}
-                                    title={`${template.title} live preview`}
-                                    loading="lazy"
-                                  />
-                                </div>
+                                template.isVideo ? (
+                                  <div className="absolute inset-0 bg-black flex items-center justify-center">
+                                    <video 
+                                      src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`}
+                                      className="w-full h-full object-contain"
+                                      autoPlay controls playsInline
+                                    />
+                                  </div>
+                                ) : (
+                                  <div 
+                                    className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
+                                    style={{ transform: `scale(${phoneScale})` }}
+                                  >
+                                    <iframe 
+                                      src={`${import.meta.env.BASE_URL}${template.id}/`}
+                                      className="w-full h-full border-0"
+                                      style={{
+                                        scrollbarWidth: 'none',
+                                        msOverflowStyle: 'none'
+                                      }}
+                                      title={`${template.title} live preview`}
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                )
                               )}
                            </div>
                          )}
@@ -554,11 +591,19 @@ export default function Showcase() {
                      {/* Static Image (Fades out when active) */}
                      <div className={`absolute inset-0 transition-opacity duration-700 ${activeTemplate?.id === template.id ? 'opacity-0' : 'opacity-100'}`}>
                        {template.image && loadedImages.has(template.id) ? (
-                         <img 
-                           src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                           alt={template.title} 
-                           className="w-full h-full object-cover"
-                         />
+                         template.isVideo ? (
+                           <video 
+                             src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                             className="w-full h-full object-cover"
+                             autoPlay muted loop playsInline
+                           />
+                         ) : (
+                           <img 
+                             src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                             alt={template.title} 
+                             className="w-full h-full object-cover"
+                           />
+                         )
                        ) : (
                          <div className="w-full h-full flex items-center justify-center bg-brand-light">
                            <span className="font-serif text-2xl text-brand-dark/20">{template.title}</span>
@@ -569,21 +614,31 @@ export default function Showcase() {
                      {/* Live iframe */}
                      {activeTemplate?.id === template.id && (
                        <div className="absolute inset-0 transition-opacity duration-700 delay-150 opacity-100 bg-brand-light">
-                          <div 
-                            className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
-                            style={{ transform: `scale(${mobilePhoneScale})` }}
-                          >
-                            <iframe 
-                              src={`${import.meta.env.BASE_URL}${template.id}/`}
-                              className="w-full h-full border-0"
-                              style={{
-                                scrollbarWidth: 'none',
-                                msOverflowStyle: 'none'
-                              }}
-                              title={`${template.title} live preview`}
-                              loading="lazy"
-                            />
-                          </div>
+                          {template.isVideo ? (
+                            <div className="absolute inset-0 bg-black flex items-center justify-center">
+                              <video 
+                                src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`}
+                                className="w-full h-full object-contain"
+                                autoPlay controls playsInline
+                              />
+                            </div>
+                          ) : (
+                            <div 
+                              className="absolute top-0 left-0 w-[390px] h-[844px] origin-top-left pointer-events-none"
+                              style={{ transform: `scale(${mobilePhoneScale})` }}
+                            >
+                              <iframe 
+                                src={`${import.meta.env.BASE_URL}${template.id}/`}
+                                className="w-full h-full border-0"
+                                style={{
+                                  scrollbarWidth: 'none',
+                                  msOverflowStyle: 'none'
+                                }}
+                                title={`${template.title} live preview`}
+                                loading="lazy"
+                              />
+                            </div>
+                          )}
                        </div>
                      )}
                      
@@ -619,12 +674,20 @@ export default function Showcase() {
                 >
                   <div className="relative w-full h-[200px] bg-brand-light overflow-hidden">
                     {template.image && (
-                      <img 
-                        src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
-                        alt={template.title} 
-                        loading={index < 3 ? 'eager' : 'lazy'}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                      template.isVideo ? (
+                        <video 
+                          src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          autoPlay muted loop playsInline
+                        />
+                      ) : (
+                        <img 
+                          src={`${import.meta.env.BASE_URL}${template.image.replace(/^\//, '')}`} 
+                          alt={template.title} 
+                          loading={index < 3 ? 'eager' : 'lazy'}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      )
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
                     <div className="absolute bottom-4 left-5 right-5">
