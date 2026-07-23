@@ -4,7 +4,7 @@ import { ArrowRight, Eye } from 'lucide-react';
 const templates = [
   {
     id: 'new_simple1',
-    title: 'New Simple 1',
+    title: 'Elegant Photo Scratch',
     category: 'simple-websites',
     description: 'A beautiful simple website template.',
     image: '/new_simple1/assets/hero-frame-D95C6j_a.png'
