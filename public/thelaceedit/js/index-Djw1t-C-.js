@@ -22244,7 +22244,7 @@ const fL = "./assets/envelope-D391inv2.png",
                     className: "absolute inset-0 w-full h-full object-cover"
                 }), R.jsx("video", {
                     ref: l,
-                    src: "/video/envelope-open.mp4",
+                    src: "./video/envelope-open.mp4",
                     muted: !0,
                     playsInline: !0,
                     preload: "auto",
