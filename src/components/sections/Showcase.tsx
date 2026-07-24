@@ -318,7 +318,7 @@ const templates = [
     title: 'Third Scene',
     category: 'video-invitations',
     description: 'An elegant third video invitation scene.',
-    image: '/assets/video_invitation_3.mp4',
+    image: '/assets/video_invitation.mp4',
     isVideo: true
   }
 ];
