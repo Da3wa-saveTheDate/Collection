@@ -80,6 +80,13 @@
       video.style.display = 'block';
       video.play();
       audio.play();
+
+      video.addEventListener('timeupdate', function() {
+        if (video.currentTime >= 50) {
+          video.pause();
+          audio.pause();
+        }
+      });
     }
   </script>
 </body>
