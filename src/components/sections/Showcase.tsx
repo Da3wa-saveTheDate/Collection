@@ -302,7 +302,7 @@ const templates = [
     title: 'Initial Scene',
     category: 'video-invitations',
     description: 'A beautiful video invitation scene.',
-    image: '/assets/video_invitation.mp4',
+    image: '/assets/video_invitation_3.mp4',
     isVideo: true
   },
   {
