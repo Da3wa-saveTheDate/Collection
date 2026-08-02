@@ -164,6 +164,13 @@ const templates = [
     description: 'A handcrafted paper-art wedding invitation with delicate florals and storybook charm.',
     image: '/papercraft/assets/l5e-images/intro-poster.png'
   },
+  {
+    id: 'eleganza',
+    title: 'Eleganza',
+    category: 'premium-wedding',
+    description: 'An embroidered Italian wedding invitation with romantic florals and timeless Lake Como elegance.',
+    image: '/eleganza/assets/l5e-images/eleganza-poster.jpg'
+  },
 
   // === Wedding Templates (custom image paths) ===
   {
