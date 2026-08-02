@@ -23,6 +23,13 @@ const templates = [
     description: 'A beautiful simple website template.',
     image: '/cisnes/assets/images/hero-frame-76CGo-SF.png'
   },
+  {
+    id: 'candlelight',
+    title: 'Candlelight',
+    category: 'simple-websites',
+    description: 'A warm and romantic candlelight-themed invitation website.',
+    image: '/candlelight/assets/images/inicio-camara-D3JixjJx.jpg'
+  },
   // === Wedding Templates (with /images/ folder) ===
   {
     id: 'celestial-love',
