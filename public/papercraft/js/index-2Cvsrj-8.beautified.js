@@ -39705,6 +39705,7 @@ const tq = () => {
             client: e,
             children: f.jsxs($L, {
                 children: [f.jsx(SD, {}), f.jsx(eM, {}), f.jsx(hF, {
+                    basename: "/papercraft",
                     children: f.jsxs(oF, {
                         children: [f.jsx(Ca, {
                             path: "/",
