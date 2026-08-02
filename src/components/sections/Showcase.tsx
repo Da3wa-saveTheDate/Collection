@@ -30,6 +30,13 @@ const templates = [
     description: 'A warm and romantic candlelight-themed invitation website.',
     image: '/candlelight/assets/images/inicio-camara-D3JixjJx.jpg'
   },
+  {
+    id: 'floral',
+    title: 'Floral',
+    category: 'simple-websites',
+    description: 'A delicate floral invitation with elegant botanical details and an interactive reveal.',
+    image: '/floral/assets/images/hero-frame-ChwB8WzS.png'
+  },
   // === Wedding Templates (with /images/ folder) ===
   {
     id: 'celestial-love',
