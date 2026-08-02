@@ -14911,8 +14911,7 @@ Error generating stack: ` + i.message + `
     (function(e) {
         e.UseFetcher = "useFetcher", e.UseFetchers = "useFetchers", e.UseScrollRestoration = "useScrollRestoration"
     })(cm || (cm = {}));
-    const Jc = "./assets/cupid-logo-B7PGcLFc.png",
-        ed = "./assets/hero-frame-ChwB8WzS.png",
+    const ed = "./assets/hero-frame-ChwB8WzS.png",
         td = "./assets/hero-scratch-cover-CwPyg4DV.png",
         zf = x.createContext({});
 
@@ -21768,7 +21767,7 @@ function dL({
         E = "20270615T230000Z",
         b = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(p)}&dates=${S}/${E}&details=${encodeURIComponent(g)}`,
         P = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(p)}&body=${encodeURIComponent(g)}&startdt=2027-06-15T16:00:00Z&enddt=2027-06-15T23:00:00Z`,
-        k = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//The Digital Yes//Wedding//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@thedigitalyes.com", "DTSTAMP:20260101T000000Z", `DTSTART:${S}`, `DTEND:${E}`, `SUMMARY:${p}`, `DESCRIPTION:${g}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
+        k = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Wedding Invitation//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@wedding-invitation.local", "DTSTAMP:20260101T000000Z", `DTSTART:${S}`, `DTEND:${E}`, `SUMMARY:${p}`, `DESCRIPTION:${g}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
 `),
         [A, M] = x.useState("");
     x.useEffect(() => {
@@ -22022,62 +22021,6 @@ function dL({
                 })
             })]
         }), R.jsx(Ar, {
-            children: i && R.jsx(gt.a, {
-                initial: {
-                    opacity: 0
-                },
-                animate: {
-                    opacity: 1
-                },
-                exit: {
-                    opacity: 0
-                },
-                transition: {
-                    duration: .4
-                },
-                href: "https://thedigitalyes.com",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "absolute top-6 left-0 right-0 mx-auto z-20 w-fit",
-                children: R.jsx(gt.span, {
-                    initial: {
-                        x: "calc(50vw - 4.5rem)",
-                        y: -6
-                    },
-                    animate: {
-                        x: 0
-                    },
-                    transition: {
-                        duration: 1.6,
-                        ease: [.22, 1, .36, 1]
-                    },
-                    className: "block",
-                    children: R.jsx(gt.span, {
-                        animate: {
-                            y: [0, -3, 0, 2, 0]
-                        },
-                        transition: {
-                            duration: 3.2,
-                            repeat: 1 / 0,
-                            ease: "easeInOut",
-                            delay: 1.6
-                        },
-                        "aria-label": "The Digital Yes",
-                        className: "block w-10 h-10 bg-granate opacity-90",
-                        style: {
-                            WebkitMaskImage: `url(${Jc})`,
-                            maskImage: `url(${Jc})`,
-                            WebkitMaskRepeat: "no-repeat",
-                            maskRepeat: "no-repeat",
-                            WebkitMaskSize: "contain",
-                            maskSize: "contain",
-                            WebkitMaskPosition: "center",
-                            maskPosition: "center"
-                        }
-                    })
-                })
-            })
-        }), R.jsx(Ar, {
             children: a && R.jsx(gt.div, {
                 initial: {
                     opacity: 0
@@ -22206,7 +22149,7 @@ const fL = "./assets/envelope-D391inv2.png",
     }) => {
         const [n, r] = x.useState(!1), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = x.useRef(null);
         ph(), x.useEffect(() => {
-            [ed, td, Jc].forEach(d => {
+            [ed, td].forEach(d => {
                 const f = new Image;
                 f.src = d
             })

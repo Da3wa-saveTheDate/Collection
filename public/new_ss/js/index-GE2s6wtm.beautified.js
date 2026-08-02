@@ -32501,15 +32501,6 @@ function V4({
             }), h.jsx("p", {
                 className: "text-base text-foreground/50 font-body tracking-wide",
                 children: u
-            }), h.jsxs("p", {
-                className: "text-sm text-foreground/40 mt-16 font-body",
-                children: [r("footer.madeBy"), " ", h.jsx("a", {
-                    href: "https://www.thedigitalyes.com",
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                    className: "hover:text-foreground transition-colors underline underline-offset-2",
-                    children: "The Digital Yes"
-                })]
             })]
         })
     })

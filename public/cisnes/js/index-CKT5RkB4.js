@@ -14908,8 +14908,7 @@ var em;
 (function(e) {
     e.UseFetcher = "useFetcher", e.UseFetchers = "useFetchers", e.UseScrollRestoration = "useScrollRestoration"
 })(em || (em = {}));
-const Bc = "assets/images/cupid-logo-C7hY05CQ.png",
-    sR = 1,
+const sR = 1,
     aR = "dce11aa7-67cf-4b4c-9ddf-fc70a319907c",
     lR = "db221931-518d-4d9e-bcf9-1cc46b13be79",
     uR = "assets/l5e-videos/waves-bg.mp4",
@@ -21210,7 +21209,7 @@ function mL({
 }) {
     const {
         t
-    } = ux(), [n, r] = x.useState(wg()), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = "Boda Clara & Hugo", u = "La boda de Clara y Hugo", c = "20270615T160000Z", d = "20270615T230000Z", h = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(l)}&dates=${c}/${d}&details=${encodeURIComponent(u)}`, f = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(l)}&body=${encodeURIComponent(u)}&startdt=2027-06-15T16:00:00Z&enddt=2027-06-15T23:00:00Z`, v = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//The Digital Yes//Wedding//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@thedigitalyes.com", "DTSTAMP:20260101T000000Z", `DTSTART:${c}`, `DTEND:${d}`, `SUMMARY:${l}`, `DESCRIPTION:${u}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
+    } = ux(), [n, r] = x.useState(wg()), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = "Boda Clara & Hugo", u = "La boda de Clara y Hugo", c = "20270615T160000Z", d = "20270615T230000Z", h = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(l)}&dates=${c}/${d}&details=${encodeURIComponent(u)}`, f = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(l)}&body=${encodeURIComponent(u)}&startdt=2027-06-15T16:00:00Z&enddt=2027-06-15T23:00:00Z`, v = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Wedding Invitation//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@wedding-invitation.local", "DTSTAMP:20260101T000000Z", `DTSTART:${c}`, `DTEND:${d}`, `SUMMARY:${l}`, `DESCRIPTION:${u}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
 `), [g, w] = x.useState("");
     x.useEffect(() => {
         const y = new Blob([v], {
@@ -21245,36 +21244,7 @@ function mL({
             className: "pointer-events-none absolute inset-0 w-full h-full object-cover z-0 select-none"
         }), P.jsxs("div", {
             className: "flex flex-col items-center text-center px-8 z-10 mt-[8vh] -translate-y-10",
-            children: [P.jsx(sn.div, {
-                "aria-hidden": "true",
-                initial: {
-                    opacity: 0,
-                    y: 8
-                },
-                animate: s ? {
-                    opacity: 1,
-                    y: 0
-                } : {
-                    opacity: 0,
-                    y: 8
-                },
-                transition: {
-                    duration: 1.6,
-                    delay: 0,
-                    ease: [.22, 1, .36, 1]
-                },
-                className: "w-16 h-16 mb-4 opacity-90 bg-granate",
-                style: {
-                    WebkitMaskImage: `url(${Bc})`,
-                    maskImage: `url(${Bc})`,
-                    WebkitMaskRepeat: "no-repeat",
-                    maskRepeat: "no-repeat",
-                    WebkitMaskPosition: "center",
-                    maskPosition: "center",
-                    WebkitMaskSize: "contain",
-                    maskSize: "contain"
-                }
-            }), P.jsx(sn.p, {
+            children: [P.jsx(sn.p, {
                 initial: {
                     opacity: 0,
                     y: 8
@@ -21502,7 +21472,7 @@ const gL = 1,
     }) => {
         const [n, r] = x.useState(!1), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = x.useRef(null);
         ux(), x.useEffect(() => {
-            [_L, VL, Bc].forEach(d => {
+            [_L, VL].forEach(d => {
                 const h = new Image;
                 h.src = d
             });

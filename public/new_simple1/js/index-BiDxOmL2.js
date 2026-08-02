@@ -14911,8 +14911,7 @@ Error generating stack: ` + i.message + `
     (function(e) {
         e.UseFetcher = "useFetcher", e.UseFetchers = "useFetchers", e.UseScrollRestoration = "useScrollRestoration"
     })(cm || (cm = {}));
-    const ed = "/new_simple1/assets/cupid-logo-B7PGcLFc.png",
-        td = "/new_simple1/assets/hero-frame-D95C6j_a.png",
+    const td = "/new_simple1/assets/hero-frame-D95C6j_a.png",
         yi = "/new_simple1/assets/hero-oval-mask-reference-DZM5xGX5.png",
         Dw = "/new_simple1/assets/hero-scratch-cover-reference-CIK32eF4.png",
         dM = 1,
@@ -21777,7 +21776,7 @@ function EL({
         y = "20270615T230000Z",
         S = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(v)}&dates=${p}/${y}&details=${encodeURIComponent(m)}`,
         T = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(v)}&body=${encodeURIComponent(m)}&startdt=2027-06-15T16:00:00Z&enddt=2027-06-15T23:00:00Z`,
-        b = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//The Digital Yes//Wedding//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@thedigitalyes.com", "DTSTAMP:20260101T000000Z", `DTSTART:${p}`, `DTEND:${y}`, `SUMMARY:${v}`, `DESCRIPTION:${m}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
+        b = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Wedding Invitation//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:clara-hugo-2027-06-15@wedding-invitation.local", "DTSTAMP:20260101T000000Z", `DTSTART:${p}`, `DTEND:${y}`, `SUMMARY:${v}`, `DESCRIPTION:${m}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
 `),
         [P, R] = x.useState("");
     x.useEffect(() => {
@@ -21986,62 +21985,6 @@ function EL({
                 })]
             })
         }), A.jsx(xo, {
-            children: i && A.jsx(xn.a, {
-                initial: {
-                    opacity: 0
-                },
-                animate: {
-                    opacity: 1
-                },
-                exit: {
-                    opacity: 0
-                },
-                transition: {
-                    duration: .4
-                },
-                href: "https://thedigitalyes.com",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "absolute top-6 left-0 right-0 mx-auto z-20 w-fit",
-                children: A.jsx(xn.span, {
-                    initial: {
-                        x: "calc(50vw - 4.5rem)",
-                        y: -6
-                    },
-                    animate: {
-                        x: 0
-                    },
-                    transition: {
-                        duration: 1.6,
-                        ease: [.22, 1, .36, 1]
-                    },
-                    className: "block",
-                    children: A.jsx(xn.span, {
-                        animate: {
-                            y: [0, -3, 0, 2, 0]
-                        },
-                        transition: {
-                            duration: 3.2,
-                            repeat: 1 / 0,
-                            ease: "easeInOut",
-                            delay: 1.6
-                        },
-                        "aria-label": "The Digital Yes",
-                        className: "block w-10 h-10 bg-[#654B31] opacity-90",
-                        style: {
-                            WebkitMaskImage: `url(${ed})`,
-                            maskImage: `url(${ed})`,
-                            WebkitMaskRepeat: "no-repeat",
-                            maskRepeat: "no-repeat",
-                            WebkitMaskSize: "contain",
-                            maskSize: "contain",
-                            WebkitMaskPosition: "center",
-                            maskPosition: "center"
-                        }
-                    })
-                })
-            })
-        }), A.jsx(xo, {
             children: i && A.jsxs(xn.div, {
                 initial: {
                     opacity: 0,
@@ -22158,7 +22101,7 @@ const TL = "/new_simple1/assets/envelope-CE1gCj0J.jpg",
     }) => {
         const [n, r] = x.useState(!1), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = x.useRef(null);
         ph(), x.useEffect(() => {
-            [td, Dw, ed].forEach(d => {
+            [td, Dw].forEach(d => {
                 const h = new Image;
                 h.src = d
             })

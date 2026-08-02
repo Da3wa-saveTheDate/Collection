@@ -14912,7 +14912,6 @@ var sf;
 })(sf || (sf = {}));
 const WS = "assets/images/inicio-camara-D3JixjJx.jpg",
     lf = "assets/images/final-camara-BIJBqqTE.jpg",
-    HS = "assets/images/nau-cupid-B7PGcLFc.png",
     $n = {
         title: "Boda de María & Carlos",
         date: "2027-06-15",
@@ -14958,23 +14957,7 @@ const WS = "assets/images/inicio-camara-D3JixjJx.jpg",
             }, []);
         return P.jsxs("div", {
             className: "h-screen w-screen overflow-hidden bg-background",
-            children: [P.jsxs("a", {
-                href: "https://www.thedigitalyes.com/",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "absolute top-4 left-4 z-50 flex items-center gap-2 bg-background/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-md hover:shadow-lg transition-all opacity-80 hover:opacity-100",
-                children: [P.jsx("img", {
-                    src: HS,
-                    alt: "Nau",
-                    className: "w-5 h-5"
-                }), P.jsx("span", {
-                    className: "font-script text-foreground/90",
-                    style: {
-                        fontSize: "11px"
-                    },
-                    children: "Buy now"
-                })]
-            }), e === "inicio" && P.jsxs("div", {
+            children: [e === "inicio" && P.jsxs("div", {
                 className: "absolute inset-0 w-full h-full cursor-pointer",
                 style: {
                     zIndex: 15

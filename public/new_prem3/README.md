@@ -1,7 +1,5 @@
 # Majestic Template — Source Code Snapshot
 
-Site of origin: https://majestic-template.thedigitalyes.com
-
 This archive contains the **complete deployed source** of the site as it exists on the live server today.
 
 ## Files
