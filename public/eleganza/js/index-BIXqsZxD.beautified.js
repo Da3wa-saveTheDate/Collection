@@ -34004,6 +34004,7 @@ const P6 = () => {
             children: p.jsx(xI, {
                 children: p.jsxs($O, {
                     children: [p.jsx(xN, {}), p.jsx(XN, {}), p.jsx(pI, {
+                        basename: "/eleganza",
                         children: p.jsxs(aI, {
                             children: [p.jsx(Xo, {
                                 path: "/",
