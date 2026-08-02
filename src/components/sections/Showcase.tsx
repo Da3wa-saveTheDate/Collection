@@ -157,6 +157,13 @@ const templates = [
     description: 'An elegant premium wedding invitation featuring beautiful animations.',
     image: '/new_ss/assets/intro-poster-new-B2unBQtC.jpg'
   },
+  {
+    id: 'papercraft',
+    title: 'Papercraft',
+    category: 'premium-wedding',
+    description: 'A handcrafted paper-art wedding invitation with delicate florals and storybook charm.',
+    image: '/papercraft/assets/l5e-images/intro-poster.png'
+  },
 
   // === Wedding Templates (custom image paths) ===
   {
