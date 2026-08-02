@@ -21648,17 +21648,7 @@ const pL = "6339ca7c-e3e2-41d8-ad4f-75f8a30f39f0",
         client: zL,
         children: P.jsx(Kb, {
             children: P.jsxs(iR, {
-                children: [P.jsx(AT, {}), P.jsx(aP, {}), P.jsx(rR, {
-                    children: P.jsxs(eR, {
-                        children: [P.jsx(zc, {
-                            path: "/",
-                            element: P.jsx(jL, {})
-                        }), P.jsx(zc, {
-                            path: "*",
-                            element: P.jsx(FL, {})
-                        })]
-                    })
-                })]
+                children: [P.jsx(AT, {}), P.jsx(aP, {}), P.jsx(jL, {})]
             })
         })
     });
