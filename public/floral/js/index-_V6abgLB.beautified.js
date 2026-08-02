@@ -15014,8 +15014,7 @@ function Sw() {
     if (!e) throw new Error("useLanguage must be used within LanguageProvider");
     return e
 }
-const $c = "assets/images/cupid-logo-B7PGcLFc.png",
-    sR = "b6ff423b-c815-4816-9dc7-1485a9d99b6d",
+const sR = "b6ff423b-c815-4816-9dc7-1485a9d99b6d",
     aR = "video/mp4",
     lR = "2026-06-24T13:39:28Z",
     uR = "hero-animated.mp4",
@@ -21173,7 +21172,7 @@ function hL({
         d = "20261003T230000Z",
         h = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(l)}&dates=${c}/${d}&details=${encodeURIComponent(u)}`,
         f = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(l)}&body=${encodeURIComponent(u)}&startdt=2026-10-03T15:15:00Z&enddt=2026-10-03T23:00:00Z`,
-        v = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//The Digital Yes//Wedding//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:ahmad-nour-2026-10-03@thedigitalyes.com", "DTSTAMP:20260101T000000Z", `DTSTART:${c}`, `DTEND:${d}`, `SUMMARY:${l}`, `DESCRIPTION:${u}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
+        v = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Wedding Invitation//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT", "UID:ahmad-nour-2026-10-03@wedding-invitation.local", "DTSTAMP:20260101T000000Z", `DTSTART:${c}`, `DTEND:${d}`, `SUMMARY:${l}`, `DESCRIPTION:${u}`, "END:VEVENT", "END:VCALENDAR"].join(`\r
 `),
         [g, w] = x.useState("");
     x.useEffect(() => {
@@ -21211,33 +21210,6 @@ function hL({
             }
         }), P.jsx("div", {
             className: "absolute inset-0 z-[1] bg-ivory/30"
-        }), P.jsx("a", {
-            href: "https://thedigitalyes.com",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            "aria-label": "The Digital Yes",
-            className: "absolute top-6 left-0 right-0 mx-auto z-20 w-fit",
-            children: P.jsx(Ut.span, {
-                animate: {
-                    y: [0, -3, 0, 2, 0]
-                },
-                transition: {
-                    duration: 3.2,
-                    repeat: 1 / 0,
-                    ease: "easeInOut"
-                },
-                className: "block w-10 h-10 bg-granate opacity-90",
-                style: {
-                    WebkitMaskImage: `url(${$c})`,
-                    maskImage: `url(${$c})`,
-                    WebkitMaskRepeat: "no-repeat",
-                    maskRepeat: "no-repeat",
-                    WebkitMaskSize: "contain",
-                    maskSize: "contain",
-                    WebkitMaskPosition: "center",
-                    maskPosition: "center"
-                }
-            })
         }), P.jsxs("div", {
             className: "relative z-10 flex flex-col items-center text-center px-8 max-w-[460px] mx-auto translate-y-[5vh]",
             children: [P.jsx(Ut.p, {
@@ -21409,15 +21381,6 @@ function hL({
                 className: "w-fit inline-flex items-center justify-center px-4 py-1.5 bg-granate text-ivory text-[9px] md:text-[10px] tracking-[0.35em] uppercase font-display rounded-full hover:bg-granate/90 transition-colors whitespace-nowrap scale-105",
                 children: t("addToCalendar")
             })]
-        }), P.jsxs("p", {
-            className: "absolute bottom-[max(env(safe-area-inset-bottom),0.5rem)] left-0 right-0 mx-auto z-20 w-fit font-body italic text-granate/80 text-xs",
-            children: [t("madeWithLove"), " ", P.jsx("a", {
-                href: "https://thedigitalyes.com",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "underline hover:text-granate transition-colors",
-                children: "The Digital Yes"
-            })]
         })]
     })
 }
@@ -21469,7 +21432,7 @@ const pL = "6339ca7c-e3e2-41d8-ad4f-75f8a30f39f0",
     }) => {
         const [n, r] = x.useState(!1), [o, i] = x.useState(!1), [s, a] = x.useState(!1), l = x.useRef(null);
         Sw(), x.useEffect(() => {
-            [OL, IL, $c].forEach(d => {
+            [OL, IL].forEach(d => {
                 const h = new Image;
                 h.src = d
             })

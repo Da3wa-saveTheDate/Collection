@@ -33,7 +33,7 @@ const templates = [
   {
     id: 'floral',
     title: 'Floral',
-    category: 'simple-websites',
+    category: 'premium-wedding',
     description: 'A delicate floral invitation with elegant botanical details and an interactive reveal.',
     image: '/floral/assets/images/hero-frame-ChwB8WzS.png'
   },
