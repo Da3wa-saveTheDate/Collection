@@ -15098,6 +15098,7 @@ const WS = "assets/images/inicio-camara-D3JixjJx.jpg",
         client: GS,
         children: P.jsxs(Ax, {
             children: [P.jsx(Rw, {}), P.jsx(s1, {}), P.jsx(VS, {
+                basename: "/candlelight",
                 children: P.jsxs($S, {
                     children: [P.jsx(Xa, {
                         path: "/",
