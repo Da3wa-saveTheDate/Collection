@@ -15097,18 +15097,7 @@ const WS = "assets/images/inicio-camara-D3JixjJx.jpg",
     XS = () => P.jsx(oS, {
         client: GS,
         children: P.jsxs(Ax, {
-            children: [P.jsx(Rw, {}), P.jsx(s1, {}), P.jsx(VS, {
-                basename: "/candlelight",
-                children: P.jsxs($S, {
-                    children: [P.jsx(Xa, {
-                        path: "/",
-                        element: P.jsx(KS, {})
-                    }), P.jsx(Xa, {
-                        path: "*",
-                        element: P.jsx(YS, {})
-                    })]
-                })
-            })]
+            children: [P.jsx(Rw, {}), P.jsx(s1, {}), P.jsx(KS, {})]
         })
     });
 Oh(document.getElementById("root")).render(P.jsx(XS, {}));
