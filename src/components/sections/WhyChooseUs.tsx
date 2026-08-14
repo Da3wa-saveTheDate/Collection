@@ -3,47 +3,47 @@ import { Heart, Smartphone, Zap, Shield, PenTool, Sparkles } from 'lucide-react'
 const features = [
   {
     icon: <Smartphone className="w-6 h-6" />,
-    title: "Mobile First Design",
-    description: "Flawless experience on any device, ensuring your guests can view your invitation anywhere."
+    title: 'تصميم مناسب للموبايل',
+    description: 'دعوة سهلة الفتح والمشاركة مع كل ضيوفك من أي موبايل.'
   },
   {
     icon: <PenTool className="w-6 h-6" />,
-    title: "Fully Customizable",
-    description: "Personalize every detail from typography and colors to music and animations."
+    title: 'تفاصيلك هي الأساس',
+    description: 'نضيف أسماءكم وتفاصيل المناسبة على التصميم الذي اخترتيه.'
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: "Instant Delivery",
-    description: "Share your beautiful digital invitation via WhatsApp, Email, or SMS instantly."
+    title: 'جاهزة خلال 72 ساعة',
+    description: 'بعد تأكيد التفاصيل، يصلك رابط دعوتك جاهزاً للمشاركة.'
   },
   {
     icon: <Shield className="w-6 h-6" />,
-    title: "Secure & Private",
-    description: "Your moments are yours. Advanced privacy settings protect your event details."
+    title: 'خطوات طلب بسيطة',
+    description: 'اختاري التصميم وأرسلي التفاصيل على واتساب في رسالة واحدة.'
   },
   {
     icon: <Heart className="w-6 h-6" />,
-    title: "RSVP Management",
-    description: "Effortlessly track guest responses, dietary requirements, and plus-ones in real time."
+    title: 'مناسبة لكل احتفال',
+    description: 'زفاف، خطوبة أو مناسبة خاصة — اختاري الستايل الذي يشبهكم.'
   },
   {
     icon: <Sparkles className="w-6 h-6" />,
-    title: "Premium Animations",
-    description: "Delight your guests with smooth, cinematic micro-interactions and scroll effects."
+    title: 'لمسة مميزة لضيوفك',
+    description: 'التفاصيل والحركة تجعل الدعوة تجربة لا تُنسى من أول فتح للرابط.'
   }
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 bg-brand-light relative overflow-hidden">
+    <section className="py-24 bg-brand-light relative overflow-hidden" dir="rtl">
       {/* Decorative Blur */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-brand-accent/10 rounded-full mix-blend-multiply filter blur-[80px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">Experience the Difference</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">دعوة أجمل وأسهل</h2>
           <p className="text-lg text-brand-dark/70 font-light">
-            We merge cutting-edge technology with timeless design to provide an unparalleled digital invitation experience.
+            اختاري من المجموعة وخلّي تفاصيل مناسبتك تظهر بطريقتك.
           </p>
         </div>
 

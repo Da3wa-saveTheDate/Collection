@@ -1,35 +1,35 @@
 export default function Process() {
   const steps = [
     {
-      number: "01",
-      title: "Select a Design",
-      description: "Browse our premium collection and choose a template that perfectly captures your event's theme."
+      number: '01',
+      title: 'اختاري التصميم',
+      description: 'شاهدي النماذج واختاري التصميم الأقرب لذوقك ومناسبتك.'
     },
     {
-      number: "02",
-      title: "Personalize Details",
-      description: "Submit your event details, photos, and preferences. Our platform makes customization effortless."
+      number: '02',
+      title: 'ارسلي الطلب على واتساب',
+      description: 'الرسالة تفتح تلقائياً باسم التصميم والباقة، ثم أضيفي تفاصيل المناسبة.'
     },
     {
-      number: "03",
-      title: "Review & Refine",
-      description: "Receive a live preview link. We'll fine-tune the animations and layout until it's absolutely perfect."
+      number: '03',
+      title: 'نراجع التفاصيل',
+      description: 'نؤكد معك البيانات المطلوبة قبل تجهيز نسختك النهائية.'
     },
     {
-      number: "04",
-      title: "Share with Guests",
-      description: "Send your digital invitation via any platform and watch the RSVPs seamlessly roll in."
+      number: '04',
+      title: 'استلمي وشاركي',
+      description: 'دعوتك الرقمية تكون جاهزة خلال 72 ساعة لتشاركيها مع ضيوفك.'
     }
   ];
 
   return (
-    <section id="process" className="py-24 bg-brand-dark text-brand-light relative">
+    <section id="process" className="py-24 bg-brand-dark text-brand-light relative" dir="rtl">
       <div className="container mx-auto px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-20 reveal-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">How It Works</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">كيف تطلبي دعوتك؟</h2>
           <p className="text-lg text-white/70 font-light">
-            A seamless, stress-free process designed to give you a perfect invitation in just a few simple steps.
+            أربع خطوات بسيطة من اختيارك للتصميم إلى مشاركة دعوتك مع ضيوفك.
           </p>
         </div>
 
