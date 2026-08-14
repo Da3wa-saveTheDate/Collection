@@ -5,33 +5,61 @@ export default function Pricing() {
   const plans: Array<{
     name: string;
     price: string;
+    priceNote?: string;
     description: string;
     package: InvitationPackage;
     isRecommended?: boolean;
     features: string[];
   }> = [
     {
-      name: 'Standard',
-      price: 'EGP 800',
-      package: 'standard',
-      description: 'A refined choice from our classic collection for your digital invitation.',
+      name: 'Customisation',
+      price: 'Price on request',
+      priceNote: 'Based on your requirements',
+      package: 'customisation',
+      description: 'A bespoke invitation created around your ideas, style, and event needs.',
       features: [
-        'Choose from the standard collection',
-        'Personalized event details',
+        'A design tailored to your vision',
+        'Personalised details and creative direction',
+        'A quote shared before work begins',
         'A ready-to-share invitation link',
         'Delivered within 72 hours',
       ],
     },
     {
-      name: 'Premium',
-      price: 'EGP 1,000',
-      package: 'premium',
-      description: 'For elevated designs and added personal touches for your occasion.',
+      name: 'Fan Invitation',
+      price: 'EGP 15',
+      priceNote: 'Per piece',
+      package: 'fan',
+      description: 'A printed fan invitation that is elegant, practical, and made for your celebration.',
+      features: [
+        'Choose your preferred fan design',
+        'Personalised event details',
+        'Order the quantity you need',
+        'Delivered within 72 hours',
+      ],
+    },
+    {
+      name: 'Simple Invitation',
+      price: 'EGP 600',
+      package: 'simple',
+      description: 'A polished digital invitation built from one of our simple website designs.',
       isRecommended: true,
       features: [
-        'Choose from Premium designs',
-        'Enhanced personalization for your design',
+        'Choose from the simple invitation collection',
+        'Personalised event details',
         'A ready-to-share invitation link',
+        'Delivered within 72 hours',
+      ],
+    },
+    {
+      name: 'Video Invitation',
+      price: 'EGP 1,400',
+      package: 'video',
+      description: 'A memorable video invitation crafted with your event details and visual style.',
+      features: [
+        'Choose from the video invitation collection',
+        'Personalised names and event details',
+        'A ready-to-share video invitation',
         'Delivered within 72 hours',
       ],
     },
@@ -43,13 +71,13 @@ export default function Pricing() {
         
         <div className="text-center max-w-2xl mx-auto mb-20 reveal-on-scroll">
           <p className="text-sm font-medium tracking-wide text-brand-accent mb-3">Straightforward pricing</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">Choose Your Package</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">Choose Your Invitation Type</h2>
           <p className="text-lg text-brand-dark/70 font-light">
             Every order is delivered within 72 hours. Browse the designs, then send your order directly via WhatsApp.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <div 
               key={index} 
@@ -73,7 +101,12 @@ export default function Pricing() {
               </p>
               
               <div className="mb-8">
-                <span className="text-5xl font-serif">{plan.price}</span>
+                <span className={`${plan.package === 'customisation' ? 'text-4xl' : 'text-5xl'} font-serif`}>{plan.price}</span>
+                {plan.priceNote && (
+                  <span className={`block mt-2 text-sm ${plan.isRecommended ? 'text-white/65' : 'text-brand-dark/55'}`}>
+                    {plan.priceNote}
+                  </span>
+                )}
               </div>
               
               <a

@@ -42,7 +42,7 @@ export default function Hero() {
 
             <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-3 text-sm text-brand-dark/70">
               <span className="inline-flex items-center gap-2"><Clock3 className="w-4 h-4 text-brand-accent" />Delivered within 72 hours</span>
-              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-brand-accent" />Standard from EGP 800</span>
+              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-brand-accent" />Simple Invitation · EGP 600</span>
             </div>
           </div>
 

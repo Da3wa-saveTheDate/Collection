@@ -1,4 +1,4 @@
-export type InvitationPackage = 'standard' | 'premium';
+export type InvitationPackage = 'customisation' | 'fan' | 'simple' | 'video';
 
 type OrderSelection = {
   template?: string;
@@ -8,13 +8,18 @@ type OrderSelection = {
 
 const whatsappNumber = '201042353785';
 
-const packageDetails: Record<InvitationPackage, { name: string; price: string }> = {
-  standard: { name: 'Standard', price: 'EGP 800' },
-  premium: { name: 'Premium', price: 'EGP 1,000' },
+const packageDetails: Record<InvitationPackage, { name: string; price: string; value?: number }> = {
+  customisation: { name: 'Customisation', price: 'Price on request' },
+  fan: { name: 'Fan Invitation', price: 'EGP 15 per piece', value: 15 },
+  simple: { name: 'Simple Invitation', price: 'EGP 600', value: 600 },
+  video: { name: 'Video Invitation', price: 'EGP 1,400', value: 1400 },
 };
 
 export function getSuggestedPackage(category?: string): InvitationPackage {
-  return category === 'premium-wedding' ? 'premium' : 'standard';
+  if (category === 'invitation fan') return 'fan';
+  if (category === 'video-invitations') return 'video';
+  if (category === 'simple-websites') return 'simple';
+  return 'customisation';
 }
 
 export function getPackageLabel(category?: string) {
@@ -50,11 +55,18 @@ export function trackOrderStart(selection: OrderSelection = {}) {
 
   const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
   if (typeof fbq === 'function') {
-    fbq('track', 'Lead', {
+    const selectedPackage = selection.package ?? getSuggestedPackage(selection.category);
+    const details = packageDetails[selectedPackage];
+    const eventData: Record<string, string | number> = {
       content_name: selection.template ?? 'Package inquiry',
-      content_category: selection.category ?? selection.package ?? 'website',
-      value: selection.package === 'premium' ? 1000 : 800,
+      content_category: selection.category ?? selectedPackage,
       currency: 'EGP',
-    });
+    };
+
+    if (details.value !== undefined) {
+      eventData.value = details.value;
+    }
+
+    fbq('track', 'Lead', eventData);
   }
 }
