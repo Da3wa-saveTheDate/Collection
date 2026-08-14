@@ -12,29 +12,28 @@ export default function Pricing() {
     features: string[];
   }> = [
     {
-      name: 'Customisation',
-      price: 'Price on request',
-      priceNote: 'Based on your requirements',
-      package: 'customisation',
-      description: 'A bespoke invitation created around your ideas, style, and event needs.',
+      name: 'Standard Invitation',
+      price: 'EGP 800',
+      package: 'standard',
+      description: 'A refined digital invitation for weddings, engagements, and special occasions.',
       features: [
-        'A design tailored to your vision',
-        'Personalised details and creative direction',
-        'A quote shared before work begins',
+        'Choose from the standard collection',
+        'Wedding and engagement designs included',
+        'Personalised event details',
         'A ready-to-share invitation link',
         'Delivered within 72 hours',
       ],
     },
     {
-      name: 'Fan Invitation',
-      price: 'EGP 15',
-      priceNote: 'Per piece',
-      package: 'fan',
-      description: 'A printed fan invitation that is elegant, practical, and made for your celebration.',
+      name: 'Premium Invitation',
+      price: 'EGP 1,000',
+      package: 'premium',
+      description: 'An elevated digital invitation with premium designs and added personal touches.',
+      isRecommended: true,
       features: [
-        'Choose your preferred fan design',
-        'Personalised event details',
-        'Order the quantity you need',
+        'Choose from the premium collection',
+        'Enhanced personalisation for your design',
+        'A ready-to-share invitation link',
         'Delivered within 72 hours',
       ],
     },
@@ -43,7 +42,6 @@ export default function Pricing() {
       price: 'EGP 600',
       package: 'simple',
       description: 'A polished digital invitation built from one of our simple website designs.',
-      isRecommended: true,
       features: [
         'Choose from the simple invitation collection',
         'Personalised event details',
@@ -63,6 +61,44 @@ export default function Pricing() {
         'Delivered within 72 hours',
       ],
     },
+    {
+      name: 'Fan Invitation',
+      price: 'EGP 15',
+      priceNote: 'Per piece',
+      package: 'fan',
+      description: 'A printed fan invitation that is elegant, practical, and made for your celebration.',
+      features: [
+        'Choose your preferred fan design',
+        'Personalised event details',
+        'Order the quantity you need',
+        'Delivered within 72 hours',
+      ],
+    },
+    {
+      name: 'Invitation Card',
+      price: 'EGP 200',
+      package: 'card',
+      description: 'A personalised invitation card prepared with your event details and chosen style.',
+      features: [
+        'Choose from the invitation card collection',
+        'Personalised event details',
+        'A ready-to-share invitation card',
+        'Delivered within 72 hours',
+      ],
+    },
+    {
+      name: 'Customisation',
+      price: 'Price on request',
+      priceNote: 'Based on your requirements',
+      package: 'customisation',
+      description: 'A separate bespoke service created around your ideas, style, and event needs.',
+      features: [
+        'Created specifically for your vision',
+        'Personalised creative direction',
+        'A quote shared before work begins',
+        'Delivered within 72 hours',
+      ],
+    },
   ];
 
   return (
@@ -77,7 +113,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <div 
               key={index} 

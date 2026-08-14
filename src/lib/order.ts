@@ -1,4 +1,11 @@
-export type InvitationPackage = 'customisation' | 'fan' | 'simple' | 'video';
+export type InvitationPackage =
+  | 'standard'
+  | 'premium'
+  | 'customisation'
+  | 'fan'
+  | 'card'
+  | 'simple'
+  | 'video';
 
 type OrderSelection = {
   template?: string;
@@ -9,17 +16,22 @@ type OrderSelection = {
 const whatsappNumber = '201042353785';
 
 const packageDetails: Record<InvitationPackage, { name: string; price: string; value?: number }> = {
+  standard: { name: 'Standard Invitation', price: 'EGP 800', value: 800 },
+  premium: { name: 'Premium Invitation', price: 'EGP 1,000', value: 1000 },
   customisation: { name: 'Customisation', price: 'Price on request' },
   fan: { name: 'Fan Invitation', price: 'EGP 15 per piece', value: 15 },
+  card: { name: 'Invitation Card', price: 'EGP 200', value: 200 },
   simple: { name: 'Simple Invitation', price: 'EGP 600', value: 600 },
   video: { name: 'Video Invitation', price: 'EGP 1,400', value: 1400 },
 };
 
 export function getSuggestedPackage(category?: string): InvitationPackage {
   if (category === 'invitation fan') return 'fan';
+  if (category === 'invitation cards') return 'card';
   if (category === 'video-invitations') return 'video';
   if (category === 'simple-websites') return 'simple';
-  return 'customisation';
+  if (category === 'premium-wedding') return 'premium';
+  return 'standard';
 }
 
 export function getPackageLabel(category?: string) {
