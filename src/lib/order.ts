@@ -9,8 +9,8 @@ type OrderSelection = {
 const whatsappNumber = '201042353785';
 
 const packageDetails: Record<InvitationPackage, { name: string; price: string }> = {
-  standard: { name: 'Standard', price: '800 ج.م' },
-  premium: { name: 'Premium', price: '1,000 ج.م' },
+  standard: { name: 'Standard', price: 'EGP 800' },
+  premium: { name: 'Premium', price: 'EGP 1,000' },
 };
 
 export function getSuggestedPackage(category?: string): InvitationPackage {
@@ -31,15 +31,15 @@ export function getOrderUrl(selection: OrderSelection = {}) {
     : new URLSearchParams(window.location.search).get('utm_campaign');
 
   const message = [
-    'أهلاً Ajwaa، أرغب في طلب دعوة رقمية.',
-    selection.template ? `التصميم المختار: ${selection.template}` : 'أرغب في المساعدة لاختيار التصميم.',
-    `الباقة: ${details.name} (${details.price})`,
-    'موعد التسليم المطلوب: خلال 72 ساعة.',
-    campaign ? `مصدر الزيارة: ${campaign}` : 'مصدر الزيارة: الموقع.',
+    'Hello Ajwaa, I would like to order a digital invitation.',
+    selection.template ? `Selected design: ${selection.template}` : 'I would like help choosing a design.',
+    `Package: ${details.name} (${details.price})`,
+    'Requested delivery: within 72 hours.',
+    campaign ? `Visit source: ${campaign}` : 'Visit source: website.',
     '',
-    'نوع المناسبة:',
-    'تاريخ المناسبة:',
-    'الأسماء المراد كتابتها:',
+    'Event type:',
+    'Event date:',
+    'Names to include:',
   ].join('\n');
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;

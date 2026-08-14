@@ -3,7 +3,7 @@ import { getOrderUrl, trackOrderStart } from '../../lib/order';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-light pt-24 pb-8 border-t border-brand-dark/5" dir="rtl">
+    <footer className="bg-brand-light pt-24 pb-8 border-t border-brand-dark/5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div className="md:col-span-1">
@@ -11,7 +11,7 @@ export default function Footer() {
               <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Ajwaa" className="h-24 w-auto object-contain" />
             </a>
             <p className="text-brand-dark/60 font-light text-sm leading-relaxed mb-6">
-              دعوات رقمية أنيقة لمناسباتكم، اختاروا التصميم وأرسلوا التفاصيل في دقائق.
+              Elegant digital invitations for your celebrations. Choose your design and send your details in minutes.
             </p>
             <div className="flex gap-4">
               <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark hover:bg-brand-dark hover:text-white transition-colors shadow-sm" aria-label="WhatsApp">
@@ -24,19 +24,19 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-medium text-brand-dark mb-6 tracking-wide text-sm">استكشفي</h4>
+            <h4 className="font-medium text-brand-dark mb-6 tracking-wide text-sm">Explore</h4>
             <ul className="space-y-4 text-sm font-light text-brand-dark/70">
-              <li><a href="#pricing" className="hover:text-brand-accent transition-colors">الباقات والأسعار</a></li>
-              <li><a href="#designs" className="hover:text-brand-accent transition-colors">كل التصاميم</a></li>
-              <li><a href="#process" className="hover:text-brand-accent transition-colors">طريقة الطلب</a></li>
+              <li><a href="#pricing" className="hover:text-brand-accent transition-colors">Pricing</a></li>
+              <li><a href="#designs" className="hover:text-brand-accent transition-colors">All Designs</a></li>
+              <li><a href="#process" className="hover:text-brand-accent transition-colors">How It Works</a></li>
             </ul>
           </div>
           
         </div>
         
         <div className="pt-8 border-t border-brand-dark/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-dark/50 font-light">
-          <p>© {new Date().getFullYear()} Ajwaa. جميع الحقوق محفوظة.</p>
-          <p>تسليم جميع الطلبات خلال 72 ساعة.</p>
+          <p>© {new Date().getFullYear()} Ajwaa. All rights reserved.</p>
+          <p>All orders delivered within 72 hours.</p>
         </div>
       </div>
     </footer>

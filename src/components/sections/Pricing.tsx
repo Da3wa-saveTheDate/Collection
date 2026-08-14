@@ -12,40 +12,40 @@ export default function Pricing() {
   }> = [
     {
       name: 'Standard',
-      price: '800 ج.م',
+      price: 'EGP 800',
       package: 'standard',
-      description: 'اختيار مناسب من التشكيلة الأساسية لدعوتك الرقمية.',
+      description: 'A refined choice from our classic collection for your digital invitation.',
       features: [
-        'اختاري من التصاميم القياسية',
-        'تخصيص بيانات المناسبة',
-        'رابط جاهز للمشاركة',
-        'تسليم خلال 72 ساعة',
+        'Choose from the standard collection',
+        'Personalized event details',
+        'A ready-to-share invitation link',
+        'Delivered within 72 hours',
       ],
     },
     {
       name: 'Premium',
-      price: '1,000 ج.م',
+      price: 'EGP 1,000',
       package: 'premium',
-      description: 'للتصاميم المميزة ولمسات تخصيص إضافية تناسب مناسبتك.',
+      description: 'For elevated designs and added personal touches for your occasion.',
       isRecommended: true,
       features: [
-        'اختاري من تصاميم Premium',
-        'تخصيص متقدم بحسب التصميم',
-        'رابط جاهز للمشاركة',
-        'تسليم خلال 72 ساعة',
+        'Choose from Premium designs',
+        'Enhanced personalization for your design',
+        'A ready-to-share invitation link',
+        'Delivered within 72 hours',
       ],
     },
   ];
 
   return (
-    <section id="pricing" className="py-24 bg-white relative" dir="rtl">
+    <section id="pricing" className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-20 reveal-on-scroll">
-          <p className="text-sm font-medium tracking-wide text-brand-accent mb-3">باقات واضحة بدون مفاجآت</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">اختاري الباقة المناسبة</h2>
+          <p className="text-sm font-medium tracking-wide text-brand-accent mb-3">Straightforward pricing</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-dark mb-6">Choose Your Package</h2>
           <p className="text-lg text-brand-dark/70 font-light">
-            كل الطلبات يتم تسليمها خلال 72 ساعة. شاهدي التصميم ثم أرسلي طلبك مباشرة على واتساب.
+            Every order is delivered within 72 hours. Browse the designs, then send your order directly via WhatsApp.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Pricing() {
             >
               {plan.isRecommended && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent text-brand-dark px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
-                  الأكثر اختياراً
+                  Most Popular
                 </div>
               )}
               
@@ -88,7 +88,7 @@ export default function Pricing() {
                 } flex items-center justify-center gap-2`}
               >
                 <MessageCircle className="w-5 h-5" />
-                اطلبي باقة {plan.name}
+                Order {plan.name}
               </a>
               
               <ul className="space-y-4">

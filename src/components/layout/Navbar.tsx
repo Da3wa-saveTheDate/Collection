@@ -31,17 +31,17 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 font-medium text-sm" dir="rtl">
-          <a href="#pricing" className="hover:text-brand-accent transition-colors">الباقات والأسعار</a>
-          <a href="#designs" className="hover:text-brand-accent transition-colors">التصاميم</a>
-          <a href="#process" className="hover:text-brand-accent transition-colors">طريقة الطلب</a>
+        <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
+          <a href="#pricing" className="hover:text-brand-accent transition-colors">Pricing</a>
+          <a href="#designs" className="hover:text-brand-accent transition-colors">Designs</a>
+          <a href="#process" className="hover:text-brand-accent transition-colors">How It Works</a>
         </nav>
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors inline-flex items-center gap-2" dir="rtl">
+          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors inline-flex items-center gap-2">
             <MessageCircle className="w-4 h-4" />
-            اطلبي الآن
+            Order Now
           </a>
         </div>
 
@@ -56,13 +56,13 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-[calc(100%+1rem)] left-4 right-4 glass rounded-2xl p-6 flex flex-col gap-4 shadow-lg animate-fade-up text-right" dir="rtl">
-          <a href="#pricing" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>الباقات والأسعار</a>
-          <a href="#designs" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>التصاميم</a>
-          <a href="#process" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>طريقة الطلب</a>
+        <div className="md:hidden absolute top-[calc(100%+1rem)] left-4 right-4 glass rounded-2xl p-6 flex flex-col gap-4 shadow-lg animate-fade-up">
+          <a href="#pricing" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
+          <a href="#designs" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Designs</a>
+          <a href="#process" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>How It Works</a>
           <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2 text-center inline-flex items-center justify-center gap-2">
             <MessageCircle className="w-4 h-4" />
-            اطلبي الآن
+            Order Now
           </a>
         </div>
       )}

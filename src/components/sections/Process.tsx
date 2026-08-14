@@ -2,34 +2,34 @@ export default function Process() {
   const steps = [
     {
       number: '01',
-      title: 'اختاري التصميم',
-      description: 'شاهدي النماذج واختاري التصميم الأقرب لذوقك ومناسبتك.'
+      title: 'Choose a Design',
+      description: 'Browse the collection and choose the design that best fits your occasion.'
     },
     {
       number: '02',
-      title: 'ارسلي الطلب على واتساب',
-      description: 'الرسالة تفتح تلقائياً باسم التصميم والباقة، ثم أضيفي تفاصيل المناسبة.'
+      title: 'Send Your Order on WhatsApp',
+      description: 'Your message opens with the design and package already selected. Add your event details and send.'
     },
     {
       number: '03',
-      title: 'نراجع التفاصيل',
-      description: 'نؤكد معك البيانات المطلوبة قبل تجهيز نسختك النهائية.'
+      title: 'Confirm the Details',
+      description: 'We confirm the information needed before preparing your final invitation.'
     },
     {
       number: '04',
-      title: 'استلمي وشاركي',
-      description: 'دعوتك الرقمية تكون جاهزة خلال 72 ساعة لتشاركيها مع ضيوفك.'
+      title: 'Receive & Share',
+      description: 'Your digital invitation is ready within 72 hours to share with your guests.'
     }
   ];
 
   return (
-    <section id="process" className="py-24 bg-brand-dark text-brand-light relative" dir="rtl">
+    <section id="process" className="py-24 bg-brand-dark text-brand-light relative">
       <div className="container mx-auto px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-20 reveal-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">كيف تطلبي دعوتك؟</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">How It Works</h2>
           <p className="text-lg text-white/70 font-light">
-            أربع خطوات بسيطة من اختيارك للتصميم إلى مشاركة دعوتك مع ضيوفك.
+            Four simple steps from choosing your design to sharing your invitation with guests.
           </p>
         </div>
 

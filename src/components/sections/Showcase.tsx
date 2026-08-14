@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Eye, MessageCircle } from 'lucide-react';
+import { ArrowRight, Eye, MessageCircle } from 'lucide-react';
 import { getOrderUrl, getPackageLabel, trackOrderStart } from '../../lib/order';
 
 const templates = [
@@ -353,13 +353,13 @@ const templates = [
 ];
 
 const categories = [
-  { key: 'premium-wedding', label: 'زفاف Premium' },
-  { key: 'wedding', label: 'زفاف' },
-  { key: 'engagement', label: 'خطوبة' },
-  { key: 'invitation fan', label: 'مراوح دعوات' },
-  { key: 'invitation cards', label: 'بطاقات دعوات' },
-  { key: 'simple-websites', label: 'تصاميم بسيطة' },
-  { key: 'video-invitations', label: 'دعوات فيديو' },
+  { key: 'premium-wedding', label: 'Premium Weddings' },
+  { key: 'wedding', label: 'Weddings' },
+  { key: 'engagement', label: 'Engagements' },
+  { key: 'invitation fan', label: 'Invitation Fans' },
+  { key: 'invitation cards', label: 'Invitation Cards' },
+  { key: 'simple-websites', label: 'Simple Websites' },
+  { key: 'video-invitations', label: 'Video Invitations' },
 ];
 
 export default function Showcase() {
@@ -424,19 +424,19 @@ export default function Showcase() {
   }, [activeCategory]);
 
   return (
-    <section id="designs" className="py-24 bg-brand-light relative" dir="rtl">
+    <section id="designs" className="py-24 bg-brand-light relative">
       {/* Decorative gradient blur */}
       <div className="absolute top-0 right-0 w-1/3 h-[500px] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
         {/* Header Area */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 reveal-on-scroll text-right">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 reveal-on-scroll text-left">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium tracking-wide text-brand-accent mb-3">اختاري التصميم ثم اطلبي مباشرة</p>
-            <h2 className="text-5xl md:text-6xl font-serif text-brand-dark mb-6 tracking-tight">مجموعة <br/><span className="text-brand-accent italic">Ajwaa</span></h2>
+            <p className="text-sm font-medium tracking-wide text-brand-accent mb-3">Choose a design, then order directly</p>
+            <h2 className="text-5xl md:text-6xl font-serif text-brand-dark mb-6 tracking-tight">Our Curated <br/><span className="text-brand-accent italic">Collection</span></h2>
             <p className="text-xl text-brand-dark/70 font-light max-w-lg leading-relaxed">
-              اضغطي على التصميم لمعاينته، ثم اختاري “اطلبي هذا التصميم” وستصلنا رسالة جاهزة بكل تفاصيل اختيارك.
+              Preview the designs, then select “Order This Design” to open a WhatsApp message with your choice already included.
             </p>
           </div>
           
@@ -486,7 +486,7 @@ export default function Showcase() {
                         {template.title}
                       </h3>
                     </div>
-                    <ArrowLeft className={`w-6 h-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-x-0 text-brand-accent' : 'opacity-0 translate-x-4 text-brand-dark/20'}`} />
+                    <ArrowRight className={`w-6 h-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-x-0 text-brand-accent' : 'opacity-0 -translate-x-4 text-brand-dark/20'}`} />
                   </div>
                   
                   <div className={`grid transition-all duration-500 ease-in-out overflow-hidden ${isActive ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
@@ -501,7 +501,7 @@ export default function Showcase() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
                         >
-                          شاهدي النموذج كاملاً <Eye className="w-4 h-4" />
+                          View Full Experience <Eye className="w-4 h-4" />
                         </a>
                         <a
                           href={getOrderUrl({ template: template.title, category: template.category })}
@@ -510,7 +510,7 @@ export default function Showcase() {
                           onClick={() => trackOrderStart({ template: template.title, category: template.category })}
                           className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-accent pb-1 hover:text-brand-accent transition-colors"
                         >
-                          اطلبي هذا التصميم ({getPackageLabel(template.category)}) <MessageCircle className="w-4 h-4" />
+                          Order This Design ({getPackageLabel(template.category)}) <MessageCircle className="w-4 h-4" />
                         </a>
                       </div>
                     </div>
@@ -614,7 +614,7 @@ export default function Showcase() {
                           className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
                         >
                           <Eye className="w-5 h-5 group-hover:text-brand-accent transition-colors" />
-                          شاهدي النموذج
+                          Open Template
                         </a>
                         {activeTemplate && (
                           <a
@@ -625,7 +625,7 @@ export default function Showcase() {
                             className="bg-brand-accent text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:bg-brand-accent-hover hover:scale-105 transition-all flex items-center gap-2"
                           >
                             <MessageCircle className="w-5 h-5" />
-                            اطلبي التصميم
+                            Order This Design
                           </a>
                         )}
                       </div>
@@ -731,7 +731,7 @@ export default function Showcase() {
                 <button 
                   key={`mobile-list-${template.id}`}
                   onClick={() => setActiveTemplate(template)}
-                  className={`snap-center shrink-0 w-[260px] sm:w-[300px] text-right group bg-white rounded-[1.5rem] overflow-hidden shadow-lg border transition-all duration-300 ${
+                  className={`snap-center shrink-0 w-[260px] sm:w-[300px] text-left group bg-white rounded-[1.5rem] overflow-hidden shadow-lg border transition-all duration-300 ${
                     isActive ? 'border-brand-accent ring-2 ring-brand-accent/20 scale-100' : 'border-brand-dark/5 scale-95 opacity-70'
                   }`}
                 >
@@ -765,7 +765,7 @@ export default function Showcase() {
                       {template.description}
                     </p>
                     <div className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark">
-                      اختاري التصميم <ArrowLeft className={`w-4 h-4 transition-transform ${isActive ? '-translate-x-1 text-brand-accent' : ''}`} />
+                      Select Design <ArrowRight className={`w-4 h-4 transition-transform ${isActive ? 'translate-x-1 text-brand-accent' : ''}`} />
                     </div>
                   </div>
                 </button>
@@ -774,9 +774,9 @@ export default function Showcase() {
           </div>
 
           {activeTemplate && (
-            <div className="mt-2 bg-white rounded-[1.5rem] p-5 shadow-lg border border-brand-dark/5 text-right">
+            <div className="mt-2 bg-white rounded-[1.5rem] p-5 shadow-lg border border-brand-dark/5 text-left">
               <p className="text-sm text-brand-dark/60 mb-3">
-                التصميم المختار: <span className="font-medium text-brand-dark">{activeTemplate.title}</span> · {getPackageLabel(activeTemplate.category)}
+                Selected design: <span className="font-medium text-brand-dark">{activeTemplate.title}</span> · {getPackageLabel(activeTemplate.category)}
               </p>
               <a
                 href={getOrderUrl({ template: activeTemplate.title, category: activeTemplate.category })}
@@ -786,7 +786,7 @@ export default function Showcase() {
                 className="w-full bg-brand-dark text-white px-6 py-4 rounded-full font-medium inline-flex items-center justify-center gap-2 hover:bg-black transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
-                اطلبي هذا التصميم على واتساب
+                Order This Design on WhatsApp
               </a>
             </div>
           )}
