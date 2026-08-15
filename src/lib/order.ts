@@ -15,7 +15,26 @@ type OrderSelection = {
 
 const whatsappNumber = '201042353785';
 
-const packageDetails: Record<InvitationPackage, { name: string; price: string; value?: number }> = {
+type PackageDetails = {
+  name: string;
+  price: string;
+  value?: number;
+  regularPrice?: string;
+};
+
+export const premiumOffer = {
+  price: 'EGP 800',
+  regularPrice: 'EGP 1,000',
+  endDate: '2026-08-22T23:59:59+03:00',
+  endLabel: '22 August 2026',
+  bookingLimit: 5,
+};
+
+export function isPremiumOfferActive(now = new Date()) {
+  return now.getTime() <= new Date(premiumOffer.endDate).getTime();
+}
+
+const packageDetails: Record<InvitationPackage, PackageDetails> = {
   standard: { name: 'Standard Invitation', price: 'EGP 800', value: 800 },
   premium: { name: 'Premium Invitation', price: 'EGP 1,000', value: 1000 },
   customisation: { name: 'Customisation', price: 'Price on request' },
@@ -24,6 +43,19 @@ const packageDetails: Record<InvitationPackage, { name: string; price: string; v
   simple: { name: 'Simple Invitation', price: 'EGP 600', value: 600 },
   video: { name: 'Video Invitation', price: 'EGP 1,400', value: 1400 },
 };
+
+function getPackageDetails(packageName: InvitationPackage): PackageDetails {
+  if (packageName === 'premium' && isPremiumOfferActive()) {
+    return {
+      name: 'Premium Invitation',
+      price: premiumOffer.price,
+      regularPrice: premiumOffer.regularPrice,
+      value: 800,
+    };
+  }
+
+  return packageDetails[packageName];
+}
 
 export function getSuggestedPackage(category?: string): InvitationPackage {
   if (category === 'invitation fan') return 'fan';
@@ -36,7 +68,7 @@ export function getSuggestedPackage(category?: string): InvitationPackage {
 
 export function getPackageLabel(category?: string) {
   const suggestedPackage = getSuggestedPackage(category);
-  const details = packageDetails[suggestedPackage];
+  const details = getPackageDetails(suggestedPackage);
   return `${details.name} · ${details.price}`;
 }
 
@@ -44,7 +76,7 @@ export function getOrderUrl(selection: OrderSelection = {}) {
   const selectedPackage = selection.package ?? (
     selection.category ? getSuggestedPackage(selection.category) : undefined
   );
-  const details = selectedPackage ? packageDetails[selectedPackage] : undefined;
+  const details = selectedPackage ? getPackageDetails(selectedPackage) : undefined;
   const campaign = typeof window === 'undefined'
     ? null
     : new URLSearchParams(window.location.search).get('utm_campaign');
@@ -58,7 +90,9 @@ export function getOrderUrl(selection: OrderSelection = {}) {
   const message = [
     'Hello Ajwaa, I would like to order a digital invitation.',
     selection.template ? `Selected design: ${selection.template}` : 'I would like help choosing a design.',
-    details ? `Package: ${details.name} (${details.price})` : 'Invitation type: I need help choosing.',
+    details
+      ? `Package: ${details.name} (${details.price}${details.regularPrice ? ` offer — regular ${details.regularPrice}` : ''})`
+      : 'Invitation type: I need help choosing.',
     'Requested delivery: within 72 hours.',
     campaign ? `Visit source: ${campaign}` : 'Visit source: website.',
     '',
@@ -79,7 +113,7 @@ export function trackOrderStart(selection: OrderSelection = {}) {
     const selectedPackage = selection.package ?? (
       selection.category ? getSuggestedPackage(selection.category) : undefined
     );
-    const details = selectedPackage ? packageDetails[selectedPackage] : undefined;
+    const details = selectedPackage ? getPackageDetails(selectedPackage) : undefined;
     const eventData: Record<string, string | number> = {
       content_name: selection.template ?? 'Package inquiry',
       content_category: selection.category ?? selectedPackage ?? 'general-inquiry',

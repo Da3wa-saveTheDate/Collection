@@ -1,14 +1,24 @@
 import { Check, MessageCircle } from 'lucide-react';
-import { getOrderUrl, trackOrderStart, type InvitationPackage } from '../../lib/order';
+import {
+  getOrderUrl,
+  isPremiumOfferActive,
+  premiumOffer,
+  trackOrderStart,
+  type InvitationPackage,
+} from '../../lib/order';
 
 export default function Pricing() {
+  const premiumOfferActive = isPremiumOfferActive();
+
   const plans: Array<{
     name: string;
     price: string;
+    regularPrice?: string;
     priceNote?: string;
     description: string;
     package: InvitationPackage;
     isRecommended?: boolean;
+    badge?: string;
     features: string[];
   }> = [
     {
@@ -26,10 +36,17 @@ export default function Pricing() {
     },
     {
       name: 'Premium Invitation',
-      price: 'EGP 1,000',
+      price: premiumOfferActive ? premiumOffer.price : premiumOffer.regularPrice,
+      regularPrice: premiumOfferActive ? premiumOffer.regularPrice : undefined,
+      priceNote: premiumOfferActive
+        ? `First ${premiumOffer.bookingLimit} confirmed bookings · Ends ${premiumOffer.endLabel}`
+        : undefined,
       package: 'premium',
-      description: 'An elevated digital invitation with premium designs and added personal touches.',
+      description: premiumOfferActive
+        ? 'This week only: choose a Premium design for the Standard price.'
+        : 'An elevated digital invitation with premium designs and added personal touches.',
       isRecommended: true,
+      badge: premiumOfferActive ? 'Limited Offer' : 'Most Popular',
       features: [
         'Choose from the premium collection',
         'Enhanced personalisation for your design',
@@ -127,7 +144,7 @@ export default function Pricing() {
             >
               {plan.isRecommended && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent text-brand-dark px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
-                  Most Popular
+                  {plan.badge}
                 </div>
               )}
               
@@ -139,6 +156,11 @@ export default function Pricing() {
               </p>
               
               <div className="mb-8">
+                {plan.regularPrice && (
+                  <span className="block mb-1 text-lg text-white/55 line-through decoration-brand-accent/80">
+                    {plan.regularPrice}
+                  </span>
+                )}
                 <span className={`${plan.package === 'customisation' ? 'text-4xl' : 'text-5xl'} font-serif`}>{plan.price}</span>
                 {plan.priceNote && (
                   <span className={`block mt-2 text-sm ${plan.isRecommended ? 'text-white/65' : 'text-brand-dark/55'}`}>

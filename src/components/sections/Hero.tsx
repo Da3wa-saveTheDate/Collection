@@ -1,7 +1,9 @@
 import { ArrowRight, Check, Clock3, MessageCircle, Sparkles } from 'lucide-react';
-import { getOrderUrl, trackOrderStart } from '../../lib/order';
+import { getOrderUrl, isPremiumOfferActive, premiumOffer, trackOrderStart } from '../../lib/order';
 
 export default function Hero() {
+  const premiumOfferActive = isPremiumOfferActive();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
       {/* Decorative Background */}
@@ -17,7 +19,11 @@ export default function Hero() {
           <div className="w-full lg:flex-1 text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
               <Sparkles className="w-4 h-4 text-brand-accent" />
-              <span className="text-sm font-medium tracking-wide">Digital invitations made for your moment</span>
+              <span className="text-sm font-medium tracking-wide">
+                {premiumOfferActive
+                  ? `Premium Upgrade Week · Only ${premiumOffer.bookingLimit} slots`
+                  : 'Digital invitations made for your moment'}
+              </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-serif text-brand-dark mb-6 leading-[1.1] text-balance">
@@ -42,7 +48,10 @@ export default function Hero() {
 
             <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-3 text-sm text-brand-dark/70">
               <span className="inline-flex items-center gap-2"><Clock3 className="w-4 h-4 text-brand-accent" />Delivered within 72 hours</span>
-              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-brand-accent" />Simple Invitation · EGP 600</span>
+              <span className="inline-flex items-center gap-2">
+                <Check className="w-4 h-4 text-brand-accent" />
+                {premiumOfferActive ? 'Premium Offer · EGP 800' : 'Simple Invitation · EGP 600'}
+              </span>
             </div>
           </div>
 
