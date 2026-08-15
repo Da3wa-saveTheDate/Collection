@@ -49,6 +49,8 @@ export default function Navbar() {
         <button 
           className="md:hidden p-2 text-brand-dark"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
         </button>

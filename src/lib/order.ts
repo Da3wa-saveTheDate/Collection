@@ -41,22 +41,31 @@ export function getPackageLabel(category?: string) {
 }
 
 export function getOrderUrl(selection: OrderSelection = {}) {
-  const selectedPackage = selection.package ?? getSuggestedPackage(selection.category);
-  const details = packageDetails[selectedPackage];
+  const selectedPackage = selection.package ?? (
+    selection.category ? getSuggestedPackage(selection.category) : undefined
+  );
+  const details = selectedPackage ? packageDetails[selectedPackage] : undefined;
   const campaign = typeof window === 'undefined'
     ? null
     : new URLSearchParams(window.location.search).get('utm_campaign');
 
+  const packageQuestions: Partial<Record<InvitationPackage, string[]>> = {
+    fan: ['Quantity required:'],
+    video: ['Photos or videos to include:', 'Preferred music:'],
+    customisation: ['Customisation brief / preferred style:', 'Reference links, if any:'],
+  };
+
   const message = [
     'Hello Ajwaa, I would like to order a digital invitation.',
     selection.template ? `Selected design: ${selection.template}` : 'I would like help choosing a design.',
-    `Package: ${details.name} (${details.price})`,
+    details ? `Package: ${details.name} (${details.price})` : 'Invitation type: I need help choosing.',
     'Requested delivery: within 72 hours.',
     campaign ? `Visit source: ${campaign}` : 'Visit source: website.',
     '',
     'Event type:',
     'Event date:',
     'Names to include:',
+    ...(selectedPackage ? packageQuestions[selectedPackage] ?? [] : []),
   ].join('\n');
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -67,15 +76,17 @@ export function trackOrderStart(selection: OrderSelection = {}) {
 
   const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
   if (typeof fbq === 'function') {
-    const selectedPackage = selection.package ?? getSuggestedPackage(selection.category);
-    const details = packageDetails[selectedPackage];
+    const selectedPackage = selection.package ?? (
+      selection.category ? getSuggestedPackage(selection.category) : undefined
+    );
+    const details = selectedPackage ? packageDetails[selectedPackage] : undefined;
     const eventData: Record<string, string | number> = {
       content_name: selection.template ?? 'Package inquiry',
-      content_category: selection.category ?? selectedPackage,
+      content_category: selection.category ?? selectedPackage ?? 'general-inquiry',
       currency: 'EGP',
     };
 
-    if (details.value !== undefined) {
+    if (details?.value !== undefined) {
       eventData.value = details.value;
     }
 

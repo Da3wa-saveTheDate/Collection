@@ -11,10 +11,10 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           
           {/* Text Content */}
-          <div className="flex-1 text-center lg:text-left animate-fade-up">
+          <div className="w-full lg:flex-1 text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
               <Sparkles className="w-4 h-4 text-brand-accent" />
               <span className="text-sm font-medium tracking-wide">Digital invitations made for your moment</span>
@@ -47,7 +47,7 @@ export default function Hero() {
           </div>
 
           {/* Floating Mockups */}
-          <div className="flex-1 relative w-full h-[400px] md:h-[600px] mt-12 lg:mt-0 block">
+          <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] mt-10 lg:mt-0 lg:flex-1 shrink-0 block">
             {/* Main Mockup */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] md:w-[280px] h-[380px] sm:h-[460px] md:h-[580px] rounded-[2rem] md:rounded-[2.5rem] bg-white shadow-2xl p-1.5 md:p-2 z-20 animate-float">
               <div className="w-full h-full rounded-[1.75rem] md:rounded-[2rem] overflow-hidden relative">

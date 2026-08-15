@@ -118,6 +118,8 @@ export default function Pricing() {
             <div 
               key={index} 
               className={`relative rounded-[2rem] p-8 md:p-10 transition-all duration-500 reveal-on-scroll delay-${(index + 1) * 100} ${
+                plan.package === 'customisation' ? 'lg:col-start-2' : ''
+              } ${
                 plan.isRecommended 
                   ? 'bg-brand-dark text-white shadow-2xl scale-100 md:scale-105 z-10' 
                   : 'bg-brand-light text-brand-dark border border-brand-dark/5'
