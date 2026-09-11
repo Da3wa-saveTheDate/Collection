@@ -14,7 +14,7 @@ export default function Footer() {
               Elegant digital invitations for your celebrations. Choose your design and send your details in minutes.
             </p>
             <div className="flex gap-4">
-              <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark hover:bg-brand-dark hover:text-white transition-colors shadow-sm" aria-label="WhatsApp">
+              <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart({}, 'footer')} className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark hover:bg-brand-dark hover:text-white transition-colors shadow-sm" aria-label="WhatsApp">
                 <MessageCircle className="w-4 h-4" />
               </a>
               <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark hover:bg-brand-dark hover:text-white transition-colors shadow-sm" aria-label="Instagram">

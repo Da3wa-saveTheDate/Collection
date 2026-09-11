@@ -1,3 +1,5 @@
+import { trackEvent } from './telemetry';
+
 export type InvitationPackage =
   | 'standard'
   | 'premium'
@@ -105,8 +107,15 @@ export function getOrderUrl(selection: OrderSelection = {}) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-export function trackOrderStart(selection: OrderSelection = {}) {
+export function trackOrderStart(selection: OrderSelection = {}, location = 'unspecified') {
   if (typeof window === 'undefined') return;
+
+  trackEvent('whatsapp_clicked', {
+    template: selection.template,
+    category: selection.category,
+    package: selection.package ?? (selection.category ? getSuggestedPackage(selection.category) : undefined),
+    location,
+  });
 
   const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
   if (typeof fbq === 'function') {

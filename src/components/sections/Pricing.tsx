@@ -1,4 +1,5 @@
 import { Check, MessageCircle } from 'lucide-react';
+import { usePricingView } from '../../hooks/usePricingView';
 import {
   getOrderUrl,
   isPremiumOfferActive,
@@ -8,6 +9,7 @@ import {
 } from '../../lib/order';
 
 export default function Pricing() {
+  const pricingRef = usePricingView();
   const premiumOfferActive = isPremiumOfferActive();
 
   const plans: Array<{
@@ -119,7 +121,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-24 bg-white relative">
+    <section ref={pricingRef} id="pricing" className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-20 reveal-on-scroll">
@@ -173,7 +175,7 @@ export default function Pricing() {
                 href={getOrderUrl({ package: plan.package })}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackOrderStart({ package: plan.package })}
+                onClick={() => trackOrderStart({ package: plan.package }, 'pricing')}
                 className={`w-full py-4 rounded-full font-medium transition-all mb-8 ${
                   plan.isRecommended 
                     ? 'bg-brand-accent text-brand-dark hover:bg-brand-accent-hover' 

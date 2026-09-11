@@ -39,7 +39,7 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors inline-flex items-center gap-2">
+          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart({}, 'navbar')} className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors inline-flex items-center gap-2">
             <MessageCircle className="w-4 h-4" />
             Order Now
           </a>
@@ -62,7 +62,7 @@ export default function Navbar() {
           <a href="#pricing" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
           <a href="#designs" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>Designs</a>
           <a href="#process" className="text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>How It Works</a>
-          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart()} className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2 text-center inline-flex items-center justify-center gap-2">
+          <a href={getOrderUrl()} target="_blank" rel="noopener noreferrer" onClick={() => trackOrderStart({}, 'navbar')} className="w-full bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium mt-2 text-center inline-flex items-center justify-center gap-2">
             <MessageCircle className="w-4 h-4" />
             Order Now
           </a>

@@ -7,14 +7,19 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "test:telemetry": "node --test tests/telemetry.test.cjs",
+    "test:telemetry:browser": "node tests/telemetry-browser.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/react": "^10.74.0",
+    "posthog-js": "^1.430.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "sharp": "^0.35.3"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^5.4.0",
     "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",

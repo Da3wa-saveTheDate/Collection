@@ -1,3 +1,4 @@
+import { trackEvent } from '../../lib/telemetry';
 import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Eye, MessageCircle } from 'lucide-react';
 import { getOrderUrl, getPackageLabel, trackOrderStart } from '../../lib/order';
@@ -496,7 +497,7 @@ export default function Showcase() {
                       </p>
                       <div className="flex flex-wrap items-center gap-4">
                         <a
-                          href={`${import.meta.env.BASE_URL}${template.id}/`}
+                          href={`${import.meta.env.BASE_URL}${template.id}/`} onClick={() => trackEvent('template_opened', { template: template.id, category: template.category, location: 'showcase_card' })}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
@@ -507,7 +508,7 @@ export default function Showcase() {
                           href={getOrderUrl({ template: template.title, category: template.category })}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={() => trackOrderStart({ template: template.title, category: template.category })}
+                          onClick={() => trackOrderStart({ template: template.title, category: template.category }, 'showcase_card')}
                           className="inline-flex items-center gap-2 text-sm font-medium text-brand-dark border-b border-brand-accent pb-1 hover:text-brand-accent transition-colors"
                         >
                           Order This Design ({getPackageLabel(template.category)}) <MessageCircle className="w-4 h-4" />
@@ -608,7 +609,7 @@ export default function Showcase() {
                     <div className="absolute inset-0 z-50 bg-brand-dark/20 opacity-0 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
                       <div className="flex flex-col gap-3">
                         <a
-                          href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/` : '#'}
+                          href={activeTemplate ? `${import.meta.env.BASE_URL}${activeTemplate.id}/` : '#'} onClick={() => activeTemplate && trackEvent('template_opened', { template: activeTemplate.id, category: activeTemplate.category, location: 'showcase_preview' })}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="bg-white text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:scale-105 transition-all flex items-center gap-2 group"
@@ -621,7 +622,7 @@ export default function Showcase() {
                             href={getOrderUrl({ template: activeTemplate.title, category: activeTemplate.category })}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => trackOrderStart({ template: activeTemplate.title, category: activeTemplate.category })}
+                            onClick={() => trackOrderStart({ template: activeTemplate.title, category: activeTemplate.category }, 'showcase_preview')}
                             className="bg-brand-accent text-brand-dark px-8 py-4 rounded-full font-medium shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:bg-brand-accent-hover hover:scale-105 transition-all flex items-center gap-2"
                           >
                             <MessageCircle className="w-5 h-5" />
@@ -708,7 +709,7 @@ export default function Showcase() {
                      {/* Overlay Action */}
                      <div className="absolute inset-0 z-50 bg-brand-dark/20 opacity-0 active:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                        <a 
-                         href={`${import.meta.env.BASE_URL}${template.id}/`}
+                         href={`${import.meta.env.BASE_URL}${template.id}/`} onClick={() => trackEvent('template_opened', { template: template.id, category: template.category, location: 'showcase_card' })}
                          target="_blank"
                          rel="noopener noreferrer"
                          className="bg-white text-brand-dark px-6 py-3 rounded-full font-medium shadow-xl flex items-center gap-2"
@@ -782,7 +783,7 @@ export default function Showcase() {
                 href={getOrderUrl({ template: activeTemplate.title, category: activeTemplate.category })}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackOrderStart({ template: activeTemplate.title, category: activeTemplate.category })}
+                onClick={() => trackOrderStart({ template: activeTemplate.title, category: activeTemplate.category }, 'showcase_preview')}
                 className="w-full bg-brand-dark text-white px-6 py-4 rounded-full font-medium inline-flex items-center justify-center gap-2 hover:bg-black transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
