@@ -2,6 +2,21 @@
 
 ## Activate in Vercel
 
+The production browser identifiers are configured in `telemetry.public.json` for
+PostHog project 605778 (US) and Sentry organization `ajwa2`, project
+`javascript-react`. These are public ingestion identifiers that are already visible
+in browser JavaScript, not private management credentials. Production builds use
+them by default, restricted to `ajwa2-collection.vercel.app`. Vercel environment
+variables or local env files override these defaults, including blank values.
+Do not copy the disabled `.env.example` values into production unless intending
+to disable tracking. Development and preview hostnames remain excluded.
+
+PostHog is on the free plan. Sentry has a new/regressed-issue alert notifying the
+account owner on their preferred channel, throttled to once per issue per hour.
+Private source-map upload credentials are not configured in this repository.
+
+To override the configuration or enable source maps:
+
 1. Create a PostHog project in your chosen region and a Sentry React project.
 2. Add the public values from `.env.example` to Vercel's **Production** environment:
    `VITE_POSTHOG_PROJECT_TOKEN`, `VITE_POSTHOG_HOST`, and `VITE_SENTRY_DSN`.

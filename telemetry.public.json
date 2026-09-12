@@ -1,0 +1,7 @@
+{
+  "VITE_TELEMETRY_ENABLED": "true",
+  "VITE_TELEMETRY_ALLOWED_HOSTS": "ajwa2-collection.vercel.app",
+  "VITE_POSTHOG_PROJECT_TOKEN": "phc_pgckL7yrMoRN4DRpY8jamjzmjm6VpUfsJdJWBDRvTcco",
+  "VITE_POSTHOG_HOST": "https://us.i.posthog.com",
+  "VITE_SENTRY_DSN": "https://82b980dd8ade3cbb84606f9764257947@o4512072609431552.ingest.de.sentry.io/4512072613953616"
+}

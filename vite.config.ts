@@ -1,11 +1,20 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import publicTelemetry from './telemetry.public.json' with { type: 'json' }
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const environment = loadEnv(mode, process.cwd(), 'VITE_')
+  return {
   base: './',
+  // These browser ingestion identifiers are public, not management API keys.
+  // Hosting environment variables (including explicit blanks) take precedence.
+  define: Object.fromEntries(Object.entries(publicTelemetry).map(([key, value]) => [
+    `import.meta.env.${key}`,
+    JSON.stringify(environment[key] ?? value),
+  ])),
   build: { sourcemap: process.env.SENTRY_AUTH_TOKEN ? 'hidden' : false },
   plugins: [react(), tailwindcss(), ...(process.env.SENTRY_AUTH_TOKEN ? [sentryVitePlugin({
     org: process.env.SENTRY_ORG,
@@ -14,4 +23,5 @@ export default defineConfig({
     telemetry: false,
     sourcemaps: { filesToDeleteAfterUpload: ['./dist/**/*.map'] },
   })] : [])],
+  }
 })
