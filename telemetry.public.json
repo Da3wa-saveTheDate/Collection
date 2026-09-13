@@ -1,5 +1,8 @@
 {
   "VITE_TELEMETRY_ENABLED": "true",
+  "VITE_SENTRY_TRACES_SAMPLE_RATE": "0.05",
+  "VITE_PERFORMANCE_SAMPLE_RATE": "0.1",
+  "VITE_SPEED_INSIGHTS_ENABLED": "true",
   "VITE_TELEMETRY_ALLOWED_HOSTS": "ajwa2-collection.vercel.app",
   "VITE_POSTHOG_PROJECT_TOKEN": "phc_pgckL7yrMoRN4DRpY8jamjzmjm6VpUfsJdJWBDRvTcco",
   "VITE_POSTHOG_HOST": "https://us.i.posthog.com",

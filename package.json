@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@sentry/react": "^10.74.0",
+    "@vercel/speed-insights": "^2.0.0",
     "posthog-js": "^1.430.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.3",
+    "web-vitals": "^6.2.1"
   },
   "devDependencies": {
     "@sentry/vite-plugin": "^5.4.0",

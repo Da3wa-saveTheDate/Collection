@@ -11,7 +11,9 @@ export default defineConfig(({ mode }) => {
   base: './',
   // These browser ingestion identifiers are public, not management API keys.
   // Hosting environment variables (including explicit blanks) take precedence.
-  define: Object.fromEntries(Object.entries(publicTelemetry).map(([key, value]) => [
+  define: Object.fromEntries(Object.entries({ ...publicTelemetry,
+    VITE_APP_RELEASE: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.GITHUB_SHA ?? 'local',
+  }).map(([key, value]) => [
     `import.meta.env.${key}`,
     JSON.stringify(environment[key] ?? value),
   ])),

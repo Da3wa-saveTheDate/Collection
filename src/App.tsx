@@ -6,6 +6,7 @@ import Showcase from './components/sections/Showcase';
 import WhyChooseUs from './components/sections/WhyChooseUs';
 import Process from './components/sections/Process';
 import { useScrollReveal } from './hooks/useScrollReveal';
+import SupportChat from './components/SupportChat';
 
 function App() {
   useScrollReveal();
@@ -21,6 +22,7 @@ function App() {
         <Process />
       </main>
       <Footer />
+      <SupportChat />
     </div>
   );
 }

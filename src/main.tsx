@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { ErrorBoundary } from '@sentry/react'
 import { initializeTelemetry } from './lib/telemetry'
+import PerformanceInsights from './components/PerformanceInsights'
 
 initializeTelemetry()
 
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
       </main>
     }>
       <App />
+      <PerformanceInsights />
     </ErrorBoundary>
   </StrictMode>,
 )

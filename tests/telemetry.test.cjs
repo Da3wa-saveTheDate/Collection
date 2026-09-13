@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const ts = require('typescript');
 
-function setup({ env = {}, hostname = 'ajwa2-collection.vercel.app', navigator = {}, captureThrows = false } = {}) {
+function setup({ env = {}, hostname = 'ajwa2-collection.vercel.app', navigator = {}, captureThrows = false, random = 0.99 } = {}) {
   const events = [];
   const configs = {};
   const settings = { PROD: true, VITE_TELEMETRY_ENABLED: 'true', VITE_POSTHOG_PROJECT_TOKEN: 'test', VITE_SENTRY_DSN: 'test', ...env };
@@ -18,11 +18,12 @@ function setup({ env = {}, hostname = 'ajwa2-collection.vercel.app', navigator =
   const source = fs.readFileSync('src/lib/telemetry.ts', 'utf8').replaceAll('import.meta.env', 'testEnv');
   const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
   const context = {
-    exports: {}, testEnv: settings, navigator,
+    exports: {}, testEnv: settings, navigator, URLSearchParams, Math: Object.assign(Object.create(Math), { random: () => random }),
     window: { location: { hostname, host: hostname, origin: `https://${hostname}`, pathname: '/', search: '?name=private', hash: '#private' } },
     require(name) {
       if (name === 'posthog-js') return posthog;
-      if (name === '@sentry/react') return { init(config) { configs.sentry = config; } };
+      if (name === '@sentry/react') return { init(config) { configs.sentry = config; }, browserTracingIntegration(options) { configs.tracing = options; return { name: 'BrowserTracing' }; } };
+      if (name === 'web-vitals') return Object.fromEntries(['CLS', 'INP', 'LCP'].map((metric) => [`on${metric}`, (callback) => { configs[metric] = callback; }]));
       throw new Error(name);
     },
   };
@@ -37,6 +38,58 @@ test('production initializes once and reports only a clean page URL', () => {
   assert.equal(events[0].event, '$pageview');
   assert.equal(events[0].properties.$current_url, 'https://ajwa2-collection.vercel.app/');
   assert.ok(!JSON.stringify(events).includes('private'));
+});
+
+test('performance sampling emits each valid vital once without element metadata', () => {
+  const { api, configs, events } = setup({ random: 0 });
+  api.initializeTelemetry();
+  configs.LCP({ name: 'LCP', value: 2300, rating: 'good', entries: [{ url: '?private' }] });
+  configs.LCP({ name: 'LCP', value: 2400, rating: 'good' });
+  configs.INP({ name: 'INP', value: NaN, rating: 'poor' });
+  assert.equal(events.filter((event) => event.event === 'web_vital').length, 1);
+  assert.equal(events[1].properties.value, 2300);
+  assert.equal(events[1].properties.unit, 'ms');
+  assert.ok(!JSON.stringify(events).includes('?private'));
+});
+
+test('unsampled visits register no web-vitals observers', () => {
+  const { api, configs } = setup();
+  api.initializeTelemetry();
+  assert.equal(configs.LCP, undefined);
+  assert.equal(configs.sentry.tracesSampleRate, 0.05);
+});
+
+test('privacy opt-out disables performance and trace collection', () => {
+  const { api, configs } = setup({ random: 0, navigator: { doNotTrack: '1' } });
+  api.initializeTelemetry();
+  assert.equal(configs.LCP, undefined);
+  assert.equal(configs.sentry.tracesSampleRate, 0);
+  assert.equal(configs.tracing, undefined);
+});
+
+test('trace sanitizer removes URLs, request data, and span attributes', () => {
+  const { api, configs } = setup();
+  api.initializeTelemetry();
+  const event = configs.sentry.beforeSendTransaction({
+    transaction: '/?private', request: { url: '?private' }, user: { id: 'private' }, extra: { secret: 'private' },
+    sdkProcessingMetadata: { normalizedRequest: { url: '?private' } },
+    contexts: { trace: { trace_id: 'trace', span_id: 'span', data: { value: 'private' } }, other: { secret: 'private' } },
+    spans: [{ op: 'resource.img', description: 'https://example.com/?private', data: { 'http.url': 'private' } }],
+  });
+  assert.ok(!JSON.stringify(event).includes('private'));
+  assert.equal(event.spans[0].op, 'resource.img');
+  assert.equal(configs.tracing.traceFetch, false);
+  assert.equal(configs.sentry.tracePropagationTargets.length, 0);
+});
+
+test('source attribution only accepts known channels', () => {
+  const { api, events, context } = setup();
+  context.window.location.search = '?utm_source=private@example.com';
+  api.initializeTelemetry();
+  assert.equal(events[0].properties.traffic_source, 'other');
+  context.window.location.search = '?utm_source=instagram';
+  api.trackEvent('whatsapp_clicked', { location: 'hero' });
+  assert.equal(events[1].properties.traffic_source, 'instagram');
 });
 
 test('preview, disabled config, and development do not initialize providers', () => {
@@ -92,6 +145,7 @@ test('Sentry scrubs customer context and preserves useful stack locations', () =
   api.initializeTelemetry();
   const event = configs.sentry.beforeSend({
     user: { email: 'private' }, request: { url: '?private' }, extra: { name: 'private' },
+    sdkProcessingMetadata: { normalizedRequest: { url: '?private' } },
     breadcrumbs: [{ message: 'private' }], message: 'private',
     exception: { values: [{ type: 'TypeError', value: 'private', stacktrace: { frames: [{ filename: 'https://example.com/app.js?private', lineno: 42, vars: { name: 'private' } }] } }] },
   });

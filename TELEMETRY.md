@@ -1,4 +1,41 @@
-# Phase 1: analytics and error tracking
+# Analytics, observability, and support
+
+## Phase 2 dashboard
+
+Open [Ajwaa — Conversion & Performance](https://us.posthog.com/project/605778/dashboard/2091566).
+The pricing and design funnels measure sequential steps within 30 minutes and
+compare device types. WhatsApp clicks are inquiry intent, not completed sales.
+Historical setup visits are included; use dates after deployment for a business baseline.
+
+Sentry's `javascript-react` project receives sampled page-load traces (5%) and
+errors tagged with the deployment commit SHA. Source maps still require the
+private build credentials below. No paid upgrade was enabled.
+
+LCP, INP, and CLS are measured on 10% of page loads and sent as `web_vital` events
+to PostHog. Each metric is emitted at most once per page load (up to three events).
+LCP/INP values use milliseconds; CLS is a unitless score. Compare each metric's
+75th percentile by device and always inspect sample counts. Collection depends on
+browser support, user interaction, and page visibility; a metric may not emit.
+These are first-finalized readings, not full-lifetime measurements after repeated
+background/foreground transitions, and do not measure inside template iframes.
+Small samples should not be used to claim an improvement.
+
+`VITE_SENTRY_TRACES_SAMPLE_RATE` and `VITE_PERFORMANCE_SAMPLE_RATE` accept 0–1;
+zero disables the corresponding collection. `VITE_APP_RELEASE` overrides the
+default Vercel/GitHub commit SHA. Changes require a new build.
+
+The optional Vercel Speed Insights component uses the same 10% rate, independently
+sampled, and removes query strings/fragments. Its free dashboard provides an
+overall RES score; detailed Vercel metrics require a paid tier. Enable Speed
+Insights in the owning Vercel project if its script is unavailable, or set
+`VITE_SPEED_INSIGHTS_ENABLED=false`. PostHog metrics work independently.
+
+The visible Need help? panel provides three static FAQ answers, pricing navigation,
+and a WhatsApp handoff. A suggestion appears after 30 seconds of visible browsing;
+it never opens automatically. Dismissal is stored in sessionStorage only. There is
+no AI service, subscription, message input, or transcript collection. Events
+`support_opened` and `support_answer_viewed` (static `topic`) measure usage;
+the handoff uses `whatsapp_clicked` with `location=support`.
 
 ## Activate in Vercel
 
@@ -40,6 +77,9 @@ To override the configuration or enable source maps:
 | `pricing_viewed` | First time at least 10% of pricing intersects the viewport | Clean page URL/path |
 | `template_opened` | Explicit full-template link click; not hover or iframe loading | Template ID, category, CTA location |
 | `whatsapp_clicked` | An order CTA click | Catalog template title, category, inferred/selected package, CTA location |
+| `web_vital` | Sampled browser metric | metric, value, rating, unit |
+| `support_opened` | Help panel opened | Clean URL/path |
+| `support_answer_viewed` | FAQ answer expanded | Static topic ID |
 
 The existing Meta Pixel remains unchanged. Its `Lead` event and the new WhatsApp
 event represent click intent, not a confirmed message, order, or payment.
@@ -56,13 +96,17 @@ PostHog uses in-memory anonymous identity: refreshes/new tabs are new identities
 so this MVP measures in-tab journeys, not persistent unique customers. It honors
 Do Not Track and Global Privacy Control. Autocapture, replay, surveys, automatic
 exception capture, and feature flags are disabled. Event properties are allowlisted;
-query strings, fragments, referrers, customer details, and campaign attribution are
-not sent. Coarse device type, browser, and OS are retained for mobile comparisons.
+query strings, fragments, referrers, and customer details are not sent. A normalized
+`traffic_source` accepts only instagram, facebook, google, tiktok, or whatsapp from
+`utm_source`; other values become `other`, missing values `unattributed`. Raw
+campaign strings are never sent. Coarse device type, browser, and OS are retained.
 Service ingestion still receives network metadata such as IP addresses;
 configure provider retention/access and the site's privacy disclosure accordingly.
 
-Sentry collects errors without replay/tracing, request data, user context, or
-breadcrumbs. Error messages are replaced with generic text to avoid customer data;
+Sentry collects errors and 5% of page-load traces without replay, request data, user
+context, or breadcrumbs. DNT/GPC disables traces and performance analytics; basic
+scrubbed errors remain enabled. Span descriptions/attributes are scrubbed and fetch/XHR
+tracing and cross-origin trace propagation are disabled. Error messages are replaced with generic text to avoid customer data;
 stack traces and exception types remain for diagnosis. This deliberately reduces
 diagnostic detail. The React boundary offers refresh and WhatsApp contact.
 

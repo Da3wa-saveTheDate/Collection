@@ -14,6 +14,7 @@ await build({
     VITE_TELEMETRY_ENABLED: 'true', VITE_TELEMETRY_ALLOWED_HOSTS: '127.0.0.1',
     VITE_POSTHOG_PROJECT_TOKEN: 'test-project', VITE_POSTHOG_HOST: 'https://eu.i.posthog.com',
     VITE_SENTRY_DSN: 'https://public@example.ingest.sentry.io/1',
+    VITE_SENTRY_TRACES_SAMPLE_RATE: '1', VITE_PERFORMANCE_SAMPLE_RATE: '1',
   }).map(([key, value]) => [`import.meta.env.${key}`, JSON.stringify(value)])),
   plugins: [{ name: 'test-capture', enforce: 'pre', transform(code, id) {
     if (id.replaceAll('\\', '/').endsWith('/src/App.tsx')) {
@@ -78,8 +79,28 @@ try {
     const click = events.find((event) => event.event === 'whatsapp_clicked');
     assert.equal(click.properties.location, 'pricing');
     assert.equal(click.properties.package, 'standard');
-    assert.ok(!JSON.stringify(events).includes('private@example.com'));
+    const privatePaths = [];
+    function findPrivate(value, path = '') {
+      if (typeof value === 'string' && value.includes('private@example.com')) privatePaths.push(path);
+      else if (value && typeof value === 'object') for (const [key, child] of Object.entries(value)) findPrivate(child, `${path}.${key}`);
+    }
+    findPrivate(events);
+    assert.deepEqual(privatePaths, [], 'Sensitive fields reached a telemetry hook');
     assert.equal(await page.$$eval('#pricing a[href^="https://wa.me"]', (links) => links.length > 0), true);
+    await page.click('[data-support-widget] > button');
+    await page.waitForSelector('#ajwaa-support');
+    await page.click('button[aria-controls="support-delivery"]');
+    assert.match(await page.$eval('#support-delivery', (el) => el.textContent), /72 hours/);
+    assert.equal(await page.$eval('#ajwaa-support a[target="_blank"]', (el) => new URL(el.href).pathname), '/201042353785');
+    await page.$eval('#ajwaa-support a[target="_blank"]', (el) => el.click());
+    const supportEvents = await page.evaluate(() => window.__telemetryEvents);
+    assert.equal(supportEvents.filter((e) => e.event === 'support_opened').length, 1);
+    assert.equal(supportEvents.find((e) => e.event === 'support_answer_viewed').properties.topic, 'delivery');
+    assert.equal(supportEvents.filter((e) => e.event === 'whatsapp_clicked' && e.properties.location === 'support').length, 1);
+    assert.equal(await page.$eval('[data-support-widget]', (el) => el.getBoundingClientRect().right <= innerWidth), true);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.$('#ajwaa-support'), null);
+    assert.equal(await page.$eval('[data-support-widget] > button', (el) => el === document.activeElement), true);
     await page.evaluate(() => window.__testFailRender());
     await page.waitForFunction(() => document.body.innerText.includes('We couldn’t load the collection'));
     assert.equal(await page.$eval('main a', (element) => element.href), 'https://wa.me/201042353785');
