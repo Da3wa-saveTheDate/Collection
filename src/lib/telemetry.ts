@@ -88,7 +88,11 @@ export function initializeTelemetry() {
       beforeSendTransaction(event) {
         delete event.user;
         delete event.request;
-        if (event.sdkProcessingMetadata) delete event.sdkProcessingMetadata.normalizedRequest;
+        if (event.sdkProcessingMetadata) {
+          delete event.sdkProcessingMetadata.normalizedRequest;
+          delete event.sdkProcessingMetadata.capturedSpanScope;
+          delete event.sdkProcessingMetadata.capturedSpanIsolationScope;
+        }
         delete event.extra;
         event.breadcrumbs = [];
         event.transaction = '/';
@@ -106,7 +110,11 @@ export function initializeTelemetry() {
       beforeSend(event) {
         delete event.user;
         delete event.request;
-        if (event.sdkProcessingMetadata) delete event.sdkProcessingMetadata.normalizedRequest;
+        if (event.sdkProcessingMetadata) {
+          delete event.sdkProcessingMetadata.normalizedRequest;
+          delete event.sdkProcessingMetadata.capturedSpanScope;
+          delete event.sdkProcessingMetadata.capturedSpanIsolationScope;
+        }
         delete event.extra;
         event.breadcrumbs = [];
         // Error messages can contain user input or request URLs.
