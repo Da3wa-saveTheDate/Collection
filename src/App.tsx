@@ -5,6 +5,7 @@ import Pricing from './components/sections/Pricing';
 import Showcase from './components/sections/Showcase';
 import WhyChooseUs from './components/sections/WhyChooseUs';
 import Process from './components/sections/Process';
+import InvitationExperience from './components/experience/InvitationExperience';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import SupportChat from './components/SupportChat';
 
@@ -18,6 +19,7 @@ function App() {
         <Hero />
         <Pricing />
         <Showcase />
+        <InvitationExperience />
         <WhyChooseUs />
         <Process />
       </main>
