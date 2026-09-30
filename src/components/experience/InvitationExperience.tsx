@@ -4,7 +4,8 @@
  * A sticky, full-viewport WebGL canvas holds one phone — showing the invitation — in the centre of
  * the screen while the chapters below scroll past it. Scroll poses the phone
  * (see experienceConfig.ts) and, at the end, docks it into the featured
- * package card's empty slot.
+ * package card's empty slot. Visitors can drag the phone, tap the envelope
+ * open, and personalise it with their names, date and design.
  *
  * Layering inside the section (back → front):
  *   backdrop gradient → hero wordmark → canvas + grain → text content
@@ -13,6 +14,8 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { ErrorBoundary } from '@sentry/react';
 import { ArrowDown, ArrowRight, MessageCircle } from 'lucide-react';
 import { getOrderUrl, isPremiumOfferActive, premiumOffer, trackOrderStart, type InvitationPackage } from '../../lib/order';
+import PersonaliseChapter from './PersonaliseChapter';
+import { designFor, orderDetails, usePersonalisation } from './personalisation';
 import './invitation-experience.css';
 
 const InvitationScene = lazy(() => import('./InvitationScene'));
@@ -38,8 +41,6 @@ function useReducedMotion() {
   return reduced;
 }
 
-const fallbackImage = `${import.meta.env.BASE_URL}celestial-love/images/hero.webp`;
-
 export default function InvitationExperience() {
   const rootRef = useRef<HTMLElement>(null);
   const [root, setRoot] = useState<HTMLElement | null>(null);
@@ -50,6 +51,11 @@ export default function InvitationExperience() {
   const reducedMotion = useReducedMotion();
   const premiumOfferActive = isPremiumOfferActive();
   const onReady = useCallback(() => setReady(true), []);
+  const personalisation = usePersonalisation();
+  const design = designFor(personalisation);
+  const details = orderDetails(personalisation);
+  // Without WebGL the chosen design still shows as a still image.
+  const fallbackImage = `${import.meta.env.BASE_URL}${design.photo}`;
 
   useEffect(() => {
     const element = rootRef.current;
@@ -117,6 +123,12 @@ export default function InvitationExperience() {
           <div className="xp__hero-foot">
             <h2 className="xp__hero-title">The first moment <em>of your celebration.</em></h2>
             <p className="xp__label xp__scroll-cue"><ArrowDown size={14} aria-hidden="true" /> Scroll to unfold</p>
+            {show3D && ready && (
+              <p className="xp__label xp__hint">
+                {!reducedMotion && <><span className="xp__hint-fine">Drag to turn</span><span className="xp__hint-coarse">Swipe the phone to turn</span> · </>}
+                <span className="xp__hint-fine">Click the seal to open</span><span className="xp__hint-coarse">Tap the seal to open</span>
+              </p>
+            )}
           </div>
         </div>
 
@@ -171,10 +183,13 @@ export default function InvitationExperience() {
           </div>
         </div>
 
-        {/* 5 — Packages, with the dock slot */}
+        {/* 5 — Personalisation */}
+        <PersonaliseChapter />
+
+        {/* 6 — Packages, with the dock slot */}
         <div className="xp__chapter xp__chapter--packages" data-xp-section="packages">
           <header className="xp__packages-head">
-            <p className="xp__label">04 — Choose your invitation</p>
+            <p className="xp__label">06 — Choose your invitation</p>
             <h2 className="xp__heading">Reserve your date.</h2>
           </header>
           <div className="xp__packages">
@@ -199,10 +214,18 @@ export default function InvitationExperience() {
                 </p>
                 <a
                   className="xp__reserve"
-                  href={getOrderUrl({ package: item.id })}
+                  // Carry the visitor's names/date, and the design they picked for the Premium card.
+                  href={getOrderUrl({
+                    package: item.id,
+                    template: item.featured && personalisation.designChosen ? design.title : undefined,
+                    details,
+                  })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackOrderStart({ package: item.id }, 'experience')}
+                  onClick={() => trackOrderStart({
+                    package: item.id,
+                    template: item.featured && personalisation.designChosen ? design.title : undefined,
+                  }, 'experience')}
                 >
                   <MessageCircle size={16} aria-hidden="true" /> Reserve on WhatsApp
                 </a>
@@ -212,7 +235,7 @@ export default function InvitationExperience() {
           <a className="xp__compare" href="#pricing">Compare all seven packages <ArrowRight size={14} aria-hidden="true" /></a>
         </div>
 
-        {/* 6 — Minimal close */}
+        {/* 7 — Minimal close */}
         <div className="xp__outro">
           <p className="xp__outro-line">Made for your moment.</p>
           <p className="xp__label">Ajwaa · Digital invitations · Delivered within 72 hours</p>

@@ -10,6 +10,7 @@ type AnalyticsEvents = {
   web_vital: { metric: string; value: number; rating: string; unit: string };
   support_opened: Record<string, never>;
   support_answer_viewed: { topic: string };
+  experience_interaction: { action: 'design_selected' | 'names_entered' | 'phone_dragged' | 'envelope_opened'; template?: string };
 };
 
 let initialized = false;
@@ -58,7 +59,7 @@ const allowedProperties = new Set([
   '$insert_id', '$time', '$process_person_profile', '$is_identified',
   '$device_type', '$browser', '$os',
   'metric', 'value', 'rating', 'unit', 'traffic_source', 'release', 'topic',
-  'template', 'category', 'package', 'location', '$current_url', '$pathname', '$host',
+  'template', 'category', 'package', 'location', 'action', '$current_url', '$pathname', '$host',
 ]);
 
 export function initializeTelemetry() {

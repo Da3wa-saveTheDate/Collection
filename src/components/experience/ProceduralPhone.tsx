@@ -6,13 +6,15 @@
  *
  * The screen cross-fades between invitation pages using `screen.value`
  * (0 = sealed envelope, 1 = names & countdown, 2 = details & map), which the
- * rig updates from the scroll keyframes.
+ * rig updates from the scroll keyframes. Pages redraw live from the visitor's
+ * names, date and design (personalisation.ts).
  */
 import { useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { EXPERIENCE } from './experienceConfig';
-import { createPhoneTextures, loadPhoneAssets } from './phoneTextures';
+import { createPhoneTextures, loadScreenFonts, loadScreenPhoto } from './phoneTextures';
+import { getPersonalisation, screenContent, subscribePersonalisation } from './personalisation';
 
 const DEPTH = 0.16;
 const BEVEL = 0.03;
@@ -70,7 +72,9 @@ function screenMaterial(first: THREE.Texture) {
   });
 }
 
-export default function ProceduralPhone({ screen, onReady }: { screen: { value: number }; onReady: () => void }) {
+type PhoneProps = { screen: { value: number }; onReady: () => void };
+
+export default function ProceduralPhone({ screen, onReady }: PhoneProps) {
   const gl = useThree(state => state.gl);
   const { width, height } = EXPERIENCE.modelSize;
 
@@ -81,7 +85,7 @@ export default function ProceduralPhone({ screen, onReady }: { screen: { value: 
     });
     body.translate(0, 0, -(DEPTH - BEVEL * 2) / 2);
 
-    const textures = createPhoneTextures(Math.min(8, gl.capabilities.getMaxAnisotropy()));
+    const textures = createPhoneTextures(Math.min(8, gl.capabilities.getMaxAnisotropy()), screenContent(getPersonalisation()));
     const frame = new THREE.MeshPhysicalMaterial({ color: '#d2b48a', metalness: 1, roughness: 0.22, clearcoat: 0.4 });
 
     const bump = { w: 0.6, h: 0.62, r: 0.15, depth: 0.03 };
@@ -103,9 +107,11 @@ export default function ProceduralPhone({ screen, onReady }: { screen: { value: 
         frame,
         bezel: new THREE.MeshStandardMaterial({ color: '#050505', roughness: 0.4 }),
         screen: screenMaterial(textures.screens[0]),
-        // Cover glass: fully transmissive with a crisp clearcoat that picks up the studio reflections.
+        // Cover glass: a thin glossy film. (Transmission would re-sample the screen from a
+        // blurred buffer and soften the invitation text, so it is deliberately not used here.)
         glass: new THREE.MeshPhysicalMaterial({
-          transmission: 1, roughness: 0.03, thickness: 0.02, ior: 1.5, clearcoat: 1, clearcoatRoughness: 0.03, specularIntensity: 1,
+          color: '#ffffff', transparent: true, opacity: 0.14, depthWrite: false,
+          roughness: 0.02, clearcoat: 1, clearcoatRoughness: 0.02, specularIntensity: 1,
         }),
         back: new THREE.MeshPhysicalMaterial({ map: textures.back, roughness: 0.5, clearcoat: 1, clearcoatRoughness: 0.12 }),
         plateau: new THREE.MeshPhysicalMaterial({ color: '#e3cfb2', roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.05 }),
@@ -115,16 +121,36 @@ export default function ProceduralPhone({ screen, onReady }: { screen: { value: 
     };
   }, [gl, width, height]);
 
+  // Keep the pages in sync with the visitor's names, date and design.
   useEffect(() => {
     let cancelled = false;
-    // Redraw the pages with real web fonts and the photo before revealing the phone.
-    loadPhoneAssets(`${import.meta.env.BASE_URL}celestial-love/images/hero.webp`).then(photo => {
+    let revealed = false;
+    let pending = 0;
+    let photo: HTMLImageElement | null = null;
+    let photoUrl = '';
+
+    const draw = async () => {
+      const content = screenContent(getPersonalisation());
+      const url = `${import.meta.env.BASE_URL}${content.design.photo}`;
+      // Wait for fonts and a new design's photo so pages never flash half-drawn.
+      const [, nextPhoto] = await Promise.all([loadScreenFonts(), url === photoUrl ? photo : loadScreenPhoto(url)]);
       if (cancelled) return;
-      parts.textures.redraw(photo);
-      onReady();
-    });
-    return () => { cancelled = true; };
+      photo = nextPhoto;
+      photoUrl = url;
+      parts.textures.redraw(content, photo);
+      if (!revealed) { revealed = true; onReady(); }
+    };
+    // Typing fires many updates; redraw once the visitor pauses briefly.
+    const schedule = () => { clearTimeout(pending); pending = window.setTimeout(draw, 90); };
+    const unsubscribe = subscribePersonalisation(schedule);
+    // The countdown is live: refresh just the names page twice a minute.
+    const tick = window.setInterval(() => {
+      if (photoUrl) parts.textures.redraw(screenContent(getPersonalisation()), photo, [1]);
+    }, 30_000);
+    draw();
+    return () => { cancelled = true; unsubscribe(); clearTimeout(pending); clearInterval(tick); };
   }, [parts, onReady]);
+
 
   useEffect(() => () => {
     [parts.body, parts.front, parts.screen, parts.bump, parts.lens, parts.lensGlass, parts.button].forEach(geometry => geometry.dispose());

@@ -13,6 +13,8 @@ type OrderSelection = {
   template?: string;
   category?: string;
   package?: InvitationPackage;
+  /** Visitor-entered details, pre-filled into the WhatsApp message only (never tracked). */
+  details?: { names?: string; date?: string };
 };
 
 const whatsappNumber = '201042353785';
@@ -99,8 +101,8 @@ export function getOrderUrl(selection: OrderSelection = {}) {
     campaign ? `Visit source: ${campaign}` : 'Visit source: website.',
     '',
     'Event type:',
-    'Event date:',
-    'Names to include:',
+    `Event date:${selection.details?.date ? ` ${selection.details.date}` : ''}`,
+    `Names to include:${selection.details?.names ? ` ${selection.details.names}` : ''}`,
     ...(selectedPackage ? packageQuestions[selectedPackage] ?? [] : []),
   ].join('\n');
 

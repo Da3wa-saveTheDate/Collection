@@ -39,12 +39,17 @@ export const KEYFRAMES: InvitationPose[] = [
   { id: 'details', spin: -1, yaw: -0.4, tiltX: 0.12, tiltZ: 0.05, scale: 0.98, distance: 7.8, light: 64, screen: 2 },
   // 4. Process — completes the turn onto the details page and leans in close.
   { id: 'process', spin: -2, yaw: 0.28, tiltX: -0.05, tiltZ: -0.04, scale: 1.04, distance: 7.1, light: -40, screen: 2 },
-  // 5. Packages — perfectly upright on the names page, ready to settle into the featured card.
+  // 5. Make it yours — text on the right; the names page turns toward it while the visitor types.
+  { id: 'personalise', spin: -2, yaw: -0.42, tiltX: 0.04, tiltZ: 0.03, scale: 1.1, distance: 7.2, light: 30, screen: 1 },
+  // 6. Packages — perfectly upright on the names page, ready to settle into the featured card.
   { id: 'packages', spin: -2, yaw: 0, tiltX: 0, tiltZ: 0, scale: 0.92, distance: 8, light: 12, screen: 1 },
 ];
 
-/** Pose used when the visitor prefers reduced motion (no scrubbing at all). */
-export const REDUCED_MOTION_POSE: InvitationPose = { ...KEYFRAMES[0], screen: 1 };
+/**
+ * Pose used when the visitor prefers reduced motion: no scrubbing at all. It starts on the
+ * sealed envelope, which a tap opens instantly (no animation).
+ */
+export const REDUCED_MOTION_POSE: InvitationPose = KEYFRAMES[0];
 
 export const EXPERIENCE = {
   /**
@@ -60,7 +65,7 @@ export const EXPERIENCE = {
   camera: { fov: 30 },
 
   /** Base size of the phone per layout. */
-  baseScale: { desktop: 0.84, mobile: 0.42 },
+  baseScale: { desktop: 0.76, mobile: 0.42 },
 
   /** Mobile keeps the choreography but calms every rotation by this factor. */
   mobileRotationScale: 0.55,
@@ -83,6 +88,19 @@ export const EXPERIENCE = {
 
   /** Hard cap on renderer pixel ratio. */
   maxDpr: 2,
+
+  /**
+   * Touch & drag. `radiansPerPixel` turns the phone as the pointer moves; on release a
+   * critically damped spring (`stiffness`) returns it to the scroll pose. A press that
+   * moves less than `tapSlop` px within `tapMs` counts as a tap (opens the envelope).
+   */
+  drag: { radiansPerPixel: 0.011, maxPitch: 0.45, stiffness: 28, tapSlop: 6, tapMs: 350, spinKick: 7 },
+
+  /**
+   * Adaptive quality. Rendering starts at `high` (or `medium` on low-end hints) and steps
+   * down (lower pixel ratio) whenever the frame rate drops, and back up when it recovers.
+   */
+  quality: { high: { dpr: 2 }, medium: { dpr: 1.5 }, low: { dpr: 1 } },
 } as const;
 
 /** Below this width text stacks above/below the phone and motion is calmed. */

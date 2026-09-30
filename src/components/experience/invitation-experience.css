@@ -258,3 +258,79 @@
   .xp__loader-ring { animation: none; }
   .xp__reserve { transition: none; }
 }
+
+/* Interaction ------------------------------------------------------------ */
+/* Empty parts of the story let pointers through to the canvas, so the phone can be grabbed;
+   text, links and form controls stay fully interactive. */
+.xp__content { pointer-events: none; }
+.xp__content * { pointer-events: auto; }
+.xp__content .xp__chapter,
+.xp__content .xp__copy,
+.xp__content .xp__gap,
+.xp__content .xp__packages,
+.xp__content .xp__hero-foot { pointer-events: none; }
+.xp__content .xp__hero-foot > * { pointer-events: auto; }
+/* The canvas takes pointers for dragging but leaves vertical swipes to page scrolling. */
+.xp__canvas { pointer-events: auto; touch-action: pan-y; }
+
+.xp__hint { margin-top: 10px; color: var(--xp-cream-muted); opacity: 0.8; }
+.xp__hint-coarse { display: none; }
+@media (pointer: coarse) {
+  .xp__hint-fine { display: none; }
+  .xp__hint-coarse { display: inline; }
+}
+
+/* Make it yours ------------------------------------------------------------ */
+.xp__form { display: grid; gap: 22px; margin-top: 26px; }
+.xp__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.xp__field { display: grid; gap: 8px; }
+.xp__field--wide { grid-column: 1 / -1; }
+.xp__field input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--xp-line);
+  background: rgba(20, 3, 6, 0.35);
+  color: var(--xp-cream);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color-scheme: dark;
+  transition: border-color 0.2s;
+}
+.xp__field input::placeholder { color: rgba(242, 230, 216, 0.35); font-style: italic; }
+.xp__field input:focus { outline: none; border-color: var(--xp-gold); box-shadow: 0 0 0 3px rgba(212, 181, 142, 0.18); }
+.xp__designs { border: 0; padding: 0; margin: 0; min-width: 0; }
+.xp__designs legend { margin-bottom: 12px; }
+.xp__design-name { color: var(--xp-cream); }
+.xp__swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+.xp__swatch { position: relative; cursor: pointer; border-radius: 14px; }
+.xp__swatch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.xp__swatch img {
+  display: block;
+  width: 56px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 1px var(--xp-line);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.xp__swatch:hover img { transform: translateY(-2px); }
+.xp__swatch input:checked + img { border-color: var(--xp-gold); box-shadow: 0 0 0 3px rgba(212, 181, 142, 0.25); }
+.xp__swatch input:focus-visible + img { outline: 2px solid var(--xp-cream); outline-offset: 3px; }
+.xp__reserve--solid { background: var(--xp-gold); color: #2c1210; justify-self: start; width: auto; padding-inline: 26px; }
+.xp__reserve--solid:hover { background: #e3c9a3; }
+.xp__privacy { font-size: 12px; color: var(--xp-cream-muted); margin-top: -8px; }
+.xp__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 1023px) {
+  /* Keep the form compact so it fits under the phone, which rides above it. */
+  .xp__body--intro { display: none; }
+  .xp__form { margin-top: 18px; gap: 16px; }
+  .xp__reserve--solid { justify-self: stretch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xp__swatch img,
+  .xp__field input { transition: none; }
+  .xp__swatch:hover img { transform: none; }
+}

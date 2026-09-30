@@ -2,10 +2,12 @@
  * Canvas-drawn artwork for the procedural phone.
  *
  * SCREENS are the pages of the digital invitation shown on the phone; the
- * keyframes' `screen` value cross-fades between them (0 → 1 → 2). The back
+ * keyframes' `screen` value cross-fades between them (0 → 1 → 2). Every page
+ * is drawn from the visitor's names, date and chosen design. The back
  * texture is the phone's frosted champagne glass with an engraved monogram.
  */
 import * as THREE from 'three';
+import type { ScreenContent } from './personalisation';
 
 // Screen canvas matches the screen's proportions (1.30 × 2.84 world units).
 export const SCREEN_W = 744;
@@ -14,10 +16,6 @@ const SERIF = '"Playfair Display", Georgia, serif';
 const SANS = 'Inter, "Helvetica Neue", Arial, sans-serif';
 const MONO = '"DM Mono", ui-monospace, monospace';
 
-const PAPER = '#f6efe4';
-const INK = '#3a2a22';
-const OXBLOOD = '#6a1320';
-const EVENT_DATE = new Date('2026-12-12T19:00:00+02:00');
 
 type Ctx = CanvasRenderingContext2D;
 
@@ -37,6 +35,15 @@ function spaced(ctx: Ctx, text: string, x: number, y: number, spacing: number) {
 function roundRect(ctx: Ctx, x: number, y: number, w: number, h: number, r: number) {
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
+}
+
+/** Set `style(size)` on ctx, shrinking the size until `text` fits `maxWidth`. */
+function fitFont(ctx: Ctx, text: string, style: (size: number) => string, size: number, maxWidth: number) {
+  ctx.font = style(size);
+  while (size > 20 && ctx.measureText(text).width > maxWidth) {
+    size -= 4;
+    ctx.font = style(size);
+  }
 }
 
 /** Deterministic PRNG so paper grain is identical between redraws. */
@@ -74,7 +81,7 @@ function statusBar(ctx: Ctx, light: boolean) {
   ctx.fill();
 }
 
-function waxSeal(ctx: Ctx, cx: number, cy: number, radius: number) {
+function waxSeal(ctx: Ctx, cx: number, cy: number, radius: number, [light, dark]: [string, string]) {
   ctx.save();
   ctx.beginPath();
   for (let i = 0; i <= 60; i++) {
@@ -83,8 +90,8 @@ function waxSeal(ctx: Ctx, cx: number, cy: number, radius: number) {
     ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
   }
   const wax = ctx.createRadialGradient(cx - radius * 0.3, cy - radius * 0.35, 4, cx, cy, radius);
-  wax.addColorStop(0, '#9a2836');
-  wax.addColorStop(1, '#4f0d16');
+  wax.addColorStop(0, light);
+  wax.addColorStop(1, dark);
   ctx.fillStyle = wax;
   ctx.shadowColor = 'rgba(40, 5, 10, 0.45)';
   ctx.shadowBlur = 24;
@@ -106,8 +113,9 @@ function waxSeal(ctx: Ctx, cx: number, cy: number, radius: number) {
 }
 
 /** Screen 0 — the sealed envelope that opens the invitation. */
-function drawEnvelope(ctx: Ctx) {
-  paper(ctx, SCREEN_W, SCREEN_H, '#efe3d0', 3);
+function drawEnvelope(ctx: Ctx, content: ScreenContent) {
+  const p = content.design.palette;
+  paper(ctx, SCREEN_W, SCREEN_H, p.paper, 3);
   // Envelope flap: a soft V with a shadowed crease.
   const flapY = SCREEN_H * 0.52;
   ctx.fillStyle = 'rgba(120, 88, 58, 0.08)';
@@ -128,24 +136,24 @@ function drawEnvelope(ctx: Ctx) {
   statusBar(ctx, false);
 
   ctx.textAlign = 'center';
-  ctx.fillStyle = '#8c6d49';
+  ctx.fillStyle = p.muted;
   ctx.font = `500 22px ${MONO}`;
   spaced(ctx, "YOU'RE INVITED", SCREEN_W / 2, SCREEN_H * 0.13, 8);
-  ctx.fillStyle = INK;
-  ctx.font = `italic 400 78px ${SERIF}`;
-  ctx.fillText('Laila & Omar', SCREEN_W / 2, SCREEN_H * 0.2);
+  ctx.fillStyle = p.ink;
+  fitFont(ctx, content.names, size => `italic 400 ${size}px ${SERIF}`, 78, SCREEN_W - 120);
+  ctx.fillText(content.names, SCREEN_W / 2, SCREEN_H * 0.2);
 
-  waxSeal(ctx, SCREEN_W / 2, flapY, 118);
+  waxSeal(ctx, SCREEN_W / 2, flapY, 118, p.seal);
 
-  ctx.fillStyle = INK;
+  ctx.fillStyle = p.ink;
   ctx.font = `400 34px ${SERIF}`;
   ctx.fillText('A celebration of love', SCREEN_W / 2, SCREEN_H * 0.7);
-  ctx.fillStyle = '#8c6d49';
+  ctx.fillStyle = p.muted;
   ctx.font = `500 22px ${MONO}`;
-  spaced(ctx, '12 · 12 · 2026', SCREEN_W / 2, SCREEN_H * 0.745, 6);
+  spaced(ctx, content.shortDate, SCREEN_W / 2, SCREEN_H * 0.745, 6);
 
   roundRect(ctx, SCREEN_W / 2 - 170, SCREEN_H * 0.84, 340, 84, 42);
-  ctx.fillStyle = OXBLOOD;
+  ctx.fillStyle = p.button;
   ctx.fill();
   ctx.fillStyle = '#f6efe4';
   ctx.font = `500 22px ${MONO}`;
@@ -154,8 +162,9 @@ function drawEnvelope(ctx: Ctx) {
 }
 
 /** Screen 1 — names, photo in an arch and a live countdown. */
-function drawNames(ctx: Ctx, photo: CanvasImageSource | null) {
-  paper(ctx, SCREEN_W, SCREEN_H, PAPER, 11);
+function drawNames(ctx: Ctx, content: ScreenContent, photo: CanvasImageSource | null) {
+  const p = content.design.palette;
+  paper(ctx, SCREEN_W, SCREEN_H, p.paper, 11);
   const archX = 92;
   const archW = SCREEN_W - archX * 2;
   const archTop = 150;
@@ -169,9 +178,8 @@ function drawNames(ctx: Ctx, photo: CanvasImageSource | null) {
   ctx.closePath();
   ctx.clip();
   if (photo) {
-    // cover-fit the square photo into the arch
-    const size = Math.max(archW, archH);
-    ctx.drawImage(photo, SCREEN_W / 2 - size / 2, archTop, size, size);
+    // Photos in /public/experience are pre-cropped to exactly this 560 × 640 arch.
+    ctx.drawImage(photo, archX, archTop, archW, archH);
   } else {
     const sky = ctx.createLinearGradient(0, archTop, 0, archTop + archH);
     sky.addColorStop(0, '#2b2350');
@@ -193,18 +201,18 @@ function drawNames(ctx: Ctx, photo: CanvasImageSource | null) {
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#8c6d49';
+  ctx.fillStyle = p.muted;
   ctx.font = `500 20px ${MONO}`;
   spaced(ctx, 'TOGETHER WITH THEIR FAMILIES', SCREEN_W / 2, 872, 5);
   ctx.fillStyle = goldGradient(ctx, 0, 900, SCREEN_W, 1100);
-  ctx.font = `italic 400 104px ${SERIF}`;
-  ctx.fillText('Laila & Omar', SCREEN_W / 2, 972);
-  ctx.fillStyle = INK;
-  ctx.font = `400 32px ${SERIF}`;
-  ctx.fillText('Saturday, 12 December 2026', SCREEN_W / 2, 1060);
+  fitFont(ctx, content.names, size => `italic 400 ${size}px ${SERIF}`, 104, SCREEN_W - 110);
+  ctx.fillText(content.names, SCREEN_W / 2, 972);
+  ctx.fillStyle = p.ink;
+  fitFont(ctx, content.longDate, size => `400 ${size}px ${SERIF}`, 32, SCREEN_W - 120);
+  ctx.fillText(content.longDate, SCREEN_W / 2, 1060);
 
-  // Countdown to the (placeholder) event date.
-  const remaining = Math.max(0, EVENT_DATE.getTime() - Date.now());
+  // Live countdown to the visitor's date (or the sample date).
+  const remaining = Math.max(0, content.event.getTime() - Date.now());
   const units = [
     [Math.floor(remaining / 864e5), 'DAYS'],
     [Math.floor(remaining / 36e5) % 24, 'HOURS'],
@@ -213,40 +221,41 @@ function drawNames(ctx: Ctx, photo: CanvasImageSource | null) {
   units.forEach(([value, label], index) => {
     const x = SCREEN_W / 2 + (index - 1) * 190;
     roundRect(ctx, x - 78, 1140, 156, 150, 22);
-    ctx.fillStyle = '#efe4d3';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(184, 140, 82, 0.45)';
+    ctx.strokeStyle = p.muted;
     ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.fillStyle = INK;
+    ctx.fillStyle = p.ink;
     ctx.font = `400 60px ${SERIF}`;
     ctx.fillText(String(value).padStart(2, '0'), x, 1200);
-    ctx.fillStyle = '#8c6d49';
+    ctx.fillStyle = p.muted;
     ctx.font = `500 18px ${MONO}`;
     spaced(ctx, label, x, 1256, 4);
   });
 
   roundRect(ctx, SCREEN_W / 2 - 200, 1370, 400, 84, 42);
-  ctx.fillStyle = OXBLOOD;
+  ctx.fillStyle = p.button;
   ctx.fill();
   ctx.fillStyle = '#f6efe4';
   ctx.font = `500 22px ${MONO}`;
   spaced(ctx, 'RSVP', SCREEN_W / 2, 1413, 8);
-  ctx.fillStyle = '#b89a73';
+  ctx.fillStyle = p.muted;
   ctx.font = `italic 400 30px ${SERIF}`;
   ctx.fillText('ajwaa', SCREEN_W / 2, 1530);
 }
 
 /** Screen 2 — ceremony details, a stylised map and the reply buttons. */
-function drawDetails(ctx: Ctx) {
-  paper(ctx, SCREEN_W, SCREEN_H, PAPER, 17);
+function drawDetails(ctx: Ctx, content: ScreenContent) {
+  const p = content.design.palette;
+  paper(ctx, SCREEN_W, SCREEN_H, p.paper, 17);
   statusBar(ctx, false);
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#8c6d49';
+  ctx.fillStyle = p.muted;
   ctx.font = `500 20px ${MONO}`;
   spaced(ctx, 'THE DETAILS', SCREEN_W / 2, 190, 8);
-  ctx.fillStyle = INK;
+  ctx.fillStyle = p.ink;
   ctx.font = `italic 400 76px ${SERIF}`;
   ctx.fillText('Join us', SCREEN_W / 2, 270);
 
@@ -260,11 +269,11 @@ function drawDetails(ctx: Ctx) {
     ctx.lineTo(SCREEN_W - 90, y + 46);
     ctx.stroke();
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#8c6d49';
+    ctx.fillStyle = p.muted;
     ctx.font = `500 20px ${MONO}`;
     spaced(ctx, label, 90, y, 5);
     ctx.textAlign = 'right';
-    ctx.fillStyle = INK;
+    ctx.fillStyle = p.ink;
     ctx.font = `400 36px ${SERIF}`;
     ctx.fillText(value, SCREEN_W - 90, y);
   });
@@ -301,7 +310,7 @@ function drawDetails(ctx: Ctx) {
   ctx.restore();
   const pinX = SCREEN_W / 2 + 70;
   const pinY = mapY + 210;
-  ctx.fillStyle = OXBLOOD;
+  ctx.fillStyle = p.button;
   ctx.beginPath();
   ctx.arc(pinX, pinY - 34, 30, Math.PI, 0);
   ctx.lineTo(pinX, pinY + 20);
@@ -313,23 +322,23 @@ function drawDetails(ctx: Ctx) {
   ctx.fill();
 
   ctx.textAlign = 'center';
-  ctx.fillStyle = INK;
+  ctx.fillStyle = p.ink;
   ctx.font = `400 38px ${SERIF}`;
   ctx.fillText('The Garden Terrace', SCREEN_W / 2, 1210);
-  ctx.fillStyle = '#8c6d49';
+  ctx.fillStyle = p.muted;
   ctx.font = `500 20px ${MONO}`;
   spaced(ctx, 'CAIRO · EGYPT', SCREEN_W / 2, 1260, 6);
 
   const buttonY = 1360;
   roundRect(ctx, 80, buttonY, 280, 84, 42);
-  ctx.strokeStyle = OXBLOOD;
+  ctx.strokeStyle = p.button;
   ctx.lineWidth = 3;
   ctx.stroke();
   roundRect(ctx, SCREEN_W - 360, buttonY, 280, 84, 42);
-  ctx.fillStyle = OXBLOOD;
+  ctx.fillStyle = p.button;
   ctx.fill();
   ctx.font = `500 20px ${MONO}`;
-  ctx.fillStyle = OXBLOOD;
+  ctx.fillStyle = p.button;
   spaced(ctx, 'DIRECTIONS', 220, buttonY + 43, 4);
   ctx.fillStyle = '#f6efe4';
   spaced(ctx, 'ACCEPT', SCREEN_W - 220, buttonY + 43, 6);
@@ -378,17 +387,17 @@ function makeCanvas(width: number, height: number) {
 export type PhoneTextures = {
   screens: THREE.CanvasTexture[];
   back: THREE.CanvasTexture;
-  /** Redraw everything (once web fonts and the photo have loaded). */
-  redraw: (photo: CanvasImageSource | null) => void;
+  /** Redraw every page, or only `pages` (e.g. [1] to tick the countdown). */
+  redraw: (content: ScreenContent, photo: CanvasImageSource | null, pages?: number[]) => void;
   dispose: () => void;
 };
 
-export function createPhoneTextures(anisotropy: number): PhoneTextures {
-  const layers: Array<{ canvas: HTMLCanvasElement; draw: (ctx: Ctx, photo: CanvasImageSource | null) => void }> = [
+export function createPhoneTextures(anisotropy: number, content: ScreenContent): PhoneTextures {
+  const layers: Array<{ canvas: HTMLCanvasElement; draw: (ctx: Ctx, content: ScreenContent, photo: CanvasImageSource | null) => void }> = [
     { canvas: makeCanvas(SCREEN_W, SCREEN_H), draw: drawEnvelope },
     { canvas: makeCanvas(SCREEN_W, SCREEN_H), draw: drawNames },
     { canvas: makeCanvas(SCREEN_W, SCREEN_H), draw: drawDetails },
-    { canvas: makeCanvas(700, 1440), draw: drawBack },
+    { canvas: makeCanvas(700, 1440), draw: ctx => drawBack(ctx) },
   ];
   const textures = layers.map(({ canvas }) => {
     const texture = new THREE.CanvasTexture(canvas);
@@ -396,14 +405,15 @@ export function createPhoneTextures(anisotropy: number): PhoneTextures {
     texture.anisotropy = anisotropy;
     return texture;
   });
-  const redraw = (photo: CanvasImageSource | null) => layers.forEach(({ canvas, draw }, index) => {
+  const redraw = (content: ScreenContent, photo: CanvasImageSource | null, pages?: number[]) => layers.forEach(({ canvas, draw }, index) => {
+    if (pages && !pages.includes(index)) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    draw(ctx, photo);
+    draw(ctx, content, photo);
     textures[index].needsUpdate = true;
   });
-  redraw(null);
+  redraw(content, null);
   return {
     screens: textures.slice(0, 3),
     back: textures[3],
@@ -412,22 +422,35 @@ export function createPhoneTextures(anisotropy: number): PhoneTextures {
   };
 }
 
-/** Fonts used on the screens, plus the photo for the names page. */
-export function loadPhoneAssets(photoUrl: string): Promise<HTMLImageElement | null> {
-  const fonts = 'fonts' in document
+let fontsReady: Promise<void> | null = null;
+
+/** Fonts used on the screens (loaded once). */
+export function loadScreenFonts() {
+  fontsReady ??= 'fonts' in document
     ? Promise.all([
       document.fonts.load(`italic 400 100px ${SERIF}`, 'Laila & Omar A'),
       document.fonts.load(`400 36px ${SERIF}`, 'Saturday'),
       document.fonts.load(`600 30px ${SANS}`, '9:41'),
       document.fonts.load(`500 22px ${MONO}`, 'RSVP'),
-    ]).catch(() => undefined)
+    ]).then(() => undefined, () => undefined)
     : Promise.resolve();
-  const photo = new Promise<HTMLImageElement | null>(resolve => {
-    const image = new Image();
-    image.decoding = 'async';
-    image.onload = () => resolve(image);
-    image.onerror = () => resolve(null);
-    image.src = photoUrl;
-  });
-  return Promise.all([fonts, photo]).then(([, image]) => image);
+  return fontsReady;
+}
+
+const photos = new Map<string, Promise<HTMLImageElement | null>>();
+
+/** A design's screen photo, fetched on first use and cached for switching back. */
+export function loadScreenPhoto(url: string) {
+  let photo = photos.get(url);
+  if (!photo) {
+    photo = new Promise(resolve => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.onload = () => resolve(image);
+      image.onerror = () => resolve(null);
+      image.src = url;
+    });
+    photos.set(url, photo);
+  }
+  return photo;
 }

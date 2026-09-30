@@ -80,6 +80,10 @@ To override the configuration or enable source maps:
 | `web_vital` | Sampled browser metric | metric, value, rating, unit |
 | `support_opened` | Help panel opened | Clean URL/path |
 | `support_answer_viewed` | FAQ answer expanded | Static topic ID |
+| `experience_interaction` | 3D phone story: design switched, names first typed, phone first dragged, envelope opened (each once per page view, except design switches) | Static action ID; catalog template title for `design_selected` |
+
+Names and dates typed into the 3D phone's "Make it yours" form are never sent to
+analytics or stored; they only pre-fill the visitor's own WhatsApp message.
 
 The existing Meta Pixel remains unchanged. Its `Lead` event and the new WhatsApp
 event represent click intent, not a confirmed message, order, or payment.
