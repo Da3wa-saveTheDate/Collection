@@ -46,6 +46,26 @@ function fitFont(ctx: Ctx, text: string, style: (size: number) => string, size: 
   }
 }
 
+/**
+ * The couple's names centred on `y`: one line while it stays legible, otherwise two
+ * lines ("First" / "& Second") at a larger size than a squeezed single line would get.
+ */
+function coupleNames(ctx: Ctx, content: ScreenContent, y: number, size: number, maxWidth: number) {
+  const style = (px: number) => `italic 400 ${px}px ${SERIF}`;
+  ctx.font = style(size);
+  const oneLine = Math.min(size, (size * maxWidth) / ctx.measureText(content.names).width);
+  if (oneLine >= size * 0.7) {
+    ctx.font = style(oneLine);
+    ctx.fillText(content.names, SCREEN_W / 2, y);
+    return;
+  }
+  const lines = [content.first, `& ${content.second}`];
+  const twoLines = Math.min(size * 0.8, ...lines.map(line => (size * maxWidth) / ctx.measureText(line).width));
+  ctx.font = style(twoLines);
+  ctx.fillText(lines[0], SCREEN_W / 2, y - twoLines * 0.52);
+  ctx.fillText(lines[1], SCREEN_W / 2, y + twoLines * 0.52);
+}
+
 /** Deterministic PRNG so paper grain is identical between redraws. */
 function random(seed: number) {
   return () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
@@ -140,8 +160,7 @@ function drawEnvelope(ctx: Ctx, content: ScreenContent) {
   ctx.font = `500 22px ${MONO}`;
   spaced(ctx, "YOU'RE INVITED", SCREEN_W / 2, SCREEN_H * 0.13, 8);
   ctx.fillStyle = p.ink;
-  fitFont(ctx, content.names, size => `italic 400 ${size}px ${SERIF}`, 78, SCREEN_W - 120);
-  ctx.fillText(content.names, SCREEN_W / 2, SCREEN_H * 0.2);
+  coupleNames(ctx, content, SCREEN_H * 0.2, 78, SCREEN_W - 120);
 
   waxSeal(ctx, SCREEN_W / 2, flapY, 118, p.seal);
 
@@ -205,8 +224,7 @@ function drawNames(ctx: Ctx, content: ScreenContent, photo: CanvasImageSource | 
   ctx.font = `500 20px ${MONO}`;
   spaced(ctx, 'TOGETHER WITH THEIR FAMILIES', SCREEN_W / 2, 872, 5);
   ctx.fillStyle = goldGradient(ctx, 0, 900, SCREEN_W, 1100);
-  fitFont(ctx, content.names, size => `italic 400 ${size}px ${SERIF}`, 104, SCREEN_W - 110);
-  ctx.fillText(content.names, SCREEN_W / 2, 972);
+  coupleNames(ctx, content, 968, 104, SCREEN_W - 110);
   ctx.fillStyle = p.ink;
   fitFont(ctx, content.longDate, size => `400 ${size}px ${SERIF}`, 32, SCREEN_W - 120);
   ctx.fillText(content.longDate, SCREEN_W / 2, 1060);

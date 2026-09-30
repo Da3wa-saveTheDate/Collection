@@ -98,8 +98,8 @@
   padding: 14vh var(--xp-gutter);
 }
 .xp__chapter--right { justify-content: flex-end; }
-/* Keep copy clear of the centred card: half the viewport minus the card's half-width. */
-.xp__copy { width: min(30rem, calc(50vw - 14rem - var(--xp-gutter))); }
+/* Keep copy clear of the centred phone: half the viewport minus the phone's half-width and a margin. */
+.xp__copy { width: min(30rem, calc(50vw - 10rem - var(--xp-gutter))); }
 .xp__gap { display: none; }
 
 .xp__chapter--hero {
@@ -116,7 +116,7 @@
   line-height: 1.2;
 }
 .xp__hero-title em { display: block; color: var(--xp-gold); }
-.xp__scroll-cue { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--xp-cream-muted); }
+.xp__scroll-cue { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 8px; margin-top: 18px; color: var(--xp-cream-muted); }
 .xp__scroll-cue svg { animation: xp-nudge 2.4s ease-in-out infinite; }
 @keyframes xp-nudge { 50% { transform: translateY(4px); } }
 
@@ -230,7 +230,7 @@
 .xp[data-3d="off"] .xp__slot { border: 5px solid #120c0a; box-shadow: 0 0 0 2px #d2b48a; }
 
 /* Tablet & mobile: text stacks above and below the (smaller) centred card. */
-@media (max-width: 1023px) {
+@media (max-width: 1023px) and (max-aspect-ratio: 5/4) {
   .xp__chapter { min-height: 100svh; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 15vh var(--xp-gutter) 7vh; }
   .xp__chapter--right { justify-content: flex-start; }
   /* Flatten the copy so the heading stays up top and the rest drops below the card. */
@@ -238,7 +238,8 @@
   .xp__heading { font-size: clamp(1.7rem, 6.4vw, 2.4rem); margin-bottom: 0; }
   /* The empty gap the card floats in; keyframes centre on it (data-xp-focus). */
   .xp__gap { display: block; flex: none; height: 38vh; }
-  .xp__chapter--hero { align-items: center; justify-content: space-between; padding-top: 16vh; }
+  /* Clear the fixed navbar even on short phones. */
+  .xp__chapter--hero { align-items: center; justify-content: space-between; padding-top: max(16vh, 118px); }
   .xp__body { font-size: 15px; line-height: 1.65; }
   .xp__facts { margin-top: 20px; }
   .xp__notes { gap: 14px; }
@@ -246,6 +247,15 @@
   .xp__chapter--packages { justify-content: center; align-items: center; }
   .xp__packages { grid-template-columns: minmax(0, 24rem); justify-content: center; }
   .xp__package--featured { order: -1; }
+}
+/* Short landscape screens: the opening text moves to the left column, clear of the phone. */
+@media (max-height: 540px) and (min-aspect-ratio: 5/4) {
+  .xp__chapter { padding-top: 90px; padding-bottom: 24px; }
+  .xp__chapter--hero { align-items: flex-start; text-align: left; }
+  .xp__chapter--hero > * { max-width: calc(50vw - 10rem - var(--xp-gutter)); }
+  .xp__hero-title { font-size: 1.4rem; }
+  .xp__heading { font-size: 1.6rem; margin: 10px 0 12px; }
+  .xp__body { font-size: 14px; line-height: 1.6; }
 }
 @media (max-width: 480px) {
   .xp__label { font-size: 10px; letter-spacing: 0.18em; }
@@ -273,7 +283,7 @@
 /* The canvas takes pointers for dragging but leaves vertical swipes to page scrolling. */
 .xp__canvas { pointer-events: auto; touch-action: pan-y; }
 
-.xp__hint { margin-top: 10px; color: var(--xp-cream-muted); opacity: 0.8; }
+.xp__hint { opacity: 0.8; }
 .xp__hint-coarse { display: none; }
 @media (pointer: coarse) {
   .xp__hint-fine { display: none; }
@@ -297,6 +307,9 @@
   color-scheme: dark;
   transition: border-color 0.2s;
 }
+.xp__field input[aria-invalid="true"] { border-color: #e39a8f; }
+.xp__field-error { font-size: 12px; color: #f0b3a8; min-height: 0; }
+.xp__field-error:empty { display: none; }
 .xp__field input::placeholder { color: rgba(242, 230, 216, 0.35); font-style: italic; }
 .xp__field input:focus { outline: none; border-color: var(--xp-gold); box-shadow: 0 0 0 3px rgba(212, 181, 142, 0.18); }
 .xp__designs { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -323,7 +336,7 @@
 .xp__privacy { font-size: 12px; color: var(--xp-cream-muted); margin-top: -8px; }
 .xp__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-@media (max-width: 1023px) {
+@media (max-width: 1023px) and (max-aspect-ratio: 5/4) {
   /* Keep the form compact so it fits under the phone, which rides above it. */
   .xp__body--intro { display: none; }
   .xp__form { margin-top: 18px; gap: 16px; }

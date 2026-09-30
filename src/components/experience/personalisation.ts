@@ -55,7 +55,9 @@ export type Personalisation = {
   designChosen: boolean;
 };
 
-export const SAMPLE = { first: 'Laila', second: 'Omar', date: '2026-12-12' } as const;
+export const SAMPLE = { first: 'Laila', second: 'Omar' } as const;
+/** Visitors can pick dates from today up to this many years ahead. */
+export const MAX_YEARS_AHEAD = 5;
 const MAX_NAME = 18;
 
 let state: Personalisation = { first: '', second: '', date: '', designId: DESIGNS[0].id, designChosen: false };
@@ -86,9 +88,35 @@ export function designFor(value: Personalisation) {
   return DESIGNS.find(design => design.id === value.designId) ?? DESIGNS[0];
 }
 
-/** True once the visitor has typed anything of their own. */
-export function isPersonalised(value: Personalisation) {
-  return Boolean(value.first.trim() || value.second.trim() || value.date);
+/** yyyy-mm-dd for a local date. */
+export function isoDay(date: Date) {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+/** Selectable range for the date input: today … MAX_YEARS_AHEAD years from now. */
+export function dateRange(now = new Date()) {
+  const latest = new Date(now);
+  latest.setFullYear(now.getFullYear() + MAX_YEARS_AHEAD);
+  return { min: isoDay(now), max: isoDay(latest) };
+}
+
+/** Whether the typed date can be used. Past or far-off dates are rejected, not silently kept. */
+export function dateStatus(date: string, now = new Date()): 'empty' | 'valid' | 'past' | 'far' {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return 'empty';
+  const { min, max } = dateRange(now);
+  if (date < min) return 'past';
+  if (date > max) return 'far';
+  return 'valid';
+}
+
+/**
+ * Sample date shown before the visitor picks one: the first Saturday at least
+ * ~10 weeks away, so the demo countdown never runs out.
+ */
+function sampleDate(now = new Date()) {
+  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 70);
+  date.setDate(date.getDate() + ((6 - date.getDay() + 7) % 7));
+  return isoDay(date);
 }
 
 /** Everything the phone screens need to draw, with sample fallbacks. */
@@ -96,9 +124,11 @@ export function screenContent(value: Personalisation) {
   const first = value.first.trim() || SAMPLE.first;
   const second = value.second.trim() || SAMPLE.second;
   // Parse as a local calendar day at 7 pm, so countdowns do not drift by timezone.
-  const [year, month, day] = (value.date || SAMPLE.date).split('-').map(Number);
+  const [year, month, day] = (dateStatus(value.date) === 'valid' ? value.date : sampleDate()).split('-').map(Number);
   const event = new Date(year, month - 1, day, 19, 0, 0);
   return {
+    first,
+    second,
     names: `${first} & ${second}`,
     event,
     longDate: new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(event),
@@ -114,6 +144,6 @@ export function orderDetails(value: Personalisation) {
   const first = value.first.trim();
   const second = value.second.trim();
   const names = first && second ? `${first} & ${second}` : first || second || undefined;
-  const date = value.date ? screenContent(value).longDate : undefined;
+  const date = dateStatus(value.date) === 'valid' ? screenContent(value).longDate : undefined;
   return names || date ? { names, date } : undefined;
 }

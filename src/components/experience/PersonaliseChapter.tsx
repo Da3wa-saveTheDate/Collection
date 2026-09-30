@@ -7,18 +7,21 @@ import { useId, useRef } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { getOrderUrl, trackOrderStart } from '../../lib/order';
 import { trackEvent } from '../../lib/telemetry';
-import { DESIGNS, designFor, orderDetails, updatePersonalisation, usePersonalisation } from './personalisation';
+import { DESIGNS, MAX_YEARS_AHEAD, dateRange, dateStatus, designFor, orderDetails, updatePersonalisation, usePersonalisation } from './personalisation';
 
-function todayIso() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-}
+const DATE_MESSAGES = {
+  past: 'Please choose a date from today onwards.',
+  far: `Please choose a date within the next ${MAX_YEARS_AHEAD} years.`,
+} as const;
 
 export default function PersonaliseChapter() {
   const value = usePersonalisation();
   const design = designFor(value);
   const ids = useId();
   const namesTracked = useRef(false);
+  const range = dateRange();
+  const status = dateStatus(value.date);
+  const dateError = status === 'past' || status === 'far' ? DATE_MESSAGES[status] : null;
 
   // Report *that* someone personalised, once — never what they typed.
   const onNames = (patch: { first?: string; second?: string }) => {
@@ -57,9 +60,11 @@ export default function PersonaliseChapter() {
             <label className="xp__field xp__field--wide">
               <span className="xp__label">Event date</span>
               <input
-                type="date" name="date" min={todayIso()}
+                type="date" name="date" min={range.min} max={range.max}
+                aria-invalid={dateError ? true : undefined} aria-describedby={`${ids}-date-error`}
                 value={value.date} onChange={event => updatePersonalisation({ date: event.target.value })}
               />
+              <span id={`${ids}-date-error`} className="xp__field-error" role="status">{dateError}</span>
             </label>
           </div>
 

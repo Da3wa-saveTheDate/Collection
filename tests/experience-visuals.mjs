@@ -23,6 +23,19 @@ async function shot(page, region) {
   return sharp(await page.screenshot()).extract(box).ensureAlpha().raw().toBuffer();
 }
 
+/**
+ * Re-run `check` until it returns true or `ms` elapses. Rendering under a software GPU can
+ * lag, so visual assertions poll rather than trusting a fixed sleep.
+ */
+async function eventually(check, ms = 8000) {
+  const deadline = Date.now() + ms;
+  for (;;) {
+    if (await check()) return true;
+    if (Date.now() > deadline) return false;
+    await wait(400);
+  }
+}
+
 /** Mean absolute channel difference (0–255) between two equal-sized shots. */
 function difference(a, b) {
   let total = 0;
@@ -94,32 +107,34 @@ try {
         const sealed = await shot(page, region);
         await page.mouse.down();
         await page.mouse.up();
-        await wait(2800);
-        const opened = await shot(page, region);
-        assert.ok(difference(sealed, opened) > 10, 'tapping the seal should open the envelope onto the names page');
+        let opened;
+        assert.ok(await eventually(async () => difference(sealed, opened = await shot(page, region)) > 10),
+          'tapping the seal should open the envelope onto the names page');
+        await wait(1500); // let the celebratory spin settle before measuring the drag
+        opened = await shot(page, region);
         if (mode === 'desktop') {
           // Dragging turns the phone; releasing springs it back to its pose.
           await page.mouse.down();
           await page.mouse.move(width / 2 + 220, height / 2, { steps: 10 });
           const turned = await shot(page, region);
           await page.mouse.up();
-          await wait(3000);
-          const settled = await shot(page, region);
           const moved = difference(opened, turned);
           assert.ok(moved > 10, 'dragging should turn the phone');
-          assert.ok(difference(opened, settled) < moved / 2, 'the phone should spring back after release');
+          assert.ok(await eventually(async () => difference(opened, await shot(page, region)) < moved / 2),
+            'the phone should spring back after release');
         }
       }
       // The rendered phone (cream invitation page) must end up inside the featured slot.
       const point = await scrollToSlot(page);
-      const inside = await brightnessAt(page, point.x, point.y);
-      assert.ok(inside > 150, `expected the docked phone inside the slot, got brightness ${inside.toFixed(0)}`);
+      let inside = 0;
+      assert.ok(await eventually(async () => (inside = await brightnessAt(page, point.x, point.y)) > 150),
+        `expected the docked phone inside the slot, got brightness ${inside.toFixed(0)}`);
       // …and scrolling back up must undock it, returning the phone to the centre of the screen.
       await page.$eval('[data-xp-section="process"]', el => el.scrollIntoView({ block: 'center' }));
-      await wait(2800);
       const viewport = page.viewport();
-      const centre = await brightnessAt(page, viewport.width / 2, viewport.height / 2 + 30);
-      assert.ok(centre > 150, `expected the phone back in the centre, got brightness ${centre.toFixed(0)}`);
+      let centre = 0;
+      assert.ok(await eventually(async () => (centre = await brightnessAt(page, viewport.width / 2, viewport.height / 2 + 30)) > 150),
+        `expected the phone back in the centre, got brightness ${centre.toFixed(0)}`);
     }
 
     // Personalisation: typed names, date and design flow into the phone and the WhatsApp messages.
@@ -142,11 +157,25 @@ try {
     const [simple, premium] = (await page.$$eval('.xp__package .xp__reserve', links => links.map(link => link.href))).map(decodeURIComponent);
     assert.ok(premium.includes('Selected design: Papercraft') && premium.includes('Nour & Karim'));
     assert.ok(simple.includes('Nour & Karim') && !simple.includes('Papercraft'));
+    // Past dates are rejected with a message and never reach the order.
+    await page.$eval('input[name="date"]', el => {
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(el, '2020-01-01');
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    assert.match(await page.$eval('.xp__field-error', el => el.textContent), /from today onwards/);
+    assert.equal(await page.$eval('input[name="date"]', el => el.getAttribute('aria-invalid')), 'true');
+    assert.ok(!decodeURIComponent(await page.$eval('.xp__form .xp__reserve', link => link.href)).includes('2020'), 'past date must not be ordered');
+    await page.$eval('input[name="date"]', el => {
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(el, '2027-05-20');
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    assert.equal(await page.$eval('.xp__field-error', el => el.textContent), '');
+
     if (mode === 'no-webgl') {
       assert.ok((await page.$eval('.xp__slot img', img => img.src)).includes('experience/papercraft.webp'));
     } else {
-      await wait(1500);
-      assert.ok(difference(sample, await shot(page, phoneRegion)) > 8, 'the phone screen should redraw with the new names and design');
+      assert.ok(await eventually(async () => difference(sample, await shot(page, phoneRegion)) > 8),
+        'the phone screen should redraw with the new names and design');
     }
 
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);

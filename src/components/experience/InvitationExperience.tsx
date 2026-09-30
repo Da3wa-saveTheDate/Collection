@@ -122,13 +122,15 @@ export default function InvitationExperience() {
           <img className="xp__poster" src={fallbackImage} alt="" width="280" height="440" loading="lazy" decoding="async" />
           <div className="xp__hero-foot">
             <h2 className="xp__hero-title">The first moment <em>of your celebration.</em></h2>
-            <p className="xp__label xp__scroll-cue"><ArrowDown size={14} aria-hidden="true" /> Scroll to unfold</p>
-            {show3D && ready && (
-              <p className="xp__label xp__hint">
-                {!reducedMotion && <><span className="xp__hint-fine">Drag to turn</span><span className="xp__hint-coarse">Swipe the phone to turn</span> · </>}
-                <span className="xp__hint-fine">Click the seal to open</span><span className="xp__hint-coarse">Tap the seal to open</span>
-              </p>
-            )}
+            <p className="xp__label xp__scroll-cue">
+              <ArrowDown size={14} aria-hidden="true" /> Scroll to unfold
+              {show3D && ready && (
+                <span className="xp__hint">
+                  {!reducedMotion && <> · <span className="xp__hint-fine">Drag to turn</span><span className="xp__hint-coarse">Swipe the phone to turn</span></>}
+                  {' · '}<span className="xp__hint-fine">Click the seal to open</span><span className="xp__hint-coarse">Tap the seal to open</span>
+                </span>
+              )}
+            </p>
           </div>
         </div>
 

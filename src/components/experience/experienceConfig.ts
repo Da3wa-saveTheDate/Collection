@@ -32,7 +32,7 @@ export type InvitationPose = {
 
 export const KEYFRAMES: InvitationPose[] = [
   // 1. Opening — the sealed envelope, phone turned slightly toward the viewer, wordmark behind it.
-  { id: 'hero', spin: 0, yaw: -0.32, tiltX: 0.06, tiltZ: 0.035, scale: 1, distance: 8, light: 38, screen: 0 },
+  { id: 'hero', spin: 0, yaw: -0.32, tiltX: 0.06, tiltZ: 0.035, scale: 0.86, distance: 8, light: 38, screen: 0 },
   // 2. Atelier — text on the left, so the phone opens its face to the right; the invitation opens.
   { id: 'atelier', spin: 0, yaw: 0.55, tiltX: -0.1, tiltZ: -0.07, scale: 1.06, distance: 7.4, light: -24, screen: 1 },
   // 3. Details — a half turn shows the engraved back while the screen changes page.
@@ -103,5 +103,9 @@ export const EXPERIENCE = {
   quality: { high: { dpr: 2 }, medium: { dpr: 1.5 }, low: { dpr: 1 } },
 } as const;
 
-/** Below this width text stacks above/below the phone and motion is calmed. */
-export const MOBILE_QUERY = '(max-width: 1023px)';
+/**
+ * Narrow, portrait-ish screens stack text above/below the phone and calm the motion.
+ * Landscape phones keep the side-by-side layout, which suits their short height.
+ * Keep in sync with the stacked media queries in invitation-experience.css.
+ */
+export const MOBILE_QUERY = '(max-width: 1023px) and (max-aspect-ratio: 5/4)';
