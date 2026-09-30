@@ -24,7 +24,8 @@ async function scrollToSlot(page) {
   await wait(2800); // scrub: 1 needs a moment to catch up
   return page.$eval('[data-xp-slot]', el => {
     const r = el.getBoundingClientRect();
-    return { x: r.left + r.width / 2, y: r.top + r.height * 0.2 };
+    // 67% down the names page is plain paper, between the date and the countdown.
+    return { x: r.left + r.width / 2, y: r.top + r.height * 0.67 };
   });
 }
 
@@ -64,16 +65,16 @@ try {
     } else {
       await page.waitForFunction(() => document.querySelector('#experience')?.dataset.ready === 'true', { timeout: 20000 });
       assert.ok(await page.$('.xp__canvas canvas'));
-      // The rendered card (cream paper) must end up inside the featured slot.
+      // The rendered phone (cream invitation page) must end up inside the featured slot.
       const point = await scrollToSlot(page);
       const inside = await brightnessAt(page, point.x, point.y);
-      assert.ok(inside > 150, `expected the docked card inside the slot, got brightness ${inside.toFixed(0)}`);
-      // …and scrolling back up must undock it, returning the card to the centre of the screen.
+      assert.ok(inside > 150, `expected the docked phone inside the slot, got brightness ${inside.toFixed(0)}`);
+      // …and scrolling back up must undock it, returning the phone to the centre of the screen.
       await page.$eval('[data-xp-section="process"]', el => el.scrollIntoView({ block: 'center' }));
       await wait(2800);
       const viewport = page.viewport();
       const centre = await brightnessAt(page, viewport.width / 2, viewport.height / 2 + 30);
-      assert.ok(centre > 150, `expected the card back in the centre, got brightness ${centre.toFixed(0)}`);
+      assert.ok(centre > 150, `expected the phone back in the centre, got brightness ${centre.toFixed(0)}`);
     }
 
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);

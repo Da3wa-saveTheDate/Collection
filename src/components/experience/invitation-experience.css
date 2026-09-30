@@ -163,9 +163,9 @@
 .xp__slot,
 .xp__frame {
   height: 100%;
-  aspect-ratio: 2 / 3;
-  /* Semicircle top on a 2:3 box: horizontal radius 50%, vertical radius 1/3 of the height. */
-  border-radius: 50% 50% 4% 4% / 33.34% 33.34% 2.7% 2.7%;
+  /* Same proportions and corner radius as the 3D phone (EXPERIENCE.modelSize). */
+  aspect-ratio: 1.46 / 3;
+  border-radius: 15% / 7.3%;
 }
 .xp__slot { border: 1px dashed rgba(212, 181, 142, 0.3); overflow: hidden; }
 .xp__slot img { display: none; width: 100%; height: 100%; object-fit: cover; }
@@ -223,11 +223,11 @@
 .xp__loader-ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--xp-line); border-top-color: var(--xp-gold); animation: xp-spin 1.1s linear infinite; }
 @keyframes xp-spin { to { transform: rotate(360deg); } }
 
-.xp__poster { display: none; width: min(56vw, 250px); aspect-ratio: 7 / 11; object-fit: cover; border-radius: 999px 999px 14px 14px; border: 6px solid #f5ede0; box-shadow: 0 30px 60px -30px #000; }
+.xp__poster { display: none; width: min(40vw, 190px); aspect-ratio: 1.46 / 3; object-fit: cover; border-radius: 15% / 7.3%; border: 7px solid #120c0a; box-shadow: 0 0 0 3px #d2b48a, 0 30px 60px -30px #000; }
 /* No WebGL: show a still invitation in the opening chapter and inside the slot. */
 .xp[data-3d="off"] .xp__poster,
 .xp[data-3d="off"] .xp__slot img { display: block; }
-.xp[data-3d="off"] .xp__slot { border-style: solid; }
+.xp[data-3d="off"] .xp__slot { border: 5px solid #120c0a; box-shadow: 0 0 0 2px #d2b48a; }
 
 /* Tablet & mobile: text stacks above and below the (smaller) centred card. */
 @media (max-width: 1023px) {
@@ -237,7 +237,7 @@
   .xp__copy { display: contents; }
   .xp__heading { font-size: clamp(1.7rem, 6.4vw, 2.4rem); margin-bottom: 0; }
   /* The empty gap the card floats in; keyframes centre on it (data-xp-focus). */
-  .xp__gap { display: block; flex: none; height: 36vh; }
+  .xp__gap { display: block; flex: none; height: 38vh; }
   .xp__chapter--hero { align-items: center; justify-content: space-between; padding-top: 16vh; }
   .xp__body { font-size: 15px; line-height: 1.65; }
   .xp__facts { margin-top: 20px; }

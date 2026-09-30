@@ -1,8 +1,8 @@
 /**
  * "The Unfolding" — a scroll-told chapter of the Ajwaa site.
  *
- * A sticky, full-viewport WebGL canvas holds one invitation in the centre of
- * the screen while the chapters below scroll past it. Scroll poses the card
+ * A sticky, full-viewport WebGL canvas holds one phone — showing the invitation — in the centre of
+ * the screen while the chapters below scroll past it. Scroll poses the phone
  * (see experienceConfig.ts) and, at the end, docks it into the featured
  * package card's empty slot.
  *
@@ -128,7 +128,7 @@ export default function InvitationExperience() {
             <div className="xp__gap" data-xp-focus aria-hidden="true" />
             <p className="xp__body">
               Proportion, typography and colour are composed like fine stationery, then brought to life for the
-              screen your guests will hold. Arches, foil and wax — the ceremony of paper, carried into a link.
+              screen your guests will hold. Arches, foil and wax — the ceremony of paper, carried onto every guest's phone.
             </p>
             <dl className="xp__facts">
               <div><dt>72h</dt><dd>From details to delivery</dd></div>
@@ -182,7 +182,7 @@ export default function InvitationExperience() {
               <article key={item.id} className={`xp__package${item.featured ? ' xp__package--featured' : ''}`}>
                 <div className="xp__package-media">
                   {item.featured ? (
-                    // The 3D invitation lands exactly inside this empty slot.
+                    // The 3D phone lands exactly inside this empty slot.
                     <div className="xp__slot" data-xp-slot>
                       <img src={fallbackImage} alt="" width="160" height="240" loading="lazy" decoding="async" />
                     </div>

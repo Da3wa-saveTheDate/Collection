@@ -1,11 +1,11 @@
 /**
- * WebGL half of the experience (lazy-loaded). Renders one invitation in the
+ * WebGL half of the experience (lazy-loaded). Renders one invitation phone in the
  * middle of a full-viewport canvas and poses it from scroll:
  *
  *   scroll ──ScrollTrigger(scrub)──▶ story progress ──keyframes──▶ pose
  *   slot rect (every frame) ──screen→world──▶ dock position & scale
  *
- * The card itself is never translated by scroll, except when docking into
+ * The phone itself is never translated by scroll, except when docking into
  * the featured package card near the end of the story.
  */
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
@@ -16,7 +16,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EXPERIENCE, KEYFRAMES, MOBILE_QUERY, REDUCED_MOTION_POSE, type InvitationPose } from './experienceConfig';
-import ProceduralInvitation from './ProceduralInvitation';
+import ProceduralPhone from './ProceduralPhone';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,7 +60,7 @@ function StudioEnvironment() {
   return null;
 }
 
-/** Optional GLB, centred and scaled to the procedural card footprint. */
+/** Optional GLB, centred and scaled to the procedural phone's height. */
 function GltfInvitation({ url, onReady }: { url: string; onReady: () => void }) {
   const { scene } = useGLTF(url);
   const model = useMemo(() => {
@@ -68,7 +68,7 @@ function GltfInvitation({ url, onReady }: { url: string; onReady: () => void }) 
     const box = new THREE.Box3().setFromObject(clone);
     const size = box.getSize(new THREE.Vector3());
     const centre = box.getCenter(new THREE.Vector3());
-    const scale = EXPERIENCE.cardSize.height / (size.y || 1);
+    const scale = EXPERIENCE.modelSize.height / (size.y || 1);
     clone.position.copy(centre).multiplyScalar(-scale);
     clone.scale.setScalar(scale);
     const wrapper = new THREE.Group();
@@ -94,6 +94,7 @@ function samplePose(anchors: number[], progress: number, ease: (t: number) => nu
   out.scale = lerp(from.scale, to.scale, t);
   out.distance = lerp(from.distance, to.distance, t);
   out.light = lerp(from.light, to.light, t);
+  out.screen = lerp(from.screen, to.screen, t);
   return out;
 }
 
@@ -111,6 +112,8 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
     pointer: new THREE.Vector2(),
     tilt: new THREE.Vector2(),
     pose: { ...KEYFRAMES[0] },
+    /** Invitation page on the phone screen, read by ProceduralPhone every frame. */
+    screen: { value: KEYFRAMES[0].screen },
   }), []);
 
   const slot = useMemo(() => root.querySelector<HTMLElement>('[data-xp-slot]'), [root]);
@@ -121,7 +124,7 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
     const sections = KEYFRAMES.map(frame => root.querySelector<HTMLElement>(`[data-xp-section="${frame.id}"]`));
 
     // Keyframe i is reached when its section's centre meets the viewport centre —
-    // or, on stacked layouts, the centre of the empty gap left for the card.
+    // or, on stacked layouts, the centre of the empty gap left for the phone.
     const measure = (trigger: ScrollTrigger) => {
       const range = trigger.end - trigger.start || 1;
       let previous = 0;
@@ -178,8 +181,8 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
   const dockPose = KEYFRAMES[KEYFRAMES.length - 1];
 
   useFrame(({ camera, size, clock, gl }, delta) => {
-    const card = group.current;
-    if (!card) return;
+    const phone = group.current;
+    if (!phone) return;
     const perspective = camera as THREE.PerspectiveCamera;
     const rotationScale = isMobile ? EXPERIENCE.mobileRotationScale : 1;
     const baseScale = isMobile ? EXPERIENCE.baseScale.mobile : EXPERIENCE.baseScale.desktop;
@@ -189,7 +192,7 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
     // Measure the slot every frame so the dock tracks scrolling and resizing exactly.
     const slotRect = slot?.getBoundingClientRect();
     if (reducedMotion) {
-      // No scrubbing: the card is either centred or already resting in its slot.
+      // No scrubbing: the phone is either centred or already resting in its slot.
       motion.dock = slotRect && slotRect.top < innerHeight * 0.7 ? 1 : 0;
     }
     const dock = reducedMotion ? motion.dock : dockEase(clamp01(motion.dock));
@@ -200,7 +203,7 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
     const lightAngle = lerp(pose.light, dockPose.light, dock) * DEG;
     keyLight.current?.position.set(Math.sin(lightAngle) * 6, 3.2, Math.cos(lightAngle) * 6);
 
-    // Idle float + lerped pointer tilt, both fading out as the card docks.
+    // Idle float + lerped pointer tilt, both fading out as the phone docks.
     const time = clock.elapsedTime;
     const idle = reducedMotion ? 0 : 1 - dock;
     const floatY = Math.sin(time * EXPERIENCE.idle.floatSpeed) * EXPERIENCE.idle.floatAmplitude * idle;
@@ -217,24 +220,25 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
     let scale = pose.scale * baseScale;
 
     if (slotRect && dock > 0) {
-      // Screen → world on the z = 0 plane the card lives in.
+      // Screen → world on the z = 0 plane the phone lives in.
       const canvasRect = gl.domElement.getBoundingClientRect();
       const visibleHeight = 2 * distance * Math.tan((perspective.fov * DEG) / 2);
       const visibleWidth = visibleHeight * (size.width / size.height);
       const slotX = ((slotRect.left + slotRect.width / 2 - canvasRect.left) / size.width - 0.5) * visibleWidth;
       const slotY = -((slotRect.top + slotRect.height / 2 - canvasRect.top) / size.height - 0.5) * visibleHeight;
       const slotScale = Math.min(
-        (slotRect.width / size.width) * visibleWidth / EXPERIENCE.cardSize.width,
-        (slotRect.height / size.height) * visibleHeight / EXPERIENCE.cardSize.height,
+        (slotRect.width / size.width) * visibleWidth / EXPERIENCE.modelSize.width,
+        (slotRect.height / size.height) * visibleHeight / EXPERIENCE.modelSize.height,
       );
       x = lerp(0, slotX, dock);
       y = lerp(floatY, slotY, dock);
       scale = lerp(scale, slotScale, dock);
     }
 
-    card.position.set(x, y, 0);
-    card.scale.setScalar(scale);
-    card.rotation.set(
+    motion.screen.value = lerp(pose.screen, dockPose.screen, dock);
+    phone.position.set(x, y, 0);
+    phone.scale.setScalar(scale);
+    phone.rotation.set(
       lerp(pose.tiltX * rotationScale + motion.tilt.x, 0, dock),
       lerp(rotY + motion.tilt.y, dockRotY, dock),
       lerp(pose.tiltZ * rotationScale + sway, 0, dock),
@@ -252,7 +256,7 @@ function InvitationRig({ root, reducedMotion, onReady }: Omit<SceneProps, 'activ
       <group ref={group}>
         {EXPERIENCE.modelUrl
           ? <GltfInvitation url={`${import.meta.env.BASE_URL}${EXPERIENCE.modelUrl}`} onReady={onReady} />
-          : <ProceduralInvitation onReady={onReady} />}
+          : <ProceduralPhone screen={motion.screen} onReady={onReady} />}
       </group>
     </>
   );

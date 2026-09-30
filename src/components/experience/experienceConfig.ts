@@ -1,19 +1,21 @@
 /**
  * Ajwaa "Unfolding Invitation" experience — pose configuration.
  *
- * The 3D invitation never moves with the page. Instead, every story chapter
- * owns one keyframe below, and scroll position blends between neighbouring
+ * The 3D phone never moves with the page. Instead, every story chapter owns
+ * one keyframe below, and scroll position blends between neighbouring
  * keyframes. Tweak these numbers to re-choreograph the piece; nothing else
  * needs to change.
  *
  * Units
- *  - spin      half-turns around Y (0 = front facing camera, 1 = back, 2 = front again).
+ *  - spin      half-turns around Y (0 = screen facing camera, 1 = back, 2 = screen again).
  *              Spins are interpolated literally, so 0 → 2 is one full turn.
  *  - yaw       extra Y rotation in radians, applied on top of `spin`.
  *  - tiltX/Z   pitch / roll in radians.
  *  - scale     multiplier on the device's base size (see `baseScale`).
- *  - distance  camera distance from the card in world units (smaller = closer).
+ *  - distance  camera distance from the phone in world units (smaller = closer).
  *  - light     key-light orbit angle in degrees (0 = front, +90 = from the right).
+ *  - screen    invitation page on the phone: 0 sealed envelope, 1 names & countdown,
+ *              2 details & map. Fractions cross-fade between pages.
  */
 export type InvitationPose = {
   /** Matches a `data-xp-section` attribute in the DOM. */
@@ -25,40 +27,40 @@ export type InvitationPose = {
   scale: number;
   distance: number;
   light: number;
+  screen: number;
 };
 
 export const KEYFRAMES: InvitationPose[] = [
-  // 1. Opening — the card turned slightly toward the viewer, wordmark behind it.
-  { id: 'hero', spin: 0, yaw: -0.32, tiltX: 0.06, tiltZ: 0.035, scale: 1, distance: 8, light: 38 },
-  // 2. Atelier — text on the left, so the card opens its face to the right.
-  { id: 'atelier', spin: 0, yaw: 0.55, tiltX: -0.1, tiltZ: -0.07, scale: 1.06, distance: 7.4, light: -24 },
-  // 3. Details — a half turn reveals the monogrammed back.
-  { id: 'details', spin: -1, yaw: -0.4, tiltX: 0.12, tiltZ: 0.05, scale: 0.98, distance: 7.8, light: 64 },
-  // 4. Process — completes the turn and leans in close.
-  { id: 'process', spin: -2, yaw: 0.28, tiltX: -0.05, tiltZ: -0.04, scale: 1.04, distance: 7.1, light: -40 },
-  // 5. Packages — perfectly upright, ready to settle into the featured card.
-  { id: 'packages', spin: -2, yaw: 0, tiltX: 0, tiltZ: 0, scale: 0.92, distance: 8, light: 12 },
+  // 1. Opening — the sealed envelope, phone turned slightly toward the viewer, wordmark behind it.
+  { id: 'hero', spin: 0, yaw: -0.32, tiltX: 0.06, tiltZ: 0.035, scale: 1, distance: 8, light: 38, screen: 0 },
+  // 2. Atelier — text on the left, so the phone opens its face to the right; the invitation opens.
+  { id: 'atelier', spin: 0, yaw: 0.55, tiltX: -0.1, tiltZ: -0.07, scale: 1.06, distance: 7.4, light: -24, screen: 1 },
+  // 3. Details — a half turn shows the engraved back while the screen changes page.
+  { id: 'details', spin: -1, yaw: -0.4, tiltX: 0.12, tiltZ: 0.05, scale: 0.98, distance: 7.8, light: 64, screen: 2 },
+  // 4. Process — completes the turn onto the details page and leans in close.
+  { id: 'process', spin: -2, yaw: 0.28, tiltX: -0.05, tiltZ: -0.04, scale: 1.04, distance: 7.1, light: -40, screen: 2 },
+  // 5. Packages — perfectly upright on the names page, ready to settle into the featured card.
+  { id: 'packages', spin: -2, yaw: 0, tiltX: 0, tiltZ: 0, scale: 0.92, distance: 8, light: 12, screen: 1 },
 ];
 
 /** Pose used when the visitor prefers reduced motion (no scrubbing at all). */
-export const REDUCED_MOTION_POSE = KEYFRAMES[0];
+export const REDUCED_MOTION_POSE: InvitationPose = { ...KEYFRAMES[0], screen: 1 };
 
 export const EXPERIENCE = {
   /**
-   * Optional GLB model. Place a file in /public (e.g. /public/invitation.glb)
-   * and set this to 'invitation.glb'. It is auto-centred and scaled to the
-   * procedural card's 2 × 3 footprint so the docking maths keeps working.
-   * Leave null to use the procedural card.
+   * Optional GLB model. Place a file in /public (e.g. /public/phone.glb) and
+   * set this to 'phone.glb'. It is auto-centred and scaled to `modelSize`'s
+   * height so the docking maths keeps working. Leave null for the procedural phone.
    */
   modelUrl: null as string | null,
 
-  /** Procedural card size in world units (width × height). */
-  cardSize: { width: 2, height: 3 },
+  /** Procedural phone size in world units (width × height). The dock slot uses the same ratio. */
+  modelSize: { width: 1.46, height: 3 },
 
   camera: { fov: 30 },
 
-  /** Base size of the card per layout. */
-  baseScale: { desktop: 0.78, mobile: 0.42 },
+  /** Base size of the phone per layout. */
+  baseScale: { desktop: 0.84, mobile: 0.42 },
 
   /** Mobile keeps the choreography but calms every rotation by this factor. */
   mobileRotationScale: 0.55,
@@ -83,5 +85,5 @@ export const EXPERIENCE = {
   maxDpr: 2,
 } as const;
 
-/** Below this width text stacks above/below the card and motion is calmed. */
+/** Below this width text stacks above/below the phone and motion is calmed. */
 export const MOBILE_QUERY = '(max-width: 1023px)';
