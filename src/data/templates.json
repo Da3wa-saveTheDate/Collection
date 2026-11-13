@@ -77,6 +77,27 @@
     "image": "elisa-jhon-wedding/images/hero.webp"
   },
   {
+    "id": "sponse-wedding",
+    "title": "Gilded Photobooth",
+    "category": "premium-wedding",
+    "description": "An emerald and gold invitation that opens from a gilded envelope, with a photobooth strip and a scratch-to-reveal date.",
+    "image": "sponse-wedding/assets/images/hero-walk.jpg"
+  },
+  {
+    "id": "new-green-demo",
+    "title": "Finca Garden",
+    "category": "premium-wedding",
+    "description": "A hand-painted Mediterranean finca invitation in olive green, opening from a wax-sealed envelope.",
+    "image": "new-green-demo/assets/images/intro-poster-BQrMtd4k.png"
+  },
+  {
+    "id": "theme-green-wedding",
+    "title": "Heritage Garden",
+    "category": "premium-wedding",
+    "description": "A sage-green embossed envelope with a red wax seal that opens onto a garden courtyard and your love story.",
+    "image": "theme-green-wedding/assets/images/og-preview.png"
+  },
+  {
     "id": "celestial-love",
     "title": "Celestial Love",
     "category": "wedding",
