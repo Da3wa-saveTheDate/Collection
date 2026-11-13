@@ -5,6 +5,7 @@ import { onCLS, onINP, onLCP, type Metric } from 'web-vitals';
 type AnalyticsEvents = {
   '$pageview': Record<string, never>;
   pricing_viewed: Record<string, never>;
+  template_previewed: { template: string; category: string };
   template_opened: { template: string; category: string; location: string };
   whatsapp_clicked: { template?: string; category?: string; package?: string; location: string };
   web_vital: { metric: string; value: number; rating: string; unit: string };

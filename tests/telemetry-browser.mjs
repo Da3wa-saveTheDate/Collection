@@ -69,16 +69,22 @@ try {
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.$eval('#pricing', (element) => element.scrollIntoView());
     await page.$eval('#pricing a[href^="https://wa.me"]', (element) => element.click());
-    await page.$eval('#designs a[target="_blank"]:not([href^="https://wa.me"])', (element) => element.click());
+    // Opening a design previews it in the page; only the full-screen link counts as template_opened.
+    await page.$eval('#designs-panel li button', (element) => element.click());
+    await page.waitForFunction(() => document.querySelector('dialog.preview')?.open);
+    await page.$eval('dialog.preview a.preview__full', (element) => element.click());
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(() => !document.querySelector('dialog.preview').open);
     await page.evaluate(() => window.__testError());
     await page.waitForFunction(() => window.__telemetryEvents.some((event) => event.exception));
     const events = await page.evaluate(() => window.__telemetryEvents);
-    for (const name of ['$pageview', 'pricing_viewed', 'whatsapp_clicked', 'template_opened']) {
+    for (const name of ['$pageview', 'pricing_viewed', 'whatsapp_clicked', 'template_previewed', 'template_opened']) {
       assert.equal(events.filter((event) => event.event === name).length, 1, `${viewport.width}: ${name} should fire once`);
     }
     const click = events.find((event) => event.event === 'whatsapp_clicked');
     assert.equal(click.properties.location, 'pricing');
-    assert.equal(click.properties.package, 'standard');
+    // The price list sends visitors to the designs; its one direct order link is the custom quote.
+    assert.equal(click.properties.package, 'customisation');
     const privatePaths = [];
     function findPrivate(value, path = '') {
       if (typeof value === 'string' && value.includes('private@example.com')) privatePaths.push(path);

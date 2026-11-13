@@ -48,7 +48,7 @@ const packageDetails: Record<InvitationPackage, PackageDetails> = {
   video: { name: 'Video Invitation', price: 'EGP 1,400', value: 1400 },
 };
 
-function getPackageDetails(packageName: InvitationPackage): PackageDetails {
+export function getPackageDetails(packageName: InvitationPackage): PackageDetails {
   if (packageName === 'premium' && isPremiumOfferActive()) {
     return {
       name: 'Premium Invitation',

@@ -1,0 +1,341 @@
+[
+  {
+    "id": "new_prem2",
+    "title": "Crimson Curtain",
+    "category": "premium-wedding",
+    "description": "A beautiful and elegant premium wedding design.",
+    "image": "new_prem2/images/hero.jpg"
+  },
+  {
+    "id": "new_prem3",
+    "title": "Majestic",
+    "category": "premium-wedding",
+    "description": "A majestic and elegant design for an unforgettable celebration.",
+    "image": "new_prem3/images/hero.webp"
+  },
+  {
+    "id": "new_prem4",
+    "title": "Classic Romance",
+    "category": "premium-wedding",
+    "description": "A charming and personal wedding template.",
+    "image": "new_prem4/images/hero.webp"
+  },
+  {
+    "id": "new_prem5",
+    "title": "Elegant Moments",
+    "category": "premium-wedding",
+    "description": "A beautiful save the date template with elegant details.",
+    "image": "new_prem5/images/hero.webp"
+  },
+  {
+    "id": "new_prem6",
+    "title": "Maldives",
+    "category": "premium-wedding",
+    "description": "A breathtaking tropical and beach-themed wedding design.",
+    "image": "new_prem6/images/hero.webp"
+  },
+  {
+    "id": "new_prem7",
+    "title": "Bilingual Elegance",
+    "category": "premium-wedding",
+    "description": "A wonderful bilingual wedding invitation layout.",
+    "image": "new_prem7/images/hero.webp"
+  },
+  {
+    "id": "new_prem9",
+    "title": "Château Romance",
+    "category": "premium-wedding",
+    "description": "A luxurious new premium wedding template.",
+    "image": "new_prem9/assets/l5e-images/hero-poster-DsqR-n3x.jpg"
+  },
+  {
+    "id": "new_ss",
+    "title": "Seaside Celebration",
+    "category": "premium-wedding",
+    "description": "An elegant premium wedding invitation featuring beautiful animations.",
+    "image": "new_ss/assets/intro-poster-new-B2unBQtC.jpg"
+  },
+  {
+    "id": "papercraft",
+    "title": "Papercraft",
+    "category": "premium-wedding",
+    "description": "A handcrafted paper-art wedding invitation with delicate florals and storybook charm.",
+    "image": "papercraft/assets/l5e-images/intro-poster.png"
+  },
+  {
+    "id": "eleganza",
+    "title": "Eleganza",
+    "category": "premium-wedding",
+    "description": "An embroidered Italian wedding invitation with romantic florals and timeless Lake Como elegance.",
+    "image": "eleganza/assets/l5e-images/eleganza-poster.jpg"
+  },
+  {
+    "id": "elisa-jhon-wedding",
+    "title": "Vintage Fairytale",
+    "category": "premium-wedding",
+    "description": "A whimsical fairy-tale wedding with chandeliers, cupids, and enchanting vintage décor.",
+    "image": "elisa-jhon-wedding/images/hero.webp"
+  },
+  {
+    "id": "celestial-love",
+    "title": "Celestial Love",
+    "category": "wedding",
+    "description": "A heavenly design featuring soft starlight and ethereal elegance for romantic unions.",
+    "image": "celestial-love/images/hero.webp"
+  },
+  {
+    "id": "desert-rose",
+    "title": "Desert Rose",
+    "category": "wedding",
+    "description": "Warm terracotta tones and organic shapes inspired by breathtaking desert sunsets.",
+    "image": "desert-rose/images/hero.webp"
+  },
+  {
+    "id": "emerald-noir",
+    "title": "Emerald Noir",
+    "category": "wedding",
+    "description": "Deep, luxurious greens paired with gold accents for a highly sophisticated atmosphere.",
+    "image": "emerald-noir/images/hero.webp"
+  },
+  {
+    "id": "cherry-blossom",
+    "title": "Cherry Blossom",
+    "category": "wedding",
+    "description": "Delicate pinks and floral motifs bringing a sense of spring and new beginnings.",
+    "image": "cherry-blossom/images/hero.webp"
+  },
+  {
+    "id": "midnight-garden",
+    "title": "Midnight Garden",
+    "category": "wedding",
+    "description": "Dark, romantic floral aesthetics with a mysterious and enchanting vibe.",
+    "image": "midnight-garden/images/hero.webp"
+  },
+  {
+    "id": "royal-blue",
+    "title": "Royal Blue",
+    "category": "wedding",
+    "description": "Classic, regal navy blue with silver foil accents for a timeless celebration.",
+    "image": "royal-blue/images/hero.webp"
+  },
+  {
+    "id": "coral-sunset",
+    "title": "Coral Sunset",
+    "category": "wedding",
+    "description": "Vibrant coral hues blending into golden sunlight for a warm, joyful celebration.",
+    "image": "coral-sunset/images/hero.webp"
+  },
+  {
+    "id": "olive-sage",
+    "title": "Earthy Botanical",
+    "category": "wedding",
+    "description": "Earthy olive greens and soft sage tones for a natural, organic wedding aesthetic.",
+    "image": "olive-sage/images/hero.webp"
+  },
+  {
+    "id": "velvet-theatre",
+    "title": "Velvet Theatre",
+    "category": "wedding",
+    "description": "Rich velvet textures and dramatic curtain-inspired layouts for a grand affair.",
+    "image": "velvet-theatre/images/hero.webp"
+  },
+  {
+    "id": "adamfarah12",
+    "title": "Vintage Sketch",
+    "category": "wedding",
+    "description": "A charming hand-sketched wedding invitation with elegant illustrations and warm touches.",
+    "image": "adamfarah12/images/hero.webp"
+  },
+  {
+    "id": "karim-somia",
+    "title": "Heartfelt Moments",
+    "category": "wedding",
+    "description": "A heartfelt, personal wedding invitation capturing genuine moments of love.",
+    "image": "karim-somia/images/hero.webp"
+  },
+  {
+    "id": "mohamed-farah",
+    "title": "Gallery Memories",
+    "category": "wedding",
+    "description": "A rich gallery-style invitation showcasing cherished memories and favorite moments.",
+    "image": "mohamed-farah/images/hero.webp"
+  },
+  {
+    "id": "omar-laila",
+    "title": "Golden Horizon",
+    "category": "wedding",
+    "description": "A romantic Egyptian-themed invitation with hand-drawn sketches and warm golden tones.",
+    "image": "omar-laila/images/hero.webp"
+  },
+  {
+    "id": "omarlayla",
+    "title": "Sunset Journey",
+    "category": "wedding",
+    "description": "A cinematic travel-inspired wedding invitation with stunning sunset photography.",
+    "image": "omarlayla/images/hero.webp"
+  },
+  {
+    "id": "zeyad-lara-wedd",
+    "title": "Mountain Romance",
+    "category": "wedding",
+    "description": "A nature-inspired mountain wedding invitation with artistic illustrations and birds.",
+    "image": "zeyad-lara-wedd/images/hero.webp"
+  },
+  {
+    "id": "selim-menna-wedding",
+    "title": "Elegant Romance",
+    "category": "wedding",
+    "description": "A beautifully elegant romance themed wedding invitation.",
+    "image": "selim-menna-wedding/images/hero.webp"
+  },
+  {
+    "id": "yassersalma",
+    "title": "Classic Elegance",
+    "category": "wedding",
+    "description": "A classic and elegant wedding invitation with timeless charm.",
+    "image": "yassersalma/images/hero.webp"
+  },
+  {
+    "id": "maya-youssef-engagement",
+    "title": "Festive Celebration",
+    "category": "engagement",
+    "description": "A celebratory engagement invitation with festive imagery and elegant styling.",
+    "image": "maya-youssef-engagement/images/hero.webp"
+  },
+  {
+    "id": "emerald-gold",
+    "title": "Emerald Gold",
+    "category": "engagement",
+    "description": "An elegant emerald and gold engagement invitation.",
+    "image": "emerald-gold/couple.png"
+  },
+  {
+    "id": "garden-bloom",
+    "title": "Garden Bloom",
+    "category": "engagement",
+    "description": "A beautiful botanical garden bloom engagement invitation.",
+    "image": "garden-bloom/couple.png"
+  },
+  {
+    "id": "midnight-stars",
+    "title": "Midnight Stars",
+    "category": "engagement",
+    "description": "A magical midnight stars engagement invitation.",
+    "image": "midnight-stars/couple.png"
+  },
+  {
+    "id": "new_simple1",
+    "title": "Elegant Photo Scratch",
+    "category": "simple-websites",
+    "description": "A beautiful simple website template.",
+    "image": "new_simple1/assets/hero-frame-D95C6j_a.png"
+  },
+  {
+    "id": "thelaceedit",
+    "title": "The Lace Edit",
+    "category": "simple-websites",
+    "description": "A beautiful simple website template.",
+    "image": "thelaceedit/assets/hero-frame-ChwB8WzS.png"
+  },
+  {
+    "id": "cisnes",
+    "title": "Cisnes",
+    "category": "simple-websites",
+    "description": "A beautiful simple website template.",
+    "image": "cisnes/assets/images/hero-frame-76CGo-SF.png"
+  },
+  {
+    "id": "candlelight",
+    "title": "Candlelight",
+    "category": "simple-websites",
+    "description": "A warm and romantic candlelight-themed invitation website.",
+    "image": "candlelight/assets/images/inicio-camara-D3JixjJx.jpg"
+  },
+  {
+    "id": "floral",
+    "title": "Floral",
+    "category": "simple-websites",
+    "description": "A delicate floral invitation with elegant botanical details and an interactive reveal.",
+    "image": "floral/assets/images/hero-frame-ChwB8WzS.png"
+  },
+  {
+    "id": "video-invitation-1",
+    "title": "Video Invitation 1",
+    "category": "video-invitations",
+    "description": "A beautiful video invitation scene.",
+    "image": "assets/video_invitation_3.mp4",
+    "isVideo": true
+  },
+  {
+    "id": "video-invitation-2",
+    "title": "Video Invitation 2",
+    "category": "video-invitations",
+    "description": "Another stunning video invitation scene.",
+    "image": "assets/video_invitation_2.mp4",
+    "isVideo": true
+  },
+  {
+    "id": "video-invitation-3",
+    "title": "Video Invitation 3",
+    "category": "video-invitations",
+    "description": "An elegant third video invitation scene.",
+    "image": "assets/video_invitation.mp4",
+    "isVideo": true
+  },
+  {
+    "id": "invitation-card-1",
+    "title": "Invitation Card 1",
+    "category": "invitation cards",
+    "description": "Beautiful invitation card design.",
+    "image": "invitation-card-1/images/hero.webp"
+  },
+  {
+    "id": "invitation-card-2",
+    "title": "Invitation Card 2",
+    "category": "invitation cards",
+    "description": "Beautiful invitation card design.",
+    "image": "invitation-card-2/images/hero.webp"
+  },
+  {
+    "id": "invitation-card-3",
+    "title": "Invitation Card 3",
+    "category": "invitation cards",
+    "description": "Beautiful invitation card design.",
+    "image": "invitation-card-3/images/hero.webp"
+  },
+  {
+    "id": "invitation-card-4",
+    "title": "Invitation Card 4",
+    "category": "invitation cards",
+    "description": "Beautiful invitation card design.",
+    "image": "invitation-card-4/images/hero.webp"
+  },
+  {
+    "id": "invitation-card-5",
+    "title": "Invitation Card 5",
+    "category": "invitation cards",
+    "description": "Beautiful invitation card design.",
+    "image": "invitation-card-5/images/hero.webp"
+  },
+  {
+    "id": "invitation-fan-1",
+    "title": "Invitation Fan 1",
+    "category": "invitation fan",
+    "description": "Beautiful invitation fan design.",
+    "image": "invitation-fan-1/images/hero.webp"
+  },
+  {
+    "id": "invitation-fan-2",
+    "title": "Invitation Fan 2",
+    "category": "invitation fan",
+    "description": "Beautiful invitation fan design.",
+    "image": "invitation-fan-2/images/hero.webp"
+  },
+  {
+    "id": "invitation-fan-3",
+    "title": "Invitation Fan 3",
+    "category": "invitation fan",
+    "description": "Beautiful invitation fan design.",
+    "image": "invitation-fan-3/images/hero.webp"
+  }
+]

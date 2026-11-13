@@ -16,6 +16,15 @@
     overflow-x: clip;
   }
   
+  /* Anchored sections stop below the fixed navbar instead of under it. */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+  #experience,
+  #personalise {
+    scroll-margin-top: 0;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }

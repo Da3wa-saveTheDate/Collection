@@ -10,6 +10,8 @@
     "test:telemetry": "node --test tests/telemetry.test.cjs",
     "test:telemetry:browser": "node tests/telemetry-browser.mjs",
     "test:experience": "node tests/experience-visuals.mjs",
+    "test:gallery": "node tests/gallery.mjs",
+    "thumbs": "node scripts/build-thumbs.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
