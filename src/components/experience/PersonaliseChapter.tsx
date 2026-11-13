@@ -32,9 +32,9 @@ export default function PersonaliseChapter() {
   const selection = { template: design.title, category: 'premium-wedding', package: 'premium' as const };
 
   return (
-    <div className="xp__chapter xp__chapter--right" data-xp-section="personalise">
+    <div id="personalise" className="xp__chapter xp__chapter--right" data-xp-section="personalise">
       <div className="xp__copy">
-        <p className="xp__label">05 — Make it yours</p>
+        <p className="xp__label">04 — Make it yours</p>
         <h2 className="xp__heading">See your names on it.</h2>
         <div className="xp__gap" data-xp-focus aria-hidden="true" />
         <p className="xp__body xp__body--intro">

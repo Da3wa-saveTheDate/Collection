@@ -3,7 +3,7 @@ import { getOrderUrl, trackOrderStart } from '../../lib/order';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-light pt-24 pb-8 border-t border-brand-dark/5">
+    <footer className="bg-brand-light pt-16 pb-8 border-t border-brand-dark/5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div className="md:col-span-1">
@@ -26,9 +26,10 @@ export default function Footer() {
           <div>
             <h4 className="font-medium text-brand-dark mb-6 tracking-wide text-sm">Explore</h4>
             <ul className="space-y-4 text-sm font-light text-brand-dark/70">
-              <li><a href="#pricing" className="hover:text-brand-accent transition-colors">Pricing</a></li>
-              <li><a href="#designs" className="hover:text-brand-accent transition-colors">All Designs</a></li>
               <li><a href="#process" className="hover:text-brand-accent transition-colors">How It Works</a></li>
+              <li><a href="#designs" className="hover:text-brand-accent transition-colors">All Designs</a></li>
+              <li><a href="#pricing" className="hover:text-brand-accent transition-colors">Prices</a></li>
+              <li><a href="#personalise" className="hover:text-brand-accent transition-colors">Try Your Names on an Invitation</a></li>
             </ul>
           </div>
           

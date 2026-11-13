@@ -191,7 +191,7 @@ export default function InvitationExperience() {
         {/* 6 — Packages, with the dock slot */}
         <div className="xp__chapter xp__chapter--packages" data-xp-section="packages">
           <header className="xp__packages-head">
-            <p className="xp__label">06 — Choose your invitation</p>
+            <p className="xp__label">05 — Choose your invitation</p>
             <h2 className="xp__heading">Reserve your date.</h2>
           </header>
           <div className="xp__packages">
@@ -234,7 +234,7 @@ export default function InvitationExperience() {
               </article>
             ))}
           </div>
-          <a className="xp__compare" href="#pricing">Compare all seven packages <ArrowRight size={14} aria-hidden="true" /></a>
+          <a className="xp__compare" href="#pricing">See all prices <ArrowRight size={14} aria-hidden="true" /></a>
         </div>
 
         {/* 7 — Minimal close */}

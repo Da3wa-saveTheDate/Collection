@@ -75,7 +75,8 @@ To override the configuration or enable source maps:
 | --- | --- | --- |
 | `$pageview` | Once when telemetry initializes | Clean page URL/path |
 | `pricing_viewed` | First time at least 10% of pricing intersects the viewport | Clean page URL/path |
-| `template_opened` | Explicit full-template link click; not hover or iframe loading | Template ID, category, CTA location |
+| `template_previewed` | A design card is opened in the gallery preview (not when stepping with previous/next) | Template ID, category |
+| `template_opened` | Explicit full-screen template link click; not the in-page preview | Template ID, category, CTA location |
 | `whatsapp_clicked` | An order CTA click | Catalog template title, category, inferred/selected package, CTA location |
 | `web_vital` | Sampled browser metric | metric, value, rating, unit |
 | `support_opened` | Help panel opened | Clean URL/path |
